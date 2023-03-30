@@ -1,115 +1,146 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'pages/grades.dart';
+import 'package:universal_platform/universal_platform.dart';
+import 'package:window_size/window_size.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  HttpOverrides.global = MyHttpOverrides();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  if (UniversalPlatform.isWindows ||
+      UniversalPlatform.isLinux ||
+      UniversalPlatform.isMacOS) {
+    setWindowMinSize(const Size(300, 650));
+    setWindowMaxSize(Size.infinite);
+  } else {
+    // phone!
+  }
+
+  runApp(const Genibook());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
 
-  // This widget is the root of your application.
+class Genibook extends StatelessWidget {
+  const Genibook({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Grades',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.blue),
+        useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      darkTheme: ThemeData.dark(
+        useMaterial3: true,
+      ),
+      themeMode: ThemeMode.system,
+      home: GradesPage(grades: grades, assignments: assignments),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
+Map<String, List<Map<String, dynamic>>> assignments = {
+  "Math": [
+    {
+      "course_name": "Math",
+      "mp": "3",
+      "dayname": "Monday",
+      "full_dayname": "Monday, December 20, 2021",
+      "date": "12/20/2021",
+      "full_date": "12/20/2021",
+      "teacher": "Mr. Smith",
+      "category": "Homework",
+      "assignment": "Page 40-41, problems 1-10",
+      "description": "Complete the assigned problems in your workbook.",
+      "grade_percent": "90",
+      "grade_num": "9/10",
+      "comment": "Great job! Just missed one question.",
+      "prev": "N/A",
+      "docs": "N/A"
+    }
+  ],
+  "Science": [
+    {
+      "course_name": "Science",
+      "mp": "3",
+      "dayname": "Tuesday",
+      "full_dayname": "Tuesday, December 21, 2021",
+      "date": "12/21/2021",
+      "full_date": "12/21/2021",
+      "teacher": "Ms. Johnson",
+      "category": "Lab Report",
+      "assignment": "Experiment 4: Chemical Reactions",
+      "description":
+          "Write a lab report summarizing the results of the experiment.",
+      "grade_percent": "95",
+      "grade_num": "19/20",
+      "comment": "Excellent work! You just missed a few minor details.",
+      "prev": "N/A",
+      "docs": "N/A"
+    },
+    {
+      "course_name": "Science",
+      "mp": "3",
+      "dayname": "Tuesday",
+      "full_dayname": "Tuesday, December 21, 2021",
+      "date": "12/21/2021",
+      "full_date": "12/21/2021",
+      "teacher": "Ms. Johnson",
+      "category": "Lab Report",
+      "assignment": "Experiment 4: Chemical Reactions",
+      "description":
+          "Write a lab report summarizing the results of the experiment.",
+      "grade_percent": "95",
+      "grade_num": "19/20",
+      "comment": "Excellent work! You just missed a few minor details.",
+      "prev": "N/A",
+      "docs": "N/A"
+    }
+  ],
+  "English": [
+    {
+      "course_name": "English",
+      "mp": "3",
+      "dayname": "Wednesday",
+      "full_dayname": "Wednesday, December 22, 2021",
+      "date": "12/22/2021",
+      "full_date": "12/22/2021",
+      "teacher": "Ms. Lee",
+      "category": "Essay",
+      "assignment": "Persuasive Essay",
+      "description": "Write a persuasive essay on the topic given in class.",
+      "grade_percent": "85",
+      "grade_num": "17/20",
+      "comment": "Good job! There were a few errors in grammar and spelling.",
+      "prev": "N/A",
+      "docs": "N/A"
+    }
+  ]
+};
+Map<String, Map<String, dynamic>> grades = {
+  'Math': {
+    'grade': 85.0,
+    'teacher_name': 'John Smith',
+    'teacher_email': 'john.smith@example.com'
+  },
+  'English': {
+    'grade': 92.0,
+    'teacher_name': 'Jane Doe',
+    'teacher_email': 'jane.doe@example.com'
+  },
+  'Science': {
+    'grade': 78.0,
+    'teacher_name': 'Bob Johnson',
+    'teacher_email': 'bob.johnson@example.com'
+  },
+};
