@@ -1,16 +1,9 @@
 # genibook
 
-A new Flutter project.
+hey hey!
 
-## Getting Started
+its eddie here
 
-This project is a starting point for a Flutter application.
+guess what!
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+i decided to rewrite zenesus, due to its error prone nature and stuff, i'll make the ui look more ✨clean✨ and code more debuggable B)
