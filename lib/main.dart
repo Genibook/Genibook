@@ -5,6 +5,7 @@ import 'package:window_size/window_size.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
 import 'screens/grades.dart';
+import 'screens/login.dart';
 import 'utils/http_overrides.dart';
 
 void main() async {
@@ -45,7 +46,8 @@ class Genibook extends StatelessWidget {
           useMaterial3: true,
         ),
         themeMode: ThemeMode.system,
-        home: GradesPage(grades: grades, assignments: assignments),
+        //home: GradesPage(grades: grades, assignments: assignments),
+        home: LoginPage(),
       );
     });
   }
