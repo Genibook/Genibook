@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/constants.dart';
+import 'package:genibook/utils/grades_utils.dart';
+import 'package:genibook/widgets/navbar.dart';
 import 'assignments.dart';
 
 class GradesPage extends StatefulWidget {
@@ -15,8 +18,9 @@ class _GradesPageState extends State<GradesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: Navbar(selectedIndex: Constants.gradePageNavNumber),
       appBar: AppBar(
-        title: Text('Grades'),
+        title: const Text('Grades'),
         elevation: 2,
         shadowColor: Theme.of(context).shadowColor,
       ),
@@ -36,43 +40,44 @@ class _GradesPageState extends State<GradesPage> {
               );
             },
             child: Card(
-              margin: EdgeInsets.all(16.0),
+              margin: const EdgeInsets.all(16.0),
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       courseName,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 24.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Text(
                       'Teacher: ${widget.grades[courseName]['teacher_name']}',
-                      style: TextStyle(fontSize: 18.0),
+                      style: const TextStyle(fontSize: 18.0),
                     ),
-                    SizedBox(height: 8.0),
+                    const SizedBox(height: 8.0),
                     Text(
                       'Email: ${widget.grades[courseName]['teacher_email']}',
-                      style: TextStyle(fontSize: 18.0),
+                      style: const TextStyle(fontSize: 18.0),
                     ),
-                    SizedBox(height: 16.0),
+                    const SizedBox(height: 16.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           'Grade:',
                           style: TextStyle(fontSize: 18.0),
                         ),
                         Text(
                           widget.grades[courseName]['grade'].toString(),
                           style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              color: getColorFromGrade(
+                                  widget.grades[courseName]['grade'])),
                         ),
                       ],
                     ),

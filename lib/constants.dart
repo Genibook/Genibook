@@ -7,4 +7,11 @@ class Constants {
   static String url = URL;
 
   static final List<String> schools = ['Montgomery High School'];
+
+  static final defaultLightColorScheme =
+      ColorScheme.fromSwatch(primarySwatch: Colors.blue);
+  static final defaultDarkColorScheme = ColorScheme.fromSwatch(
+      primarySwatch: Colors.blue, brightness: Brightness.dark);
+
+  static final gradePageNavNumber = 1;
 }

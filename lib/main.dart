@@ -4,6 +4,7 @@ import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
+import 'constants.dart';
 import 'screens/grades.dart';
 import 'screens/login.dart';
 import 'utils/http_overrides.dart';
@@ -27,27 +28,23 @@ void main() async {
 class Genibook extends StatelessWidget {
   const Genibook({Key? key}) : super(key: key);
 
-  static final _defaultLightColorScheme =
-      ColorScheme.fromSwatch(primarySwatch: Colors.blue);
-  static final _defaultDarkColorScheme = ColorScheme.fromSwatch(
-      primarySwatch: Colors.blue, brightness: Brightness.dark);
-
   @override
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Grades',
         theme: ThemeData(
-          colorScheme: lightColorScheme ?? _defaultLightColorScheme,
+          colorScheme: lightColorScheme ?? Constants.defaultLightColorScheme,
           useMaterial3: true,
         ),
         darkTheme: ThemeData(
-          colorScheme: darkColorScheme ?? _defaultDarkColorScheme,
+          colorScheme: darkColorScheme ?? Constants.defaultDarkColorScheme,
           useMaterial3: true,
         ),
         themeMode: ThemeMode.system,
-        //home: GradesPage(grades: grades, assignments: assignments),
-        home: LoginPage(),
+        home: GradesPage(grades: grades, assignments: assignments),
+        //home: LoginPage(),
       );
     });
   }
