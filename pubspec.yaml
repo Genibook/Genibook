@@ -31,6 +31,7 @@ environment:
 dependencies:
   dynamic_color: ^1.4.0
   universal_platform: ^1.0.0-nullsafety
+  url_launcher: ^6.1.10
   window_size:
       git:
         url: https://github.com/google/flutter-desktop-embedding.git

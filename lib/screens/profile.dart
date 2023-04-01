@@ -3,6 +3,16 @@ import 'package:genibook/constants.dart';
 import 'package:genibook/icons/custom_icons_icons.dart';
 import 'package:genibook/utils/swipe.dart';
 import 'package:genibook/widgets/navbar.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+// ignore: non_constant_identifier_names
+Future<void> LaunchUrl(String urll) async {
+  final Uri url = Uri.parse(urll);
+  if (!await launchUrl(url)) {
+    throw Exception('Could not launch $url');
+  }
+}
 
 class ProfilePage extends StatelessWidget {
   final Map<String, dynamic> studentData;
@@ -50,27 +60,43 @@ class ProfilePage extends StatelessWidget {
                     Center(
                         child: GestureDetector(
                             onLongPress: () {
+                              HapticFeedback.lightImpact();
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: Text('Delete Card'),
-                                    content: Text(
-                                        'Are you sure you want to delete this card?'),
+                                    title: const Text('Details', style: TextStyle(fontWeight: FontWeight.bold),),
+                                    content:SizedBox(height:70,child: Column(crossAxisAlignment: CrossAxisAlignment.start,children:[Text(
+                                              'State ID: ${studentData['state_id']}',
+                                              
+                                              style:
+                                                  const TextStyle(fontSize: 12.0),
+                                              
+                                            ),
+                                            Text('Birthday: ${studentData['birthday']}'
+                                              ,style:
+                                                  const TextStyle(fontSize: 12.0),),
+                                                  Row(children: [const Text('Schedule Link: ', style:
+                                                  TextStyle(fontSize: 12.0),),
+                                                  
+                                                  InkWell(onTap:() {
+                                                    launchUrl(studentData["schedule_link"]);
+                                                  },
+                                                  child:Text("click me!", style:
+                                                  TextStyle(fontSize: 12.0),)
+                                                  )
+                                                  ],),
+                                             
+                                            
+                                            ])),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        child: Text('Cancel'),
+                                        child: const Text('ok!', style: TextStyle(fontWeight: FontWeight.bold),),
                                       ),
-                                      TextButton(
-                                        onPressed: () {
-                                          // Delete the card here
-                                          Navigator.pop(context);
-                                        },
-                                        child: Text('Delete'),
-                                      ),
+                                      
                                     ],
                                   );
                                 },
@@ -142,25 +168,7 @@ class ProfilePage extends StatelessWidget {
                                           ],
                                         ),
                                         const SizedBox(height: 10.0),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceAround,
-                                        //   children: [
-                                        //     const Text(
-                                        //       "State ID ",
-                                        //       style: TextStyle(
-                                        //         fontSize: 15.0,
-                                        //       ),
-                                        //     ),
-                                        //     Text(
-                                        //       '${studentData['state_id']}',
-                                        //       style:
-                                        //           const TextStyle(fontSize: 12.0),
-                                        //       textAlign: TextAlign.center,
-                                        //     )
-                                        //   ],
-                                        // ),
-                                        // const SizedBox(height: 10.0),
+                                       
                                       ],
                                     ))))),
                   ],
