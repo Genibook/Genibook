@@ -55,7 +55,7 @@ class Genibook extends StatelessWidget {
 Map<String, dynamic> studentData = {
   "age": 15,
   "img_url": "https://c.tenor.com/bCfpwMjfAi0AAAAC/cat-typing.gif",
-  "state_id": 123123112,
+  "state_id": 4238447327,
   "birthday": "06/07/2007",
   "schedule_link": "N/A",
   "name": "Eddie Tang",

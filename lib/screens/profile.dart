@@ -16,9 +16,6 @@ class ProfilePage extends StatelessWidget {
           swipeHandler(moveEvent, Constants.profilePageNavNumber);
         },
         child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Profile'),
-            ),
             bottomNavigationBar:
                 const Navbar(selectedIndex: Constants.profilePageNavNumber),
             body: SafeArea(
@@ -51,104 +48,49 @@ class ProfilePage extends StatelessWidget {
                       ),
                     )),
                     Center(
-                        child: Card(
-                            child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const SizedBox(height: 10.0),
-                                    Row(
+                        child: GestureDetector(
+                            onLongPress: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Text('Delete Card'),
+                                    content: Text(
+                                        'Are you sure you want to delete this card?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          // Delete the card here
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Delete'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            },
+                            child: Card(
+                                child: Padding(
+                                    padding: const EdgeInsets.all(16.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Icon(
-                                          Icons.timer_outlined,
-                                          color: Colors.blueAccent[400],
-                                          size: 35,
-                                        ),
-                                        const SizedBox(
-                                          width: 20.0,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            InkWell(
-                                              child: const Text(
-                                                "GPA history",
-                                                style: TextStyle(
-                                                  fontSize: 15.0,
-                                                ),
-                                              ),
-                                              onTap: () {},
-                                            ),
-                                            InkWell(
-                                              child: const Text(
-                                                "click me",
-                                                style: TextStyle(
-                                                  fontSize: 12.0,
-                                                ),
-                                              ),
-                                              onTap: () {},
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10.0),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.school,
-                                          color: Colors.yellowAccent[400],
-                                          size: 35,
-                                        ),
-                                        const SizedBox(
-                                          width: 20.0,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
                                           children: [
                                             const Text(
-                                              "Grade Level",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                              ),
-                                            ),
-                                            Text(
-                                              '${studentData['grade']}',
-                                              style: const TextStyle(
-                                                  fontSize: 12.0),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10.0),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.key,
-                                          color: Colors.pinkAccent[400],
-                                          size: 35,
-                                        ),
-                                        const SizedBox(
-                                          width: 20.0,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              "Locker",
+                                              "Locker ",
                                               style: TextStyle(
                                                 fontSize: 15.0,
                                               ),
@@ -160,28 +102,33 @@ class ProfilePage extends StatelessWidget {
                                               textAlign: TextAlign.center,
                                             )
                                           ],
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10.0),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          CustomIcons.chalkboard_teacher,
-                                          color: Colors.green[400],
-                                          size: 30,
                                         ),
-                                        const SizedBox(
-                                          width: 20.0,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                        const SizedBox(height: 10.0),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
                                           children: [
                                             const Text(
-                                              "Counselor Name",
+                                              "Grade ",
+                                              style: TextStyle(
+                                                fontSize: 15.0,
+                                              ),
+                                            ),
+                                            Text(
+                                              '${studentData['grade']}',
+                                              style: const TextStyle(
+                                                  fontSize: 12.0),
+                                              textAlign: TextAlign.center,
+                                            )
+                                          ],
+                                        ),
+                                        const SizedBox(height: 10.0),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
+                                          children: [
+                                            const Text(
+                                              "Counselor Name ",
                                               style: TextStyle(
                                                 fontSize: 15.0,
                                               ),
@@ -193,45 +140,29 @@ class ProfilePage extends StatelessWidget {
                                               textAlign: TextAlign.center,
                                             )
                                           ],
-                                        )
-                                      ],
-                                    ),
-                                    const SizedBox(height: 10.0),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.flag,
-                                          color: Colors.purple[700],
-                                          size: 35,
                                         ),
-                                        const SizedBox(
-                                          width: 20.0,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              "State ID",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                              ),
-                                            ),
-                                            Text(
-                                              '${studentData['state_id']}',
-                                              style: const TextStyle(
-                                                  fontSize: 12.0),
-                                              textAlign: TextAlign.center,
-                                            )
-                                          ],
-                                        )
+                                        const SizedBox(height: 10.0),
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.spaceAround,
+                                        //   children: [
+                                        //     const Text(
+                                        //       "State ID ",
+                                        //       style: TextStyle(
+                                        //         fontSize: 15.0,
+                                        //       ),
+                                        //     ),
+                                        //     Text(
+                                        //       '${studentData['state_id']}',
+                                        //       style:
+                                        //           const TextStyle(fontSize: 12.0),
+                                        //       textAlign: TextAlign.center,
+                                        //     )
+                                        //   ],
+                                        // ),
+                                        // const SizedBox(height: 10.0),
                                       ],
-                                    ),
-                                    const SizedBox(height: 10.0),
-                                  ],
-                                )))),
+                                    ))))),
                   ],
                 ),
               ),

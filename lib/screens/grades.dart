@@ -24,7 +24,7 @@ class _GradesPageState extends State<GradesPage> {
       },
       child: Scaffold(
         bottomNavigationBar:
-            Navbar(selectedIndex: Constants.gradePageNavNumber),
+            const Navbar(selectedIndex: Constants.gradePageNavNumber),
         appBar: AppBar(
           title: const Text('Grades'),
           elevation: 2,
