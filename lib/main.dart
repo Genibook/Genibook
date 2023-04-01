@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/screens/profile.dart';
 import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
@@ -16,7 +17,7 @@ void main() async {
   if (UniversalPlatform.isWindows ||
       UniversalPlatform.isLinux ||
       UniversalPlatform.isMacOS) {
-    setWindowMinSize(const Size(300, 650));
+    setWindowMinSize(const Size(350, 650));
     setWindowMaxSize(Size.infinite);
   } else {
     // phone!
@@ -43,12 +44,27 @@ class Genibook extends StatelessWidget {
           useMaterial3: true,
         ),
         themeMode: ThemeMode.system,
-        home: GradesPage(grades: grades, assignments: assignments),
+        //home: GradesPage(grades: grades, assignments: assignments),
         //home: LoginPage(),
+        home: ProfilePage(studentData: studentData),
       );
     });
   }
 }
+
+Map<String, dynamic> studentData = {
+  "age": 15,
+  "img_url": "https://c.tenor.com/bCfpwMjfAi0AAAAC/cat-typing.gif",
+  "state_id": 123123112,
+  "birthday": "06/07/2007",
+  "schedule_link": "N/A",
+  "name": "Eddie Tang",
+  "grade": 10,
+  "locker": "N/A",
+  "counselor_name": "Someone",
+  "id": 107600,
+  "image64": "N/A",
+};
 
 Map<String, List<Map<String, dynamic>>> assignments = {
   "Math": [
