@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/constants.dart';
 
-void swipeHandler(PointerMoveEvent moveEvent, int pageNumber) {
-  if (moveEvent.delta.dx > 0) {
-    print("swipe right");
-  } else if (moveEvent.delta.dx < 0) {
-    print("swipe left");
+void swipeHandler(DragUpdateDetails details, int pageNumber) {
+  if (details.delta.dx > Constants.dragSensitivity) {
+    print("right");
+  }
+
+  // Swiping in left direction.
+  if (details.delta.dx < -Constants.dragSensitivity) {
+    print("left");
   }
 }

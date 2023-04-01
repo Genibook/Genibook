@@ -44,9 +44,9 @@ class Genibook extends StatelessWidget {
           useMaterial3: true,
         ),
         themeMode: ThemeMode.system,
-        //home: GradesPage(grades: grades, assignments: assignments),
+        home: GradesPage(grades: grades, assignments: assignments),
         //home: LoginPage(),
-        home: ProfilePage(studentData: studentData),
+        //home: ProfilePage(studentData: studentData),
       );
     });
   }

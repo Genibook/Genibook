@@ -18,9 +18,9 @@ class GradesPage extends StatefulWidget {
 class _GradesPageState extends State<GradesPage> {
   @override
   Widget build(BuildContext context) {
-    return Listener(
-      onPointerMove: (moveEvent) {
-        swipeHandler(moveEvent, Constants.profilePageNavNumber);
+    return GestureDetector(
+      onPanUpdate: (details) {
+        swipeHandler(details, Constants.profilePageNavNumber);
       },
       child: Scaffold(
         bottomNavigationBar:
