@@ -35,6 +35,11 @@ class AssignmentPage extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                            "${assignment.dayName} - ${assignment.date} - MP ${assignment.mp}"),
                         const SizedBox(height: 16.0),
                         Text(
                           'Category: ${assignment.category}',
@@ -55,10 +60,11 @@ class AssignmentPage extends StatelessWidget {
                             ),
                             Text(
                               '${assignment.gradeNum} (${assignment.gradePercent}%)',
-                              style: const TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: getColorFromGrade(
+                                      assignment.gradePercent)),
                             ),
                           ],
                         ),

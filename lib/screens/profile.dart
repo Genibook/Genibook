@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/constants.dart';
-import 'package:genibook/icons/custom_icons_icons.dart';
 import 'package:genibook/utils/swipe.dart';
 import 'package:genibook/widgets/navbar.dart';
 import 'package:flutter/services.dart';
