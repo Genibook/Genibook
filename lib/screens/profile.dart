@@ -65,38 +65,58 @@ class ProfilePage extends StatelessWidget {
                                 context: context,
                                 builder: (BuildContext context) {
                                   return AlertDialog(
-                                    title: const Text('Details', style: TextStyle(fontWeight: FontWeight.bold),),
-                                    content:SizedBox(height:70,child: Column(crossAxisAlignment: CrossAxisAlignment.start,children:[Text(
-                                              'State ID: ${studentData['state_id']}',
-                                              
-                                              style:
-                                                  const TextStyle(fontSize: 12.0),
-                                              
-                                            ),
-                                            Text('Birthday: ${studentData['birthday']}'
-                                              ,style:
-                                                  const TextStyle(fontSize: 12.0),),
-                                                  Row(children: [const Text('Schedule Link: ', style:
-                                                  TextStyle(fontSize: 12.0),),
-                                                  
-                                                  InkWell(onTap:() {
-                                                    launchUrl(studentData["schedule_link"]);
-                                                  },
-                                                  child:Text("click me!", style:
-                                                  TextStyle(fontSize: 12.0),)
-                                                  )
-                                                  ],),
-                                             
-                                            
+                                    title: const Text(
+                                      'Details',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    content: SizedBox(
+                                        height: 70,
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'State ID: ${studentData['state_id']}',
+                                                style: const TextStyle(
+                                                    fontSize: 12.0),
+                                              ),
+                                              Text(
+                                                'Birthday: ${studentData['birthday']}',
+                                                style: const TextStyle(
+                                                    fontSize: 12.0),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  const Text(
+                                                    'Schedule Link: ',
+                                                    style: TextStyle(
+                                                        fontSize: 12.0),
+                                                  ),
+                                                  InkWell(
+                                                      onTap: () {
+                                                        launchUrl(studentData[
+                                                            "schedule_link"]);
+                                                      },
+                                                      child: Text(
+                                                        "click me!",
+                                                        style: TextStyle(
+                                                            fontSize: 12.0),
+                                                      ))
+                                                ],
+                                              ),
                                             ])),
                                     actions: [
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        child: const Text('ok!', style: TextStyle(fontWeight: FontWeight.bold),),
+                                        child: const Text(
+                                          'ok!',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
-                                      
                                     ],
                                   );
                                 },
@@ -168,7 +188,6 @@ class ProfilePage extends StatelessWidget {
                                           ],
                                         ),
                                         const SizedBox(height: 10.0),
-                                       
                                       ],
                                     ))))),
                   ],
