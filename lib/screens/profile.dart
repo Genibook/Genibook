@@ -59,7 +59,7 @@ class ProfilePage extends StatelessWidget {
                     Center(
                         child: GestureDetector(
                             onLongPress: () {
-                              HapticFeedback.lightImpact();
+                              HapticFeedback.mediumImpact();
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
