@@ -61,7 +61,7 @@ Map<String, dynamic> studentData = {
   "name": "Eddie Tang",
   "grade": 10,
   "locker": "N/A",
-  "counselor_name": "Someone",
+  "counselor_name": "James Charles",
   "id": 107600,
   "image64": "N/A",
 };

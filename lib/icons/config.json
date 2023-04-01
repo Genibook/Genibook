@@ -23,6 +23,12 @@
       "css": "calendar",
       "code": 59392,
       "src": "elusive"
+    },
+    {
+      "uid": "8edf18439e453e104a03a27056c4c427",
+      "css": "chalkboard_teacher",
+      "code": 62748,
+      "src": "fontawesome5"
     }
   ]
 }
