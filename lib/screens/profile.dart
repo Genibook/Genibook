@@ -81,10 +81,16 @@ class ProfilePage extends StatelessWidget {
                                                 style: const TextStyle(
                                                     fontSize: 12.0),
                                               ),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
                                               Text(
                                                 'Birthday: ${studentData['birthday']}',
                                                 style: const TextStyle(
                                                     fontSize: 12.0),
+                                              ),
+                                              const SizedBox(
+                                                height: 5,
                                               ),
                                               Row(
                                                 children: [
@@ -95,29 +101,18 @@ class ProfilePage extends StatelessWidget {
                                                   ),
                                                   InkWell(
                                                       onTap: () {
-                                                        launchUrl(studentData[
+                                                        LaunchUrl(studentData[
                                                             "schedule_link"]);
                                                       },
-                                                      child: Text(
+                                                      child: const Text(
                                                         "click me!",
                                                         style: TextStyle(
-                                                            fontSize: 12.0),
+                                                            fontSize: 12.0,
+                                                            color: Colors.blue),
                                                       ))
                                                 ],
                                               ),
                                             ])),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text(
-                                          'ok!',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ),
-                                    ],
                                   );
                                 },
                               );
