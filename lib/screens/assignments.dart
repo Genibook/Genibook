@@ -7,7 +7,7 @@ import 'package:genibook/widgets/deatiled_assignment.dart';
 class AssignmentPage extends StatelessWidget {
   final List<Assignment> assignmentsForAClass;
 
-  const AssignmentPage({Key? key, required this.assignmentsForAClass});
+  const AssignmentPage({super.key, required this.assignmentsForAClass});
 
   @override
   Widget build(BuildContext context) {
