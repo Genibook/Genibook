@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/screens/profile.dart';
+import 'package:genibook/wrappers/student_class.dart';
 import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
@@ -161,3 +162,34 @@ Map<String, Map<String, dynamic>> grades = {
     'teacher_email': 'bob.johnson@example.com'
   },
 };
+Student student = Student.fromJson({
+  'age': 15,
+  'img_url': 'https://c.tenor.com/bCfpwMjfAi0AAAAC/cat-typing.gif',
+  'state_id': 4238447327,
+  'birthday': '06/07/2007',
+  'schedule_link': 'https://example.com',
+  'name': 'Eddie Tang',
+  'grade': 10,
+  'locker': 'N/A',
+  'counselor_name': 'James Charles',
+  'id': 107600,
+  'image64': 'N/A',
+  'assignments': {},
+  'grades': {
+    'Math': {
+      'grade': 85.0,
+      'teacher_name': 'John Smith',
+      'teacher_email': 'john.smith@example.com'
+    },
+    'English': {
+      'grade': 92.0,
+      'teacher_name': 'Jane Doe',
+      'teacher_email': 'jane.doe@example.com'
+    },
+    'Science': {
+      'grade': 78.0,
+      'teacher_name': 'Bob Johnson',
+      'teacher_email': 'bob.johnson@example.com'
+    },
+  }
+});
