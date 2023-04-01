@@ -4,12 +4,12 @@ import 'package:genibook/utils/grades_utils.dart';
 import 'package:genibook/widgets/navbar.dart';
 import '../utils/swipe.dart';
 import 'assignments.dart';
+import '../models/student_class.dart';
 
 class GradesPage extends StatefulWidget {
-  final Map<String, dynamic> grades;
-  final Map<String, dynamic> assignments;
+  final Student student;
 
-  GradesPage({required this.grades, required this.assignments});
+  GradesPage({required this.student});
 
   @override
   _GradesPageState createState() => _GradesPageState();
@@ -31,16 +31,17 @@ class _GradesPageState extends State<GradesPage> {
           shadowColor: Theme.of(context).shadowColor,
         ),
         body: ListView.builder(
-          itemCount: widget.grades.length,
+          itemCount: widget.student.grades.length,
           itemBuilder: (BuildContext context, int index) {
-            String courseName = widget.grades.keys.elementAt(index);
+            String courseName = widget.student.grades.keys.elementAt(index);
             return GestureDetector(
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => AssignmentPage(
-                      assignments: widget.assignments[courseName],
+                      assignmentsForAClass:
+                          widget.student.assignments[courseName],
                     ),
                   ),
                 );
@@ -61,12 +62,12 @@ class _GradesPageState extends State<GradesPage> {
                       ),
                       const SizedBox(height: 16.0),
                       Text(
-                        'Teacher: ${widget.grades[courseName]['teacher_name']}',
+                        'Teacher: ${widget.student.grades.getSubjectTeacherName(courseName)}',
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       const SizedBox(height: 8.0),
                       Text(
-                        'Email: ${widget.grades[courseName]['teacher_email']}',
+                        'Email: ${widget.student.grades.getSubjectTeacherEmail(courseName)}',
                         style: const TextStyle(fontSize: 18.0),
                       ),
                       const SizedBox(height: 16.0),
@@ -78,12 +79,14 @@ class _GradesPageState extends State<GradesPage> {
                             style: TextStyle(fontSize: 18.0),
                           ),
                           Text(
-                            widget.grades[courseName]['grade'].toString(),
+                            widget.student.grades
+                                .getSubjectGrade(courseName)
+                                .toString(),
                             style: TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,
-                                color: getColorFromGrade(
-                                    widget.grades[courseName]['grade'])),
+                                color: getColorFromGrade(widget.student.grades
+                                    .getSubjectGrade(courseName))),
                           ),
                         ],
                       ),

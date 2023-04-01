@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/models/assignments_class.dart';
+import 'package:genibook/utils/grades_utils.dart';
 
 class AssignmentPage extends StatelessWidget {
-  final List<dynamic>? assignments;
+  final List<Assignment> assignmentsForAClass;
 
-  const AssignmentPage({super.key, this.assignments});
+  const AssignmentPage({Key? key, required this.assignmentsForAClass});
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +13,14 @@ class AssignmentPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Assignments'),
       ),
-      body: assignments == null || assignments!.isEmpty
+      body: assignmentsForAClass.isEmpty
           ? const Center(
               child: Text('No assignments found. :/'),
             )
           : ListView.builder(
-              itemCount: assignments!.length,
+              itemCount: assignmentsForAClass.length,
               itemBuilder: (BuildContext context, int index) {
-                var assignment = assignments![index];
+                Assignment assignment = assignmentsForAClass[index];
                 return Card(
                   margin: const EdgeInsets.all(16.0),
                   child: Padding(
@@ -27,7 +29,7 @@ class AssignmentPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          assignment['assignment'],
+                          assignment.assignmentName,
                           style: const TextStyle(
                             fontSize: 24.0,
                             fontWeight: FontWeight.bold,
@@ -35,12 +37,12 @@ class AssignmentPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 16.0),
                         Text(
-                          'Category: ${assignment['category']}',
+                          'Category: ${assignment.category}',
                           style: const TextStyle(fontSize: 18.0),
                         ),
                         const SizedBox(height: 8.0),
                         Text(
-                          'Description: ${assignment['description']}',
+                          'Description: ${assignment.description}',
                           style: const TextStyle(fontSize: 18.0),
                         ),
                         const SizedBox(height: 16.0),
@@ -52,7 +54,7 @@ class AssignmentPage extends StatelessWidget {
                               style: TextStyle(fontSize: 18.0),
                             ),
                             Text(
-                              '${assignment['grade_num']} (${assignment['grade_percent']}%)',
+                              '${assignment.gradeNum} (${assignment.gradePercent}%)',
                               style: const TextStyle(
                                 fontSize: 18.0,
                                 fontWeight: FontWeight.bold,

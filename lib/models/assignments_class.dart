@@ -2,9 +2,9 @@
 // String assignmentsJsonString = jsonEncode(assignments.toJson());
 
 class Assignments {
-  Map<String, List<Assignment>> data;
+  Map<String, List<Assignment>> assignments;
 
-  Assignments({required this.data});
+  Assignments(this.assignments);
 
   factory Assignments.fromJson(Map<String, dynamic> json) {
     Map<String, List<Assignment>> data = {};
@@ -15,20 +15,34 @@ class Assignments {
       }
       data[key] = assignments;
     });
-    return Assignments(data: data);
+    return Assignments(data);
   }
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> json = {};
-    data.forEach((key, value) {
+    assignments.forEach((key, value) {
       json[key] = value.map((assignment) => assignment.toJson()).toList();
     });
     return json;
   }
+
+  List<Assignment> operator [](String key) {
+    return assignments[key] ?? [Assignment.fromJson({})];
+  }
+
+  bool isEmptyForAClass(String key) {
+    return assignments[key]!.isEmpty;
+  }
+
+  int get length => assignments.length;
+
+  bool get isEmptyDict => assignments.isEmpty;
+
+  bool get isNotEmpty => assignments.isNotEmpty;
 }
 
 class Assignment {
-  String courseName;
+  String assignmentName;
   String mp;
   String dayName;
   String fullDayName;
@@ -45,7 +59,7 @@ class Assignment {
   String docs;
 
   Assignment({
-    required this.courseName,
+    required this.assignmentName,
     required this.mp,
     required this.dayName,
     required this.fullDayName,
@@ -64,7 +78,7 @@ class Assignment {
 
   factory Assignment.fromJson(Map<String, dynamic> json) {
     return Assignment(
-      courseName: json['course_name'],
+      assignmentName: json['course_name'],
       mp: json['mp'],
       dayName: json['dayname'],
       fullDayName: json['full_dayname'],
@@ -84,7 +98,7 @@ class Assignment {
 
   Map<String, dynamic> toJson() {
     return {
-      'course_name': courseName,
+      'course_name': assignmentName,
       'mp': mp,
       'dayname': dayName,
       'full_dayname': fullDayName,

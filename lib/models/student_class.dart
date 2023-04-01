@@ -1,5 +1,5 @@
-import 'package:genibook/wrappers/assignments_class.dart';
-import 'package:genibook/wrappers/grades_class.dart';
+import 'package:genibook/models/assignments_class.dart';
+import 'package:genibook/models/grades_class.dart';
 
 class Student {
   int age;

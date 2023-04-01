@@ -17,6 +17,14 @@ class Grades {
     return _grades[subject] ?? {};
   }
 
+  int get length {
+    return _grades.length;
+  }
+
+  Iterable<String> get keys {
+    return _grades.keys;
+  }
+
   double getSubjectGrade(String subject) {
     final Map<String, dynamic> subjectGrades = getSubjectGrades(subject);
     return subjectGrades['grade'] ?? 0.0;
