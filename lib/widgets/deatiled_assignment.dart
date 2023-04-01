@@ -6,29 +6,37 @@ void showDetailedAssignmentView(BuildContext context, Assignment assignment) {
     context: context,
     builder: (context) {
       return AlertDialog(
-        title: const Text(
-          'Assignment Details',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          'Assignment Details - ${assignment.assignmentName} ',
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         content: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Course Name: ${assignment.assignmentName}'),
-              Text('MP: ${assignment.mp}'),
-              Text('Day Name: ${assignment.dayName}'),
-              Text('Full Day Name: ${assignment.fullDayName}'),
-              Text('Date: ${assignment.date}'),
-              Text('Full Date: ${assignment.fullDate}'),
-              Text('Teacher: ${assignment.teacher}'),
-              Text('Category: ${assignment.category}'),
-              Text('Assignment: ${assignment.assignment}'),
+              Text(
+                assignment.category,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              Text(
+                assignment.assignment,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              const SizedBox(height: 6),
+              Text(assignment.teacher),
+              Text(
+                  '${assignment.fullDayName} - ${assignment.fullDate} - MP ${assignment.mp}'),
+              const SizedBox(height: 10),
               Text('Description: ${assignment.description}'),
-              Text('Grade Percent: ${assignment.gradePercent}'),
-              Text('Grade Num: ${assignment.gradeNum}'),
+              const SizedBox(height: 6),
               Text('Comment: ${assignment.comment}'),
-              Text('Prev: ${assignment.prev}'),
-              Text('Docs: ${assignment.docs}'),
+              const SizedBox(height: 6),
+              Text(
+                'Grade: ${assignment.gradePercent} (${assignment.gradeNum})',
+                style: const TextStyle(fontSize: 17),
+              ),
             ],
           ),
         ),
@@ -37,7 +45,7 @@ void showDetailedAssignmentView(BuildContext context, Assignment assignment) {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('Close'),
+            child: const Text('Close'),
           ),
         ],
       );

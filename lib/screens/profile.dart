@@ -59,7 +59,7 @@ class ProfilePage extends StatelessWidget {
                     Center(
                         child: GestureDetector(
                             onLongPress: () {
-                              HapticFeedback.mediumImpact();
+                              HapticFeedback.lightImpact();
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -112,6 +112,14 @@ class ProfilePage extends StatelessWidget {
                                                 ],
                                               ),
                                             ])),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                        child: const Text('Close'),
+                                      ),
+                                    ],
                                   );
                                 },
                               );

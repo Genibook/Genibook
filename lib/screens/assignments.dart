@@ -25,7 +25,7 @@ class AssignmentPage extends StatelessWidget {
                 Assignment assignment = assignmentsForAClass[index];
                 return GestureDetector(
                     onTap: () {
-                      HapticFeedback.lightImpact();
+                      HapticFeedback.mediumImpact();
                       showDetailedAssignmentView(context, assignment);
                     },
                     child: Card(
