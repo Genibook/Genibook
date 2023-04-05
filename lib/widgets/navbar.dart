@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/constants.dart';
+import 'package:genibook/navigator/api_navigator.dart';
 
 class Navbar extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -28,47 +30,35 @@ class NavBarState extends State<Navbar> {
       _selectedIndex = index;
     });
 
-    // List<String> things = await readEmailPassSchoolintoCookies();
-    // email = things[0];
-    // password = things[1];
-    // school = things[2];
+    if (index == Constants.gradePageNavNumber) {
+      // ignore: use_build_context_synchronously
 
-    // if (index == gradesNavNum) {
-    //   // ignore: use_build_context_synchronously
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) => CoursesPage(
-    //               email: email,
-    //               password: password,
-    //               school: school,
-    //               refresh: false,
-    //             )),
-    //   );
-    // } else if (index == profileNavNum) {
-    //   // ignore: use_build_context_synchronously
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) => StudentPage(
-    //               email: email,
-    //               password: password,
-    //               school: school,
-    //             )),
-    //   );
-    // } else if (index == scheduleNavNum) {
-    //   // ignore: use_build_context_synchronously
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //         builder: (context) => Schedule(
-    //               email: email,
-    //               password: password,
-    //               school: school,
-    //             )),
-    //   );
-    // } else if (index == todoNavNum) {
-    //   // ignore: use_build_context_synchronously
+    } else if (index == Constants.profilePageNavNumber) {
+      ApiNavigator nav = const ApiNavigator();
+      nav.pushToLogin(context);
+      // ignore: use_build_context_synchronously
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => StudentPage(
+      //             email: email,
+      //             password: password,
+      //             school: school,
+      //           )),
+      // );
+    } else if (index == Constants.schedulePageNavNumber) {
+      // ignore: use_build_context_synchronously
+      // Navigator.push(
+      //   context,
+      //   MaterialPageRoute(
+      //       builder: (context) => Schedule(
+      //             email: email,
+      //             password: password,
+      //             school: school,
+      //           )),
+      // );
+    }
+    // ignore: use_build_context_synchronously
     //   Navigator.of(context).push(
     //     MaterialPageRoute(builder: (context) => const TodoList()),
     //   );
