@@ -1,14 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:genibook/models/schedule_class.dart';
 
 class SchedulePage extends StatefulWidget {
-  const SchedulePage();
+  final String jsonData;
+
+  const SchedulePage({Key? key, required this.jsonData}) : super(key: key);
 
   @override
   _SchedulePageState createState() => _SchedulePageState();
 }
 
 class _SchedulePageState extends State<SchedulePage> {
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+  List<Assignment> _assignments = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _assignments = parseAssignments(widget.jsonData);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +66,8 @@ class _SchedulePageState extends State<SchedulePage> {
                 if (isSameDay(_selectedDay, assignment.date)) {
                   return ListTile(
                     title: Text(assignment.assignment),
-                    subtitle: Text('${assignment.category} - ${assignment.courseName}'),
+                    subtitle: Text(
+                        '${assignment.category} - ${assignment.courseName}'),
                   );
                 } else {
                   return SizedBox.shrink();
@@ -63,4 +78,5 @@ class _SchedulePageState extends State<SchedulePage> {
         ],
       ),
     );
+  }
 }
