@@ -42,7 +42,7 @@ class Assignments {
 }
 
 class Assignment {
-  String assignmentName;
+  String courseName;
   String mp;
   String dayName;
   String fullDayName;
@@ -59,7 +59,7 @@ class Assignment {
   String docs;
 
   Assignment({
-    required this.assignmentName,
+    required this.courseName,
     required this.mp,
     required this.dayName,
     required this.fullDayName,
@@ -78,7 +78,7 @@ class Assignment {
 
   factory Assignment.fromJson(Map<String, dynamic> json) {
     return Assignment(
-      assignmentName: json['course_name'],
+      courseName: json['course_name'],
       mp: json['mp'],
       dayName: json['dayname'],
       fullDayName: json['full_dayname'],
@@ -98,7 +98,7 @@ class Assignment {
 
   Map<String, dynamic> toJson() {
     return {
-      'course_name': assignmentName,
+      'course_name': courseName,
       'mp': mp,
       'dayname': dayName,
       'full_dayname': fullDayName,

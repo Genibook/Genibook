@@ -67,6 +67,7 @@ flutter:
 
   assets:
     - assets/
+    - assets/noData.png
     
   fonts:
     - family:  CustomIcons

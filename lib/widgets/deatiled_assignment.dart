@@ -17,13 +17,8 @@ void showDetailedAssignmentView(BuildContext context, Assignment assignment) {
               Text(
                 assignment.category,
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
-              // Text(
-              //   assignment.assignment,
-              //   style:
-              //       const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              // ),
               const SizedBox(height: 6),
               Text(assignment.teacher),
               Text(

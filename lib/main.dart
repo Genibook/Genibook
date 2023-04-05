@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:genibook/screens/profile.dart';
-import 'package:genibook/models/student_class.dart';
+import 'package:genibook/screens/schedule.dart';
 import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
+import 'package:genibook/models/student_class.dart';
+import 'models/schedule_class.dart';
+
 import 'constants.dart';
 import 'screens/grades.dart';
 import 'screens/login.dart';
+import 'screens/profile.dart';
 import 'utils/http_overrides.dart';
 
 void main() async {
@@ -34,21 +37,23 @@ class Genibook extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Grades',
-        theme: ThemeData(
-          colorScheme: lightColorScheme ?? Constants.defaultLightColorScheme,
-          useMaterial3: true,
-        ),
-        darkTheme: ThemeData(
-          colorScheme: darkColorScheme ?? Constants.defaultDarkColorScheme,
-          useMaterial3: true,
-        ),
-        themeMode: ThemeMode.system,
-        home: GradesPage(student: eddie),
-        //home: LoginPage(),
-        //home: ProfilePage(studentData: studentData),
-      );
+          debugShowCheckedModeBanner: false,
+          title: 'Grades',
+          theme: ThemeData(
+            colorScheme: lightColorScheme ?? Constants.defaultLightColorScheme,
+            useMaterial3: true,
+          ),
+          darkTheme: ThemeData(
+            colorScheme: darkColorScheme ?? Constants.defaultDarkColorScheme,
+            useMaterial3: true,
+          ),
+          themeMode: ThemeMode.system,
+          //home: GradesPage(student: eddie),
+          //home: LoginPage(),
+          //home: ProfilePage(studentData: studentData),
+          home: SchedulePage(
+            scheduleAssignments: scheduleAssignments,
+          ));
     });
   }
 }
@@ -180,4 +185,65 @@ Student eddie = Student.fromJson({
       'teacher_email': 'bob.johnson@example.com'
     },
   }
+});
+
+ScheduleAssignmentsList scheduleAssignments = ScheduleAssignmentsList.fromJson({
+  'scheduleAssignments': [
+    {
+      "assignment": "Day 24 HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/14",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day 24 HW",
+      "category": "plqy with balls",
+      "course_name": "AP calculus AB",
+      "date": "4/12",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day 24 HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/15",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day 24 HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/15",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day 24 HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/15",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day YOUR MOM HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/15",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day 24 HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/15",
+      "description": "",
+      "points": "50"
+    },
+  ]
 });
