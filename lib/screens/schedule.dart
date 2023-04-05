@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/constants.dart';
+import 'package:genibook/widgets/navbar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:genibook/models/schedule_class.dart';
 
@@ -25,6 +27,8 @@ class _SchedulePageState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar:
+          const Navbar(selectedIndex: Constants.schedulePageNavNumber),
       appBar: AppBar(
         title: const Text('Schedule'),
       ),

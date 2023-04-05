@@ -70,11 +70,19 @@ class ProfilePage extends StatelessWidget {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     content: SizedBox(
-                                        height: 70,
+                                        height: 90,
                                         child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
+                                              Text(
+                                                'Locker : ${student.locker}',
+                                                style: const TextStyle(
+                                                    fontSize: 12.0),
+                                              ),
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
                                               Text(
                                                 'State ID: ${student.stateId}',
                                                 style: const TextStyle(
@@ -112,14 +120,6 @@ class ProfilePage extends StatelessWidget {
                                                 ],
                                               ),
                                             ])),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: const Text('Close'),
-                                      ),
-                                    ],
                                   );
                                 },
                               );
