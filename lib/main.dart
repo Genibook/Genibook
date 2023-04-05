@@ -47,7 +47,7 @@ class Genibook extends StatelessWidget {
             colorScheme: darkColorScheme ?? Constants.defaultDarkColorScheme,
             useMaterial3: true,
           ),
-          themeMode: ThemeMode.system,
+          themeMode: ThemeMode.light,
           //home: GradesPage(student: eddie),
           //home: LoginPage(),
           //home: ProfilePage(student: eddie),

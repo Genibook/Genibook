@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/widgets/navbar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:genibook/models/schedule_class.dart';
+import '../extensions/darkmode.dart';
 
 class SchedulePage extends StatefulWidget {
   final ScheduleAssignmentsList scheduleAssignments;
@@ -39,10 +41,27 @@ class _SchedulePageState extends State<SchedulePage> {
             lastDay: DateTime.utc(DateTime.now().year + 1, 12, 31),
             focusedDay: _focusedDay,
             calendarFormat: _calendarFormat,
+            calendarBuilders: CalendarBuilders(
+              singleMarkerBuilder: (context, date, _) {
+                return Container(
+                  decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: date == _selectedDay
+                          ? Colors.transparent
+                          : Theme.of(context)
+                              .colorScheme
+                              .primary), //Change color
+                  width: 5.0,
+                  height: 5.0,
+                  margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                );
+              },
+            ),
             selectedDayPredicate: (day) {
               return isSameDay(_selectedDay, day);
             },
             onDaySelected: (selectedDay, focusedDay) {
+              HapticFeedback.lightImpact();
               setState(() {
                 _selectedDay = selectedDay;
                 _focusedDay = focusedDay;
