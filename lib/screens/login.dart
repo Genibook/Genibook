@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/icons/custom_icons_icons.dart';
-// import 'package:genibook/extensions/darkmode.dart';
-// import 'home_page.dart';
+import 'package:genibook/navigator/api_navigator.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -10,6 +9,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  ApiNavigator nav = const ApiNavigator();
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -20,10 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   void _login() {
     if (_formKey.currentState!.validate()) {
       // Perform login logic here
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
+      nav.pushToGrades(context);
     }
   }
 
@@ -33,22 +30,23 @@ class _LoginPageState extends State<LoginPage> {
         body: SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Row(children: [
-            Image.asset(
-              'assets/genesis_logo.png',
+        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+          const Expanded(
+              child: Text(
+            "Genibook",
+            style: TextStyle(
+              fontSize: 40,
+              letterSpacing: 2,
+              fontWeight: FontWeight.bold,
             ),
-            const Text(
-              "enibook",
-              style: TextStyle(
-                fontSize: 40,
-                letterSpacing: 2,
-                fontWeight: FontWeight.bold,
-              ),
-            )
-          ]),
-          const SizedBox(
-            height: 20,
+          )),
+          Expanded(
+            flex: 3,
+            child: Image.asset(
+              'assets/education.png',
+              height: 200,
+              width: 200,
+            ),
           ),
           Form(
             key: _formKey,
@@ -60,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: SizedBox(
                     //width: 300,
                     child: ButtonTheme(
-                      alignedDropdown: true,
+                      // alignedDropdown: true,
                       child: DropdownButtonFormField<String>(
                         isExpanded: true,
                         value: _selectedSchool,

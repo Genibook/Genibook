@@ -4,7 +4,7 @@ import 'package:genibook/constants.dart';
 import 'package:genibook/widgets/navbar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:genibook/models/schedule_class.dart';
-import '../extensions/darkmode.dart';
+import 'package:genibook/utils/swipe.dart';
 
 class SchedulePage extends StatefulWidget {
   final ScheduleAssignmentsList scheduleAssignments;
@@ -28,62 +28,69 @@ class _SchedulePageState extends State<SchedulePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar:
-          const Navbar(selectedIndex: Constants.schedulePageNavNumber),
-      appBar: AppBar(
-        title: const Text('Schedule'),
-      ),
-      body: Column(
-        children: [
-          TableCalendar(
-            firstDay: DateTime.utc(DateTime.now().year - 1, 1, 1),
-            lastDay: DateTime.utc(DateTime.now().year + 1, 12, 31),
-            focusedDay: _focusedDay,
-            calendarFormat: _calendarFormat,
-            calendarBuilders: CalendarBuilders(
-              singleMarkerBuilder: (context, date, _) {
-                return Container(
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: date == _selectedDay
-                          ? Colors.transparent
-                          : Theme.of(context)
-                              .colorScheme
-                              .primary), //Change color
-                  width: 5.0,
-                  height: 5.0,
-                  margin: const EdgeInsets.symmetric(horizontal: 1.5),
-                );
-              },
-            ),
-            selectedDayPredicate: (day) {
-              return isSameDay(_selectedDay, day);
-            },
-            onDaySelected: (selectedDay, focusedDay) {
-              HapticFeedback.lightImpact();
-              setState(() {
-                _selectedDay = selectedDay;
-                _focusedDay = focusedDay;
-              });
-            },
-            onFormatChanged: (format) {
-              setState(() {
-                _calendarFormat = format;
-              });
-            },
-            eventLoader: (day) {
-              final events =
-                  widget.scheduleAssignments.list.where((assignment) {
-                return isSameDay(assignment.dateAsDateTime, day);
-              }).toList();
-
-              return events.map((event) => event.assignment).toList();
-            },
+    return GestureDetector(
+        onPanUpdate: (details) {
+          swipeHandler(details, Constants.profilePageNavNumber);
+        },
+        child: Scaffold(
+          bottomNavigationBar:
+              const Navbar(selectedIndex: Constants.schedulePageNavNumber),
+          appBar: AppBar(
+            title: const Text('Schedule'),
+            automaticallyImplyLeading: false,
+            elevation: 2,
+            shadowColor: Theme.of(context).shadowColor,
           ),
-          Expanded(
-              child:
-                  widget.scheduleAssignments.doesDayHaveAssignment(_selectedDay)
+          body: Column(
+            children: [
+              TableCalendar(
+                firstDay: DateTime.utc(DateTime.now().year - 1, 1, 1),
+                lastDay: DateTime.utc(DateTime.now().year + 1, 12, 31),
+                focusedDay: _focusedDay,
+                calendarFormat: _calendarFormat,
+                calendarBuilders: CalendarBuilders(
+                  singleMarkerBuilder: (context, date, _) {
+                    return Container(
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: date == _selectedDay
+                              ? Colors.transparent
+                              : Theme.of(context)
+                                  .colorScheme
+                                  .primary), //Change color
+                      width: 5.0,
+                      height: 5.0,
+                      margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                    );
+                  },
+                ),
+                selectedDayPredicate: (day) {
+                  return isSameDay(_selectedDay, day);
+                },
+                onDaySelected: (selectedDay, focusedDay) {
+                  HapticFeedback.lightImpact();
+                  setState(() {
+                    _selectedDay = selectedDay;
+                    _focusedDay = focusedDay;
+                  });
+                },
+                onFormatChanged: (format) {
+                  setState(() {
+                    _calendarFormat = format;
+                  });
+                },
+                eventLoader: (day) {
+                  final events =
+                      widget.scheduleAssignments.list.where((assignment) {
+                    return isSameDay(assignment.dateAsDateTime, day);
+                  }).toList();
+
+                  return events.map((event) => event.assignment).toList();
+                },
+              ),
+              Expanded(
+                  child: widget.scheduleAssignments
+                          .doesDayHaveAssignment(_selectedDay)
                       ? ListView.builder(
                           itemCount: widget.scheduleAssignments.list.length,
                           itemBuilder: (context, index) {
@@ -106,8 +113,8 @@ class _SchedulePageState extends State<SchedulePage> {
                           width: 100,
                           height: 100,
                           child: Image.asset("assets/noData.png"))),
-        ],
-      ),
-    );
+            ],
+          ),
+        ));
   }
 }

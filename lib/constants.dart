@@ -13,8 +13,8 @@ class Constants {
   static final defaultDarkColorScheme = ColorScheme.fromSwatch(
       primarySwatch: Colors.blue, brightness: Brightness.dark);
 
-  static const int gradePageNavNumber = 1;
   static const int profilePageNavNumber = 0;
+  static const int gradePageNavNumber = 1;
   static const int schedulePageNavNumber = 2;
 
   static const int dragSensitivity = 8;

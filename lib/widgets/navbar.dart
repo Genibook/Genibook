@@ -11,6 +11,7 @@ class Navbar extends StatefulWidget {
 }
 
 class NavBarState extends State<Navbar> {
+  ApiNavigator nav = const ApiNavigator();
   late int _selectedIndex;
   @override
   void initState() {
@@ -31,38 +32,13 @@ class NavBarState extends State<Navbar> {
     });
 
     if (index == Constants.gradePageNavNumber) {
-      // ignore: use_build_context_synchronously
-
+      nav.pushToGrades(context);
     } else if (index == Constants.profilePageNavNumber) {
-      ApiNavigator nav = const ApiNavigator();
-      nav.pushToLogin(context);
-      // ignore: use_build_context_synchronously
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) => StudentPage(
-      //             email: email,
-      //             password: password,
-      //             school: school,
-      //           )),
-      // );
+      // nav.pushToLogin(context);
+      nav.pushToProfilePage(context);
     } else if (index == Constants.schedulePageNavNumber) {
-      // ignore: use_build_context_synchronously
-      // Navigator.push(
-      //   context,
-      //   MaterialPageRoute(
-      //       builder: (context) => Schedule(
-      //             email: email,
-      //             password: password,
-      //             school: school,
-      //           )),
-      // );
+      nav.pushToSchedule(context);
     }
-    // ignore: use_build_context_synchronously
-    //   Navigator.of(context).push(
-    //     MaterialPageRoute(builder: (context) => const TodoList()),
-    //   );
-    // }
   }
 
   @override

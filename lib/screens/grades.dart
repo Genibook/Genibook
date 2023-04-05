@@ -26,10 +26,10 @@ class _GradesPageState extends State<GradesPage> {
         bottomNavigationBar:
             const Navbar(selectedIndex: Constants.gradePageNavNumber),
         appBar: AppBar(
-          title: const Text('Grades'),
-          elevation: 2,
-          shadowColor: Theme.of(context).shadowColor,
-        ),
+            title: const Text('Grades'),
+            elevation: 2,
+            shadowColor: Theme.of(context).shadowColor,
+            automaticallyImplyLeading: false),
         body: ListView.builder(
           itemCount: widget.student.grades.length,
           itemBuilder: (BuildContext context, int index) {
