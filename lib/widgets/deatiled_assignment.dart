@@ -7,7 +7,7 @@ void showDetailedAssignmentView(BuildContext context, Assignment assignment) {
     builder: (context) {
       return AlertDialog(
         title: Text(
-          'Assignment Details - ${assignment.assignmentName} ',
+          assignment.assignment,
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         content: SingleChildScrollView(
@@ -19,11 +19,11 @@ void showDetailedAssignmentView(BuildContext context, Assignment assignment) {
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
-              Text(
-                assignment.assignment,
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-              ),
+              // Text(
+              //   assignment.assignment,
+              //   style:
+              //       const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              // ),
               const SizedBox(height: 6),
               Text(assignment.teacher),
               Text(
