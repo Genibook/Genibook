@@ -4,6 +4,7 @@ import 'package:genibook/utils/swipe.dart';
 import 'package:genibook/widgets/navbar.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../models/student_class.dart';
 
 // ignore: non_constant_identifier_names
 Future<void> LaunchUrl(String urll) async {
@@ -14,9 +15,9 @@ Future<void> LaunchUrl(String urll) async {
 }
 
 class ProfilePage extends StatelessWidget {
-  final Map<String, dynamic> studentData;
+  final Student student;
 
-  const ProfilePage({super.key, required this.studentData});
+  const ProfilePage({super.key, required this.student});
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +42,12 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           Center(
                             child: CircleAvatar(
-                              backgroundImage:
-                                  NetworkImage(studentData['img_url']),
+                              backgroundImage: NetworkImage(student.imageUrl),
                               radius: 50.0,
                             ),
                           ),
                           Text(
-                            studentData['name'],
+                            student.name,
                             style: const TextStyle(
                               fontSize: 27.0,
                               fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class ProfilePage extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'State ID: ${studentData['state_id']}',
+                                                'State ID: ${student.stateId}',
                                                 style: const TextStyle(
                                                     fontSize: 12.0),
                                               ),
@@ -84,7 +84,7 @@ class ProfilePage extends StatelessWidget {
                                                 height: 5,
                                               ),
                                               Text(
-                                                'Birthday: ${studentData['birthday']}',
+                                                'Birthday: ${student.birthday}',
                                                 style: const TextStyle(
                                                     fontSize: 12.0),
                                               ),
@@ -100,8 +100,8 @@ class ProfilePage extends StatelessWidget {
                                                   ),
                                                   InkWell(
                                                       onTap: () {
-                                                        LaunchUrl(studentData[
-                                                            "schedule_link"]);
+                                                        LaunchUrl(student
+                                                            .scheduleLink);
                                                       },
                                                       child: const Text(
                                                         "click me!",
@@ -144,7 +144,7 @@ class ProfilePage extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              '${studentData['locker']}',
+                                              student.locker,
                                               style: const TextStyle(
                                                   fontSize: 12.0),
                                               textAlign: TextAlign.center,
@@ -163,7 +163,7 @@ class ProfilePage extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              '${studentData['grade']}',
+                                              '${student.grade}',
                                               style: const TextStyle(
                                                   fontSize: 12.0),
                                               textAlign: TextAlign.center,
@@ -182,14 +182,13 @@ class ProfilePage extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              '${studentData['counselor_name']}',
+                                              student.counselorName,
                                               style: const TextStyle(
                                                   fontSize: 12.0),
                                               textAlign: TextAlign.center,
                                             )
                                           ],
                                         ),
-                                        const SizedBox(height: 10.0),
                                       ],
                                     ))))),
                   ],

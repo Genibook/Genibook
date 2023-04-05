@@ -37,23 +37,24 @@ class Genibook extends StatelessWidget {
   Widget build(BuildContext context) {
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Grades',
-          theme: ThemeData(
-            colorScheme: lightColorScheme ?? Constants.defaultLightColorScheme,
-            useMaterial3: true,
-          ),
-          darkTheme: ThemeData(
-            colorScheme: darkColorScheme ?? Constants.defaultDarkColorScheme,
-            useMaterial3: true,
-          ),
-          themeMode: ThemeMode.system,
-          //home: GradesPage(student: eddie),
-          //home: LoginPage(),
-          //home: ProfilePage(studentData: studentData),
-          home: SchedulePage(
-            scheduleAssignments: scheduleAssignments,
-          ));
+        debugShowCheckedModeBanner: false,
+        title: 'Grades',
+        theme: ThemeData(
+          colorScheme: lightColorScheme ?? Constants.defaultLightColorScheme,
+          useMaterial3: true,
+        ),
+        darkTheme: ThemeData(
+          colorScheme: darkColorScheme ?? Constants.defaultDarkColorScheme,
+          useMaterial3: true,
+        ),
+        themeMode: ThemeMode.system,
+        //home: GradesPage(student: eddie),
+        //home: LoginPage(),
+        home: ProfilePage(student: eddie),
+        // home: SchedulePage(
+        //   scheduleAssignments: scheduleAssignments,
+        // )
+      );
     });
   }
 }
