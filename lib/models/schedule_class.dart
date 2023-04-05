@@ -1,5 +1,7 @@
 import 'dart:core';
 
+import 'package:table_calendar/table_calendar.dart';
+
 class ScheduleAssignment {
   final String courseName;
   final String date;
@@ -68,5 +70,14 @@ class ScheduleAssignmentsList {
 
   List<ScheduleAssignment> get list {
     return scheduleAssignments;
+  }
+
+  bool doesDayHaveAssignment(DateTime? selectedDay) {
+    for (ScheduleAssignment assignment in scheduleAssignments) {
+      if (isSameDay(assignment.dateAsDateTime, selectedDay)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

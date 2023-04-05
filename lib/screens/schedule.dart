@@ -63,24 +63,30 @@ class _SchedulePageState extends State<SchedulePage> {
             },
           ),
           Expanded(
-            child: ListView.builder(
-              itemCount: widget.scheduleAssignments.list.length,
-              itemBuilder: (context, index) {
-                final assignment = widget.scheduleAssignments.list[index];
-
-                if (isSameDay(_selectedDay, assignment.dateAsDateTime)) {
-                  return ListTile(
-                    title: Text(assignment.assignment),
-                    subtitle: Text(
-                        '${assignment.category} - ${assignment.courseName}'),
-                    trailing: Text(assignment.points),
-                  );
-                } else {
-                  return const SizedBox.shrink();
-                }
-              },
-            ),
-          ),
+              child:
+                  widget.scheduleAssignments.doesDayHaveAssignment(_selectedDay)
+                      ? ListView.builder(
+                          itemCount: widget.scheduleAssignments.list.length,
+                          itemBuilder: (context, index) {
+                            final assignment =
+                                widget.scheduleAssignments.list[index];
+                            if (isSameDay(
+                                _selectedDay, assignment.dateAsDateTime)) {
+                              return ListTile(
+                                title: Text(assignment.assignment),
+                                subtitle: Text(
+                                    '${assignment.category} - ${assignment.courseName}'),
+                                trailing: Text(assignment.points),
+                              );
+                            } else {
+                              return const SizedBox.shrink();
+                            }
+                          },
+                        )
+                      : SizedBox(
+                          width: 100,
+                          height: 100,
+                          child: Image.asset("assets/noData.png"))),
         ],
       ),
     );
