@@ -20,5 +20,5 @@ class Constants {
 
   static const int dragSensitivity = 10;
 
-  static const int transitionDurationOfSwipeForLeft = 150;
+  static const int transitionDurationOfSwipeForLeft = 155;
 }

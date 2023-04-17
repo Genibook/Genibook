@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:genibook/constants.dart';
 
-import 'swipe_for_left.dart';
+import 'swipes.dart';
 
 import 'package:genibook/screens/login.dart';
 import 'package:genibook/screens/profile.dart';
@@ -48,14 +48,12 @@ class ApiNavigator extends Navigator {
     if (direction) {
       //means to the left
       Navigator.of(context)
-          .push(SlidePageRoute(child: GradesPage(student: eddie)));
+          .push(SlideToLeftPageRoute(child: GradesPage(student: eddie)));
       return;
     }
-    Navigator.of(context).push<void>(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) => GradesPage(student: eddie),
-      ),
-    );
+    Navigator.of(context)
+        .push(SlideToRightPageRoute(child: GradesPage(student: eddie)));
+    return;
   }
 
   void pushToProfilePage<T extends Object>(
@@ -63,33 +61,30 @@ class ApiNavigator extends Navigator {
     if (direction) {
       //means to the left
       Navigator.of(context)
-          .push(SlidePageRoute(child: ProfilePage(student: eddie)));
+          .push(SlideToLeftPageRoute(child: ProfilePage(student: eddie)));
       return;
     }
-    Navigator.of(context).push<void>(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) => ProfilePage(student: eddie),
-      ),
-    );
+    Navigator.of(context)
+        .push(SlideToRightPageRoute(child: ProfilePage(student: eddie)));
+    return;
   }
 
   void pushToSchedule<T extends Object>(BuildContext context, bool direction) {
     if (direction) {
       //means to the left
-      Navigator.of(context).push(SlidePageRoute(
+      Navigator.of(context).push(SlideToLeftPageRoute(
         child: SchedulePage(
           scheduleAssignments: scheduleAssignments,
         ),
       ));
       return;
     }
-    Navigator.of(context).push<void>(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) => SchedulePage(
-          scheduleAssignments: scheduleAssignments,
-        ),
+    Navigator.of(context).push(SlideToRightPageRoute(
+      child: SchedulePage(
+        scheduleAssignments: scheduleAssignments,
       ),
-    );
+    ));
+    return;
   }
 }
 
