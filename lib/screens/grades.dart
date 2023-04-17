@@ -20,7 +20,7 @@ class _GradesPageState extends State<GradesPage> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onPanUpdate: (details) {
-          swipeHandler(details, Constants.profilePageNavNumber, context);
+          swipeHandler(details, Constants.gradePageNavNumber, context);
         },
         child: Scaffold(
           bottomNavigationBar:

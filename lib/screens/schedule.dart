@@ -30,7 +30,7 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onPanUpdate: (details) {
-          swipeHandler(details, Constants.profilePageNavNumber, context);
+          swipeHandler(details, Constants.schedulePageNavNumber, context);
         },
         child: Scaffold(
             bottomNavigationBar:
