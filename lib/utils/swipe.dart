@@ -7,23 +7,23 @@ void swipeHandler(
   ApiNavigator nav = const ApiNavigator();
 
   if (details.delta.dx > Constants.dragSensitivity) {
-    print("right");
+    //print("right");
     int nextNum = pageNumber - 1;
     if (0 <= nextNum) {
       nav.useNumbersToDetermine(nextNum, context);
     }
-    print(pageNumber);
-    print(nextNum);
+    // print(pageNumber);
+    // print(nextNum);
   }
 
   // Swiping in left direction.
   if (details.delta.dx < -Constants.dragSensitivity) {
-    print("left");
+    //print("left");
     int nextNum = pageNumber + 1;
     if (nextNum <= Constants.amountOfPages) {
       nav.useNumbersToDetermine(nextNum, context);
     }
-    print(pageNumber);
-    print(nextNum);
+    // print(pageNumber);
+    // print(nextNum);
   }
 }
