@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 
 import 'package:genibook/constants.dart';
 
+import 'swipe_for_left.dart';
+
 import 'package:genibook/screens/login.dart';
 import 'package:genibook/screens/profile.dart';
 import 'package:genibook/screens/grades.dart';
@@ -24,13 +26,13 @@ class ApiNavigator extends Navigator {
     }
   }
 
-  void useNumbersToDetermine(int number, BuildContext context) {
+  void useNumbersToDetermine(int number, BuildContext context, bool direction) {
     if (number == Constants.gradePageNavNumber) {
-      pushToGrades(context);
+      pushToGrades(context, direction);
     } else if (number == Constants.profilePageNavNumber) {
-      pushToProfilePage(context);
+      pushToProfilePage(context, direction);
     } else if (number == Constants.schedulePageNavNumber) {
-      pushToSchedule(context);
+      pushToSchedule(context, direction);
     }
   }
 
@@ -42,7 +44,13 @@ class ApiNavigator extends Navigator {
     );
   }
 
-  void pushToGrades<T extends Object>(BuildContext context) {
+  void pushToGrades<T extends Object>(BuildContext context, bool direction) {
+    if (direction) {
+      //means to the left
+      Navigator.of(context)
+          .push(SlidePageRoute(child: GradesPage(student: eddie)));
+      return;
+    }
     Navigator.of(context).push<void>(
       MaterialPageRoute<void>(
         builder: (BuildContext context) => GradesPage(student: eddie),
@@ -50,7 +58,14 @@ class ApiNavigator extends Navigator {
     );
   }
 
-  void pushToProfilePage<T extends Object>(BuildContext context) {
+  void pushToProfilePage<T extends Object>(
+      BuildContext context, bool direction) {
+    if (direction) {
+      //means to the left
+      Navigator.of(context)
+          .push(SlidePageRoute(child: ProfilePage(student: eddie)));
+      return;
+    }
     Navigator.of(context).push<void>(
       MaterialPageRoute<void>(
         builder: (BuildContext context) => ProfilePage(student: eddie),
@@ -58,7 +73,16 @@ class ApiNavigator extends Navigator {
     );
   }
 
-  void pushToSchedule<T extends Object>(BuildContext context) {
+  void pushToSchedule<T extends Object>(BuildContext context, bool direction) {
+    if (direction) {
+      //means to the left
+      Navigator.of(context).push(SlidePageRoute(
+        child: SchedulePage(
+          scheduleAssignments: scheduleAssignments,
+        ),
+      ));
+      return;
+    }
     Navigator.of(context).push<void>(
       MaterialPageRoute<void>(
         builder: (BuildContext context) => SchedulePage(

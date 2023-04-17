@@ -19,4 +19,6 @@ class Constants {
   static const int amountOfPages = 3;
 
   static const int dragSensitivity = 10;
+
+  static const int transitionDurationOfSwipeForLeft = 150;
 }

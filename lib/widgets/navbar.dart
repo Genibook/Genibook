@@ -31,7 +31,7 @@ class NavBarState extends State<Navbar> {
       _selectedIndex = index;
     });
 
-    nav.useNumbersToDetermine(index, context);
+    nav.useNumbersToDetermine(index, context, false);
   }
 
   @override

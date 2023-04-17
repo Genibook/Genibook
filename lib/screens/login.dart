@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   void _login() {
     if (_formKey.currentState!.validate()) {
       // Perform login logic here
-      nav.pushToGrades(context);
+      nav.pushToGrades(context, false);
     }
   }
 

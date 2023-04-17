@@ -7,10 +7,10 @@ void swipeHandler(
   ApiNavigator nav = const ApiNavigator();
 
   if (details.delta.dx > Constants.dragSensitivity) {
-    //print("right");
+    //print("right -> that means i want to go to the left screen");
     int nextNum = pageNumber - 1;
     if (0 <= nextNum) {
-      nav.useNumbersToDetermine(nextNum, context);
+      nav.useNumbersToDetermine(nextNum, context, true);
     }
     // print(pageNumber);
     // print(nextNum);
@@ -21,7 +21,7 @@ void swipeHandler(
     //print("left");
     int nextNum = pageNumber + 1;
     if (nextNum <= Constants.amountOfPages) {
-      nav.useNumbersToDetermine(nextNum, context);
+      nav.useNumbersToDetermine(nextNum, context, false);
     }
     // print(pageNumber);
     // print(nextNum);
