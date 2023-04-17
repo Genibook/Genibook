@@ -30,91 +30,92 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onPanUpdate: (details) {
-          swipeHandler(details, Constants.profilePageNavNumber);
+          swipeHandler(details, Constants.profilePageNavNumber, context);
         },
         child: Scaffold(
-          bottomNavigationBar:
-              const Navbar(selectedIndex: Constants.schedulePageNavNumber),
-          appBar: AppBar(
-            title: const Text('Schedule'),
-            automaticallyImplyLeading: false,
-            elevation: 2,
-            shadowColor: Theme.of(context).shadowColor,
-          ),
-          body: Column(
-            children: [
-              TableCalendar(
-                firstDay: DateTime.utc(DateTime.now().year - 1, 1, 1),
-                lastDay: DateTime.utc(DateTime.now().year + 1, 12, 31),
-                focusedDay: _focusedDay,
-                calendarFormat: _calendarFormat,
-                calendarBuilders: CalendarBuilders(
-                  singleMarkerBuilder: (context, date, _) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: date == _selectedDay
-                              ? Colors.transparent
-                              : Theme.of(context)
-                                  .colorScheme
-                                  .primary), //Change color
-                      width: 5.0,
-                      height: 5.0,
-                      margin: const EdgeInsets.symmetric(horizontal: 1.5),
-                    );
-                  },
-                ),
-                selectedDayPredicate: (day) {
-                  return isSameDay(_selectedDay, day);
-                },
-                onDaySelected: (selectedDay, focusedDay) {
-                  HapticFeedback.lightImpact();
-                  setState(() {
-                    _selectedDay = selectedDay;
-                    _focusedDay = focusedDay;
-                  });
-                },
-                onFormatChanged: (format) {
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                },
-                eventLoader: (day) {
-                  final events =
-                      widget.scheduleAssignments.list.where((assignment) {
-                    return isSameDay(assignment.dateAsDateTime, day);
-                  }).toList();
+            bottomNavigationBar:
+                const Navbar(selectedIndex: Constants.schedulePageNavNumber),
+            appBar: AppBar(
+              title: const Text('Schedule'),
+              automaticallyImplyLeading: false,
+              elevation: 2,
+              shadowColor: Theme.of(context).shadowColor,
+            ),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  TableCalendar(
+                    firstDay: DateTime.utc(DateTime.now().year - 1, 1, 1),
+                    lastDay: DateTime.utc(DateTime.now().year + 1, 12, 31),
+                    focusedDay: _focusedDay,
+                    calendarFormat: _calendarFormat,
+                    calendarBuilders: CalendarBuilders(
+                      singleMarkerBuilder: (context, date, _) {
+                        return Container(
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: date == _selectedDay
+                                  ? Colors.transparent
+                                  : Theme.of(context)
+                                      .colorScheme
+                                      .primary), //Change color
+                          width: 5.0,
+                          height: 5.0,
+                          margin: const EdgeInsets.symmetric(horizontal: 1.5),
+                        );
+                      },
+                    ),
+                    selectedDayPredicate: (day) {
+                      return isSameDay(_selectedDay, day);
+                    },
+                    onDaySelected: (selectedDay, focusedDay) {
+                      HapticFeedback.lightImpact();
+                      setState(() {
+                        _selectedDay = selectedDay;
+                        _focusedDay = focusedDay;
+                      });
+                    },
+                    onFormatChanged: (format) {
+                      setState(() {
+                        _calendarFormat = format;
+                      });
+                    },
+                    eventLoader: (day) {
+                      final events =
+                          widget.scheduleAssignments.list.where((assignment) {
+                        return isSameDay(assignment.dateAsDateTime, day);
+                      }).toList();
 
-                  return events.map((event) => event.assignment).toList();
-                },
+                      return events.map((event) => event.assignment).toList();
+                    },
+                  ),
+                  Expanded(
+                      child: widget.scheduleAssignments
+                              .doesDayHaveAssignment(_selectedDay)
+                          ? ListView.builder(
+                              itemCount: widget.scheduleAssignments.list.length,
+                              itemBuilder: (context, index) {
+                                final assignment =
+                                    widget.scheduleAssignments.list[index];
+                                if (isSameDay(
+                                    _selectedDay, assignment.dateAsDateTime)) {
+                                  return ListTile(
+                                    title: Text(assignment.assignment),
+                                    subtitle: Text(
+                                        '${assignment.category} - ${assignment.courseName}'),
+                                    trailing: Text(assignment.points),
+                                  );
+                                } else {
+                                  return const SizedBox.shrink();
+                                }
+                              },
+                            )
+                          : SizedBox(
+                              width: 100,
+                              height: 100,
+                              child: Image.asset("assets/noData.png"))),
+                ],
               ),
-              Expanded(
-                  child: widget.scheduleAssignments
-                          .doesDayHaveAssignment(_selectedDay)
-                      ? ListView.builder(
-                          itemCount: widget.scheduleAssignments.list.length,
-                          itemBuilder: (context, index) {
-                            final assignment =
-                                widget.scheduleAssignments.list[index];
-                            if (isSameDay(
-                                _selectedDay, assignment.dateAsDateTime)) {
-                              return ListTile(
-                                title: Text(assignment.assignment),
-                                subtitle: Text(
-                                    '${assignment.category} - ${assignment.courseName}'),
-                                trailing: Text(assignment.points),
-                              );
-                            } else {
-                              return const SizedBox.shrink();
-                            }
-                          },
-                        )
-                      : SizedBox(
-                          width: 100,
-                          height: 100,
-                          child: Image.asset("assets/noData.png"))),
-            ],
-          ),
-        ));
+            )));
   }
 }

@@ -16,6 +16,7 @@ class Constants {
   static const int profilePageNavNumber = 0;
   static const int gradePageNavNumber = 1;
   static const int schedulePageNavNumber = 2;
+  static const int amountOfPages = 3;
 
-  static const int dragSensitivity = 8;
+  static const int dragSensitivity = 10;
 }

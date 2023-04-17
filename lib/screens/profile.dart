@@ -23,9 +23,14 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onPanUpdate: (details) {
-          swipeHandler(details, Constants.profilePageNavNumber);
+          swipeHandler(details, Constants.profilePageNavNumber, context);
         },
         child: Scaffold(
+            appBar: AppBar(
+                title: const Text('Profile'),
+                elevation: 2,
+                shadowColor: Theme.of(context).shadowColor,
+                automaticallyImplyLeading: false),
             bottomNavigationBar:
                 const Navbar(selectedIndex: Constants.profilePageNavNumber),
             body: SafeArea(

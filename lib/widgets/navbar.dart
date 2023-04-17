@@ -31,14 +31,7 @@ class NavBarState extends State<Navbar> {
       _selectedIndex = index;
     });
 
-    if (index == Constants.gradePageNavNumber) {
-      nav.pushToGrades(context);
-    } else if (index == Constants.profilePageNavNumber) {
-      // nav.pushToLogin(context);
-      nav.pushToProfilePage(context);
-    } else if (index == Constants.schedulePageNavNumber) {
-      nav.pushToSchedule(context);
-    }
+    nav.useNumbersToDetermine(index, context);
   }
 
   @override

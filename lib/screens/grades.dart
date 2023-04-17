@@ -19,85 +19,87 @@ class _GradesPageState extends State<GradesPage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onPanUpdate: (details) {
-        swipeHandler(details, Constants.profilePageNavNumber);
-      },
-      child: Scaffold(
-        bottomNavigationBar:
-            const Navbar(selectedIndex: Constants.gradePageNavNumber),
-        appBar: AppBar(
-            title: const Text('Grades'),
-            elevation: 2,
-            shadowColor: Theme.of(context).shadowColor,
-            automaticallyImplyLeading: false),
-        body: ListView.builder(
-          itemCount: widget.student.grades.length,
-          itemBuilder: (BuildContext context, int index) {
-            String courseName = widget.student.grades.keys.elementAt(index);
-            return GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AssignmentPage(
-                      assignmentsForAClass:
-                          widget.student.assignments[courseName],
+        onPanUpdate: (details) {
+          swipeHandler(details, Constants.profilePageNavNumber, context);
+        },
+        child: Scaffold(
+          bottomNavigationBar:
+              const Navbar(selectedIndex: Constants.gradePageNavNumber),
+          appBar: AppBar(
+              title: const Text('Grades'),
+              elevation: 2,
+              shadowColor: Theme.of(context).shadowColor,
+              automaticallyImplyLeading: false),
+          body: SafeArea(
+            child: ListView.builder(
+              itemCount: widget.student.grades.length,
+              itemBuilder: (BuildContext context, int index) {
+                String courseName = widget.student.grades.keys.elementAt(index);
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => AssignmentPage(
+                          assignmentsForAClass:
+                              widget.student.assignments[courseName],
+                        ),
+                      ),
+                    );
+                  },
+                  child: Card(
+                    margin: const EdgeInsets.all(16.0),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            courseName,
+                            style: const TextStyle(
+                              fontSize: 24.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(height: 16.0),
+                          Text(
+                            'Teacher: ${widget.student.grades.getSubjectTeacherName(courseName)}',
+                            style: const TextStyle(fontSize: 18.0),
+                          ),
+                          const SizedBox(height: 8.0),
+                          Text(
+                            'Email: ${widget.student.grades.getSubjectTeacherEmail(courseName)}',
+                            style: const TextStyle(fontSize: 18.0),
+                          ),
+                          const SizedBox(height: 16.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                'Grade:',
+                                style: TextStyle(fontSize: 18.0),
+                              ),
+                              Text(
+                                widget.student.grades
+                                    .getSubjectGrade(courseName)
+                                    .toString(),
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: getColorFromGrade(widget
+                                        .student.grades
+                                        .getSubjectGrade(courseName))),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
               },
-              child: Card(
-                margin: const EdgeInsets.all(16.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        courseName,
-                        style: const TextStyle(
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 16.0),
-                      Text(
-                        'Teacher: ${widget.student.grades.getSubjectTeacherName(courseName)}',
-                        style: const TextStyle(fontSize: 18.0),
-                      ),
-                      const SizedBox(height: 8.0),
-                      Text(
-                        'Email: ${widget.student.grades.getSubjectTeacherEmail(courseName)}',
-                        style: const TextStyle(fontSize: 18.0),
-                      ),
-                      const SizedBox(height: 16.0),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            'Grade:',
-                            style: TextStyle(fontSize: 18.0),
-                          ),
-                          Text(
-                            widget.student.grades
-                                .getSubjectGrade(courseName)
-                                .toString(),
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                                color: getColorFromGrade(widget.student.grades
-                                    .getSubjectGrade(courseName))),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        ),
-      ),
-    );
+            ),
+          ),
+        ));
   }
 }

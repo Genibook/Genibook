@@ -24,6 +24,16 @@ class ApiNavigator extends Navigator {
     }
   }
 
+  void useNumbersToDetermine(int number, BuildContext context) {
+    if (number == Constants.gradePageNavNumber) {
+      pushToGrades(context);
+    } else if (number == Constants.profilePageNavNumber) {
+      pushToProfilePage(context);
+    } else if (number == Constants.schedulePageNavNumber) {
+      pushToSchedule(context);
+    }
+  }
+
   void pushToLogin<T extends Object>(BuildContext context) {
     Navigator.of(context).push<void>(
       MaterialPageRoute<void>(
