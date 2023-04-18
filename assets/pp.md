@@ -1,4 +1,7 @@
 # Genibook's Privacy Policy
+
+By agreeing, you agree to the privacy policy.
+
 ## Introduction
 
 Thank you for choosing to be part of our Community at Genibook ('Company', 'we', 'us', or 'our'). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns please contact us at Genibook.gradebook@gmail.com.

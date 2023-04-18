@@ -5,20 +5,39 @@ import 'package:flutter_markdown/flutter_markdown.dart';
 Future<void> showPrivacyPolicyDialog(BuildContext context) async {
   String privacyPolicy = await rootBundle.loadString('assets/pp.md');
   showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text('Privacy Policy'),
-        content: Markdown(data: privacyPolicy),
-        actions: <Widget>[
-          ElevatedButton(
-            child: const Text('OK'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+      context: context,
+      builder: ((context) {
+        return AlertDialog(
+          content: SizedBox(
+            height: MediaQuery.of(context).size.height * 3 / 2,
+            width: MediaQuery.of(context).size.height * 3 / 2,
+            child: Markdown(data: privacyPolicy),
           ),
-        ],
-      );
-    },
-  );
+          actions: <Widget>[
+            ElevatedButton(
+              child: const Text('I agree'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      }));
+  // showDialog(
+  //   context: context,
+  //   builder: (BuildContext context) {
+  //     return AlertDialog(
+  //       title: const Text('Privacy Policy'),
+  //       content: Markdown(data: privacyPolicy),
+  //       actions: <Widget>[
+  //         ElevatedButton(
+  //           child: const Text('OK'),
+  //           onPressed: () {
+  //             Navigator.of(context).pop();
+  //           },
+  //         ),
+  //       ],
+  //     );
+  //   },
+  // );
 }
