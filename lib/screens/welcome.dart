@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:genibook/cache/login/tos.dart';
+import 'package:genibook/widgets/tos.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/navigator/swipes.dart';
 import 'package:genibook/screens/login.dart';
@@ -79,9 +79,6 @@ class _SplashScreenState extends State<SplashScreen>
               child: ElevatedButton(
                 onPressed: () async {
                   showPrivacyPolicyDialog(context);
-                  // Navigator.of(context)
-                  //     //TODO: tos page etc
-                  //     .push(SlideToRightPageRoute(child: LoginPage()));
                 },
                 child: const SizedBox(
                     height: 50,

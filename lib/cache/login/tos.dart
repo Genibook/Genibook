@@ -1,43 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'package:flutter_markdown/flutter_markdown.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-Future<void> showPrivacyPolicyDialog(BuildContext context) async {
-  String privacyPolicy = await rootBundle.loadString('assets/pp.md');
-  showDialog(
-      context: context,
-      builder: ((context) {
-        return AlertDialog(
-          content: SizedBox(
-            height: MediaQuery.of(context).size.height * 3 / 2,
-            width: MediaQuery.of(context).size.height * 3 / 2,
-            child: Markdown(data: privacyPolicy),
-          ),
-          actions: <Widget>[
-            ElevatedButton(
-              child: const Text('I agree'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      }));
-  // showDialog(
-  //   context: context,
-  //   builder: (BuildContext context) {
-  //     return AlertDialog(
-  //       title: const Text('Privacy Policy'),
-  //       content: Markdown(data: privacyPolicy),
-  //       actions: <Widget>[
-  //         ElevatedButton(
-  //           child: const Text('OK'),
-  //           onPressed: () {
-  //             Navigator.of(context).pop();
-  //           },
-  //         ),
-  //       ],
-  //     );
-  //   },
-  // );
+AndroidOptions _getAndroidOptions() => const AndroidOptions(
+      encryptedSharedPreferences: true,
+    );
+
+final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
+
+void teststuff() async {
+  await storage.write(key: "test", value: "hi");
+  String value = await storage.read(key: "test") ?? "";
+
+// Read all values
+  Map<String, String> allValues = await storage.readAll();
+
+// Delete value
+  await storage.delete(key: "test");
+
+// Delete all
+  await storage.deleteAll();
+
+  print(value);
+  print(allValues);
+
+// Write value
 }
