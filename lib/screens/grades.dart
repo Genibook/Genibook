@@ -9,9 +9,10 @@ import '../models/student_class.dart';
 class GradesPage extends StatefulWidget {
   final Student student;
 
-  GradesPage({required this.student});
+  const GradesPage({super.key, required this.student});
 
   @override
+  // ignore: library_private_types_in_public_api
   _GradesPageState createState() => _GradesPageState();
 }
 

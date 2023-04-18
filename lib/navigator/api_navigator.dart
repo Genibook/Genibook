@@ -39,7 +39,7 @@ class ApiNavigator extends Navigator {
   void pushToLogin<T extends Object>(BuildContext context) {
     Navigator.of(context).push<void>(
       MaterialPageRoute<void>(
-        builder: (BuildContext context) => LoginPage(),
+        builder: (BuildContext context) => const LoginPage(),
       ),
     );
   }

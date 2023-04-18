@@ -27,7 +27,8 @@ class _SplashScreenState extends State<SplashScreen>
     readTOS().then((value) {
       if (value) {
         //TODO: change push animation
-        Navigator.of(context).push(SlideToRightPageRoute(child: LoginPage()));
+        Navigator.of(context)
+            .push(SlideToRightPageRoute(child: const LoginPage()));
       }
     });
 

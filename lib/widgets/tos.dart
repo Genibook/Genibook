@@ -22,7 +22,7 @@ Future<void> showPrivacyPolicyDialog(BuildContext context) async {
               onPressed: () async {
                 if (await writeTOS()) {
                   Navigator.of(context)
-                      .push(SlideToRightPageRoute(child: LoginPage()));
+                      .push(SlideToRightPageRoute(child: const LoginPage()));
                 }
               },
             ),
