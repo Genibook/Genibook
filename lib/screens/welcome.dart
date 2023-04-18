@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/widgets/tos.dart';
 import 'package:genibook/constants.dart';
-import 'package:genibook/navigator/swipes.dart';
-import 'package:genibook/screens/login.dart';
 import 'package:genibook/extensions/darkmode.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -22,15 +19,6 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-
-    //TODO maybe change to main.dart
-    readTOS().then((value) {
-      if (value) {
-        //TODO: change push animation
-        Navigator.of(context)
-            .push(SlideToRightPageRoute(child: const LoginPage()));
-      }
-    });
 
     _controller = AnimationController(
       duration: const Duration(milliseconds: 2000),
