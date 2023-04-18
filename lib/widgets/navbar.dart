@@ -27,11 +27,20 @@ class NavBarState extends State<Navbar> {
   }
 
   void _onItemTapped(int index) async {
+    int selected_index = _selectedIndex;
     setState(() {
       _selectedIndex = index;
     });
 
-    nav.useNumbersToDetermine(index, context, false);
+    bool left = false;
+    if (index == Constants.gradePageNavNumber - 1 &&
+        selected_index == Constants.gradePageNavNumber) {
+      left = true;
+    } else if (index == Constants.schedulePageNavNumber - 1 &&
+        selected_index == Constants.schedulePageNavNumber) {
+      left = true;
+    }
+    nav.useNumbersToDetermine(index, context, left);
   }
 
   @override
