@@ -23,6 +23,10 @@ Future<bool> writeTOS() async {
   }
 }
 
+Future<bool> readTOS() async {
+  String value = await storage.read(key: Constants.tosReadKey) ?? "false";
+  return value.toLowerCase() == 'true';
+}
 // void teststuff() async {
 //   await storage.write(key: "test", value: "hi");
 //   String value = await storage.read(key: "test") ?? "";

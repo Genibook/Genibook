@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/widgets/tos.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/navigator/swipes.dart';
@@ -21,6 +22,14 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
+
+    //TODO maybe change to main.dart
+    readTOS().then((value) {
+      if (value) {
+        //TODO: change push animation
+        Navigator.of(context).push(SlideToRightPageRoute(child: LoginPage()));
+      }
+    });
 
     _controller = AnimationController(
       duration: const Duration(milliseconds: 2000),
