@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/navigator/swipes.dart';
 import 'package:genibook/screens/login.dart';
@@ -47,7 +48,9 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     //LoginPage()
     return Scaffold(
-      body: SafeArea(
+        body: Container(
+      decoration: const BoxDecoration(color: Constants.appBlue),
+      child: SafeArea(
         child: Column(
           children: [
             RotationTransition(
@@ -70,19 +73,18 @@ class _SplashScreenState extends State<SplashScreen>
               style: Theme.of(context).textTheme.headline2,
               textAlign: TextAlign.center,
             ),
-            const SizedBox(
-              height: 16,
-            ),
+            const Spacer(),
             Opacity(
               opacity: _showButton ? _controller.value : 0.0,
               child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      //TODO: tos page etc
-                      .push(SlideToRightPageRoute(child: LoginPage()));
+                onPressed: () async {
+                  showPrivacyPolicyDialog(context);
+                  // Navigator.of(context)
+                  //     //TODO: tos page etc
+                  //     .push(SlideToRightPageRoute(child: LoginPage()));
                 },
                 child: const SizedBox(
-                    height: 40,
+                    height: 50,
                     width: 120,
                     child: Center(
                       child: Text(
@@ -91,10 +93,11 @@ class _SplashScreenState extends State<SplashScreen>
                       ),
                     )),
               ),
-            )
+            ),
+            const Spacer(),
           ],
         ),
       ),
-    );
+    ));
   }
 }
