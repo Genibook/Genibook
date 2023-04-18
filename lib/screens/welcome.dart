@@ -21,6 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     );
     super.initState();
+    _controller.repeat(period: const Duration(seconds: 4));
   }
 
   @override
@@ -33,27 +34,32 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     //LoginPage()
     return Scaffold(
-        body: SafeArea(
-      child: Center(
-        child: RotationTransition(
-          turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
-          child: Column(children: [
-            Image(
-                image: context.isDarkMode
-                    ? const AssetImage("assets/icon-blue-transparent-meow.png")
-                    : const AssetImage(
-                        "assets/icon-black-transparent-meow.png")),
+      body: SafeArea(
+        child: Column(
+          children: [
+            RotationTransition(
+                turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+                child: Center(
+                  child: Image(
+                      image: context.isDarkMode
+                          ? const AssetImage(
+                              "assets/icon-blue-transparent-meow.png")
+                          : const AssetImage(
+                              "assets/icon-black-transparent-meow.png")),
+                )),
             Text(
               "Welcome to ${Constants.appName}.",
               style: Theme.of(context).textTheme.headline3,
+              textAlign: TextAlign.center,
             ),
             Text(
               Constants.tagline,
               style: Theme.of(context).textTheme.headline2,
+              textAlign: TextAlign.center,
             )
-          ]),
+          ],
         ),
       ),
-    ));
+    );
   }
 }
