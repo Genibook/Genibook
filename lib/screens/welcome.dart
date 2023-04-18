@@ -22,11 +22,12 @@ class _SplashScreenState extends State<SplashScreen>
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 5000),
+      duration: const Duration(milliseconds: 2000),
       vsync: this,
     );
 
-    _controller.repeat(period: const Duration(seconds: 2));
+    _controller.forward();
+    // _controller.repeat(period: const Duration(seconds: 2));
     Future.delayed(const Duration(seconds: 2), () {
       setState(() {
         _showButton = true;
@@ -57,7 +58,7 @@ class _SplashScreenState extends State<SplashScreen>
                           ? const AssetImage(
                               "assets/icon-blue-transparent-meow.png")
                           : const AssetImage(
-                              "assets/icon-black-transparent-meow.png")),
+                              "assets/icon-black-transparent.png")),
                 )),
             Text(
               "Welcome to ${Constants.appName}.",

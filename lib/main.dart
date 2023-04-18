@@ -42,7 +42,7 @@ class Genibook extends StatelessWidget {
             useMaterial3: true,
           ),
           themeMode: ThemeMode.system,
-          home: SplashScreen());
+          home: const SplashScreen());
     });
   }
 }
