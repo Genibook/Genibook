@@ -81,7 +81,7 @@ class _SplashScreenState extends State<SplashScreen>
                       .push(SlideToRightPageRoute(child: LoginPage()));
                 },
                 child: const SizedBox(
-                    height: 30,
+                    height: 40,
                     width: 120,
                     child: Center(
                       child: Text(

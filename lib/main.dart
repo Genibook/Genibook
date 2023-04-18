@@ -15,7 +15,7 @@ void main() async {
   if (UniversalPlatform.isWindows ||
       UniversalPlatform.isLinux ||
       UniversalPlatform.isMacOS) {
-    setWindowMinSize(const Size(350, 650));
+    setWindowMinSize(const Size(350, 700));
     setWindowMaxSize(Size.infinite);
   } else {
     // phone!
