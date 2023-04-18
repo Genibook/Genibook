@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/screens/splash_screen.dart';
 import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
 import 'constants.dart';
-import 'screens/login.dart';
 import 'utils/http_overrides.dart';
 
 void main() async {
@@ -42,7 +42,7 @@ class Genibook extends StatelessWidget {
             useMaterial3: true,
           ),
           themeMode: ThemeMode.system,
-          home: LoginPage());
+          home: SplashScreen());
     });
   }
 }

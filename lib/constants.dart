@@ -21,4 +21,7 @@ class Constants {
   static const int dragSensitivity = 10;
 
   static const int transitionDurationOfSwipeForLeft = 155;
+
+  static const String tagline = "It's Genesis remade.";
+  static const String appName = "Genibook";
 }
