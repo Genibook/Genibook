@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:genibook/screens/splash_screen.dart';
+import 'package:genibook/screens/welcome.dart';
 import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
