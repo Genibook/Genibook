@@ -26,4 +26,7 @@ class Constants {
   static const String appName = "Genibook";
 
   static const Color appBlue = Color(0xFF21A8F5);
+
+  static const String tosReadKey = "tos_read";
+  //static const String
 }

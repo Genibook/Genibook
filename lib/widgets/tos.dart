@@ -19,11 +19,11 @@ Future<void> showPrivacyPolicyDialog(BuildContext context) async {
           actions: <Widget>[
             ElevatedButton(
               child: const Text('I agree'),
-              onPressed: () {
-                // Navigator.of(context)
-                //     .push(SlideToRightPageRoute(child: LoginPage()));
-                teststuff();
-                // Navigator.of(context).pop();
+              onPressed: () async {
+                if (await writeTOS()) {
+                  Navigator.of(context)
+                      .push(SlideToRightPageRoute(child: LoginPage()));
+                }
               },
             ),
           ],

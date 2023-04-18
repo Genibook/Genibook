@@ -68,6 +68,7 @@ class _SplashScreenState extends State<SplashScreen>
               style: Theme.of(context).textTheme.headline3,
               textAlign: TextAlign.center,
             ),
+            const Spacer(),
             Text(
               Constants.tagline,
               style: Theme.of(context).textTheme.headline2,
