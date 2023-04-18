@@ -38,7 +38,6 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void dispose() {
     _controller.dispose();
-    _controller.dispose();
     super.dispose();
   }
 
@@ -47,7 +46,9 @@ class _SplashScreenState extends State<SplashScreen>
     //LoginPage()
     return Scaffold(
         body: Container(
-      decoration: const BoxDecoration(color: Constants.appBlue),
+      decoration: context.isDarkMode
+          ? null
+          : const BoxDecoration(color: Constants.appBlue),
       child: SafeArea(
         child: Column(
           children: [
