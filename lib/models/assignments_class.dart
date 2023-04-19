@@ -1,6 +1,8 @@
 //Assignments assignments = Assignments.fromJson(assignmentsJson);
 // String assignmentsJsonString = jsonEncode(assignments.toJson());
 
+import 'package:flutter/foundation.dart';
+
 class Assignments {
   Map<String, List<Assignment>> assignments;
 
@@ -39,6 +41,49 @@ class Assignments {
   bool get isEmptyDict => assignments.isEmpty;
 
   bool get isNotEmpty => assignments.isNotEmpty;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Assignments &&
+          runtimeType == other.runtimeType &&
+          mapEquals(assignments, other.assignments);
+
+  @override
+  int get hashCode => mapHashCode(assignments);
+
+  static int mapHashCode(Map<String, dynamic> map) {
+    return map.values
+        .map((v) => v is List ? mapListHashCode(v) : v.hashCode)
+        .reduce((a, b) => a ^ b);
+  }
+
+  static int mapListHashCode(List<dynamic> list) {
+    return list.map((v) => v.hashCode).reduce((a, b) => a ^ b);
+  }
+
+  static bool mapEquals(
+      Map<dynamic, dynamic> map1, Map<dynamic, dynamic> map2) {
+    if (identical(map1, map2)) {
+      return true;
+    }
+    if (map1.length != map2.length) {
+      return false;
+    }
+    for (final key in map1.keys) {
+      if (!map2.containsKey(key)) {
+        return false;
+      }
+      if (map1[key] is List && map2[key] is List) {
+        if (!listEquals(map1[key], map2[key])) {
+          return false;
+        }
+      } else if (map1[key] != map2[key]) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
 
 class Assignment {
@@ -115,4 +160,43 @@ class Assignment {
       'docs': docs,
     };
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Assignment &&
+          runtimeType == other.runtimeType &&
+          courseName == other.courseName &&
+          mp == other.mp &&
+          dayName == other.dayName &&
+          fullDayName == other.fullDayName &&
+          date == other.date &&
+          fullDate == other.fullDate &&
+          teacher == other.teacher &&
+          category == other.category &&
+          assignment == other.assignment &&
+          description == other.description &&
+          gradePercent == other.gradePercent &&
+          gradeNum == other.gradeNum &&
+          comment == other.comment &&
+          prev == other.prev &&
+          docs == other.docs;
+
+  @override
+  int get hashCode =>
+      courseName.hashCode ^
+      mp.hashCode ^
+      dayName.hashCode ^
+      fullDayName.hashCode ^
+      date.hashCode ^
+      fullDate.hashCode ^
+      teacher.hashCode ^
+      category.hashCode ^
+      assignment.hashCode ^
+      description.hashCode ^
+      gradePercent.hashCode ^
+      gradeNum.hashCode ^
+      comment.hashCode ^
+      prev.hashCode ^
+      docs.hashCode;
 }
