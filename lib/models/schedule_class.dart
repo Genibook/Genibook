@@ -1,5 +1,6 @@
 import 'dart:core';
 
+import 'package:flutter/foundation.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class ScheduleAssignment {
@@ -46,6 +47,27 @@ class ScheduleAssignment {
         now.year, int.parse(date.split("/")[0]), int.parse(date.split("/")[1]));
     return datee;
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ScheduleAssignment &&
+          runtimeType == other.runtimeType &&
+          courseName == other.courseName &&
+          date == other.date &&
+          points == other.points &&
+          category == other.category &&
+          assignment == other.assignment &&
+          description == other.description;
+
+  @override
+  int get hashCode =>
+      courseName.hashCode ^
+      date.hashCode ^
+      points.hashCode ^
+      category.hashCode ^
+      assignment.hashCode ^
+      description.hashCode;
 }
 
 class ScheduleAssignmentsList {
@@ -80,4 +102,14 @@ class ScheduleAssignmentsList {
     }
     return false;
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ScheduleAssignmentsList &&
+          runtimeType == other.runtimeType &&
+          listEquals(other.scheduleAssignments, scheduleAssignments);
+
+  @override
+  int get hashCode => scheduleAssignments.hashCode;
 }

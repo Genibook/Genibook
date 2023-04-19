@@ -409,3 +409,65 @@ ScheduleAssignmentsList scheduleAssignments = ScheduleAssignmentsList.fromJson({
     },
   ]
 });
+
+ScheduleAssignmentsList scheduleAssignments2 =
+    ScheduleAssignmentsList.fromJson({
+  'scheduleAssignments': [
+    {
+      "assignment": "Day 24 HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/14",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day 24 HW",
+      "category": "plqy with balls",
+      "course_name": "AP calculus AB",
+      "date": "4/12",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day 24 HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/15",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day 24 HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/15",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day 24 HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/15",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day YOUR MOM HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/15",
+      "description": "",
+      "points": "50"
+    },
+    {
+      "assignment": "Day 24 HW",
+      "category": "Performance Assessments",
+      "course_name": "AP calculus AB",
+      "date": "4/15",
+      "description": "",
+      "points": "50"
+    },
+  ]
+});
