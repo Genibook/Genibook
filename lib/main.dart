@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/cache/login/tos.dart';
-import 'package:genibook/navigator/swipes.dart';
+import 'package:genibook/screens/debug.dart';
 import 'package:genibook/screens/welcome.dart';
 import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
@@ -51,7 +51,11 @@ class Genibook extends StatelessWidget {
             useMaterial3: true,
           ),
           themeMode: ThemeMode.system,
-          home: loginOrSplash ? const LoginPage() : const SplashScreen());
+          home: Constants.debugMode
+              ? const DebugScreen()
+              : loginOrSplash
+                  ? const LoginPage()
+                  : const SplashScreen());
     });
   }
 }

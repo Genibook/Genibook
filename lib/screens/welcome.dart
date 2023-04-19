@@ -50,6 +50,8 @@ class _SplashScreenState extends State<SplashScreen>
           ? null
           : const BoxDecoration(color: Constants.appBlue),
       child: SafeArea(
+          child: Padding(
+        padding: const EdgeInsets.all(5),
         child: Column(
           children: [
             RotationTransition(
@@ -94,7 +96,7 @@ class _SplashScreenState extends State<SplashScreen>
             const Spacer(),
           ],
         ),
-      ),
+      )),
     ));
   }
 }
