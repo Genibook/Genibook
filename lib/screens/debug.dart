@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/models/assignments_class.dart';
+import 'package:genibook/models/grades_class.dart';
 import 'package:genibook/navigator/api_navigator.dart';
 
 class DebugScreen extends StatefulWidget {
@@ -59,7 +60,15 @@ class _DebugScreenState extends State<DebugScreen> {
                             Assignments.fromJson(assignments2));
                       }
                     },
-                    child: const Text("Assignments .equals"))
+                    child: const Text("Assignments ==")),
+                ElevatedButton(
+                    onPressed: () async {
+                      if (kDebugMode) {
+                        print(Grades.fromJson(grades) ==
+                            Grades.fromJson(grades2));
+                      }
+                    },
+                    child: const Text("Grades ==")),
               ],
             )
           ]))),

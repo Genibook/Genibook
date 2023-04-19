@@ -294,24 +294,44 @@ Student eddie = Student.fromJson({
   'id': 107600,
   'image64': 'N/A',
   'assignments': assignments,
-  'grades': {
-    'Math': {
-      'grade': 85.0,
-      'teacher_name': 'John Smith',
-      'teacher_email': 'john.smith@example.com'
-    },
-    'English': {
-      'grade': 92.0,
-      'teacher_name': 'Jane Doe',
-      'teacher_email': 'jane.doe@example.com'
-    },
-    'Science': {
-      'grade': 78.0,
-      'teacher_name': 'Bob Johnson',
-      'teacher_email': 'bob.johnson@example.com'
-    },
-  }
+  'grades': grades
 });
+
+Map<String, Map<String, dynamic>> grades = {
+  'Math': {
+    'grade': 85.0,
+    'teacher_name': 'John Smith',
+    'teacher_email': 'john.smith@example.com'
+  },
+  'English': {
+    'grade': 92.0,
+    'teacher_name': 'Jane Doe',
+    'teacher_email': 'jane.doe@example.com'
+  },
+  'Science': {
+    'grade': 78.0,
+    'teacher_name': 'Bob Johnson',
+    'teacher_email': 'bob.johnson@example.com'
+  },
+};
+
+Map<String, Map<String, dynamic>> grades2 = {
+  'Math': {
+    'grade': 85.0,
+    'teacher_name': 'John Smith',
+    'teacher_email': 'john.smith@example.com'
+  },
+  'English': {
+    'grade': 92.0,
+    'teacher_name': 'Jane Doe',
+    'teacher_email': 'jane.doe@example.com'
+  },
+  'Science': {
+    'grade': 78.0,
+    'teacher_name': 'Bob Johnson',
+    'teacher_email': 'bob.johnson@example.com'
+  },
+};
 
 ScheduleAssignmentsList scheduleAssignments = ScheduleAssignmentsList.fromJson({
   'scheduleAssignments': [

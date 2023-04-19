@@ -1,3 +1,6 @@
+import 'package:collection/collection.dart';
+import 'package:flutter/foundation.dart';
+
 class Grades {
   final Map<String, Map<String, dynamic>> _grades;
 
@@ -39,6 +42,24 @@ class Grades {
     final Map<String, dynamic> subjectGrades = getSubjectGrades(subject);
     return subjectGrades['teacher_email'] ?? '';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (kDebugMode) {
+      print("is other grades?: ${other is Grades}");
+      // if (other is Grades) {
+      //   print(other._grades);
+      // }
+      // print(_grades);
+    }
+
+    var deepEq = const DeepCollectionEquality();
+    return other is Grades && deepEq.equals(_grades, other._grades);
+  }
+
+  @override
+  int get hashCode => _grades.hashCode;
 }
 
 // final grades = Grades.fromJson({
