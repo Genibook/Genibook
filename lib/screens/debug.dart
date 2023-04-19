@@ -69,6 +69,13 @@ class _DebugScreenState extends State<DebugScreen> {
                       }
                     },
                     child: const Text("Grades ==")),
+                ElevatedButton(
+                    onPressed: () async {
+                      if (kDebugMode) {
+                        print(eddie == baddie);
+                      }
+                    },
+                    child: const Text("Student ==")),
               ],
             )
           ]))),

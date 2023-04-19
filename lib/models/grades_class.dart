@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
@@ -54,8 +55,8 @@ class Grades {
       // print(_grades);
     }
 
-    var deepEq = const DeepCollectionEquality();
-    return other is Grades && deepEq.equals(_grades, other._grades);
+    return other is Grades &&
+        const DeepCollectionEquality().equals(_grades, other._grades);
   }
 
   @override

@@ -297,6 +297,22 @@ Student eddie = Student.fromJson({
   'grades': grades
 });
 
+Student baddie = Student.fromJson({
+  'age': 15,
+  'img_url': 'https://c.tenor.com/bCfpwMjfAi0AAAAC/cat-typing.gif',
+  'state_id': 4238447327,
+  'birthday': '06/07/2007',
+  'schedule_link': 'https://example.com',
+  'name': 'Eddie Tang',
+  'grade': 10,
+  'locker': 'N/A',
+  'counselor_name': 'James Charles',
+  'id': 107600,
+  'image64': 'N/A',
+  'assignments': assignments,
+  'grades': grades
+});
+
 Map<String, Map<String, dynamic>> grades = {
   'Math': {
     'grade': 85.0,

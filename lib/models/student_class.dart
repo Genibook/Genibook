@@ -1,5 +1,7 @@
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
+// ignore: depend_on_referenced_packages
+import 'package:collection/collection.dart';
 
 class Student {
   int age;
@@ -72,4 +74,38 @@ class Student {
       'grades': grades,
     };
   }
+
+  @override
+  bool operator ==(Object other) {
+    return other is Student &&
+        other.age == age &&
+        other.imageUrl == imageUrl &&
+        other.stateId == stateId &&
+        other.birthday == birthday &&
+        other.scheduleLink == scheduleLink &&
+        other.name == name &&
+        other.grade == grade &&
+        other.locker == locker &&
+        other.counselorName == counselorName &&
+        other.id == id &&
+        other.image64 == image64 &&
+        other.assignments == assignments &&
+        other.grades == grades;
+  }
+
+  @override
+  int get hashCode =>
+      age.hashCode ^
+      imageUrl.hashCode ^
+      stateId.hashCode ^
+      birthday.hashCode ^
+      scheduleLink.hashCode ^
+      name.hashCode ^
+      grade.hashCode ^
+      locker.hashCode ^
+      counselorName.hashCode ^
+      id.hashCode ^
+      image64.hashCode ^
+      const DeepCollectionEquality().hash(assignments.toJson()) ^
+      const DeepCollectionEquality().hash(grades.toJson());
 }
