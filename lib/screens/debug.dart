@@ -17,24 +17,34 @@ class _DebugScreenState extends State<DebugScreen> {
     return Scaffold(
       body: SafeArea(
           child: SingleChildScrollView(
-              child: Row(children: [
-        Column(
-          children: const [Text("API calls")],
-        ),
-        Column(
-          children: [
-            const Text("Caching"),
-            ElevatedButton(
-                onPressed: () async {
-                  bool val = await writeTOS();
-                  if (kDebugMode) {
-                    print(val);
-                  }
-                },
-                child: const Text(""))
-          ],
-        )
-      ]))),
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+            Column(
+              children: [
+                Text(
+                  "API calls",
+                  style: Theme.of(context).textTheme.headline3,
+                )
+              ],
+            ),
+            Column(
+              children: [
+                Text(
+                  "Caching",
+                  style: Theme.of(context).textTheme.headline3,
+                ),
+                ElevatedButton(
+                    onPressed: () async {
+                      bool val = await writeTOS();
+                      if (kDebugMode) {
+                        print("Assigned value to: $val");
+                      }
+                    },
+                    child: const Text("TOS"))
+              ],
+            )
+          ]))),
     );
   }
 }
