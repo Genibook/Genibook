@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/screens/debug.dart';
@@ -23,6 +24,8 @@ void main() async {
   } else {
     // phone!
   }
+
+  //assert(kDebugMode == true);
 
   runApp(const Genibook());
 }

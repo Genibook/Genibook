@@ -185,6 +185,102 @@ Map<String, List<Map<String, dynamic>>> assignments = {
   ]
 };
 
+Map<String, List<Map<String, dynamic>>> assignments2 = {
+  "Math": [
+    {
+      "course_name": "Math",
+      "mp": "3",
+      "dayname": "Mon",
+      "full_dayname": "Monday",
+      "date": "12/20",
+      "full_date": "12/20/2021",
+      "teacher": "Mr. Smith",
+      "category": "Homework",
+      "assignment": "Page 40-41, problems 1-10",
+      "description": "Complete the assigned problems in your workbook.",
+      "grade_percent": "90",
+      "grade_num": "9/10",
+      "comment": "Great job! Just missed one question.",
+      "prev": "N/A",
+      "docs": "N/A"
+    }
+  ],
+  "Science": [
+    {
+      "course_name": "Science",
+      "mp": "3",
+      "dayname": "Tus",
+      "full_dayname": "Tuesday",
+      "date": "12/21",
+      "full_date": "12/21/2021",
+      "teacher": "Ms. Johnson",
+      "category": "Lab Report",
+      "assignment": "Experiment 4: Chemical Reactions",
+      "description":
+          "Write a lab report summarizing the results of the experiment.",
+      "grade_percent": "95",
+      "grade_num": "19/20",
+      "comment": "Excellent work! You just missed a few minor details.",
+      "prev": "N/A",
+      "docs": "N/A"
+    },
+    {
+      "course_name": "Science",
+      "mp": "3",
+      "dayname": "Wed",
+      "full_dayname": "Wednesday",
+      "date": "12/24",
+      "full_date": "12/24/2021",
+      "teacher": "Ms. Johnson",
+      "category": "Lab Report",
+      "assignment": "Experiment 4: Chemical Reactions",
+      "description":
+          "Write a lab report summarizing the results of the experiment.",
+      "grade_percent": "95",
+      "grade_num": "19/20",
+      "comment": "Excellent work! You just missed a few minor details.",
+      "prev": "N/A",
+      "docs": "N/A"
+    },
+    {
+      "course_name": "Science",
+      "mp": "3",
+      "dayname": "Thus",
+      "full_dayname": "Thursday",
+      "date": "12/25",
+      "full_date": "12/25/2021",
+      "teacher": "Ms. Johnson",
+      "category": "Lab Report",
+      "assignment": "Experiment 4: Chemical Reactions",
+      "description":
+          "Write a lab report summarizing the results of the experiment.",
+      "grade_percent": "95",
+      "grade_num": "19/20",
+      "comment": "Excellent work! You just missed a few minor details.",
+      "prev": "N/A",
+      "docs": "N/A"
+    }
+  ],
+  "English": [
+    {
+      "course_name": "English",
+      "mp": "3",
+      "dayname": "Wed",
+      "full_dayname": "Wednesday",
+      "date": "12/22",
+      "full_date": "12/22",
+      "teacher": "Ms. Lee",
+      "category": "Essay",
+      "assignment": "Persuasive Essay",
+      "description": "Write a persuasive essay on the topic given in class.",
+      "grade_percent": "85",
+      "grade_num": "17/20",
+      "comment": "Good job! There were a few errors in grammar and spelling.",
+      "prev": "N/A",
+      "docs": "N/A"
+    }
+  ]
+};
 Student eddie = Student.fromJson({
   'age': 15,
   'img_url': 'https://c.tenor.com/bCfpwMjfAi0AAAAC/cat-typing.gif',

@@ -45,17 +45,13 @@ class Assignments {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is Assignments &&
-          runtimeType == other.runtimeType &&
-          mapEquals(assignments, other.assignments);
+      other is Assignments && mapEquals(assignments, other.assignments);
 
   @override
   int get hashCode => mapHashCode(assignments);
 
-  static int mapHashCode(Map<String, dynamic> map) {
-    return map.values
-        .map((v) => v is List ? mapListHashCode(v) : v.hashCode)
-        .reduce((a, b) => a ^ b);
+  static int mapHashCode(Map<String, List<Assignment>> map) {
+    return map.values.map((v) => mapListHashCode(v)).reduce((a, b) => a ^ b);
   }
 
   static int mapListHashCode(List<dynamic> list) {
@@ -63,22 +59,38 @@ class Assignments {
   }
 
   static bool mapEquals(
-      Map<dynamic, dynamic> map1, Map<dynamic, dynamic> map2) {
+      Map<String, List<Assignment>> map1, Map<String, List<Assignment>> map2) {
     if (identical(map1, map2)) {
+      if (kDebugMode) {
+        print("identitcal");
+      }
       return true;
     }
     if (map1.length != map2.length) {
+      if (kDebugMode) {
+        print("diff lengths");
+      }
       return false;
     }
     for (final key in map1.keys) {
       if (!map2.containsKey(key)) {
+        if (kDebugMode) {
+          print("map 2 no key");
+        }
+
         return false;
       }
-      if (map1[key] is List && map2[key] is List) {
+      if (map1[key] is List<Assignment> && map2[key] is List<Assignment>) {
         if (!listEquals(map1[key], map2[key])) {
+          if (kDebugMode) {
+            print("assignment list not equal");
+          }
           return false;
         }
       } else if (map1[key] != map2[key]) {
+        if (kDebugMode) {
+          print("assignment list not equal second if statement");
+        }
         return false;
       }
     }
@@ -165,7 +177,6 @@ class Assignment {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Assignment &&
-          runtimeType == other.runtimeType &&
           courseName == other.courseName &&
           mp == other.mp &&
           dayName == other.dayName &&
