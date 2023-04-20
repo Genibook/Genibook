@@ -19,6 +19,7 @@ class ApiNavigator extends Navigator {
   const ApiNavigator({super.key});
 
   Future<void> loadData() async {
+    //TODO do this later
     final response = await http.get(getCorrectUri("/api/"));
     if (response.statusCode == 200) {
       return json.decode(response.body);
