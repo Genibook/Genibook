@@ -45,46 +45,52 @@ class ApiNavigator extends Navigator {
   }
 
   void pushToGrades<T extends Object>(BuildContext context, bool direction) {
-    if (direction) {
-      //means to the left
+    if (Constants.debugMode) {
+      if (direction) {
+        //means to the left
+        Navigator.of(context)
+            .push(SlideToLeftPageRoute(child: GradesPage(student: eddie)));
+        return;
+      }
       Navigator.of(context)
-          .push(SlideToLeftPageRoute(child: GradesPage(student: eddie)));
+          .push(SlideToRightPageRoute(child: GradesPage(student: eddie)));
       return;
     }
-    Navigator.of(context)
-        .push(SlideToRightPageRoute(child: GradesPage(student: eddie)));
-    return;
   }
 
   void pushToProfilePage<T extends Object>(
       BuildContext context, bool direction) {
-    if (direction) {
-      //means to the left
+    if (Constants.debugMode) {
+      if (direction) {
+        //means to the left
+        Navigator.of(context)
+            .push(SlideToLeftPageRoute(child: ProfilePage(student: eddie)));
+        return;
+      }
       Navigator.of(context)
-          .push(SlideToLeftPageRoute(child: ProfilePage(student: eddie)));
+          .push(SlideToRightPageRoute(child: ProfilePage(student: eddie)));
       return;
     }
-    Navigator.of(context)
-        .push(SlideToRightPageRoute(child: ProfilePage(student: eddie)));
-    return;
   }
 
   void pushToSchedule<T extends Object>(BuildContext context, bool direction) {
-    if (direction) {
-      //means to the left
-      Navigator.of(context).push(SlideToLeftPageRoute(
+    if (Constants.debugMode) {
+      if (direction) {
+        //means to the left
+        Navigator.of(context).push(SlideToLeftPageRoute(
+          child: SchedulePage(
+            scheduleAssignments: scheduleAssignments,
+          ),
+        ));
+        return;
+      }
+      Navigator.of(context).push(SlideToRightPageRoute(
         child: SchedulePage(
           scheduleAssignments: scheduleAssignments,
         ),
       ));
       return;
     }
-    Navigator.of(context).push(SlideToRightPageRoute(
-      child: SchedulePage(
-        scheduleAssignments: scheduleAssignments,
-      ),
-    ));
-    return;
   }
 }
 
