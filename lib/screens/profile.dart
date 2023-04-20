@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/constants.dart';
+import 'package:genibook/utils/base64_to_image.dart';
 import 'package:genibook/utils/swipe.dart';
 import 'package:genibook/widgets/navbar.dart';
 import 'package:flutter/services.dart';
@@ -47,7 +48,10 @@ class ProfilePage extends StatelessWidget {
                         children: [
                           Center(
                             child: CircleAvatar(
-                              backgroundImage: NetworkImage(student.imageUrl),
+                              backgroundImage: Constants.debugMode
+                                  ? NetworkImage(student.imageUrl)
+                                  : imageFromBase64String(student.image64)
+                                      .image,
                               radius: 50.0,
                             ),
                           ),
