@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/icons/custom_icons_icons.dart';
 import 'package:genibook/navigator/api_navigator.dart';
+import 'package:genibook/extensions/virtualkeyboard.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -33,24 +34,23 @@ class _LoginPageState extends State<LoginPage> {
         body: SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-          const Expanded(
-              child: Text(
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          const Text(
             "Genibook",
             style: TextStyle(
               fontSize: 40,
               letterSpacing: 2,
               fontWeight: FontWeight.bold,
             ),
-          )),
-          Expanded(
-            flex: 3,
-            child: Image.asset(
-              'assets/education.png',
-              height: 200,
-              width: 200,
-            ),
           ),
+          context.virtualKeyboardIsOpen
+              ? const SizedBox.shrink()
+              : Image.asset(
+                  'assets/education.png',
+                  height: 200,
+                  width: 200,
+                ),
           Form(
             key: _formKey,
             child: Column(
@@ -61,7 +61,8 @@ class _LoginPageState extends State<LoginPage> {
                   child: SizedBox(
                     //width: 300,
                     child: ButtonTheme(
-                      // alignedDropdown: true,
+                        // alignedDropdown: true,
+                        child: SizedBox(
                       child: DropdownButtonFormField<String>(
                         isExpanded: true,
                         value: _selectedSchool,
@@ -91,52 +92,56 @@ class _LoginPageState extends State<LoginPage> {
                           return null;
                         },
                       ),
+                    )),
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+                SizedBox(
+                  child: TextFormField(
+                    controller: _emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                      hintText: 'Enter your email',
+                      border: OutlineInputBorder(),
                     ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      return null;
+                    },
                   ),
                 ),
                 const SizedBox(height: 16.0),
-                TextFormField(
-                  controller: _emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                    hintText: 'Enter your email',
-                    border: OutlineInputBorder(),
+                SizedBox(
+                  child: TextFormField(
+                    controller: _passwordController,
+                    obscureText: !_passwordVisible,
+                    decoration: InputDecoration(
+                        labelText: 'Password',
+                        hintText: 'Enter your password',
+                        border: const OutlineInputBorder(),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _passwordVisible
+                                ? Icons.visibility
+                                : Icons.visibility_off,
+                            color: Theme.of(context).primaryColorDark,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              _passwordVisible = !_passwordVisible;
+                            });
+                          },
+                        )),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your email';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 16.0),
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: !_passwordVisible,
-                  decoration: InputDecoration(
-                      labelText: 'Password',
-                      hintText: 'Enter your password',
-                      border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _passwordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
-                          color: Theme.of(context).primaryColorDark,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _passwordVisible = !_passwordVisible;
-                          });
-                        },
-                      )),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    return null;
-                  },
                 ),
                 const SizedBox(
                   height: 20,
