@@ -4,6 +4,8 @@ import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
 import 'package:genibook/navigator/api_navigator.dart';
+import 'package:genibook/navigator/swipes.dart';
+import 'package:genibook/screens/login.dart';
 
 class DebugScreen extends StatefulWidget {
   const DebugScreen({super.key});
@@ -28,7 +30,13 @@ class _DebugScreenState extends State<DebugScreen> {
                 Text(
                   "API calls",
                   style: Theme.of(context).textTheme.headline3,
-                )
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          SlideToRightPageRoute(child: const LoginPage()));
+                    },
+                    child: const Text("RETURN TO LOGIN PAGE TO DEBUG"))
               ],
             ),
             Column(

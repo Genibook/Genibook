@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:genibook/utils/api_utils.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:genibook/constants.dart';
@@ -18,7 +19,7 @@ class ApiNavigator extends Navigator {
   const ApiNavigator({super.key});
 
   Future<void> loadData() async {
-    final response = await http.get(Uri.parse('https://example.com/data.json'));
+    final response = await http.get(getCorrectUri("/api/"));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
