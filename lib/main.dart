@@ -50,7 +50,7 @@ class Genibook extends StatelessWidget {
       (value) {
         alreadyLoggedIn = value.valid;
         if (kDebugMode) {
-          print("[DEBUG main()]: $alreadyLoggedIn");
+          print("[DEBUG main()]: already logged in?: $alreadyLoggedIn");
         }
         // future builder to get the student?
         // maybe read the cache
