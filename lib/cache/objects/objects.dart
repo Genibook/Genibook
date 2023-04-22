@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:genibook/api/rawdata.dart';
+import 'package:genibook/constants.dart';
 import 'package:genibook/models/schedule_class.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/models/student_class.dart';
@@ -24,7 +25,9 @@ class StoreObjects {
     String jsonString = await storage.read(key: "student") ?? "";
     if (jsonString.isNotEmpty) {
       if (kDebugMode) {
-        print("[DEBUG: readStudent()->objects.dart]: $json");
+        if (Constants.debugModePrintEVERYTHING) {
+          print("[DEBUG: readStudent()->objects.dart]: $jsonString");
+        }
       }
       Map<String, dynamic> jsonn = json.decode(jsonString);
       return Student.fromJson(jsonn);

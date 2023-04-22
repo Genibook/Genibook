@@ -69,7 +69,7 @@ class Grades {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
     if (kDebugMode) {
-      print("[DEBUG] Operator == for Grades class");
+      print("[DEBUG] Operator == for Grades class was called");
       print("[DEBUG] is other grades?: ${other is Grades}");
     }
 
@@ -94,7 +94,7 @@ class Grade {
 
   factory Grade.fromJson(Map<String, dynamic> json) {
     if (kDebugMode) {
-      if (Constants.debugMode) {
+      if (Constants.debugModePrintEVERYTHING) {
         print("[DEBUG: Grade.fromJson()]: $json");
       }
     }

@@ -34,7 +34,8 @@ class ApiNavigator extends Navigator {
 
   Future<void> pushToGrades<T extends Object>(
       BuildContext context, bool direction) async {
-    ApiHandler.getNewStudent().then((student) {
+    //TODO: do like a routine so thtat every ten minutes update
+    ApiHandler.getNewStudent(false).then((student) {
       if (direction) {
         Navigator.of(context).push(SlideToLeftPageRoute(
             child: GradesPage(student: Constants.debugMode ? eddie : student)));
@@ -48,7 +49,7 @@ class ApiNavigator extends Navigator {
 
   void pushToProfilePage<T extends Object>(
       BuildContext context, bool direction) {
-    ApiHandler.getNewStudent().then((student) {
+    ApiHandler.getNewStudent(false).then((student) {
       if (direction) {
         Navigator.of(context).push(SlideToLeftPageRoute(
             child:

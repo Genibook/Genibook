@@ -136,10 +136,12 @@ class Assignment {
 
   factory Assignment.fromJson(Map<String, dynamic> json) {
     if (kDebugMode) {
-      if (Constants.debugMode) {
+      if (Constants.debugModePrintEVERYTHING) {
         print("[DEBUG: Assignment.fromJson()]: $json");
       }
     }
+    String percent = json['grade_percent'];
+    percent.replaceAll("%", "");
     return Assignment(
       courseName: json['course_name'],
       mp: json['mp'],
@@ -151,7 +153,7 @@ class Assignment {
       category: json['category'],
       assignment: json['assignment'],
       description: json['description'],
-      gradePercent: json['grade_percent'],
+      gradePercent: percent,
       gradeNum: json['grade_num'],
       comment: json['comment'],
       prev: json['prev'],

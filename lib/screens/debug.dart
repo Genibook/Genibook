@@ -41,7 +41,7 @@ class _DebugScreenState extends State<DebugScreen> {
                 child: const Text("RETURN TO LOGIN PAGE TO DEBUG")),
             ElevatedButton(
                 onPressed: (() async {
-                  Student student = await ApiHandler.getNewStudent();
+                  Student student = await ApiHandler.getNewStudent(false);
                   if (kDebugMode) {
                     print(student.toJson());
                   }

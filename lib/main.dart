@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:genibook/api/handler.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
+import 'package:genibook/models/student_class.dart';
 import 'package:genibook/screens/debug.dart';
 import 'package:genibook/screens/grades.dart';
 import 'package:genibook/screens/welcome.dart';
@@ -39,6 +41,7 @@ class Genibook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //StoreObjects.logout();
+    Student student = eddie;
     bool loginOrSplash = false;
     readTOS().then((value) {
       if (value) {
@@ -51,6 +54,14 @@ class Genibook extends StatelessWidget {
         alreadyLoggedIn = value.valid;
         if (kDebugMode) {
           print("[DEBUG main()]: already logged in?: $alreadyLoggedIn");
+        }
+        if (value.valid) {
+          ApiHandler.getNewStudent(true).then((studentt) {
+            if (kDebugMode) {
+              print("[DEBUG: main()]: $studentt");
+            }
+            student = studentt;
+          });
         }
         // future builder to get the student?
         // maybe read the cache
@@ -74,7 +85,7 @@ class Genibook extends StatelessWidget {
               ? const DebugScreen()
               : loginOrSplash
                   ? alreadyLoggedIn
-                      ? GradesPage(student: eddie)
+                      ? GradesPage(student: student)
                       : const LoginPage()
                   : const SplashScreen());
     });

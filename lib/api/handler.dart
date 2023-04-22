@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/api/utils.dart';
 import 'package:genibook/models/schedule_class.dart';
@@ -39,13 +40,17 @@ class ApiHandler {
     }
   }
 
-  static Future<Student> getNewStudent() async {
+  static Future<Student> getNewStudent(bool getCached) async {
     if (kDebugMode) {
       print("[DEBUG: getNewStudent()]: calling getNewStudent()");
     }
 
     /// currentStudent is either [eddie] or the [Student] in the cache
     Student currentStudent = await StoreObjects.readStudent();
+
+    if (currentStudent != eddie && getCached) {
+      return currentStudent;
+    }
     // secrets are stored before calling this function.
     Secret secret = await StoreObjects.readSecret();
     Map<String, dynamic> json =

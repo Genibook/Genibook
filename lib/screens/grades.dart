@@ -35,7 +35,7 @@ class _GradesPageState extends State<GradesPage> {
             actions: [
               IconButton(
                   onPressed: (() async {
-                    ApiHandler.getNewStudent();
+                    ApiHandler.getNewStudent(false);
                   }),
                   icon: const Icon(Icons.circle))
             ],

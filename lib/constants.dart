@@ -28,6 +28,7 @@ class Constants {
   static const Color appBlue = Color(0xFF21A8F5);
 
   static const bool debugMode = false;
+  static const bool debugModePrintEVERYTHING = false;
 
   static const String tosReadKey = "tos_read";
   //static const String
