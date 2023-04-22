@@ -66,6 +66,17 @@ Widget gradeNumThenPercentForAssignments(Assignment assignment) {
   }
   if (assignment.gradeNum.contains("Not")) {
     ending = "pts";
+    //todo
+    /*
+flutter: 5/5 - 100.0
+flutter: 5/5 - 100.0
+flutter: 5/5 - 100.0
+flutter: 5/5 - 100.0
+flutter: 5/5 - 100.0
+flutter: Absent  - Assignment Pts: 5
+
+phsyed marking 2
+    */
   } else if (assignment.gradeNum.split("/")[1] == "0" ||
       assignment.gradePercent.isEmpty) {
     ending = "Extra Points";
@@ -79,23 +90,22 @@ Widget gradeNumThenPercentForAssignments(Assignment assignment) {
             assignment.gradePercent, assignment.gradeNum)),
   );
 }
-  // } catch (e) {
-  //   if (grade >= 90) {
-  //     return Colors.green;
-  //   } else if ((90 > grade) && (grade >= 80)) {
-  //     return Colors.yellow;
-  //   } else if ((80 > grade) && (grade >= 70)) {
-  //     return Colors.amber;
-  //   } else if ((70 > grade) && (grade >= 60)) {
-  //     return Colors.orange;
-  //   } else if ((60 > grade) && (grade >= 50)) {
-  //     return Colors.deepOrange;
-  //   } else if (50 > grade && grade != 0.0) {
-  //     return Colors.red;
-  //   } else if (grade == -1) {
-  //     return Colors.red;
-  //   } else {
-  //     return Colors.blue;
-  //   }
-  // }
-
+// } catch (e) {
+//   if (grade >= 90) {
+//     return Colors.green;
+//   } else if ((90 > grade) && (grade >= 80)) {
+//     return Colors.yellow;
+//   } else if ((80 > grade) && (grade >= 70)) {
+//     return Colors.amber;
+//   } else if ((70 > grade) && (grade >= 60)) {
+//     return Colors.orange;
+//   } else if ((60 > grade) && (grade >= 50)) {
+//     return Colors.deepOrange;
+//   } else if (50 > grade && grade != 0.0) {
+//     return Colors.red;
+//   } else if (grade == -1) {
+//     return Colors.red;
+//   } else {
+//     return Colors.blue;
+//   }
+// }
