@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:genibook/constants.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/utils/grades_utils.dart';
 import 'package:flutter/services.dart';
@@ -13,8 +14,10 @@ class AssignmentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (kDebugMode) {
-      for (Assignment ass in assignmentsForAClass) {
-        print("[DEBUG BUILD: assignmentpage]: ${ass.toJson()}");
+      if (Constants.debugModePrintEVERYTHING) {
+        for (Assignment ass in assignmentsForAClass) {
+          print("[DEBUG BUILD: assignmentpage]: ${ass.toJson()}");
+        }
       }
     }
     return Scaffold(

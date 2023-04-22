@@ -1,5 +1,8 @@
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:genibook/api/rawdata.dart';
+import 'package:genibook/constants.dart';
 import 'package:genibook/models/assignments_class.dart';
 
 double roundDouble(double value, int places) {
@@ -30,7 +33,7 @@ MaterialColor getColorFromGrade(double grade) {
 MaterialColor getColorFromGradeAssignment(
     String gradePercent, String gradeNum) {
   double grade;
-  if (gradeNum.contains("Not")) {
+  if (gradeNum.contains("Not") || gradeNum.split("/")[1] == "0") {
     return Colors.blue;
   } else {
     grade = double.parse(gradePercent);
@@ -56,8 +59,16 @@ MaterialColor getColorFromGradeAssignment(
 
 Widget gradeNumThenPercentForAssignments(Assignment assignment) {
   String ending = "%";
+  if (kDebugMode) {
+    if (Constants.debugModePrintEVERYTHING) {
+      print("${assignment.gradeNum} - ${assignment.gradePercent}");
+    }
+  }
   if (assignment.gradeNum.contains("Not")) {
     ending = "pts";
+  } else if (assignment.gradeNum.split("/")[1] == "0" ||
+      assignment.gradePercent.isEmpty) {
+    ending = "Extra Points";
   }
   return Text(
     '${assignment.gradeNum} (${assignment.gradePercent}$ending)',

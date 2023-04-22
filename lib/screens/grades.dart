@@ -54,9 +54,10 @@ class _GradesPageState extends State<GradesPage> {
                   if (Constants.debugModePrintEVERYTHING) {
                     print(
                         "[DEBUG: Grades page build, Item builder]: ${widget.student.grades.toJson()}");
+
+                    print(
+                        "[DEBUG: Grades page build, Item builder]: $index , ${widget.student.grades.keys.elementAt(index)}");
                   }
-                  print(
-                      "[DEBUG: Grades page build, Item builder]: $index , ${widget.student.grades.keys.elementAt(index)}");
                 }
                 String courseName = widget.student.grades.keys.elementAt(index);
                 return GestureDetector(

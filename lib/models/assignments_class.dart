@@ -135,15 +135,13 @@ class Assignment {
   });
 
   factory Assignment.fromJson(Map<String, dynamic> json) {
-    if (kDebugMode) {
-      if (Constants.debugModePrintEVERYTHING) {
-        print("[DEBUG: Assignment.fromJson()]: $json");
-      }
-    }
     String percent = json['grade_percent'];
     percent = percent.replaceAll(RegExp(r'%'), "");
     if (kDebugMode) {
-      print("[DEBUG: Assignment.fromJson()]: $percent");
+      if (Constants.debugModePrintEVERYTHING) {
+        print("[DEBUG: Assignment.fromJson()]: $json");
+        print("[DEBUG: Assignment.fromJson()]: $percent");
+      }
     }
     return Assignment(
       courseName: json['course_name'],
