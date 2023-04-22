@@ -52,6 +52,7 @@ class StoreObjects {
       return Secret.fromJson(emptySecretDict);
     }
   }
+  //TODO: create logout function
 
   //static Future<void> storeSecrets() async{
   //}

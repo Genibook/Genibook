@@ -39,7 +39,9 @@ class ApiHandler {
   }
 
   static Future<Student> getNewStudent() async {
+    /// currentStudent is either [eddie] or the [Student] in the cache
     Student currentStudent = await StoreObjects.readStudent();
+    // secrets are stored before calling this function.
     Secret secret = await StoreObjects.readSecret();
     Map<String, dynamic> json =
         await loadData("/apiv1/student/", secret.toJson());

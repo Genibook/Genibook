@@ -51,9 +51,8 @@ class _LoginPageState extends State<LoginPage> {
 
       bool valid = await ApiHandler.login(aSecret);
       if (valid) {
-        StoreObjects.storeSecret(aSecret);
-        // ignore: use_build_context_synchronously
-        nav.pushToGrades(context, false);
+        StoreObjects.storeSecret(aSecret)
+            .then((value) => nav.pushToGrades(context, false));
       } else {
         _shakeKey.currentState?.shake();
       }

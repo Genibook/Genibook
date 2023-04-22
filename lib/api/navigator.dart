@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/api/handler.dart';
 import 'package:genibook/api/rawdata.dart';
 
 import 'package:genibook/constants.dart';
+import 'package:genibook/models/student_class.dart';
 
 import 'swipes.dart';
 
@@ -31,22 +33,18 @@ class ApiNavigator extends Navigator {
     );
   }
 
-  void pushToGrades<T extends Object>(BuildContext context, bool direction) {
-    // get new data or smth
-    // read grades cache if the cache is filled
-    // compare == ( i think get students already does it, do it)
-
-    if (Constants.debugMode) {
+  Future<void> pushToGrades<T extends Object>(
+      BuildContext context, bool direction) async {
+    ApiHandler.getNewStudent().then((student) {
       if (direction) {
-        //means to the left
-        Navigator.of(context)
-            .push(SlideToLeftPageRoute(child: GradesPage(student: eddie)));
+        Navigator.of(context).push(SlideToLeftPageRoute(
+            child: GradesPage(student: Constants.debugMode ? eddie : student)));
         return;
       }
-      Navigator.of(context)
-          .push(SlideToRightPageRoute(child: GradesPage(student: eddie)));
+      Navigator.of(context).push(SlideToRightPageRoute(
+          child: GradesPage(student: Constants.debugMode ? eddie : student)));
       return;
-    }
+    });
   }
 
   void pushToProfilePage<T extends Object>(
