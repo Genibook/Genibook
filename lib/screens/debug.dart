@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:genibook/api/handler.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/models/assignments_class.dart';
@@ -34,6 +35,11 @@ class _DebugScreenState extends State<DebugScreen> {
                       .push(SlideToRightPageRoute(child: const LoginPage()));
                 },
                 child: const Text("RETURN TO LOGIN PAGE TO DEBUG")),
+            IconButton(
+                onPressed: (() async {
+                  ApiHandler.getNewStudent();
+                }),
+                icon: const Icon(Icons.circle)),
             Text(
               "Caching",
               style: Theme.of(context).textTheme.headline3,

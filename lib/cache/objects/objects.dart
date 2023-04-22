@@ -1,5 +1,6 @@
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/models/schedule_class.dart';
+import 'package:genibook/models/secret.dart';
 import 'package:genibook/models/student_class.dart';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -19,7 +20,7 @@ class StoreObjects {
   }
 
   static Future<Student> readStudent() async {
-    String jsonString = await storage.read(key: "student") ?? "{}";
+    String jsonString = await storage.read(key: "student") ?? "";
     if (jsonString.isNotEmpty) {
       Map<String, dynamic> jsonn = json.decode(jsonString);
       return Student.fromJson(jsonn);
@@ -31,6 +32,21 @@ class StoreObjects {
   static Future<void> storeSchedules(ScheduleAssignmentsList schedule) async {
     String stringJson = jsonEncode(schedule.toJson());
     await storage.write(key: "schedule", value: stringJson);
+  }
+
+  static Future<void> storeSecret(Secret secret) async {
+    String stringJson = jsonEncode(secret.toJson());
+    await storage.write(key: "secret", value: stringJson);
+  }
+
+  static Future<Secret> readSecret() async {
+    String jsonString = await storage.read(key: "secret") ?? "";
+    if (jsonString.isNotEmpty) {
+      Map<String, dynamic> jsonn = json.decode(jsonString);
+      return Secret.fromJson(jsonn);
+    } else {
+      return Secret.fromJson(emptySecretDict);
+    }
   }
 
   //static Future<void> storeSecrets() async{

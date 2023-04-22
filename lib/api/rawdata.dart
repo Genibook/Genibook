@@ -1,6 +1,13 @@
 import 'package:genibook/models/schedule_class.dart';
 import 'package:genibook/models/student_class.dart';
 
+Map<String, dynamic> emptySecretDict = {
+  "username": "",
+  "password": "",
+  "userSelector": "",
+  "mp": ""
+};
+
 Map<String, List<Map<String, dynamic>>> assignments = {
   "Math": [
     {
