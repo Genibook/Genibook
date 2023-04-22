@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/cache/objects/objects.dart';
@@ -25,13 +28,13 @@ class _LoginPageState extends State<LoginPage> {
 
   final _shakeKey = GlobalKey<ShakeWidgetState>();
 
-  late String _selectedSchool;
+  String? _selectedSchool;
 
   void _login() async {
     if (_formKey.currentState!.validate()) {
       String email = _emailController.text;
       String pass = _passwordController.text;
-      String highSchool = _selectedSchool;
+      String highSchool = _selectedSchool ?? "";
       String userSelector = "1";
       String mp = "MP1";
 
@@ -42,12 +45,17 @@ class _LoginPageState extends State<LoginPage> {
           mp: mp,
           highSchool: highSchool);
 
+      if (kDebugMode) {
+        print(json.encode(aSecret.toJson()));
+      }
+
       bool valid = await ApiHandler.login(aSecret);
       if (valid) {
         StoreObjects.storeSecret(aSecret);
-      } else {
         // ignore: use_build_context_synchronously
         nav.pushToGrades(context, false);
+      } else {
+        _shakeKey.currentState?.shake();
       }
 
       // Perform login logic here
