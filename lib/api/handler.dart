@@ -40,6 +40,10 @@ class ApiHandler {
   }
 
   static Future<Student> getNewStudent() async {
+    if (kDebugMode) {
+      print("[DEBUG: getNewStudent()]: calling getNewStudent()");
+    }
+
     /// currentStudent is either [eddie] or the [Student] in the cache
     Student currentStudent = await StoreObjects.readStudent();
     // secrets are stored before calling this function.
@@ -48,10 +52,13 @@ class ApiHandler {
         await loadData("/apiv1/student/", secret.toJson());
     if (json.isEmpty) {
       if (kDebugMode) {
-        print("json is empty");
+        print("[DEBUG: getNewStudent()] json is empty");
       }
       return currentStudent;
     } else {
+      if (kDebugMode) {
+        print("[DEBUG]: getNewStudent() json is NOT empty");
+      }
       Student apiStudent = Student.fromJson(json);
       if (apiStudent == currentStudent) {
         return currentStudent;

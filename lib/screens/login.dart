@@ -30,6 +30,14 @@ class _LoginPageState extends State<LoginPage> {
 
   String? _selectedSchool;
 
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _shakeKey.currentState!.dispose();
+  }
+
   void _login() async {
     if (_formKey.currentState!.validate()) {
       String email = _emailController.text;
@@ -46,6 +54,7 @@ class _LoginPageState extends State<LoginPage> {
           highSchool: highSchool);
 
       if (kDebugMode) {
+        print("[DEBUG] _login() under screen LOGIN: ");
         print(json.encode(aSecret.toJson()));
       }
 

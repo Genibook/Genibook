@@ -23,6 +23,9 @@ class StoreObjects {
   static Future<Student> readStudent() async {
     String jsonString = await storage.read(key: "student") ?? "";
     if (jsonString.isNotEmpty) {
+      if (kDebugMode) {
+        print("[DEBUG: readStudent()->objects.dart]: $json");
+      }
       Map<String, dynamic> jsonn = json.decode(jsonString);
       return Student.fromJson(jsonn);
     } else {
@@ -45,6 +48,10 @@ class StoreObjects {
       Map<String, dynamic> jsonn = json.decode(jsonString);
       return Secret.fromJson(jsonn);
     } else {
+      if (kDebugMode) {
+        print("[DEBUG] READ SECRET: EMPTY SECRET STRING?");
+      }
+
       return Secret.fromJson(emptySecretDict);
     }
   }

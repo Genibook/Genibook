@@ -15,6 +15,7 @@ class _SplashScreenState extends State<SplashScreen>
   late AnimationController _controller;
 
   bool _showButton = false;
+  bool continuee = true;
 
   @override
   void initState() {
@@ -28,16 +29,19 @@ class _SplashScreenState extends State<SplashScreen>
     _controller.forward();
     // _controller.repeat(period: const Duration(seconds: 2));
     Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        _showButton = true;
-        _controller.forward();
-      });
+      if (continuee) {
+        setState(() {
+          _showButton = true;
+          _controller.forward();
+        });
+      }
     });
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    continuee = false;
     super.dispose();
   }
 

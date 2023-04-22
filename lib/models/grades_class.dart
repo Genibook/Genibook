@@ -92,8 +92,11 @@ class Grade {
   });
 
   factory Grade.fromJson(Map<String, dynamic> json) {
+    if (kDebugMode) {
+      print("[DEBUG: Grade.fromJson()]: $json");
+    }
     double gradee;
-    if (json["grade"].runtimeType != double) {
+    if (json["grade"].runtimeType == double) {
       gradee = json["grade"];
     } else {
       gradee = double.parse(json["grade"]);

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
 // ignore: depend_on_referenced_packages
@@ -36,6 +37,9 @@ class Student {
   });
 
   factory Student.fromJson(Map<String, dynamic> json) {
+    // if (kDebugMode) {
+    //   print("[DEBUG: Student.fromJson()]: $json");
+    // }
     return Student(
       age: json['age'],
       imageUrl: json['img_url'],

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/login/tos.dart';
@@ -37,7 +38,7 @@ class Genibook extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    StoreObjects.logout();
+    //StoreObjects.logout();
     bool loginOrSplash = false;
     readTOS().then((value) {
       if (value) {
@@ -48,6 +49,9 @@ class Genibook extends StatelessWidget {
     StoreObjects.readSecret().then(
       (value) {
         alreadyLoggedIn = value.valid;
+        if (kDebugMode) {
+          print("[DEBUG main()]: $alreadyLoggedIn");
+        }
         // future builder to get the student?
         // maybe read the cache
         // if the alreadyLogged in is true?

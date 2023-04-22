@@ -134,6 +134,9 @@ class Assignment {
   });
 
   factory Assignment.fromJson(Map<String, dynamic> json) {
+    if (kDebugMode) {
+      print("[DEBUG: Assignment.fromJson()]: $json");
+    }
     return Assignment(
       courseName: json['course_name'],
       mp: json['mp'],
