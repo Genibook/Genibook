@@ -67,14 +67,8 @@ class AssignmentPage extends StatelessWidget {
                                       'Grade:',
                                       style: TextStyle(fontSize: 18.0),
                                     ),
-                                    Text(
-                                      '${assignment.gradeNum} (${assignment.gradePercent}%)',
-                                      style: TextStyle(
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold,
-                                          color: getColorFromGrade(
-                                              assignment.gradePercent)),
-                                    ),
+                                    gradeNumThenPercentForAssignments(
+                                        assignment),
                                   ],
                                 ),
                               ],

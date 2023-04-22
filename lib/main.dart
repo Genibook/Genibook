@@ -37,6 +37,7 @@ class Genibook extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    StoreObjects.logout();
     bool loginOrSplash = false;
     readTOS().then((value) {
       if (value) {

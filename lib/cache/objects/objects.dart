@@ -38,6 +38,7 @@ class StoreObjects {
   static Future<Secret> readSecret() async {
     String jsonString = await storage.read(key: "secret") ?? "";
     if (kDebugMode) {
+      print("[DEBUG] READ SECRET:");
       print(jsonString);
     }
     if (jsonString.isNotEmpty) {
@@ -55,7 +56,9 @@ class StoreObjects {
 
   static Future<ScheduleAssignmentsList> readSchedule() async {
     String jsonString = await storage.read(key: "schedule") ?? "";
+
     if (kDebugMode) {
+      print("[DEBUG] READ SCHEDULE:");
       print(jsonString);
     }
     if (jsonString.isNotEmpty) {
