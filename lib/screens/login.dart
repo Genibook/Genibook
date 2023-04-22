@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/icons/custom_icons_icons.dart';
-import 'package:genibook/api/api_navigator.dart';
+import 'package:genibook/api/navigator.dart';
 import 'package:genibook/extensions/virtualkeyboard.dart';
 
 class LoginPage extends StatefulWidget {

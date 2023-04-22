@@ -1,7 +1,4 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:genibook/utils/api_utils.dart';
-import 'package:http/http.dart' as http;
 
 import 'package:genibook/constants.dart';
 
@@ -17,16 +14,6 @@ import 'package:genibook/models/schedule_class.dart';
 
 class ApiNavigator extends Navigator {
   const ApiNavigator({super.key});
-
-  Future<void> loadData() async {
-    //TODO do this later
-    final response = await http.get(getCorrectUri("/apiv1/"));
-    if (response.statusCode == 200) {
-      return json.decode(response.body);
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
 
   void useNumbersToDetermine(int number, BuildContext context, bool direction) {
     if (number == Constants.gradePageNavNumber) {
