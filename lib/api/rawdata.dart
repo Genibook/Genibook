@@ -4,8 +4,9 @@ import 'package:genibook/models/student_class.dart';
 Map<String, dynamic> emptySecretDict = {
   "username": "",
   "password": "",
-  "userSelector": 1,
-  "mp": ""
+  "userSelector": "1",
+  "mp": "",
+  "highSchool": ""
 };
 
 Map<String, List<Map<String, dynamic>>> assignments = {

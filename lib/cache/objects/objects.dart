@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/models/schedule_class.dart';
 import 'package:genibook/models/secret.dart';
@@ -41,6 +42,9 @@ class StoreObjects {
 
   static Future<Secret> readSecret() async {
     String jsonString = await storage.read(key: "secret") ?? "";
+    if (kDebugMode) {
+      print(jsonString.isEmpty);
+    }
     if (jsonString.isNotEmpty) {
       Map<String, dynamic> jsonn = json.decode(jsonString);
       return Secret.fromJson(jsonn);

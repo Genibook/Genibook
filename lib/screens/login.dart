@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/api/handler.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/icons/custom_icons_icons.dart';
 import 'package:genibook/api/navigator.dart';
 import 'package:genibook/extensions/virtualkeyboard.dart';
 import 'package:genibook/models/secret.dart';
+import 'package:genibook/widgets/shakey.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -21,6 +23,8 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   bool _passwordVisible = false;
 
+  final _shakeKey = GlobalKey<ShakeWidgetState>();
+
   late String _selectedSchool;
 
   void _login() async {
@@ -28,13 +32,26 @@ class _LoginPageState extends State<LoginPage> {
       String email = _emailController.text;
       String pass = _passwordController.text;
       String highSchool = _selectedSchool;
-      int userSelector = 1;
+      String userSelector = "1";
       String mp = "MP1";
 
+      Secret aSecret = Secret(
+          username: email,
+          password: pass,
+          userSelector: userSelector,
+          mp: mp,
+          highSchool: highSchool);
+
+      bool valid = await ApiHandler.login(aSecret);
+      if (valid) {
+        StoreObjects.storeSecret(aSecret);
+      } else {
+        // ignore: use_build_context_synchronously
+        nav.pushToGrades(context, false);
+      }
+
       // Perform login logic here
-      StoreObjects.storeSecret(
-          Secret(email, _passwordController.text, 1, "MP1", _selectedSchool));
-      nav.pushToGrades(context, false);
+
     }
   }
 
@@ -157,22 +174,29 @@ class _LoginPageState extends State<LoginPage> {
                   height: 20,
                 ),
                 Center(
-                    child: SizedBox(
-                        height: 50,
-                        width: 200,
-                        child: ElevatedButton.icon(
-                          icon: const Icon(
-                            CustomIcons.binoculars,
-                            size: 20.0,
-                          ),
-                          label: const Text('View your Genesis'),
-                          onPressed: _login,
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20.0),
+                  child: ShakeWidget(
+                      key: _shakeKey,
+                      // 5. configure the animation parameters
+                      shakeCount: 3,
+                      shakeOffset: 10,
+                      shakeDuration: const Duration(milliseconds: 400),
+                      child: SizedBox(
+                          height: 50,
+                          width: 200,
+                          child: ElevatedButton.icon(
+                            icon: const Icon(
+                              CustomIcons.binoculars,
+                              size: 20.0,
                             ),
-                          ),
-                        ))),
+                            label: const Text('View your Genesis'),
+                            onPressed: _login,
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                          ))),
+                ),
               ],
             ),
           ),

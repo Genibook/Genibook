@@ -12,8 +12,8 @@ class ApiHandler {
   ApiHandler._();
 
   static Future<Map<String, dynamic>> loadData(
-      String ending, Map<String, dynamic> data) async {
-    final response = await http.get(getCorrectUri(ending, data));
+      String ending, Map<String, String> data) async {
+    final response = await http.post(getCorrectUri(ending, data));
     if (response.statusCode == 200) {
       return json.decode(response.body);
     } else {
@@ -26,11 +26,12 @@ class ApiHandler {
 
   static Future<bool> login(Secret secret) async {
     final response =
-        await http.get(getCorrectUri("/apiv1/login", secret.toJson()));
+        await http.post(getCorrectUri("/apiv1/login/", secret.toJson()));
     if (response.statusCode == 200) {
       return true;
     } else {
       if (kDebugMode) {
+        print(response.statusCode);
         print("failed to login");
       }
       return false;
@@ -41,7 +42,7 @@ class ApiHandler {
     Student currentStudent = await StoreObjects.readStudent();
     Secret secret = await StoreObjects.readSecret();
     Map<String, dynamic> json =
-        await loadData("/apiv1/student", secret.toJson());
+        await loadData("/apiv1/student/", secret.toJson());
     if (json.isEmpty) {
       if (kDebugMode) {
         print("json is empty");

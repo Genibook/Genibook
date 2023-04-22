@@ -1,6 +1,6 @@
 import 'package:genibook/constants.dart';
 
-Uri getCorrectUri(String ending, Map<String, dynamic> map) {
+Uri getCorrectUri(String ending, Map<String, String> map) {
   Uri url;
   if (Constants.url.startsWith("127")) {
     url = Uri(

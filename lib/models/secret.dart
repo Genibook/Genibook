@@ -1,33 +1,45 @@
 class Secret {
-  final String _username;
-  final String _password;
-  final int _userSelector;
-  final String _mp;
-  final String _highSchool;
+  final String username;
+  final String password;
+  final String userSelector;
+  final String mp;
+  final String highSchool;
 
-  Secret(this._username, this._password, this._userSelector, this._mp,
-      this._highSchool);
+  Secret(
+      {required this.username,
+      required this.password,
+      required this.userSelector,
+      required this.mp,
+      required this.highSchool});
 
-  String get username => _username;
-  String get password => _password;
-  int get userSelector => _userSelector;
-  String get mp => _mp;
-
-  Map<String, dynamic> toJson() => {
-        'username': _username,
-        'password': _password,
-        'user': _userSelector,
-        "highschool": _highSchool,
-        'mp': _mp,
+  Map<String, String> toJson() => {
+        'username': username,
+        'password': password,
+        'user': userSelector,
+        "highschool": highSchool,
+        'mp': mp,
       };
 
   factory Secret.fromJson(Map<String, dynamic> json) {
     return Secret(
-      json['username'] as String,
-      json['password'] as String,
-      json['userSelector'] as int,
-      json['mp'] as String,
-      json["highSchool"] as String,
+      username: json['username'] as String,
+      password: json['password'] as String,
+      userSelector: json['userSelector'] as String,
+      mp: json['mp'] as String,
+      highSchool: json["highSchool"] as String,
     );
+  }
+
+  bool get valid {
+    if (password.isNotEmpty &&
+        mp.isNotEmpty &&
+        username.isNotEmpty &&
+        highSchool.isNotEmpty &&
+        username.isNotEmpty &&
+        userSelector.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

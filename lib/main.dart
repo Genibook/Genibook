@@ -46,12 +46,10 @@ class Genibook extends StatelessWidget {
     bool alreadyLoggedIn = false;
     StoreObjects.readSecret().then(
       (value) {
-        if (value.password.isNotEmpty &&
-            value.mp.isNotEmpty &&
-            value.username.isNotEmpty) {
-          alreadyLoggedIn = true;
-          // get the student
-        }
+        alreadyLoggedIn = value.valid;
+        // future builder to get the student?
+        // maybe read the cache
+        // if the alreadyLogged in is true?
       },
     );
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {

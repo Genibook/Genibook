@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/login/tos.dart';
+import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
 import 'package:genibook/api/swipes.dart';
+import 'package:genibook/models/secret.dart';
 import 'package:genibook/screens/login.dart';
+import 'package:genibook/secrets.dart';
 
 class DebugScreen extends StatefulWidget {
   const DebugScreen({super.key});
@@ -35,11 +38,22 @@ class _DebugScreenState extends State<DebugScreen> {
                       .push(SlideToRightPageRoute(child: const LoginPage()));
                 },
                 child: const Text("RETURN TO LOGIN PAGE TO DEBUG")),
-            IconButton(
+            ElevatedButton(
                 onPressed: (() async {
                   ApiHandler.getNewStudent();
                 }),
-                icon: const Icon(Icons.circle)),
+                child: const Text("Get STUDENT")),
+            ElevatedButton(
+                onPressed: (() async {
+                  Secret secret = Secret(
+                      username: email,
+                      password: password,
+                      userSelector: "1",
+                      mp: "MP1",
+                      highSchool: "Montgomery High School");
+                  ApiHandler.login(secret);
+                }),
+                child: const Text("LOGIN")),
             Text(
               "Caching",
               style: Theme.of(context).textTheme.headline3,
