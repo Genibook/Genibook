@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/api/data.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/utils/grades_utils.dart';
 import 'package:genibook/widgets/navbar.dart';
@@ -27,10 +28,18 @@ class _GradesPageState extends State<GradesPage> {
           bottomNavigationBar:
               const Navbar(selectedIndex: Constants.gradePageNavNumber),
           appBar: AppBar(
-              title: const Text('Grades'),
-              elevation: 2,
-              shadowColor: Theme.of(context).shadowColor,
-              automaticallyImplyLeading: false),
+            title: const Text('Grades'),
+            elevation: 2,
+            shadowColor: Theme.of(context).shadowColor,
+            automaticallyImplyLeading: false,
+            actions: [
+              IconButton(
+                  onPressed: (() async {
+                    ApiHandler.getNewStudent();
+                  }),
+                  icon: const Icon(Icons.circle))
+            ],
+          ),
           body: SafeArea(
             child: ListView.builder(
               itemCount: widget.student.grades.length,

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:genibook/cache/objects/objects.dart';
-import 'package:genibook/utils/api_utils.dart';
+import 'package:genibook/api/utils.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -21,7 +21,8 @@ class ApiHandler {
     }
   }
 
-  static Future<Student> getNewStudent(Student currentStudent) async {
+  static Future<Student> getNewStudent() async {
+    Student currentStudent = await StoreObjects.readStudent();
     Map<String, dynamic> json = await loadData("/apiv1/student");
     if (json.isEmpty) {
       if (kDebugMode) {

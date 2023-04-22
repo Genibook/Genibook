@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
-import 'package:genibook/api/navigator.dart';
 import 'package:genibook/api/swipes.dart';
 import 'package:genibook/screens/login.dart';
 
