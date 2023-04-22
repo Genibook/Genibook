@@ -51,7 +51,10 @@ class _DebugScreenState extends State<DebugScreen> {
                       userSelector: "1",
                       mp: "MP1",
                       highSchool: "Montgomery High School");
-                  ApiHandler.login(secret);
+                  bool valid = await ApiHandler.login(secret);
+                  if (kDebugMode) {
+                    print(valid);
+                  }
                 }),
                 child: const Text("LOGIN")),
             Text(
