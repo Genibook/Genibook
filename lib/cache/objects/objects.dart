@@ -30,11 +30,6 @@ class StoreObjects {
     }
   }
 
-  static Future<void> storeSchedules(ScheduleAssignmentsList schedule) async {
-    String stringJson = jsonEncode(schedule.toJson());
-    await storage.write(key: "schedule", value: stringJson);
-  }
-
   static Future<void> storeSecret(Secret secret) async {
     String stringJson = jsonEncode(secret.toJson());
     await storage.write(key: "secret", value: stringJson);
@@ -52,7 +47,25 @@ class StoreObjects {
       return Secret.fromJson(emptySecretDict);
     }
   }
-  //TODO: create logout function
+
+  static Future<void> storeSchedule(ScheduleAssignmentsList schedule) async {
+    String stringJson = jsonEncode(schedule.toJson());
+    await storage.write(key: "schedule", value: stringJson);
+  }
+
+  static Future<ScheduleAssignmentsList> readSchedule() async {
+    String jsonString = await storage.read(key: "schedule") ?? "";
+    if (kDebugMode) {
+      print(jsonString);
+    }
+    if (jsonString.isNotEmpty) {
+      Map<String, dynamic> jsonn = json.decode(jsonString);
+      return ScheduleAssignmentsList.fromJson(jsonn);
+    } else {
+      return scheduleAssignments;
+    }
+  }
+  //TODO: create logout function and schedule
 
   //static Future<void> storeSecrets() async{
   //}

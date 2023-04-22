@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/api/utils.dart';
+import 'package:genibook/models/schedule_class.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -57,6 +58,30 @@ class ApiHandler {
       } else {
         StoreObjects.storeStudent(apiStudent);
         return apiStudent;
+      }
+    }
+  }
+
+  static Future<ScheduleAssignmentsList> getNewSchedule() async {
+    /// it will either be the one [in cache] or [scheduleAssignments] variable in rawdata.dart
+    ScheduleAssignmentsList cachedSchedule = await StoreObjects.readSchedule();
+    Secret secret = await StoreObjects.readSecret();
+    Map<String, dynamic> json =
+        await loadData("/apiv1/schedule/", secret.toJson());
+
+    if (json.isEmpty) {
+      if (kDebugMode) {
+        print("json is empty");
+      }
+      return cachedSchedule;
+    } else {
+      ScheduleAssignmentsList apiSchedule =
+          ScheduleAssignmentsList.fromJson(json);
+      if (apiSchedule == cachedSchedule) {
+        return cachedSchedule;
+      } else {
+        StoreObjects.storeSchedule(apiSchedule);
+        return apiSchedule;
       }
     }
   }
