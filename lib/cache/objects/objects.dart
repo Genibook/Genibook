@@ -65,7 +65,12 @@ class StoreObjects {
       return scheduleAssignments;
     }
   }
-  //TODO: create logout function and schedule
+
+  static Future<void> logout() async {
+    await storage.delete(key: "secret");
+    await storage.delete(key: "schedule");
+    await storage.delete(key: "student");
+  }
 
   //static Future<void> storeSecrets() async{
   //}

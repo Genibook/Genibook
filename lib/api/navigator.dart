@@ -3,7 +3,6 @@ import 'package:genibook/api/handler.dart';
 import 'package:genibook/api/rawdata.dart';
 
 import 'package:genibook/constants.dart';
-import 'package:genibook/models/student_class.dart';
 
 import 'swipes.dart';
 
