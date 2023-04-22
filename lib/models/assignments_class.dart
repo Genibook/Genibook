@@ -141,7 +141,10 @@ class Assignment {
       }
     }
     String percent = json['grade_percent'];
-    percent.replaceAll("%", "");
+    percent = percent.replaceAll(RegExp(r'%'), "");
+    if (kDebugMode) {
+      print("[DEBUG: Assignment.fromJson()]: $percent");
+    }
     return Assignment(
       courseName: json['course_name'],
       mp: json['mp'],

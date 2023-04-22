@@ -8,7 +8,7 @@ void showDetailedAssignmentView(BuildContext context, Assignment assignment) {
       return AlertDialog(
         title: Text(
           assignment.assignment,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.headline5,
         ),
         content: SingleChildScrollView(
           child: Column(
