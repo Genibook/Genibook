@@ -1,6 +1,7 @@
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
+import 'package:genibook/constants.dart';
 
 class Grades {
   Map<String, Grade> gradesMap;
@@ -93,7 +94,9 @@ class Grade {
 
   factory Grade.fromJson(Map<String, dynamic> json) {
     if (kDebugMode) {
-      print("[DEBUG: Grade.fromJson()]: $json");
+      if (Constants.debugMode) {
+        print("[DEBUG: Grade.fromJson()]: $json");
+      }
     }
     double gradee;
     if (json["grade"].runtimeType == double) {

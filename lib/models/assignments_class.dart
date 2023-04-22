@@ -2,6 +2,7 @@
 // String assignmentsJsonString = jsonEncode(assignments.toJson());
 
 import 'package:flutter/foundation.dart';
+import 'package:genibook/constants.dart';
 
 class Assignments {
   Map<String, List<Assignment>> assignments;
@@ -135,7 +136,9 @@ class Assignment {
 
   factory Assignment.fromJson(Map<String, dynamic> json) {
     if (kDebugMode) {
-      print("[DEBUG: Assignment.fromJson()]: $json");
+      if (Constants.debugMode) {
+        print("[DEBUG: Assignment.fromJson()]: $json");
+      }
     }
     return Assignment(
       courseName: json['course_name'],
