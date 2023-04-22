@@ -49,17 +49,17 @@ class ApiNavigator extends Navigator {
 
   void pushToProfilePage<T extends Object>(
       BuildContext context, bool direction) {
-    if (Constants.debugMode) {
+    ApiHandler.getNewStudent().then((student) {
       if (direction) {
-        //means to the left
-        Navigator.of(context)
-            .push(SlideToLeftPageRoute(child: ProfilePage(student: eddie)));
+        Navigator.of(context).push(SlideToLeftPageRoute(
+            child:
+                ProfilePage(student: Constants.debugMode ? eddie : student)));
         return;
       }
-      Navigator.of(context)
-          .push(SlideToRightPageRoute(child: ProfilePage(student: eddie)));
+      Navigator.of(context).push(SlideToRightPageRoute(
+          child: ProfilePage(student: Constants.debugMode ? eddie : student)));
       return;
-    }
+    });
   }
 
   void pushToSchedule<T extends Object>(BuildContext context, bool direction) {
