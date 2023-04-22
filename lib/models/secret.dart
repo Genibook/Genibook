@@ -3,8 +3,10 @@ class Secret {
   final String _password;
   final int _userSelector;
   final String _mp;
+  final String _highSchool;
 
-  Secret(this._username, this._password, this._userSelector, this._mp);
+  Secret(this._username, this._password, this._userSelector, this._mp,
+      this._highSchool);
 
   String get username => _username;
   String get password => _password;
@@ -15,6 +17,7 @@ class Secret {
         'username': _username,
         'password': _password,
         'userSelector': _userSelector,
+        "highSchool": _highSchool,
         'mp': _mp,
       };
 
@@ -24,6 +27,7 @@ class Secret {
       json['password'] as String,
       json['userSelector'] as int,
       json['mp'] as String,
+      json["highSchool"] as String,
     );
   }
 }

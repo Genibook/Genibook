@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/icons/custom_icons_icons.dart';
 import 'package:genibook/api/navigator.dart';
 import 'package:genibook/extensions/virtualkeyboard.dart';
+import 'package:genibook/models/secret.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -19,11 +21,13 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   bool _passwordVisible = false;
 
-  String? _selectedSchool;
+  late String _selectedSchool;
 
   void _login() {
     if (_formKey.currentState!.validate()) {
       // Perform login logic here
+      StoreObjects.storeSecret(Secret(_emailController.text,
+          _passwordController.text, 1, "MP1", _selectedSchool));
       nav.pushToGrades(context, false);
     }
   }
@@ -77,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                             .toList(),
                         onChanged: (value) {
                           setState(() {
-                            _selectedSchool = value;
+                            _selectedSchool = value ?? "";
                           });
                         },
                         decoration: const InputDecoration(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/login/tos.dart';
+import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/screens/debug.dart';
+import 'package:genibook/screens/grades.dart';
 import 'package:genibook/screens/welcome.dart';
 import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
@@ -40,6 +43,17 @@ class Genibook extends StatelessWidget {
         loginOrSplash = true;
       }
     });
+    bool alreadyLoggedIn = false;
+    StoreObjects.readSecret().then(
+      (value) {
+        if (value.password.isNotEmpty &&
+            value.mp.isNotEmpty &&
+            value.username.isNotEmpty) {
+          alreadyLoggedIn = true;
+          // get the student
+        }
+      },
+    );
     return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
       return MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -56,7 +70,9 @@ class Genibook extends StatelessWidget {
           home: Constants.debugMode
               ? const DebugScreen()
               : loginOrSplash
-                  ? const LoginPage()
+                  ? alreadyLoggedIn
+                      ? GradesPage(student: eddie)
+                      : const LoginPage()
                   : const SplashScreen());
     });
   }
