@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/constants.dart';
-import 'package:genibook/navigator/api_navigator.dart';
+import 'package:genibook/api/api_navigator.dart';
 
 class Navbar extends StatefulWidget {
   // ignore: use_key_in_widget_constructors

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/constants.dart';
-import 'package:genibook/navigator/api_navigator.dart';
+import 'package:genibook/api/api_navigator.dart';
 
 void swipeHandler(
     DragUpdateDetails details, int pageNumber, BuildContext context) {
