@@ -63,22 +63,24 @@ class ApiNavigator extends Navigator {
   }
 
   void pushToSchedule<T extends Object>(BuildContext context, bool direction) {
-    if (Constants.debugMode) {
+    ApiHandler.getNewSchedule().then((schedule) {
       if (direction) {
         //means to the left
         Navigator.of(context).push(SlideToLeftPageRoute(
           child: SchedulePage(
-            scheduleAssignments: scheduleAssignments,
+            scheduleAssignments:
+                Constants.debugMode ? scheduleAssignments : schedule,
           ),
         ));
         return;
       }
       Navigator.of(context).push(SlideToRightPageRoute(
         child: SchedulePage(
-          scheduleAssignments: scheduleAssignments,
+          scheduleAssignments:
+              Constants.debugMode ? scheduleAssignments : schedule,
         ),
       ));
       return;
-    }
+    });
   }
 }
