@@ -32,6 +32,10 @@ class ApiNavigator extends Navigator {
   }
 
   void pushToGrades<T extends Object>(BuildContext context, bool direction) {
+    // get new data or smth
+    // read grades cache if the cache is filled
+    // compare == ( i think get students already does it, do it)
+
     if (Constants.debugMode) {
       if (direction) {
         //means to the left

@@ -43,7 +43,7 @@ class StoreObjects {
   static Future<Secret> readSecret() async {
     String jsonString = await storage.read(key: "secret") ?? "";
     if (kDebugMode) {
-      print(jsonString.isEmpty);
+      print(jsonString);
     }
     if (jsonString.isNotEmpty) {
       Map<String, dynamic> jsonn = json.decode(jsonString);

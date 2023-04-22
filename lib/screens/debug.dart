@@ -8,6 +8,7 @@ import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
 import 'package:genibook/api/swipes.dart';
 import 'package:genibook/models/secret.dart';
+import 'package:genibook/models/student_class.dart';
 import 'package:genibook/screens/login.dart';
 import 'package:genibook/secrets.dart';
 
@@ -40,7 +41,10 @@ class _DebugScreenState extends State<DebugScreen> {
                 child: const Text("RETURN TO LOGIN PAGE TO DEBUG")),
             ElevatedButton(
                 onPressed: (() async {
-                  ApiHandler.getNewStudent();
+                  Student student = await ApiHandler.getNewStudent();
+                  if (kDebugMode) {
+                    print(student.toJson());
+                  }
                 }),
                 child: const Text("Get STUDENT")),
             ElevatedButton(

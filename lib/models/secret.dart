@@ -24,9 +24,9 @@ class Secret {
     return Secret(
       username: json['username'] as String,
       password: json['password'] as String,
-      userSelector: json['userSelector'] as String,
+      userSelector: json['user'] as String,
       mp: json['mp'] as String,
-      highSchool: json["highSchool"] as String,
+      highSchool: json["highschool"] as String,
     );
   }
 
