@@ -46,7 +46,7 @@ class AssignmentPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  assignment.courseName,
+                                  assignment.assignment,
                                   style: const TextStyle(
                                     fontSize: 24.0,
                                     fontWeight: FontWeight.bold,
