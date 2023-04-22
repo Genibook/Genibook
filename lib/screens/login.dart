@@ -23,11 +23,17 @@ class _LoginPageState extends State<LoginPage> {
 
   late String _selectedSchool;
 
-  void _login() {
+  void _login() async {
     if (_formKey.currentState!.validate()) {
+      String email = _emailController.text;
+      String pass = _passwordController.text;
+      String highSchool = _selectedSchool;
+      int userSelector = 1;
+      String mp = "MP1";
+
       // Perform login logic here
-      StoreObjects.storeSecret(Secret(_emailController.text,
-          _passwordController.text, 1, "MP1", _selectedSchool));
+      StoreObjects.storeSecret(
+          Secret(email, _passwordController.text, 1, "MP1", _selectedSchool));
       nav.pushToGrades(context, false);
     }
   }

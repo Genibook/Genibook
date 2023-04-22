@@ -16,8 +16,8 @@ class Secret {
   Map<String, dynamic> toJson() => {
         'username': _username,
         'password': _password,
-        'userSelector': _userSelector,
-        "highSchool": _highSchool,
+        'user': _userSelector,
+        "highschool": _highSchool,
         'mp': _mp,
       };
 
