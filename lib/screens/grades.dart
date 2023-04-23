@@ -7,7 +7,6 @@ import 'package:genibook/widgets/navbar.dart';
 import '../utils/swipe.dart';
 import 'assignments.dart';
 import '../models/student_class.dart';
-import 'package:genibook/screens/settings/grades_settings.dart';
 
 class GradesPage extends StatefulWidget {
   final Student student;

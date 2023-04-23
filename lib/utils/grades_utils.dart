@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/models/assignments_class.dart';
 

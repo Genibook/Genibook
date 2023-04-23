@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
 // ignore: depend_on_referenced_packages

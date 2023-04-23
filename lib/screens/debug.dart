@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/login/tos.dart';
-import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
 import 'package:genibook/api/swipes.dart';
