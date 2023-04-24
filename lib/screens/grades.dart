@@ -38,9 +38,13 @@ class _GradesPageState extends State<GradesPage> {
                   height: 50,
                   width: 50,
                   child: IconButton(
-                      onPressed: (() async {
+                      onPressed: (() {
                         // ApiHandler.getNewStudent(false);
-                        await showGradesSettingsView(context);
+                        showDialog(
+                            context: context,
+                            builder: ((context) {
+                              return const GradesSettingsView();
+                            }));
                       }),
                       icon: const Icon(Icons.settings))),
             ],

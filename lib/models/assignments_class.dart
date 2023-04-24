@@ -76,7 +76,8 @@ class Assignments {
     for (final key in map1.keys) {
       if (!map2.containsKey(key)) {
         if (kDebugMode) {
-          print("map 2 no key");
+          print(
+              "[DEBUG mapEquals] map 2 IN THE COMPARISON no key, RETURNING FALSE");
         }
 
         return false;

@@ -1,9 +1,9 @@
 class Secret {
-  final String username;
-  final String password;
-  final String userSelector;
-  final String mp;
-  final String highSchool;
+  String username;
+  String password;
+  String userSelector;
+  String mp;
+  String highSchool;
 
   Secret(
       {required this.username,
