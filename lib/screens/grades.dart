@@ -40,7 +40,7 @@ class _GradesPageState extends State<GradesPage> {
                   child: IconButton(
                       onPressed: (() async {
                         // ApiHandler.getNewStudent(false);
-                        showGradesSettingsView(context);
+                        await showGradesSettingsView(context);
                       }),
                       icon: const Icon(Icons.settings))),
             ],

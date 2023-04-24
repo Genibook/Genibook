@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:genibook/models/student_class.dart';
 // import 'package:genibook/models/grades_class.dart';
 
-void showGradesSettingsView(BuildContext context) {
+Future<void> showGradesSettingsView(BuildContext context) async {
   showDialog(
     context: context,
     builder: (context) {

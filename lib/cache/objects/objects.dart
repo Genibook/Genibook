@@ -78,6 +78,26 @@ class StoreObjects {
     }
   }
 
+  static Future<void> storeMPs(List<String> mps) async {
+    String stringJson = jsonEncode(mps);
+    await storage.write(key: "mps", value: stringJson);
+  }
+
+  static Future<List<String>> readMPs() async {
+    String jsonString = await storage.read(key: "mps") ?? "";
+
+    if (kDebugMode) {
+      print("[DEBUG] READ MPS:");
+      print(jsonString);
+    }
+    if (jsonString.isNotEmpty) {
+      List<String> thing = json.decode(jsonString);
+      return thing;
+    } else {
+      return [];
+    }
+  }
+
   static Future<Map<String, String>> readAll() async {
     Map<String, String> thing = await storage.readAll();
     return thing;

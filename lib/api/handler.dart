@@ -20,7 +20,7 @@ class ApiHandler {
       return json.decode(response.body);
     } else {
       if (kDebugMode) {
-        print("failed to load data");
+        print("[DEBUG loadData]: failed to get data");
       }
       return {};
     }
@@ -34,7 +34,7 @@ class ApiHandler {
     } else {
       if (kDebugMode) {
         print(response.statusCode);
-        print("failed to login");
+        print("[DEBUG login]: failed to login");
       }
       return false;
     }
@@ -83,7 +83,7 @@ class ApiHandler {
 
     if (json.isEmpty) {
       if (kDebugMode) {
-        print("json is empty");
+        print("[DEBUG getNewSchedule] json is empty");
       }
       return cachedSchedule;
     } else {
@@ -94,6 +94,36 @@ class ApiHandler {
       } else {
         StoreObjects.storeSchedule(apiSchedule);
         return apiSchedule;
+      }
+    }
+  }
+
+  static Future<List<String>> getMPs() async {
+    List<String> cachedMps = await StoreObjects.readMPs();
+    List<String> apiMps = [];
+    Secret secret = await StoreObjects.readSecret();
+
+    final response =
+        await http.post(getCorrectUri("/apiv1/mps/", secret.toJson()));
+    if (response.statusCode == 200) {
+      apiMps = json.decode(response.body);
+    } else {
+      if (kDebugMode) {
+        print("[DEBUG getMPs]: failed to get mps data");
+      }
+    }
+
+    if (apiMps.isEmpty) {
+      if (kDebugMode) {
+        print("[DEBUG getNewSchedule] mps is empty");
+      }
+      return cachedMps;
+    } else {
+      if (apiMps == cachedMps) {
+        return cachedMps;
+      } else {
+        StoreObjects.storeMPs(apiMps);
+        return apiMps;
       }
     }
   }
