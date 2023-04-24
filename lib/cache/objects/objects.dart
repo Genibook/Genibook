@@ -78,6 +78,11 @@ class StoreObjects {
     }
   }
 
+  static Future<Map<String, String>> readAll() async {
+    Map<String, String> thing = await storage.readAll();
+    return thing;
+  }
+
   static Future<void> logout() async {
     await storage.delete(key: "secret");
     await storage.delete(key: "schedule");

@@ -1,8 +1,12 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/login/tos.dart';
+import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
 import 'package:genibook/api/swipes.dart';
@@ -10,6 +14,16 @@ import 'package:genibook/models/secret.dart';
 import 'package:genibook/models/student_class.dart';
 import 'package:genibook/screens/login.dart';
 import 'package:genibook/secrets.dart';
+
+void writeMapToFile(Map<String, String> map, String filePath) {
+  final file = File(filePath);
+
+  // Convert the map to a string
+  final jsonString = json.encode(map);
+
+  // Write the string to the file
+  file.writeAsString(jsonString);
+}
 
 class DebugScreen extends StatefulWidget {
   const DebugScreen({super.key});
@@ -64,6 +78,16 @@ class _DebugScreenState extends State<DebugScreen> {
               "Caching",
               style: Theme.of(context).textTheme.headline3,
             ),
+            ElevatedButton(
+                onPressed: () async {
+                  Map<String, String> thing = await StoreObjects.readAll();
+                  if (kDebugMode) {
+                    String filePath = 'test_data/data.json';
+
+                    writeMapToFile(thing, filePath);
+                  }
+                },
+                child: const Text("ALL")),
             ElevatedButton(
                 onPressed: () async {
                   bool val = await writeTOS();

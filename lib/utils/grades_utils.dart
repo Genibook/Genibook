@@ -32,7 +32,16 @@ MaterialColor getColorFromGrade(double grade) {
 MaterialColor getColorFromGradeAssignment(
     String gradePercent, String gradeNum) {
   double grade;
-  if (gradeNum.contains("Not") || gradeNum.split("/")[1] == "0") {
+  if (!gradeNum.contains("/")) {
+    if (gradeNum.contains("Exempt") || gradeNum.contains("Absent")) {
+      return Colors.blue;
+    } else if (gradeNum.contains("Missing") ||
+        gradeNum.contains("Incomplete")) {
+      return Colors.red;
+    }
+    return Colors.blue;
+  }
+  if (gradeNum.split("/")[1] == "0") {
     return Colors.blue;
   } else {
     grade = double.parse(gradePercent);
@@ -61,21 +70,11 @@ Widget gradeNumThenPercentForAssignments(Assignment assignment) {
   if (kDebugMode) {
     if (Constants.debugModePrintEVERYTHING) {
       print("${assignment.gradeNum} - ${assignment.gradePercent}");
+      print("${!assignment.gradeNum.contains("/")}");
     }
   }
-  if (assignment.gradeNum.contains("Not")) {
+  if (!assignment.gradeNum.contains("/")) {
     ending = "pts";
-    //todo
-    /*
-flutter: 5/5 - 100.0
-flutter: 5/5 - 100.0
-flutter: 5/5 - 100.0
-flutter: 5/5 - 100.0
-flutter: 5/5 - 100.0
-flutter: Absent  - Assignment Pts: 5
-
-phsyed marking 2
-    */
   } else if (assignment.gradeNum.split("/")[1] == "0" ||
       assignment.gradePercent.isEmpty) {
     ending = "Extra Points";

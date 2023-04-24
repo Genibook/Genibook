@@ -41,6 +41,7 @@ class Genibook extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //StoreObjects.logout();
+
     Student student = eddie;
     bool loginOrSplash = false;
     readTOS().then((value) {
@@ -58,7 +59,7 @@ class Genibook extends StatelessWidget {
         if (value.valid) {
           ApiHandler.getNewStudent(true).then((studentt) {
             if (kDebugMode) {
-              print("[DEBUG: main()]: $studentt");
+              print("[DEBUG: main()]: we got a student! $studentt");
             }
             student = studentt;
           });
