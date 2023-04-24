@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/cache/objects/objects.dart';
+import 'package:genibook/models/secret.dart';
 // import 'package:genibook/models/student_class.dart';
 // import 'package:genibook/models/grades_class.dart';
+import 'package:genibook/api/handler.dart';
 
 Future<void> showGradesSettingsView(BuildContext context) async {
+  List<dynamic> mps = await ApiHandler.getMPs();
+  Secret secret = await StoreObjects.readSecret();
   showDialog(
     context: context,
     builder: (context) {
@@ -12,6 +17,12 @@ Future<void> showGradesSettingsView(BuildContext context) async {
           style: Theme.of(context).textTheme.headline5,
         ),
 
+        content: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[Text(secret.mp)],
+          ),
+        ),
         // content: SingleChildScrollView(
         //   child: Column(
         //     crossAxisAlignment: CrossAxisAlignment.start,

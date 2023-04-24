@@ -98,15 +98,16 @@ class ApiHandler {
     }
   }
 
-  static Future<List<String>> getMPs() async {
-    List<String> cachedMps = await StoreObjects.readMPs();
-    List<String> apiMps = [];
+  static Future<List<dynamic>> getMPs() async {
+    List<dynamic> cachedMps = await StoreObjects.readMPs();
+    List<dynamic> apiMps = <dynamic>[];
     Secret secret = await StoreObjects.readSecret();
 
     final response =
         await http.post(getCorrectUri("/apiv1/mps/", secret.toJson()));
     if (response.statusCode == 200) {
-      apiMps = json.decode(response.body);
+      List<dynamic> mps = json.decode(response.body);
+      apiMps = mps;
     } else {
       if (kDebugMode) {
         print("[DEBUG getMPs]: failed to get mps data");
@@ -115,7 +116,7 @@ class ApiHandler {
 
     if (apiMps.isEmpty) {
       if (kDebugMode) {
-        print("[DEBUG getNewSchedule] mps is empty");
+        print("[DEBUG getMPs] mps is empty");
       }
       return cachedMps;
     } else {

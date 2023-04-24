@@ -78,12 +78,12 @@ class StoreObjects {
     }
   }
 
-  static Future<void> storeMPs(List<String> mps) async {
+  static Future<void> storeMPs(List<dynamic> mps) async {
     String stringJson = jsonEncode(mps);
     await storage.write(key: "mps", value: stringJson);
   }
 
-  static Future<List<String>> readMPs() async {
+  static Future<List<dynamic>> readMPs() async {
     String jsonString = await storage.read(key: "mps") ?? "";
 
     if (kDebugMode) {
@@ -91,10 +91,10 @@ class StoreObjects {
       print(jsonString);
     }
     if (jsonString.isNotEmpty) {
-      List<String> thing = json.decode(jsonString);
+      List<dynamic> thing = json.decode(jsonString);
       return thing;
     } else {
-      return [];
+      return <dynamic>["MP1", "MP2"];
     }
   }
 
