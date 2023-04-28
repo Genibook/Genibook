@@ -1,5 +1,9 @@
 import UIKit
 import Flutter
+import workmanager
+
+WorkmanagerPlugin.registerTask(withIdentifier: "task-identifier")
+
 
 @UIApplicationMain
 @objc class AppDelegate: FlutterAppDelegate {
