@@ -12,14 +12,34 @@ import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:workmanager/workmanager.dart';
 
 import 'constants.dart';
 import 'screens/login.dart';
 import 'utils/http_overrides.dart';
 
+@pragma(
+    'vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
+void callbackDispatcher() {
+  Workmanager().executeTask((task, inputData) {
+    if (kDebugMode) {
+      var backgroundTask = "IDK IDK IDK";
+      print("Native called background task: $backgroundTask");
+    } //simpleTask will be emitted here.
+    return Future.value(true);
+  });
+}
+
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
+
+  Workmanager().initialize(
+      callbackDispatcher, // The top level function, aka callbackDispatcher
+      isInDebugMode:
+          true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
+      );
+  Workmanager().registerOneOffTask("task-identifier", "simpleTask");
 
   if (UniversalPlatform.isWindows ||
       UniversalPlatform.isLinux ||
