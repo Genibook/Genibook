@@ -18,14 +18,19 @@ import 'constants.dart';
 import 'screens/login.dart';
 import 'utils/http_overrides.dart';
 
-@pragma(
-    'vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
+@pragma('vm:entry-point')
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) {
-    if (kDebugMode) {
-      var backgroundTask = "IDK IDK IDK";
-      print("Native called background task: $backgroundTask");
-    } //simpleTask will be emitted here.
+    // final _sharedPreference = await SharedPreferences.getInstance(); //Initialize dependency
+
+    // try { //add code execution
+    //   totalExecutions = _sharedPreference.getInt("totalExecutions");
+    //   _sharedPreference.setInt("totalExecutions", totalExecutions == null ? 1 : totalExecutions+1);
+    // } catch(err) {
+    //   Logger().e(err.toString()); // Logger flutter package, prints error on the debug console
+    //   throw Exception(err);
+    // }
+
     return Future.value(true);
   });
 }
