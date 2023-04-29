@@ -54,7 +54,9 @@
 	<false/>
 	<key>BGTaskSchedulerPermittedIdentifiers</key>
 	<array>
-		<string>task-identifier</string>
+		<string>be.tramckrijte.workmanagerExample.simpleTask</string>
+		<string>be.tramckrijte.workmanagerExample.rescheduledTaskk</string>
+		<string>be.tramckrijte.workmanagerExample.failedTask</string>
   </array>
 </dict>
 </plist>

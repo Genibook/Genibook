@@ -2,7 +2,7 @@ import UIKit
 import Flutter
 import workmanager
 
-WorkmanagerPlugin.registerTask(withIdentifier: "task-identifier")
+
 
 
 @UIApplicationMain
@@ -13,6 +13,13 @@ WorkmanagerPlugin.registerTask(withIdentifier: "task-identifier")
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
     UIApplication.shared.setMinimumBackgroundFetchInterval(TimeInterval(60*15))
+
+
+    WorkmanagerPlugin.registerTask(withIdentifier:  "be.tramckrijte.workmanagerExample.simpleTask")
+    WorkmanagerPlugin.registerTask(withIdentifier: "be.tramckrijte.workmanagerExample.rescheduledTask")
+    WorkmanagerPlugin.registerTask(withIdentifier:  "be.tramckrijte.workmanagerExample.failedTask")
+
+
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }

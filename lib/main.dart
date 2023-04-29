@@ -12,28 +12,27 @@ import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
 import 'package:dynamic_color/dynamic_color.dart';
-import 'package:workmanager/workmanager.dart';
 
 import 'constants.dart';
 import 'screens/login.dart';
 import 'utils/http_overrides.dart';
 
-@pragma('vm:entry-point')
-void callbackDispatcher() {
-  Workmanager().executeTask((task, inputData) {
-    // final _sharedPreference = await SharedPreferences.getInstance(); //Initialize dependency
+// @pragma('vm:entry-point')
+// void callbackDispatcher() {
+//   Workmanager().executeTask((task, inputData) {
+//     // final _sharedPreference = await SharedPreferences.getInstance(); //Initialize dependency
 
-    // try { //add code execution
-    //   totalExecutions = _sharedPreference.getInt("totalExecutions");
-    //   _sharedPreference.setInt("totalExecutions", totalExecutions == null ? 1 : totalExecutions+1);
-    // } catch(err) {
-    //   Logger().e(err.toString()); // Logger flutter package, prints error on the debug console
-    //   throw Exception(err);
-    // }
+//     // try { //add code execution
+//     //   totalExecutions = _sharedPreference.getInt("totalExecutions");
+//     //   _sharedPreference.setInt("totalExecutions", totalExecutions == null ? 1 : totalExecutions+1);
+//     // } catch(err) {
+//     //   Logger().e(err.toString()); // Logger flutter package, prints error on the debug console
+//     //   throw Exception(err);
+//     // }
 
-    return Future.value(true);
-  });
-}
+//     return Future.value(true);
+//   });
+// }
 
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
@@ -46,12 +45,18 @@ void main() async {
     setWindowMaxSize(Size.infinite);
   } else {
     // phone!
-    Workmanager().initialize(
-        callbackDispatcher, // The top level function, aka callbackDispatcher
-        isInDebugMode:
-            true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
-        );
-    Workmanager().registerOneOffTask("task-identifier", "simpleTask");
+    // Workmanager().initialize(
+    //     callbackDispatcher, // The top level function, aka callbackDispatcher
+    //     isInDebugMode:
+    //         true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
+    //     );
+    // Workmanager().registerOneOffTask("task-identifier", "simpleTask",
+    //     constraints: Constraints(
+    //         networkType: NetworkType.connected,
+    //         requiresBatteryNotLow: true,
+    //         requiresCharging: true,
+    //         requiresDeviceIdle: true,
+    //         requiresStorageNotLow: true));
   }
 
   //assert(kDebugMode == true);
