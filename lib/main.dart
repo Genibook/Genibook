@@ -1,3 +1,4 @@
+import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
@@ -5,7 +6,8 @@ import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/student_class.dart';
-import 'package:genibook/screens/debug.dart';
+import 'package:genibook/screens/debug/backgroundtasks.dart';
+import 'package:genibook/screens/debug/debug.dart';
 import 'package:genibook/screens/grades.dart';
 import 'package:genibook/screens/welcome.dart';
 import 'dart:io';
@@ -17,22 +19,21 @@ import 'constants.dart';
 import 'screens/login.dart';
 import 'utils/http_overrides.dart';
 
-// @pragma('vm:entry-point')
-// void callbackDispatcher() {
-//   Workmanager().executeTask((task, inputData) {
-//     // final _sharedPreference = await SharedPreferences.getInstance(); //Initialize dependency
-
-//     // try { //add code execution
-//     //   totalExecutions = _sharedPreference.getInt("totalExecutions");
-//     //   _sharedPreference.setInt("totalExecutions", totalExecutions == null ? 1 : totalExecutions+1);
-//     // } catch(err) {
-//     //   Logger().e(err.toString()); // Logger flutter package, prints error on the debug console
-//     //   throw Exception(err);
-//     // }
-
-//     return Future.value(true);
-//   });
-// }
+@pragma('vm:entry-point')
+void backgroundFetchHeadlessTask(HeadlessTask task) async {
+  String taskId = task.taskId;
+  bool isTimeout = task.timeout;
+  if (isTimeout) {
+    // This task has exceeded its allowed running-time.
+    // You must stop what you're doing and immediately .finish(taskId)
+    print("[BackgroundFetch] Headless task timed-out: $taskId");
+    BackgroundFetch.finish(taskId);
+    return;
+  }
+  print('[BackgroundFetch] Headless event received.');
+  // Do your work here...
+  BackgroundFetch.finish(taskId);
+}
 
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
@@ -45,18 +46,7 @@ void main() async {
     setWindowMaxSize(Size.infinite);
   } else {
     // phone!
-    // Workmanager().initialize(
-    //     callbackDispatcher, // The top level function, aka callbackDispatcher
-    //     isInDebugMode:
-    //         true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
-    //     );
-    // Workmanager().registerOneOffTask("task-identifier", "simpleTask",
-    //     constraints: Constraints(
-    //         networkType: NetworkType.connected,
-    //         requiresBatteryNotLow: true,
-    //         requiresCharging: true,
-    //         requiresDeviceIdle: true,
-    //         requiresStorageNotLow: true));
+
   }
 
   //assert(kDebugMode == true);
@@ -112,7 +102,8 @@ class Genibook extends StatelessWidget {
           ),
           themeMode: ThemeMode.system,
           home: Constants.debugMode
-              ? const DebugScreen()
+              // ? const DebugScreen()
+              ? const MyApp()
               : loginOrSplash
                   ? alreadyLoggedIn
                       ? GradesPage(student: student)

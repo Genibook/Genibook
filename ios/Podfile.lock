@@ -1,40 +1,33 @@
 PODS:
+  - background_fetch (1.1.5):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_secure_storage (6.0.0):
     - Flutter
-  - shared_preferences_foundation (0.0.1):
-    - Flutter
-    - FlutterMacOS
   - url_launcher_ios (0.0.1):
-    - Flutter
-  - workmanager (0.0.1):
     - Flutter
 
 DEPENDENCIES:
+  - background_fetch (from `.symlinks/plugins/background_fetch/ios`)
   - Flutter (from `Flutter`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
-  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
-  - workmanager (from `.symlinks/plugins/workmanager/ios`)
 
 EXTERNAL SOURCES:
+  background_fetch:
+    :path: ".symlinks/plugins/background_fetch/ios"
   Flutter:
     :path: Flutter
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
-  shared_preferences_foundation:
-    :path: ".symlinks/plugins/shared_preferences_foundation/ios"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
-  workmanager:
-    :path: ".symlinks/plugins/workmanager/ios"
 
 SPEC CHECKSUMS:
+  background_fetch: 9a9963128952bfdd197e21786983c7c7a30e1478
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
-  shared_preferences_foundation: 986fc17f3d3251412d18b0265f9c64113a8c2472
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
-  workmanager: 0afdcf5628bbde6924c21af7836fed07b42e30e6
 
 PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
 
