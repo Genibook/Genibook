@@ -12,7 +12,7 @@ import workmanager
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
-    UIApplication.shared.setMinimumBackgroundFetchInterval(TimeInterval(60*15))
+    UIApplication.shared.setMinimumBackgroundFetchInterval(TimeInterval(60*1))
 
 
     WorkmanagerPlugin.registerTask(withIdentifier:  "be.tramckrijte.workmanagerExample.simpleTask")

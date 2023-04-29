@@ -272,6 +272,7 @@ class _DebugScreenState extends State<DebugScreen> {
     'vm:entry-point') // Mandatory if the App is obfuscated or using Flutter 3.1+
 void callbackDispatcher() {
   Workmanager().executeTask((task, inputData) async {
+    print("asdhfjadsfadsf");
     switch (task) {
       case simpleTaskKey:
         if (kDebugMode) {
