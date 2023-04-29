@@ -7,21 +7,23 @@ import 'package:genibook/models/student_class.dart';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-AndroidOptions _getAndroidOptions() => const AndroidOptions(
-      encryptedSharedPreferences: true,
-    );
-
-final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
-
 class StoreObjects {
   StoreObjects._();
 
   static Future<void> storeStudent(Student student) async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
     String stringJson = jsonEncode(student.toJson());
     await storage.write(key: "student", value: stringJson);
   }
 
   static Future<Student> readStudent() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
     String jsonString = await storage.read(key: "student") ?? "";
     if (jsonString.isNotEmpty) {
       if (kDebugMode) {
@@ -37,11 +39,19 @@ class StoreObjects {
   }
 
   static Future<void> storeSecret(Secret secret) async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
     String stringJson = jsonEncode(secret.toJson());
     await storage.write(key: "secret", value: stringJson);
   }
 
   static Future<Secret> readSecret() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
     String jsonString = await storage.read(key: "secret") ?? "";
     if (kDebugMode) {
       print("[DEBUG] READ SECRET: $jsonString");
@@ -59,11 +69,19 @@ class StoreObjects {
   }
 
   static Future<void> storeSchedule(ScheduleAssignmentsList schedule) async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
     String stringJson = jsonEncode(schedule.toJson());
     await storage.write(key: "schedule", value: stringJson);
   }
 
   static Future<ScheduleAssignmentsList> readSchedule() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
     String jsonString = await storage.read(key: "schedule") ?? "";
 
     if (kDebugMode) {
@@ -79,11 +97,19 @@ class StoreObjects {
   }
 
   static Future<void> storeMPs(List<dynamic> mps) async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
     String stringJson = jsonEncode(mps);
     await storage.write(key: "mps", value: stringJson);
   }
 
   static Future<List<dynamic>> readMPs() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
     String jsonString = await storage.read(key: "mps") ?? "";
 
     if (kDebugMode) {
@@ -99,11 +125,19 @@ class StoreObjects {
   }
 
   static Future<Map<String, String>> readAll() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
     Map<String, String> thing = await storage.readAll();
     return thing;
   }
 
   static Future<void> logout() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
     await storage.delete(key: "secret");
     await storage.delete(key: "schedule");
     await storage.delete(key: "student");

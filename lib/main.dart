@@ -34,13 +34,6 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
 
-  Workmanager().initialize(
-      callbackDispatcher, // The top level function, aka callbackDispatcher
-      isInDebugMode:
-          true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
-      );
-  Workmanager().registerOneOffTask("task-identifier", "simpleTask");
-
   if (UniversalPlatform.isWindows ||
       UniversalPlatform.isLinux ||
       UniversalPlatform.isMacOS) {
@@ -48,6 +41,12 @@ void main() async {
     setWindowMaxSize(Size.infinite);
   } else {
     // phone!
+    Workmanager().initialize(
+        callbackDispatcher, // The top level function, aka callbackDispatcher
+        isInDebugMode:
+            true // If enabled it will post a notification whenever the task is running. Handy for debugging tasks
+        );
+    Workmanager().registerOneOffTask("task-identifier", "simpleTask");
   }
 
   //assert(kDebugMode == true);

@@ -1,14 +1,12 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:genibook/constants.dart';
 
-AndroidOptions _getAndroidOptions() => const AndroidOptions(
-      encryptedSharedPreferences: true,
-    );
-
-final storage = FlutterSecureStorage(aOptions: _getAndroidOptions());
-
 /// Returns the value written to the TOS key as a bool
 Future<bool> writeTOS() async {
+  const storage = FlutterSecureStorage(
+      aOptions: AndroidOptions(
+    encryptedSharedPreferences: true,
+  ));
   String value = await storage.read(key: Constants.tosReadKey) ?? "false";
 
   bool b = value.toLowerCase() == 'true';
@@ -24,6 +22,10 @@ Future<bool> writeTOS() async {
 }
 
 Future<bool> readTOS() async {
+  const storage = FlutterSecureStorage(
+      aOptions: AndroidOptions(
+    encryptedSharedPreferences: true,
+  ));
   String value = await storage.read(key: Constants.tosReadKey) ?? "false";
   return value.toLowerCase() == 'true';
 }
