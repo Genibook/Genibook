@@ -19,22 +19,6 @@ import 'constants.dart';
 import 'screens/login.dart';
 import 'utils/http_overrides.dart';
 
-@pragma('vm:entry-point')
-void backgroundFetchHeadlessTask(HeadlessTask task) async {
-  String taskId = task.taskId;
-  bool isTimeout = task.timeout;
-  if (isTimeout) {
-    // This task has exceeded its allowed running-time.
-    // You must stop what you're doing and immediately .finish(taskId)
-    print("[BackgroundFetch] Headless task timed-out: $taskId");
-    BackgroundFetch.finish(taskId);
-    return;
-  }
-  print('[BackgroundFetch] Headless event received.');
-  // Do your work here...
-  BackgroundFetch.finish(taskId);
-}
-
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +30,6 @@ void main() async {
     setWindowMaxSize(Size.infinite);
   } else {
     // phone!
-
   }
 
   //assert(kDebugMode == true);
