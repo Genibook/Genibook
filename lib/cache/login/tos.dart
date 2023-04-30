@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:genibook/constants.dart';
 
@@ -27,6 +28,9 @@ Future<bool> readTOS() async {
     encryptedSharedPreferences: true,
   ));
   String value = await storage.read(key: Constants.tosReadKey) ?? "false";
+  if (kDebugMode) {
+    print("[readTOS()]: " + value);
+  }
   return value.toLowerCase() == 'true';
 }
 // void teststuff() async {

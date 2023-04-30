@@ -4,6 +4,7 @@ import 'package:genibook/api/handler.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
+import 'package:genibook/models/secret.dart';
 import 'package:genibook/models/student_class.dart';
 import 'package:genibook/screens/debug/backgroundtasks.dart';
 import 'package:genibook/screens/grades.dart';
@@ -35,61 +36,109 @@ void main() async {
   runApp(const Genibook());
 }
 
-class Genibook extends StatelessWidget {
-  const Genibook({Key? key}) : super(key: key);
+class Genibook extends StatefulWidget {
+  const Genibook({super.key});
+
+  @override
+  State<StatefulWidget> createState() => GenibookState();
+}
+
+class GenibookState extends State<Genibook> {
+  Future<bool>? loginOrSplash;
+  Future<Secret>? alreadyLoggedIn;
+
+  @override
+  void initState() {
+    super.initState();
+    loginOrSplash = readTOS();
+    alreadyLoggedIn = StoreObjects.readSecret();
+  }
 
   @override
   Widget build(BuildContext context) {
     //StoreObjects.logout();
 
-    Student student = eddie;
-    bool loginOrSplash = false;
-    readTOS().then((value) {
-      if (value) {
-        loginOrSplash = true;
-      }
-    });
-    bool alreadyLoggedIn = false;
-    StoreObjects.readSecret().then(
-      (value) {
-        alreadyLoggedIn = value.valid;
-        if (kDebugMode) {
-          print("[DEBUG main()]: already logged in?: $alreadyLoggedIn");
+    // Student student = eddie;
+    // bool loginOrSplash = false;
+    // readTOS().then((value) {
+    //   if (value) {
+    //     loginOrSplash = true;
+    //   }
+    // });
+    // bool alreadyLoggedIn = false;
+    // StoreObjects.readSecret().then(
+    //   (value) {
+    //     alreadyLoggedIn = value.valid;
+    //     if (kDebugMode) {
+    //       print("[DEBUG main()]: already logged in?: $alreadyLoggedIn");
+    //     }
+    //     if (value.valid) {
+    //       ApiHandler.getNewStudent(true).then((studentt) {
+    //         if (kDebugMode) {
+    //           print("[DEBUG: main()]: we got a student! $studentt");
+    //         }
+    //         student = studentt;
+    //       });
+    //     }
+    //     // future builder to get the student?
+    //     // maybe read the cache
+    //     // if the alreadyLogged in is true?
+    //   },
+    // );
+
+    return FutureBuilder<bool>(
+      future: loginOrSplash,
+      builder: (context, loginOrSplashFuture) {
+        if (loginOrSplashFuture.hasData) {
+          return FutureBuilder<Secret>(
+            future: alreadyLoggedIn,
+            builder: (context, alreadyLoggedInFuture) {
+              if (alreadyLoggedInFuture.hasData) {
+                Future<Student> student = ApiHandler.getNewStudent(true);
+
+                return FutureBuilder<Student>(
+                  future: student,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return DynamicColorBuilder(
+                          builder: (lightColorScheme, darkColorScheme) {
+                        return MaterialApp(
+                            debugShowCheckedModeBanner: false,
+                            title: 'Grades',
+                            theme: ThemeData(
+                              colorScheme: lightColorScheme ??
+                                  Constants.defaultLightColorScheme,
+                              useMaterial3: true,
+                            ),
+                            darkTheme: ThemeData(
+                              colorScheme: darkColorScheme ??
+                                  Constants.defaultDarkColorScheme,
+                              useMaterial3: true,
+                            ),
+                            themeMode: ThemeMode.system,
+                            home: Constants.debugMode
+                                // ? const DebugScreen()
+                                ? const MyApp()
+                                : loginOrSplashFuture.data!
+                                    ? alreadyLoggedInFuture.data!.valid
+                                        ? GradesPage(student: snapshot.data!)
+                                        : const LoginPage()
+                                    : const SplashScreen());
+                      });
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          );
+        } else {
+          return const Center(child: CircularProgressIndicator());
         }
-        if (value.valid) {
-          ApiHandler.getNewStudent(true).then((studentt) {
-            if (kDebugMode) {
-              print("[DEBUG: main()]: we got a student! $studentt");
-            }
-            student = studentt;
-          });
-        }
-        // future builder to get the student?
-        // maybe read the cache
-        // if the alreadyLogged in is true?
       },
     );
-    return DynamicColorBuilder(builder: (lightColorScheme, darkColorScheme) {
-      return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'Grades',
-          theme: ThemeData(
-            colorScheme: lightColorScheme ?? Constants.defaultLightColorScheme,
-            useMaterial3: true,
-          ),
-          darkTheme: ThemeData(
-            colorScheme: darkColorScheme ?? Constants.defaultDarkColorScheme,
-            useMaterial3: true,
-          ),
-          themeMode: ThemeMode.system,
-          home: Constants.debugMode
-              // ? const DebugScreen()
-              ? const MyApp()
-              : loginOrSplash
-                  ? alreadyLoggedIn
-                      ? GradesPage(student: student)
-                      : const LoginPage()
-                  : const SplashScreen());
-    });
   }
 }

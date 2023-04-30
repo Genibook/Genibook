@@ -50,6 +50,8 @@ class ApiHandler {
 
     if (currentStudent != eddie && getCached) {
       return currentStudent;
+    } else if (getCached) {
+      return eddie;
     }
     // secrets are stored before calling this function.
     Secret secret = await StoreObjects.readSecret();
