@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -13,11 +14,15 @@ void backgroundFetchHeadlessTask(HeadlessTask task) async {
   if (isTimeout) {
     // This task has exceeded its allowed running-time.
     // You must stop what you're doing and immediately .finish(taskId)
-    print("[BackgroundFetch] Headless task timed-out: $taskId");
+    if (kDebugMode) {
+      print("[BackgroundFetch] Headless task timed-out: $taskId");
+    }
     BackgroundFetch.finish(taskId);
     return;
   }
-  print('[BackgroundFetch] Headless event received.');
+  if (kDebugMode) {
+    print('[BackgroundFetch] Headless event received.');
+  }
   // Do your work here...
   BackgroundFetch.finish(taskId);
 }
@@ -26,13 +31,14 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   bool _enabled = true;
   int _status = 0;
-  List<DateTime> _events = [];
+  final List<DateTime> _events = [];
 
   @override
   void initState() {
@@ -55,17 +61,23 @@ class _MyAppState extends State<MyApp> {
             requiredNetworkType: NetworkType.ANY), (String taskId) async {
       // <-- Event handler
       // This is the fetch-event callback.
-      print("[BackgroundFetch] Event received $taskId");
+      if (kDebugMode) {
+        print("[BackgroundFetch] Event received $taskId");
+      }
       setState(() {
         _events.insert(0, DateTime.now());
       });
 
       switch (taskId) {
         case 'com.transistorsoft.test':
-          print("Received custom task");
+          if (kDebugMode) {
+            print("Received custom task");
+          }
           break;
         default:
-          print("Default fetch task");
+          if (kDebugMode) {
+            print("Default fetch task");
+          }
       }
       // IMPORTANT:  You must signal completion of your task or the OS can punish your app
       // for taking too long in the background.
@@ -73,12 +85,14 @@ class _MyAppState extends State<MyApp> {
     }, (String taskId) async {
       // <-- Task timeout handler.
       // This task has exceeded its allowed running-time.  You must stop what you're doing and immediately .finish(taskId)
-      print("[BackgroundFetch] TASK TIMEOUT taskId: $taskId");
+      if (kDebugMode) {
+        print("[BackgroundFetch] TASK TIMEOUT taskId: $taskId");
+      }
       BackgroundFetch.finish(taskId);
     });
-
-    print('[BackgroundFetch] configure success: $status');
-
+    if (kDebugMode) {
+      print('[BackgroundFetch] configure success: $status');
+    }
     setState(() {
       _status = status;
     });
@@ -95,20 +109,28 @@ class _MyAppState extends State<MyApp> {
     });
     if (enabled) {
       BackgroundFetch.start().then((int status) {
-        print('[BackgroundFetch] start success: $status');
+        if (kDebugMode) {
+          print('[BackgroundFetch] start success: $status');
+        }
       }).catchError((e) {
-        print('[BackgroundFetch] start FAILURE: $e');
+        if (kDebugMode) {
+          print('[BackgroundFetch] start FAILURE: $e');
+        }
       });
     } else {
       BackgroundFetch.stop().then((int status) {
-        print('[BackgroundFetch] stop success: $status');
+        if (kDebugMode) {
+          print('[BackgroundFetch] stop success: $status');
+        }
       });
     }
   }
 
   void _onClickStatus() async {
     int status = await BackgroundFetch.status;
-    print('[BackgroundFetch] status: $status');
+    if (kDebugMode) {
+      print('[BackgroundFetch] status: $status');
+    }
     setState(() {
       _status = status;
     });

@@ -70,13 +70,13 @@ class _SplashScreenState extends State<SplashScreen>
                 )),
             Text(
               "Welcome to ${Constants.appName}.",
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.displaySmall,
               textAlign: TextAlign.center,
             ),
             const Spacer(),
             Text(
               Constants.tagline,
-              style: Theme.of(context).textTheme.headline2,
+              style: Theme.of(context).textTheme.displayMedium,
               textAlign: TextAlign.center,
             ),
             const Spacer(),

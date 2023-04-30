@@ -53,7 +53,7 @@ class _DebugScreenState extends State<DebugScreen> {
           children: [
             Text(
               "API calls",
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             ElevatedButton(
                 onPressed: () {
@@ -85,7 +85,7 @@ class _DebugScreenState extends State<DebugScreen> {
                 child: const Text("LOGIN")),
             Text(
               "Caching",
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             ElevatedButton(
                 onPressed: () async {
@@ -107,7 +107,7 @@ class _DebugScreenState extends State<DebugScreen> {
                 child: const Text("TOS")),
             Text(
               "Logic",
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             ElevatedButton(
                 onPressed: () async {
@@ -140,7 +140,7 @@ class _DebugScreenState extends State<DebugScreen> {
                 child: const Text("schedule assignments ==")),
             Text(
               "Caching",
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
             ElevatedButton(
                 onPressed: () async {
@@ -152,7 +152,7 @@ class _DebugScreenState extends State<DebugScreen> {
                 child: const Text("TOS")),
             Text(
               "Plugin initialization",
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headlineSmall,
             ),
           ],
         ),

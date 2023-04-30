@@ -41,7 +41,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
     return AlertDialog(
       title: Text(
         "Grade Settings",
-        style: Theme.of(context).textTheme.headline5,
+        style: Theme.of(context).textTheme.headlineSmall,
       ),
 
       content: SingleChildScrollView(

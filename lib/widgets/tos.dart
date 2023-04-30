@@ -6,27 +6,37 @@ import 'package:genibook/api/swipes.dart';
 import 'package:genibook/screens/login.dart';
 
 Future<void> showPrivacyPolicyDialog(BuildContext context) async {
-  String privacyPolicy = await rootBundle.loadString('assets/pp.md');
+  Future<String> privacyPolicy = rootBundle.loadString('assets/pp.md');
   showDialog(
       context: context,
       builder: ((context) {
-        return AlertDialog(
-          content: SizedBox(
-            height: MediaQuery.of(context).size.height * 3 / 2,
-            width: MediaQuery.of(context).size.height * 3 / 2,
-            child: Markdown(data: privacyPolicy),
-          ),
-          actions: <Widget>[
-            ElevatedButton(
-              child: const Text('I agree'),
-              onPressed: () async {
-                if (await writeTOS()) {
-                  Navigator.of(context)
-                      .push(SlideToRightPageRoute(child: const LoginPage()));
-                }
-              },
-            ),
-          ],
+        return FutureBuilder<String>(
+          future: privacyPolicy,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return AlertDialog(
+                content: SizedBox(
+                  height: MediaQuery.of(context).size.height * 3 / 2,
+                  width: MediaQuery.of(context).size.height * 3 / 2,
+                  child: Markdown(data: snapshot.data!),
+                ),
+                actions: <Widget>[
+                  ElevatedButton(
+                    child: const Text('I agree'),
+                    onPressed: () async {
+                      if (await writeTOS()) {
+                        // ignore: use_build_context_synchronously
+                        Navigator.of(context).push(
+                            SlideToRightPageRoute(child: const LoginPage()));
+                      }
+                    },
+                  ),
+                ],
+              );
+            } else {
+              return const CircularProgressIndicator();
+            }
+          },
         );
       }));
   // showDialog(

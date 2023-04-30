@@ -1,4 +1,3 @@
-import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
@@ -7,7 +6,6 @@ import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/student_class.dart';
 import 'package:genibook/screens/debug/backgroundtasks.dart';
-import 'package:genibook/screens/debug/debug.dart';
 import 'package:genibook/screens/grades.dart';
 import 'package:genibook/screens/welcome.dart';
 import 'dart:io';
