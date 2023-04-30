@@ -52,10 +52,10 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  "Current MP: ${secret.mp}",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
+                // Text(
+                //   "Current MP: ${secret.mp}",
+                //   style: Theme.of(context).textTheme.bodyLarge,
+                // ),
                 DropdownButton(
                     value: _selectedMP,
                     items: mps

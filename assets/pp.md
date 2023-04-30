@@ -4,7 +4,7 @@ By agreeing, you agree to the privacy policy.
 
 ## Introduction
 
-Thank you for choosing to be part of our Community at Genibook ('Company', 'we', 'us', or 'our'). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns please contact us at Genibook.gradebook@gmail.com.
+Thank you for choosing to be part of our Community at Genibook ('Company', 'we', 'us', or 'our'). We are committed to protecting your personal information and your right to privacy. If you have any questions or concerns please contact us at zenesus.gradebook@gmail.com.
 
 This privacy notice describes how we might use your information if you download or use our application -- Genibook.
 
@@ -57,4 +57,4 @@ Yes, we will update this notice as neccessary to stay compliant with relevant la
 
 ## How can you review, update, or delete the data we collect from you?
 
-Based on the applicable law of your country, you may have the right to request access to your personal information we collect from you, change that information, or delete it in some circumstances. To request to review, update, or delete your personal information, please submit a request form by contacting us at Genibook.gradebook@gmail.com.
+Based on the applicable law of your country, you may have the right to request access to your personal information we collect from you, change that information, or delete it in some circumstances. To request to review, update, or delete your personal information, please submit a request form by contacting us at zenesus.gradebook@gmail.com.

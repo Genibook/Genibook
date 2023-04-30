@@ -67,7 +67,6 @@ class _LoginPageState extends State<LoginPage> {
       }
 
       // Perform login logic here
-
     }
   }
 
@@ -138,7 +137,9 @@ class _LoginPageState extends State<LoginPage> {
                     )),
                   ),
                 ),
-                const SizedBox(height: 16.0),
+                context.virtualKeyboardIsOpen
+                    ? const SizedBox(height: 10.0)
+                    : const SizedBox(height: 16.0),
                 SizedBox(
                   child: TextFormField(
                     controller: _emailController,
@@ -156,7 +157,9 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                 ),
-                const SizedBox(height: 16.0),
+                context.virtualKeyboardIsOpen
+                    ? const SizedBox(height: 10.0)
+                    : const SizedBox(height: 16.0),
                 SizedBox(
                   child: TextFormField(
                     controller: _passwordController,
@@ -186,9 +189,9 @@ class _LoginPageState extends State<LoginPage> {
                     },
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
+                context.virtualKeyboardIsOpen
+                    ? const SizedBox(height: 10.0)
+                    : const SizedBox(height: 16.0),
                 Center(
                   child: ShakeWidget(
                       key: _shakeKey,
