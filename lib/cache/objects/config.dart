@@ -24,7 +24,7 @@ class ConfigCache {
         aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
     ));
-    String value = await storage.read(key: "bg-fetch") ?? "false";
+    String value = await storage.read(key: "bg-fetch") ?? "true";
     return value.toLowerCase() == 'true';
   }
 

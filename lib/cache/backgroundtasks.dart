@@ -66,6 +66,8 @@ Future<void> initPlatformState() async {
     // This is the fetch-event callback.
     if (kDebugMode) {
       print("[BackgroundFetch] Event received $taskId");
+
+      print("-------[BackgroundFetch] WE STARTING UPDATING CACHES-------");
     }
 
     await ApiHandler.getNewStudent(false);
@@ -87,6 +89,11 @@ Future<void> initPlatformState() async {
     // }
     // IMPORTANT:  You must signal completion of your task or the OS can punish your app
     // for taking too long in the background.
+
+    if (kDebugMode) {
+      print("-------[BackgroundFetch] WE FINISHED UPDATING CACHES-------");
+    }
+
     BackgroundFetch.finish(taskId);
   }, (String taskId) async {
     // <-- Task timeout handler.

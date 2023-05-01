@@ -25,17 +25,20 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
   void initState() {
     setState(() {});
     ApiHandler.getMPs().then((value) {
+      if (!mounted) return;
       setState(() {
         mps = value;
       });
     });
     StoreObjects.readSecret().then((value) {
+      if (!mounted) return;
       setState(() {
         secret = value;
         _selectedMP = secret.mp;
       });
     });
     ConfigCache.readBgFetchVal().then((value) {
+      if (!mounted) return;
       setState(() {
         _enabled = value;
       });
@@ -49,6 +52,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
     setState(() {
       _enabled = enabled;
     });
+    if (!mounted) return;
   }
 
   @override
@@ -84,6 +88,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                       StoreObjects.storeSecret(secret);
                       ApiHandler.getMPs().then(
                         (value) {
+                          if (!mounted) return;
                           setState(() {
                             mps = value;
                           });
