@@ -38,7 +38,9 @@ class ApiNavigator extends Navigator {
     // TODO: integrate gpas stuff
     // TODO: make ui look nicer
     // TODO: MAKE SURE TO ADD SOMEWHERE THAT ONLY SUPPORTS HIGH SCHOOLERS
-    // TODO: splash screen
+
+    //  splash screen (nvm looks ugly)
+
     // TODO: credits
     // TODO: finsih grade settings page
     // TODO: bday detection :D
@@ -48,7 +50,7 @@ class ApiNavigator extends Navigator {
     // TODO: add something for ungraded assignments
     // TODO: CHANGE THE WEBSITE THAT ASSIGNMENTS AND GRADED API GOES TO CUZ THERES NO Notgraded THING IN GRADE CELL
     //TODO: do like a routine so thtat every ten minutes update
-    ApiHandler.getNewStudent(false).then((student) {
+    ApiHandler.getNewStudent(true).then((student) {
       if (direction) {
         Navigator.of(context).push(SlideToLeftPageRoute(
             child: GradesPage(student: Constants.debugMode ? eddie : student)));
@@ -62,7 +64,7 @@ class ApiNavigator extends Navigator {
 
   void pushToProfilePage<T extends Object>(
       BuildContext context, bool direction) {
-    ApiHandler.getNewStudent(false).then((student) {
+    ApiHandler.getNewStudent(true).then((student) {
       if (direction) {
         Navigator.of(context).push(SlideToLeftPageRoute(
             child:
@@ -76,7 +78,7 @@ class ApiNavigator extends Navigator {
   }
 
   void pushToSchedule<T extends Object>(BuildContext context, bool direction) {
-    ApiHandler.getNewSchedule().then((schedule) {
+    ApiHandler.getNewSchedule(true).then((schedule) {
       if (direction) {
         //means to the left
         Navigator.of(context).push(SlideToLeftPageRoute(

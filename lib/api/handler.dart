@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:genibook/api/rawdata.dart';
+import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/api/utils.dart';
 import 'package:genibook/models/schedule_class.dart';
@@ -76,9 +77,12 @@ class ApiHandler {
     }
   }
 
-  static Future<ScheduleAssignmentsList> getNewSchedule() async {
+  static Future<ScheduleAssignmentsList> getNewSchedule(bool getCached) async {
     /// it will either be the one [in cache] or [scheduleAssignments] variable in rawdata.dart
     ScheduleAssignmentsList cachedSchedule = await StoreObjects.readSchedule();
+    if (getCached && cachedSchedule != scheduleAssignments) {
+      return cachedSchedule;
+    }
     Secret secret = await StoreObjects.readSecret();
     Map<String, dynamic> json =
         await loadData("/apiv1/schedule/", secret.toJson());
@@ -101,7 +105,7 @@ class ApiHandler {
   }
 
   static Future<List<dynamic>> getMPs() async {
-    List<dynamic> cachedMps = await StoreObjects.readMPs();
+    List<dynamic> cachedMps = await ConfigCache.readMPs();
     List<dynamic> apiMps = <dynamic>[];
     Secret secret = await StoreObjects.readSecret();
 
@@ -125,7 +129,7 @@ class ApiHandler {
       if (apiMps == cachedMps) {
         return cachedMps;
       } else {
-        StoreObjects.storeMPs(apiMps);
+        ConfigCache.storeMPs(apiMps);
         return apiMps;
       }
     }

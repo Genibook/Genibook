@@ -96,34 +96,6 @@ class StoreObjects {
     }
   }
 
-  static Future<void> storeMPs(List<dynamic> mps) async {
-    const storage = FlutterSecureStorage(
-        aOptions: AndroidOptions(
-      encryptedSharedPreferences: true,
-    ));
-    String stringJson = jsonEncode(mps);
-    await storage.write(key: "mps", value: stringJson);
-  }
-
-  static Future<List<dynamic>> readMPs() async {
-    const storage = FlutterSecureStorage(
-        aOptions: AndroidOptions(
-      encryptedSharedPreferences: true,
-    ));
-    String jsonString = await storage.read(key: "mps") ?? "";
-
-    if (kDebugMode) {
-      print("[DEBUG] READ MPS:");
-      print(jsonString);
-    }
-    if (jsonString.isNotEmpty) {
-      List<dynamic> thing = json.decode(jsonString);
-      return thing;
-    } else {
-      return <dynamic>["MP1", "MP2"];
-    }
-  }
-
   static Future<Map<String, String>> readAll() async {
     const storage = FlutterSecureStorage(
         aOptions: AndroidOptions(

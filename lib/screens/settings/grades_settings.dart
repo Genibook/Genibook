@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/api/rawdata.dart';
+import 'package:genibook/cache/backgroundtasks.dart';
+import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
 // import 'package:genibook/models/student_class.dart';
@@ -17,6 +19,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
   Secret secret = Secret.fromJson(emptySecretDict);
   List<dynamic> mps = [];
   String? _selectedMP;
+  bool _enabled = true;
 
   @override
   void initState() {
@@ -32,8 +35,20 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
         _selectedMP = secret.mp;
       });
     });
-
+    ConfigCache.readBgFetchVal().then((value) {
+      setState(() {
+        _enabled = value;
+      });
+    });
     super.initState();
+  }
+
+  void _onClickEnable(bool enabled) async {
+    await ConfigCache.storeBgFetchVal(enabled);
+    setBackgroundFetch(enabled);
+    setState(() {
+      _enabled = enabled;
+    });
   }
 
   @override
@@ -56,6 +71,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                 //   "Current MP: ${secret.mp}",
                 //   style: Theme.of(context).textTheme.bodyLarge,
                 // ),
+                Switch(value: _enabled, onChanged: _onClickEnable),
                 DropdownButton(
                     value: _selectedMP,
                     items: mps

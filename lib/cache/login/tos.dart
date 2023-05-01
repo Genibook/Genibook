@@ -29,7 +29,7 @@ Future<bool> readTOS() async {
   ));
   String value = await storage.read(key: Constants.tosReadKey) ?? "false";
   if (kDebugMode) {
-    print("[readTOS()]: " + value);
+    print("[readTOS()]: $value");
   }
   return value.toLowerCase() == 'true';
 }
