@@ -72,6 +72,7 @@ Future<void> initPlatformState() async {
 
     await ApiHandler.getNewStudent(false);
     await ApiHandler.getNewSchedule(false);
+    await ApiHandler.getMPs(false);
     // setState(() {
     //   _events.insert(0, DateTime.now());
     // });

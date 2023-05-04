@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/api/rawdata.dart';
+import 'package:genibook/cache/backgroundtasks.dart';
+import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
 // import 'package:genibook/models/student_class.dart';
@@ -17,7 +19,7 @@ class GradesSettingsView extends StatefulWidget {
 class _GradesSettingsViewState extends State<GradesSettingsView> {
   Secret secret = Secret.fromJson(emptySecretDict);
   List<dynamic> mps = [];
-  String? _selectedMP;
+  bool _enabled = true;
   bool _isLoading = false;
 
   @override
@@ -29,15 +31,23 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
         mps = value;
       });
     });
-    StoreObjects.readSecret().then((value) {
+    ConfigCache.readBgFetchVal().then((value) {
       if (!mounted) return;
       setState(() {
-        secret = value;
-        _selectedMP = secret.mp;
+        _enabled = value;
       });
     });
-
     super.initState();
+  }
+
+  void _onClickEnable(bool enabled) async {
+    HapticFeedback.lightImpact();
+    await ConfigCache.storeBgFetchVal(enabled);
+    setBackgroundFetch(enabled);
+    setState(() {
+      _enabled = enabled;
+    });
+    if (!mounted) return;
   }
 
   @override
@@ -57,33 +67,15 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  "Current MP: ",
+                  "Background Refresh: ",
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                ButtonTheme(
-                  alignedDropdown: true,
-                  child: DropdownButton(
-                      value: _selectedMP,
-                      items: mps
-                          .map((mp) =>
-                              DropdownMenuItem(value: mp, child: Text(mp)))
-                          .toList(),
-                      onChanged: (mp) {
-                        _selectedMP = mp as String;
-                        secret.mp = mp;
-                        StoreObjects.storeSecret(secret);
-                        ApiHandler.getMPs(true).then(
-                          (value) {
-                            if (!mounted) return;
-                            setState(() {
-                              mps = value;
-                            });
-                          },
-                        );
-                      }),
-                )
+                Switch(
+                  value: _enabled,
+                  onChanged: _onClickEnable,
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

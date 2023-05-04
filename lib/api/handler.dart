@@ -104,10 +104,14 @@ class ApiHandler {
     }
   }
 
-  static Future<List<dynamic>> getMPs() async {
+  static Future<List<dynamic>> getMPs(bool getCached) async {
     List<dynamic> cachedMps = await ConfigCache.readMPs();
     List<dynamic> apiMps = <dynamic>[];
     Secret secret = await StoreObjects.readSecret();
+
+    if (getCached) {
+      return cachedMps;
+    }
 
     final response =
         await http.post(getCorrectUri("/apiv1/mps/", secret.toJson()));
