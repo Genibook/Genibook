@@ -1,3 +1,4 @@
+import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/utils.dart';
@@ -52,7 +53,17 @@ class _GradesPageState extends State<GradesPage> {
             ],
           ),
           body: SafeArea(
-              child: RefreshIndicator(
+              child: CustomRefreshIndicator(
+            builder: (
+              BuildContext context,
+              Widget child,
+              IndicatorController controller,
+            ) {
+              /// TODO: Implement your own refresh indicator
+              return Stack(
+                children: const <Widget>[],
+              );
+            },
             onRefresh: () async {
               Student stud = await refreshAllData();
 
