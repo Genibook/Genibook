@@ -57,7 +57,7 @@ Future<void> initPlatformState() async {
           minimumFetchInterval: 15,
           stopOnTerminate: false,
           enableHeadless: true,
-          requiresBatteryNotLow: true,
+          requiresBatteryNotLow: false,
           requiresCharging: false,
           requiresStorageNotLow: true,
           requiresDeviceIdle: false,
