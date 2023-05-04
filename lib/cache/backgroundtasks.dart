@@ -70,7 +70,8 @@ Future<void> initPlatformState() async {
       print("-------[BackgroundFetch] WE STARTING UPDATING CACHES-------");
     }
 
-    refreshAllData();
+    await refreshAllData();
+
     // setState(() {
     //   _events.insert(0, DateTime.now());
     // });
