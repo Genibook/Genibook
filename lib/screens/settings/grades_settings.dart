@@ -7,6 +7,8 @@ import 'package:genibook/models/secret.dart';
 // import 'package:genibook/models/student_class.dart';
 // import 'package:genibook/models/grades_class.dart';
 import 'package:genibook/api/handler.dart';
+import 'package:genibook/routes/swipes.dart';
+import 'package:genibook/screens/grades.dart';
 
 class GradesSettingsView extends StatefulWidget {
   const GradesSettingsView({super.key});
@@ -123,14 +125,21 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                 setState(() {
                   _isLoading = true;
                 });
-                refreshAllData();
-                Navigator.of(context).pop();
+                refreshAllData().then((value) {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(SlideToRightPageRoute(
+                      child: GradesPage(
+                    student: value,
+                  )));
+                });
               },
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(_isLoading ? 'Loading... ' : 'Save',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge),
+                _isLoading
+                    ? const CircularProgressIndicator()
+                    : Text('Save',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge),
               ]),
             )),
       ],

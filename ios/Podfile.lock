@@ -1,5 +1,5 @@
 PODS:
-  - background_fetch (1.1.5):
+  - background_fetch (1.1.6):
     - Flutter
   - Flutter (1.0.0)
   - flutter_secure_storage (6.0.0):
@@ -24,7 +24,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  background_fetch: 9a9963128952bfdd197e21786983c7c7a30e1478
+  background_fetch: bc9b44b0bf8b434e282a2ac9be8662800a0296ed
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
