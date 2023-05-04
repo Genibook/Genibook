@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/api/swipes.dart';
 import 'package:genibook/constants.dart';
+import 'package:genibook/screens/eastereggs/credits.dart';
 import 'package:genibook/utils/base64_to_image.dart';
 import 'package:genibook/utils/swipe.dart';
 import 'package:genibook/widgets/navbar.dart';
@@ -28,7 +30,13 @@ class ProfilePage extends StatelessWidget {
         },
         child: Scaffold(
             appBar: AppBar(
-                title: const Text('Profile'),
+                title: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(
+                        SlideToRightPageRoute(child: const CreditsPage()));
+                  },
+                  child: const Text('Profile'),
+                ),
                 elevation: 2,
                 shadowColor: Theme.of(context).shadowColor,
                 automaticallyImplyLeading: false),
