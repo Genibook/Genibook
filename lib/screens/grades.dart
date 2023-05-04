@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:genibook/api/utils.dart';
 import 'package:genibook/constants.dart';
+import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/settings/grades_settings.dart';
 import 'package:genibook/utils/grades_utils.dart';
 import 'package:genibook/widgets/navbar.dart';
@@ -50,6 +52,16 @@ class _GradesPageState extends State<GradesPage> {
             ],
           ),
           body: SafeArea(
+              child: RefreshIndicator(
+            onRefresh: () async {
+              Student stud = await refreshAllData();
+
+              // ignore: use_build_context_synchronously
+              await Navigator.of(context).push(SlideToRightPageRoute(
+                  child: GradesPage(
+                student: stud,
+              )));
+            },
             child: ListView.builder(
               itemCount: widget.student.grades.length,
               itemBuilder: (BuildContext context, int index) {
@@ -127,7 +139,7 @@ class _GradesPageState extends State<GradesPage> {
                 );
               },
             ),
-          ),
+          )),
         ));
   }
 }
