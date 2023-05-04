@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/api/rawdata.dart';
+import 'package:genibook/api/utils.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
 // import 'package:genibook/models/student_class.dart';
@@ -117,11 +118,13 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
         SizedBox(
             width: 100,
             child: TextButton(
-              onPressed: () {
+              onPressed: () async {
                 HapticFeedback.lightImpact();
                 setState(() {
                   _isLoading = true;
                 });
+                refreshAllData();
+                Navigator.of(context).pop();
               },
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [

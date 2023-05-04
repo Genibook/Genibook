@@ -4,7 +4,7 @@ import 'package:genibook/constants.dart';
 import 'package:genibook/widgets/navbar.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:genibook/models/schedule_class.dart';
-import 'package:genibook/utils/swipe.dart';
+import 'package:genibook/routes/swipe.dart';
 
 class SchedulePage extends StatefulWidget {
   final ScheduleAssignmentsList scheduleAssignments;

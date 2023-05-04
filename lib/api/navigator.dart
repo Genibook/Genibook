@@ -4,7 +4,7 @@ import 'package:genibook/api/rawdata.dart';
 
 import 'package:genibook/constants.dart';
 
-import 'swipes.dart';
+import '../routes/swipes.dart';
 
 import 'package:genibook/screens/login.dart';
 import 'package:genibook/screens/profile.dart';

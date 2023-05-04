@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/utils/base64_to_image.dart';
-import 'package:genibook/utils/swipe.dart';
+import 'package:genibook/routes/swipe.dart';
 import 'package:genibook/widgets/navbar.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';

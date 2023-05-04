@@ -4,7 +4,7 @@ import 'package:genibook/constants.dart';
 import 'package:genibook/screens/settings/grades_settings.dart';
 import 'package:genibook/utils/grades_utils.dart';
 import 'package:genibook/widgets/navbar.dart';
-import '../utils/swipe.dart';
+import '../routes/swipe.dart';
 import 'assignments.dart';
 import '../models/student_class.dart';
 

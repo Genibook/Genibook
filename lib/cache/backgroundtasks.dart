@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 
 import 'package:background_fetch/background_fetch.dart';
-import 'package:genibook/api/handler.dart';
+import 'package:genibook/api/utils.dart';
 
 // [Android-only] This "Headless Task" is run when the Android app is terminated with `enableHeadless: true`
 // Be sure to annotate your callback function to avoid issues in release mode on Flutter >= 3.3.0
@@ -70,9 +70,7 @@ Future<void> initPlatformState() async {
       print("-------[BackgroundFetch] WE STARTING UPDATING CACHES-------");
     }
 
-    await ApiHandler.getNewStudent(false);
-    await ApiHandler.getNewSchedule(false);
-    await ApiHandler.getMPs(false);
+    refreshAllData();
     // setState(() {
     //   _events.insert(0, DateTime.now());
     // });

@@ -1,3 +1,4 @@
+import 'package:genibook/api/handler.dart';
 import 'package:genibook/constants.dart';
 
 Uri getCorrectUri(String ending, Map<String, String> map) {
@@ -21,4 +22,10 @@ Uri getCorrectUri(String ending, Map<String, String> map) {
   }
 
   return url;
+}
+
+Future<void> refreshAllData() async {
+  await ApiHandler.getNewStudent(false);
+  await ApiHandler.getNewSchedule(false);
+  await ApiHandler.getMPs(false);
 }
