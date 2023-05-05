@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:genibook/api/swipes.dart';
+import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/screens/eastereggs/credits.dart';
 import 'package:genibook/utils/base64_to_image.dart';
