@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:genibook/cache/login/tos.dart';
-import 'package:genibook/api/swipes.dart';
+import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/login.dart';
 
 Future<void> showPrivacyPolicyDialog(BuildContext context) async {

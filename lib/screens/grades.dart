@@ -1,10 +1,13 @@
+import 'package:custom_refresh_indicator/custom_refresh_indicator.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:genibook/api/utils.dart';
 import 'package:genibook/constants.dart';
+import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/settings/grades_settings.dart';
 import 'package:genibook/utils/grades_utils.dart';
 import 'package:genibook/widgets/navbar.dart';
-import '../utils/swipe.dart';
+import '../routes/swipe.dart';
 import 'assignments.dart';
 import '../models/student_class.dart';
 
@@ -50,6 +53,28 @@ class _GradesPageState extends State<GradesPage> {
             ],
           ),
           body: SafeArea(
+              child: CustomRefreshIndicator(
+            offsetToArmed: 220,
+            builder: (
+              BuildContext context,
+              Widget child,
+              IndicatorController controller,
+            ) {
+              /// TODO: Implement your own refresh indicator
+              /// https://www.youtube.com/watch?v=FUqiWfHTo0Y
+              return Stack(
+                children: const <Widget>[],
+              );
+            },
+            onRefresh: () async {
+              Student stud = await refreshAllData();
+
+              // ignore: use_build_context_synchronously
+              await Navigator.of(context).push(SlideToRightPageRoute(
+                  child: GradesPage(
+                student: stud,
+              )));
+            },
             child: ListView.builder(
               itemCount: widget.student.grades.length,
               itemBuilder: (BuildContext context, int index) {
@@ -127,7 +152,7 @@ class _GradesPageState extends State<GradesPage> {
                 );
               },
             ),
-          ),
+          )),
         ));
   }
 }

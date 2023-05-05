@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/api/rawdata.dart';
+import 'package:genibook/api/utils.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
 // import 'package:genibook/models/student_class.dart';
 // import 'package:genibook/models/grades_class.dart';
 import 'package:genibook/api/handler.dart';
+import 'package:genibook/routes/swipes.dart';
+import 'package:genibook/screens/grades.dart';
 
 class GradesSettingsView extends StatefulWidget {
   const GradesSettingsView({super.key});
@@ -117,17 +120,26 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
         SizedBox(
             width: 100,
             child: TextButton(
-              onPressed: () {
+              onPressed: () async {
                 HapticFeedback.lightImpact();
                 setState(() {
                   _isLoading = true;
                 });
+                refreshAllData().then((value) {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(SlideToRightPageRoute(
+                      child: GradesPage(
+                    student: value,
+                  )));
+                });
               },
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(_isLoading ? 'Loading... ' : 'Save',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge),
+                _isLoading
+                    ? const CircularProgressIndicator()
+                    : Text('Save',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyLarge),
               ]),
             )),
       ],
