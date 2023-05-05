@@ -54,12 +54,14 @@ class _GradesPageState extends State<GradesPage> {
           ),
           body: SafeArea(
               child: CustomRefreshIndicator(
+            offsetToArmed: 220,
             builder: (
               BuildContext context,
               Widget child,
               IndicatorController controller,
             ) {
               /// TODO: Implement your own refresh indicator
+              /// https://www.youtube.com/watch?v=FUqiWfHTo0Y
               return Stack(
                 children: const <Widget>[],
               );
