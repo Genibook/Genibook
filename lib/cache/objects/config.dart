@@ -42,7 +42,7 @@ class ConfigCache {
         aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
     ));
-    String jsonString = await storage.read(key: "mps") ?? "";
+    String jsonString = await storage.read(key: "mps") ?? "[]";
 
     if (kDebugMode) {
       print("[DEBUG] READ MPS:");
@@ -53,6 +53,35 @@ class ConfigCache {
       return thing;
     } else {
       return <dynamic>["MP1", "MP2"];
+    }
+  }
+
+  static Future<void> storeGPAHistory(
+      Map<String, Map<String, double>> his) async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
+    String stringJson = jsonEncode(his);
+    await storage.write(key: "gpa_his", value: stringJson);
+  }
+
+  static Future<Map<String, Map<String, double>>> readGPAhistory() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
+    String jsonString = await storage.read(key: "gpa_his") ?? "{}";
+
+    if (kDebugMode) {
+      print("[DEBUG] READ MPS:");
+      print(jsonString);
+    }
+    if (jsonString.isNotEmpty) {
+      Map<String, Map<String, double>> thing = json.decode(jsonString);
+      return thing;
+    } else {
+      return {};
     }
   }
 }

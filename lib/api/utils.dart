@@ -29,5 +29,6 @@ Future<Student> refreshAllData() async {
   Student stud = await ApiHandler.getNewStudent(false);
   await ApiHandler.getNewSchedule(false);
   await ApiHandler.getMPs(false);
+  await ApiHandler.getGPAhistory(false);
   return stud;
 }

@@ -138,4 +138,40 @@ class ApiHandler {
       }
     }
   }
+
+  static Future<Map<String, Map<String, double>>> getGPAhistory(
+      bool getCached) async {
+    Map<String, Map<String, double>> cachedHis =
+        await ConfigCache.readGPAhistory();
+
+    if (getCached) {
+      return cachedHis;
+    }
+
+    Map<String, Map<String, double>> ret = {};
+    Secret secret = await StoreObjects.readSecret();
+
+    Map<String, String> map = secret.toJson();
+    map["mp"] = "FG";
+
+    final response = await http.post(getCorrectUri("/apiv1/gpas_his/", map));
+    if (response.statusCode == 200) {
+      Map<String, Map<String, double>> resp = json.decode(response.body);
+      ret = resp;
+    } else {
+      if (kDebugMode) {
+        print("[DEBUG getGPAhistory]: failed to get gpa history data");
+      }
+    }
+
+    if (ret.isEmpty) {
+      if (kDebugMode) {
+        print("[DEBUG getGPAhistory] gpa history data is empty");
+      }
+      return cachedHis;
+    } else {
+      ConfigCache.storeGPAHistory(ret);
+      return ret;
+    }
+  }
 }
