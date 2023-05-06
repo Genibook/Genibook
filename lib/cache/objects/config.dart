@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:genibook/constants.dart';
 
 class ConfigCache {
   ConfigCache._();
@@ -74,12 +75,20 @@ class ConfigCache {
     String jsonString = await storage.read(key: "gpa_his") ?? "";
 
     if (kDebugMode) {
-      print("[DEBUG] READ GPAhistory:");
-      print(jsonString);
+      if (Constants.debugModePrintEVERYTHING) {
+        print("[DEBUG] READ GPAhistory: $jsonString");
+      }
     }
     if (jsonString.isNotEmpty) {
-      Map<String, Map<String, double>> thing = json.decode(jsonString);
-      return thing;
+      final decodedJson = json.decode(jsonString);
+      final resp = decodedJson.map<String, Map<String, double>>((key, value) {
+        final nestedMap = (value as Map<String, dynamic>).map<String, double>(
+            (nestedKey, nestedValue) =>
+                MapEntry(nestedKey, nestedValue.toDouble()));
+        return MapEntry(key as String, nestedMap);
+      });
+
+      return resp;
     } else {
       return {};
     }

@@ -3,6 +3,7 @@ import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/api/utils.dart';
+import 'package:genibook/constants.dart';
 import 'package:genibook/models/schedule_class.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:http/http.dart' as http;
@@ -43,7 +44,9 @@ class ApiHandler {
 
   static Future<Student> getNewStudent(bool getCached) async {
     if (kDebugMode) {
-      print("[DEBUG: getNewStudent()]: calling getNewStudent()");
+      if (Constants.debugModePrintEVERYTHING) {
+        print("[DEBUG: getNewStudent()]: calling getNewStudent()");
+      }
     }
 
     /// currentStudent is either [eddie] or the [Student] in the cache

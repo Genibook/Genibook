@@ -5,18 +5,12 @@ import 'package:genibook/constants.dart';
 import 'package:genibook/screens/eastereggs/credits.dart';
 import 'package:genibook/utils/base64_to_image.dart';
 import 'package:genibook/routes/swipe.dart';
+import 'package:genibook/utils/profile_utils.dart';
+import 'package:genibook/widgets/detailed/detailed_profile.dart';
 import 'package:genibook/widgets/navbar.dart';
 import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../models/student_class.dart';
 
-// ignore: non_constant_identifier_names
-Future<void> LaunchUrl(String urll) async {
-  final Uri url = Uri.parse(urll);
-  if (!await launchUrl(url)) {
-    throw Exception('Could not launch $url');
-  }
-}
+import '../models/student_class.dart';
 
 class ProfilePage extends StatefulWidget {
   final Student student;
@@ -28,18 +22,27 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  Future<Map<String, Map<String, double>>>? gpaHisFuture;
+  late Map<String, Map<String, double>> gpaHis;
+  List<Widget> gpaHistoryList = [];
+
   @override
   void initState() {
     super.initState();
 
-    setState(() {
-      gpaHisFuture = ApiHandler.getGPAhistory(true);
+    gpaHis = {};
+
+    ApiHandler.getGPAhistory(true).then((value) {
+      setState(() {
+        gpaHis = value;
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    setState(() {
+      gpaHistoryList = generateGPAHistories(gpaHis, context);
+    });
     return GestureDetector(
         onPanUpdate: (details) {
           swipeHandler(details, Constants.profilePageNavNumber, context);
@@ -64,194 +67,72 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Card(
-                        child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Center(
-                            child: CircleAvatar(
-                              backgroundImage: Constants.debugMode
-                                  ? NetworkImage(widget.student.imageUrl)
-                                  : imageFromBase64String(
-                                          widget.student.image64)
-                                      .image,
-                              radius: 50.0,
-                            ),
+                    Expanded(
+                        flex: 4,
+                        child: Card(
+                            child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Center(
+                                child: CircleAvatar(
+                                  backgroundImage: Constants.debugMode
+                                      ? NetworkImage(widget.student.imageUrl)
+                                      : imageFromBase64String(
+                                              widget.student.image64)
+                                          .image,
+                                  radius: 50.0,
+                                ),
+                              ),
+                              Text(
+                                widget.student.name,
+                                style: const TextStyle(
+                                  fontSize: 27.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
                           ),
-                          Text(
-                            widget.student.name,
-                            style: const TextStyle(
-                              fontSize: 27.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )),
-                    Center(
-                        child: GestureDetector(
-                            onLongPress: () {
-                              HapticFeedback.lightImpact();
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: const Text(
-                                      'Details',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    content: SizedBox(
-                                        height: 90,
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Locker : ${widget.student.locker}',
-                                                style: const TextStyle(
-                                                    fontSize: 12.0),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                'State ID: ${widget.student.stateId}',
-                                                style: const TextStyle(
-                                                    fontSize: 12.0),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                'Birthday: ${widget.student.birthday}',
-                                                style: const TextStyle(
-                                                    fontSize: 12.0),
-                                              ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  const Text(
-                                                    'Schedule Link: ',
-                                                    style: TextStyle(
-                                                        fontSize: 12.0),
-                                                  ),
-                                                  InkWell(
-                                                      onTap: () {
-                                                        LaunchUrl(widget.student
-                                                            .scheduleLink);
-                                                      },
-                                                      child: const Text(
-                                                        "click me!",
-                                                        style: TextStyle(
-                                                            fontSize: 12.0,
-                                                            color: Colors.blue),
-                                                      ))
-                                                ],
-                                              ),
-                                            ])),
+                        ))),
+                    Expanded(
+                        flex: 3,
+                        child: Center(
+                            child: GestureDetector(
+                                onLongPress: () {
+                                  HapticFeedback.lightImpact();
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return gimmeDetailedProfileView(
+                                          widget.student);
+                                    },
                                   );
                                 },
-                              );
-                            },
-                            child: Card(
-                                child: Padding(
-                                    padding: const EdgeInsets.all(16.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            const Text(
-                                              "Locker ",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                              ),
-                                            ),
-                                            Text(
-                                              widget.student.locker,
-                                              style: const TextStyle(
-                                                  fontSize: 12.0),
-                                              textAlign: TextAlign.center,
-                                            )
-                                          ],
-                                        ),
-                                        const SizedBox(height: 10.0),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            const Text(
-                                              "Grade ",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                              ),
-                                            ),
-                                            Text(
-                                              '${widget.student.grade}',
-                                              style: const TextStyle(
-                                                  fontSize: 12.0),
-                                              textAlign: TextAlign.center,
-                                            )
-                                          ],
-                                        ),
-                                        const SizedBox(height: 10.0),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            const Text(
-                                              "Counselor Name ",
-                                              style: TextStyle(
-                                                fontSize: 15.0,
-                                              ),
-                                            ),
-                                            Text(
-                                              widget.student.counselorName,
-                                              style: const TextStyle(
-                                                  fontSize: 12.0),
-                                              textAlign: TextAlign.center,
-                                            )
-                                          ],
-                                        ),
-                                      ],
-                                    ))))),
-                    Card(
-                        child: SizedBox(
-                            height: 300,
-                            width: double.infinity,
+                                child: Card(
+                                    child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: SingleChildScrollView(
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children:
+                                                    generateUnDetailedProfileInfo(
+                                                        widget.student,
+                                                        context)))))))),
+                    Expanded(
+                        flex: 5,
+                        child: Card(
                             child: Padding(
                                 padding: const EdgeInsets.all(16.0),
-                                child: FutureBuilder<
-                                        Map<String, Map<String, double>>>(
-                                    future: gpaHisFuture,
-                                    builder: (context, snapshot) {
-                                      if (snapshot.hasData) {
-                                        return SingleChildScrollView(
-                                            child: ListView.builder(
-                                          itemBuilder: (context, index) {
-                                            String year = snapshot.data!.keys
-                                                .elementAt(index);
-
-                                            return ListTile(
-                                              title: Text(
-                                                  "Weighted: ${snapshot.data![year]!['weighted']}"),
-                                            );
-                                          },
-                                        ));
-                                      } else {
-                                        return const CircularProgressIndicator();
-                                      }
-                                    })))),
+                                child: SizedBox(
+                                    height: 100,
+                                    child: SingleChildScrollView(
+                                        child: Column(
+                                      children: gpaHistoryList,
+                                    )))))),
                   ],
                 ),
               ),
