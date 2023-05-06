@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
+import 'package:genibook/api/utils.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/icons/custom_icons_icons.dart';
@@ -25,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _passwordVisible = false;
+  bool _logiN = false;
 
   final _shakeKey = GlobalKey<ShakeWidgetState>();
 
@@ -39,6 +41,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login() async {
+    setState(() {
+      _logiN = true;
+    });
     if (_formKey.currentState!.validate()) {
       String email = _emailController.text;
       String pass = _passwordController.text;
@@ -60,8 +65,12 @@ class _LoginPageState extends State<LoginPage> {
 
       bool valid = await ApiHandler.login(aSecret);
       if (valid) {
-        StoreObjects.storeSecret(aSecret)
-            .then((value) => nav.pushToGrades(context, false));
+        await StoreObjects.storeSecret(aSecret);
+        await StoreObjects.readSecret();
+        //print(json.encode(aSecret.toJson()));
+
+        refreshAllData().then((value) => nav.pushToGrades(context, false));
+        // ignore: use_build_context_synchronously
       } else {
         _shakeKey.currentState?.shake();
       }
@@ -203,11 +212,15 @@ class _LoginPageState extends State<LoginPage> {
                           height: 50,
                           width: 200,
                           child: ElevatedButton.icon(
-                            icon: const Icon(
-                              CustomIcons.binoculars,
-                              size: 20.0,
-                            ),
-                            label: const Text('View your Genesis'),
+                            icon: _logiN
+                                ? const Icon(CustomIcons.cat)
+                                : const Icon(
+                                    CustomIcons.binoculars,
+                                    size: 20.0,
+                                  ),
+                            label: _logiN
+                                ? const Text("Loading")
+                                : const Text('View your Genesis'),
                             onPressed: _login,
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(

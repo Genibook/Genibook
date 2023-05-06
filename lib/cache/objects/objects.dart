@@ -85,7 +85,9 @@ class StoreObjects {
     String jsonString = await storage.read(key: "schedule") ?? "";
 
     if (kDebugMode) {
-      print("[DEBUG] READ SCHEDULE: $jsonString)");
+      if (Constants.debugModePrintEVERYTHING) {
+        print("[DEBUG] READ SCHEDULE: $jsonString)");
+      }
     }
     if (jsonString.isNotEmpty) {
       Map<String, dynamic> jsonn = json.decode(jsonString);

@@ -29,6 +29,12 @@
       "css": "chalkboard_teacher",
       "code": 62748,
       "src": "fontawesome5"
+    },
+    {
+      "uid": "4c7bbc0bcaaa7e01a76ed3c5e414928c",
+      "css": "cat",
+      "code": 59743,
+      "src": "rpgawesome"
     }
   ]
 }
