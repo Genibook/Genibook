@@ -208,6 +208,18 @@ class ProfilePage extends StatelessWidget {
                                         ),
                                       ],
                                     ))))),
+                    // Card(
+                    //     child: SizedBox(
+                    //         height: 300,
+                    //         child: Padding(
+                    //             padding: const EdgeInsets.all(16.0),
+                    //             child: SingleChildScrollView(
+                    //               child: Column(
+                    //                 mainAxisAlignment:
+                    //                     MainAxisAlignment.spaceEvenly,
+                    //                 children: [],
+                    //               ),
+                    //             )))),
                   ],
                 ),
               ),
