@@ -112,6 +112,9 @@ class StoreObjects {
     await storage.delete(key: "secret");
     await storage.delete(key: "schedule");
     await storage.delete(key: "student");
+    await storage.delete(key: "mps");
+    await storage.delete(key: "gpa_his");
+    await storage.delete(key: "bg-fetch");
   }
 
   //static Future<void> storeSecrets() async{

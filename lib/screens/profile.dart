@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
+import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/screens/eastereggs/credits.dart';
+import 'package:genibook/screens/login.dart';
 import 'package:genibook/utils/base64_to_image.dart';
 import 'package:genibook/routes/swipe.dart';
 import 'package:genibook/utils/profile_utils.dart';
@@ -49,16 +51,27 @@ class _ProfilePageState extends State<ProfilePage> {
         },
         child: Scaffold(
             appBar: AppBar(
-                title: InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                        SlideToRightPageRoute(child: const CreditsPage()));
-                  },
-                  child: const Text('Profile'),
-                ),
-                elevation: 2,
-                shadowColor: Theme.of(context).shadowColor,
-                automaticallyImplyLeading: false),
+              title: InkWell(
+                onTap: () {
+                  Navigator.of(context)
+                      .push(SlideToRightPageRoute(child: const CreditsPage()));
+                },
+                child: const Text('Profile'),
+              ),
+              elevation: 2,
+              shadowColor: Theme.of(context).shadowColor,
+              automaticallyImplyLeading: false,
+              actions: [
+                IconButton(
+                    onPressed: () async {
+                      await StoreObjects.logout();
+                      // ignore: use_build_context_synchronously
+                      Navigator.of(context).push(
+                          SlideToRightPageRoute(child: const LoginPage()));
+                    },
+                    icon: const Icon(Icons.logout))
+              ],
+            ),
             bottomNavigationBar:
                 const Navbar(selectedIndex: Constants.profilePageNavNumber),
             body: SafeArea(
