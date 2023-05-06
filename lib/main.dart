@@ -56,36 +56,6 @@ class GenibookState extends State<Genibook> {
 
   @override
   Widget build(BuildContext context) {
-    //StoreObjects.logout();
-
-    // Student student = eddie;
-    // bool loginOrSplash = false;
-    // readTOS().then((value) {
-    //   if (value) {
-    //     loginOrSplash = true;
-    //   }
-    // });
-    // bool alreadyLoggedIn = false;
-    // StoreObjects.readSecret().then(
-    //   (value) {
-    //     alreadyLoggedIn = value.valid;
-    //     if (kDebugMode) {
-    //       print("[DEBUG main()]: already logged in?: $alreadyLoggedIn");
-    //     }
-    //     if (value.valid) {
-    //       ApiHandler.getNewStudent(true).then((studentt) {
-    //         if (kDebugMode) {
-    //           print("[DEBUG: main()]: we got a student! $studentt");
-    //         }
-    //         student = studentt;
-    //       });
-    //     }
-    //     // future builder to get the student?
-    //     // maybe read the cache
-    //     // if the alreadyLogged in is true?
-    //   },
-    // );
-
     return FutureBuilder<bool>(
       future: loginOrSplash,
       builder: (context, loginOrSplashFuture) {
