@@ -6,6 +6,7 @@ import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/models/student_class.dart';
 import 'package:genibook/screens/debug/backgroundtasks.dart';
+import 'package:genibook/screens/debug/debug.dart';
 import 'package:genibook/screens/grades.dart';
 import 'package:genibook/screens/welcome.dart';
 import 'dart:io';
@@ -87,8 +88,8 @@ class GenibookState extends State<Genibook> {
                             ),
                             themeMode: ThemeMode.system,
                             home: Constants.debugMode
-                                // ? const DebugScreen()
-                                ? const MyApp()
+                                ? const DebugScreen()
+                                //? const MyApp()
                                 : loginOrSplashFuture.data!
                                     ? alreadyLoggedInFuture.data!.valid
                                         ? GradesPage(student: snapshot.data!)
