@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/api/handler.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/screens/eastereggs/credits.dart';
@@ -17,10 +18,25 @@ Future<void> LaunchUrl(String urll) async {
   }
 }
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final Student student;
 
   const ProfilePage({super.key, required this.student});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  Future<Map<String, Map<String, double>>>? gpaHisFuture;
+  @override
+  void initState() {
+    super.initState();
+
+    setState(() {
+      gpaHisFuture = ApiHandler.getGPAhistory(true);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +73,15 @@ class ProfilePage extends StatelessWidget {
                           Center(
                             child: CircleAvatar(
                               backgroundImage: Constants.debugMode
-                                  ? NetworkImage(student.imageUrl)
-                                  : imageFromBase64String(student.image64)
+                                  ? NetworkImage(widget.student.imageUrl)
+                                  : imageFromBase64String(
+                                          widget.student.image64)
                                       .image,
                               radius: 50.0,
                             ),
                           ),
                           Text(
-                            student.name,
+                            widget.student.name,
                             style: const TextStyle(
                               fontSize: 27.0,
                               fontWeight: FontWeight.bold,
@@ -93,7 +110,7 @@ class ProfilePage extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                'Locker : ${student.locker}',
+                                                'Locker : ${widget.student.locker}',
                                                 style: const TextStyle(
                                                     fontSize: 12.0),
                                               ),
@@ -101,7 +118,7 @@ class ProfilePage extends StatelessWidget {
                                                 height: 5,
                                               ),
                                               Text(
-                                                'State ID: ${student.stateId}',
+                                                'State ID: ${widget.student.stateId}',
                                                 style: const TextStyle(
                                                     fontSize: 12.0),
                                               ),
@@ -109,7 +126,7 @@ class ProfilePage extends StatelessWidget {
                                                 height: 5,
                                               ),
                                               Text(
-                                                'Birthday: ${student.birthday}',
+                                                'Birthday: ${widget.student.birthday}',
                                                 style: const TextStyle(
                                                     fontSize: 12.0),
                                               ),
@@ -125,7 +142,7 @@ class ProfilePage extends StatelessWidget {
                                                   ),
                                                   InkWell(
                                                       onTap: () {
-                                                        LaunchUrl(student
+                                                        LaunchUrl(widget.student
                                                             .scheduleLink);
                                                       },
                                                       child: const Text(
@@ -161,7 +178,7 @@ class ProfilePage extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              student.locker,
+                                              widget.student.locker,
                                               style: const TextStyle(
                                                   fontSize: 12.0),
                                               textAlign: TextAlign.center,
@@ -180,7 +197,7 @@ class ProfilePage extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              '${student.grade}',
+                                              '${widget.student.grade}',
                                               style: const TextStyle(
                                                   fontSize: 12.0),
                                               textAlign: TextAlign.center,
@@ -199,7 +216,7 @@ class ProfilePage extends StatelessWidget {
                                               ),
                                             ),
                                             Text(
-                                              student.counselorName,
+                                              widget.student.counselorName,
                                               style: const TextStyle(
                                                   fontSize: 12.0),
                                               textAlign: TextAlign.center,
@@ -211,15 +228,30 @@ class ProfilePage extends StatelessWidget {
                     Card(
                         child: SizedBox(
                             height: 300,
+                            width: double.infinity,
                             child: Padding(
                                 padding: const EdgeInsets.all(16.0),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [],
-                                  ),
-                                )))),
+                                child: FutureBuilder<
+                                        Map<String, Map<String, double>>>(
+                                    future: gpaHisFuture,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        return SingleChildScrollView(
+                                            child: ListView.builder(
+                                          itemBuilder: (context, index) {
+                                            String year = snapshot.data!.keys
+                                                .elementAt(index);
+
+                                            return ListTile(
+                                              title: Text(
+                                                  "Weighted: ${snapshot.data![year]!['weighted']}"),
+                                            );
+                                          },
+                                        ));
+                                      } else {
+                                        return const CircularProgressIndicator();
+                                      }
+                                    })))),
                   ],
                 ),
               ),

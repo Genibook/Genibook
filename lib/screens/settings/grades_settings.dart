@@ -125,7 +125,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                 setState(() {
                   _isLoading = true;
                 });
-                refreshAllData().then((value) {
+                refreshMPStudentSchedule().then((value) {
                   Navigator.of(context).pop();
                   Navigator.of(context).push(SlideToRightPageRoute(
                       child: GradesPage(

@@ -42,7 +42,7 @@ class ConfigCache {
         aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
     ));
-    String jsonString = await storage.read(key: "mps") ?? "[]";
+    String jsonString = await storage.read(key: "mps") ?? "";
 
     if (kDebugMode) {
       print("[DEBUG] READ MPS:");
@@ -71,10 +71,10 @@ class ConfigCache {
         aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
     ));
-    String jsonString = await storage.read(key: "gpa_his") ?? "{}";
+    String jsonString = await storage.read(key: "gpa_his") ?? "";
 
     if (kDebugMode) {
-      print("[DEBUG] READ MPS:");
+      print("[DEBUG] READ GPAhistory:");
       print(jsonString);
     }
     if (jsonString.isNotEmpty) {

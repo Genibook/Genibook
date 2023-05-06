@@ -156,7 +156,15 @@ class ApiHandler {
 
     final response = await http.post(getCorrectUri("/apiv1/gpas_his/", map));
     if (response.statusCode == 200) {
-      Map<String, Map<String, double>> resp = json.decode(response.body);
+      final decodedJson = json.decode(response.body);
+
+      final resp = decodedJson.map<String, Map<String, double>>((key, value) {
+        final nestedMap = (value as Map<String, dynamic>).map<String, double>(
+            (nestedKey, nestedValue) =>
+                MapEntry(nestedKey, nestedValue.toDouble()));
+        return MapEntry(key as String, nestedMap);
+      });
+
       ret = resp;
     } else {
       if (kDebugMode) {
