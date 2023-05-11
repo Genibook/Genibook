@@ -5,7 +5,6 @@ import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/models/student_class.dart';
-import 'package:genibook/screens/debug/backgroundtasks.dart';
 import 'package:genibook/screens/debug/debug.dart';
 import 'package:genibook/screens/grades.dart';
 import 'package:genibook/screens/welcome.dart';
