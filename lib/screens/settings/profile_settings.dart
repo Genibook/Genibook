@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/cache/backgroundtasks.dart';
 import 'package:genibook/cache/objects/config.dart';
-import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
 // import 'package:genibook/models/student_class.dart';
 // import 'package:genibook/models/grades_class.dart';
