@@ -51,7 +51,7 @@ List<Widget> generateGPAHistories(
         style: Theme.of(context).textTheme.bodyLarge,
       ),
       trailing: SizedBox(
-          width: 90,
+          width: 100,
           child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
             Text(
               "$weighted",

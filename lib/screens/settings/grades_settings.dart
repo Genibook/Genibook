@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/api/utils.dart';
+import 'package:genibook/cache/backgroundtasks.dart';
+import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
 // import 'package:genibook/models/student_class.dart';
@@ -9,6 +11,7 @@ import 'package:genibook/models/secret.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/grades.dart';
+import 'package:genibook/utils/grades_utils.dart';
 
 class GradesSettingsView extends StatefulWidget {
   const GradesSettingsView({super.key});
@@ -22,10 +25,12 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
   List<dynamic> mps = [];
   String? _selectedMP;
   bool _isLoading = false;
+  bool _enabled = true;
+  Map<String, List<dynamic>> availableStudents = {};
+  String? availableStudentKey;
 
   @override
   void initState() {
-    setState(() {});
     ApiHandler.getMPs(true).then((value) {
       if (!mounted) return;
       setState(() {
@@ -37,10 +42,33 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
       setState(() {
         secret = value;
         _selectedMP = secret.mp;
+        availableStudentKey = secret.userSelector;
+      });
+    });
+    ConfigCache.readBgFetchVal().then((value) {
+      if (!mounted) return;
+      setState(() {
+        _enabled = value;
+      });
+    });
+    ApiHandler.getAvailableStudents().then((value) {
+      if (!mounted) return;
+      setState(() {
+        availableStudents = value;
       });
     });
 
     super.initState();
+  }
+
+  void _onClickEnable(bool enabled) async {
+    HapticFeedback.lightImpact();
+    await ConfigCache.storeBgFetchVal(enabled);
+    setBackgroundFetch(enabled);
+    setState(() {
+      _enabled = enabled;
+    });
+    if (!mounted) return;
   }
 
   @override
@@ -50,11 +78,34 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
         "Grade Settings",
         style: Theme.of(context).textTheme.headlineSmall,
       ),
-
       content: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Current Student: ",
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+                ButtonTheme(
+                  alignedDropdown: true,
+                  child: DropdownButton(
+                      value: availableStudentKey,
+                      items:
+                          generateAvailableStudentsDropDown(availableStudents),
+                      onChanged: (aStringNumber) {
+                        String selector = aStringNumber as String;
+                        secret.userSelector = selector;
+                        setState(() {
+                          availableStudentKey = selector;
+                        });
+                      }),
+                )
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,7 +125,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                       onChanged: (mp) {
                         _selectedMP = mp as String;
                         secret.mp = mp;
-                        StoreObjects.storeSecret(secret);
+
                         ApiHandler.getMPs(true).then(
                           (value) {
                             if (!mounted) return;
@@ -86,42 +137,31 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                       }),
                 )
               ],
-            )
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Background Refresh: ",
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+                Switch(
+                  value: _enabled,
+                  onChanged: _onClickEnable,
+                ),
+              ],
+            ),
           ],
         ),
       ),
-      // content: SingleChildScrollView(
-      //   child: Column(
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: <Widget>[
-      //       Text(
-      //         assignment.category,
-      //         style:
-      //             const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-      //       ),
-      //       const SizedBox(height: 6),
-      //       Text(assignment.teacher),
-      //       Text(
-      //           '${assignment.fullDayName} - ${assignment.fullDate} - MP ${assignment.mp}'),
-      //       const SizedBox(height: 10),
-      //       Text('Description: ${assignment.description}'),
-      //       const SizedBox(height: 6),
-      //       Text('Comment: ${assignment.comment}'),
-      //       const SizedBox(height: 6),
-      //       Text(
-      //         'Grade: ${assignment.gradePercent} (${assignment.gradeNum})',
-      //         style: const TextStyle(fontSize: 17),
-      //       ),
-      //     ],
-      //   ),
-      // ),
-
       actions: <Widget>[
         SizedBox(
             width: 100,
             child: TextButton(
               onPressed: () async {
                 HapticFeedback.lightImpact();
+                await StoreObjects.storeSecret(secret);
                 setState(() {
                   _isLoading = true;
                 });

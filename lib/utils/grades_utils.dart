@@ -88,6 +88,17 @@ Widget gradeNumThenPercentForAssignments(Assignment assignment) {
             assignment.gradePercent, assignment.gradeNum)),
   );
 }
+
+List<DropdownMenuItem<String>> generateAvailableStudentsDropDown(
+    Map<String, List<dynamic>> input) {
+  List<DropdownMenuItem<String>> ret = [];
+  input.forEach((key, value) {
+    ret.add(
+        DropdownMenuItem(value: key, child: Text("${value[0]}-${value[1]}")));
+  });
+
+  return ret;
+}
 // } catch (e) {
 //   if (grade >= 90) {
 //     return Colors.green;

@@ -145,7 +145,7 @@ class ApiHandler {
   static Future<Map<String, Map<String, double>>> getGPAhistory(
       bool getCached) async {
     Map<String, Map<String, double>> cachedHis =
-        await ConfigCache.readGPAhistory();
+        await StoreObjects.readGPAhistory();
 
     if (getCached) {
       return cachedHis;
@@ -181,8 +181,44 @@ class ApiHandler {
       }
       return cachedHis;
     } else {
-      ConfigCache.storeGPAHistory(ret);
+      StoreObjects.storeGPAHistory(ret);
       return ret;
     }
+  }
+
+  static Future<Map<String, List<dynamic>>> getAvailableStudents() async {
+    Map<String, List<dynamic>> ret = {};
+    List<dynamic> grades = [];
+    List<dynamic> ids = [];
+
+    Secret secret = await StoreObjects.readSecret();
+    Map<String, String> map = secret.toJson();
+    var response =
+        await http.post(getCorrectUri("/apiv1/grade_of_students/", map));
+    if (response.statusCode == 200) {
+      grades = json.decode(response.body);
+    } else {
+      if (kDebugMode) {
+        print(
+            "[DEBUG getAvailableStudents]: failed to get (/apiv1/grade_of_students/) data");
+      }
+    }
+
+    response = await http.post(getCorrectUri("/apiv1/ids/", map));
+    if (response.statusCode == 200) {
+      ids = json.decode(response.body);
+    } else {
+      if (kDebugMode) {
+        print("[DEBUG getAvailableStudents]: failed to get (/apiv1/ids/) data");
+      }
+    }
+
+    for (int i = 0; i < grades.length; i++) {
+      ret["${i + 1}"] = [];
+      ret["${i + 1}"]?.add(ids[i]);
+      ret["${i + 1}"]?.add(grades[i]);
+    }
+
+    return ret;
   }
 }

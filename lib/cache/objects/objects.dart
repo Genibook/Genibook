@@ -97,6 +97,43 @@ class StoreObjects {
     }
   }
 
+  static Future<void> storeGPAHistory(
+      Map<String, Map<String, double>> his) async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
+    String stringJson = jsonEncode(his);
+    await storage.write(key: "gpa_his", value: stringJson);
+  }
+
+  static Future<Map<String, Map<String, double>>> readGPAhistory() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
+    String jsonString = await storage.read(key: "gpa_his") ?? "";
+
+    if (kDebugMode) {
+      if (Constants.debugModePrintEVERYTHING) {
+        print("[DEBUG] READ GPAhistory: $jsonString");
+      }
+    }
+    if (jsonString.isNotEmpty) {
+      final decodedJson = json.decode(jsonString);
+      final resp = decodedJson.map<String, Map<String, double>>((key, value) {
+        final nestedMap = (value as Map<String, dynamic>).map<String, double>(
+            (nestedKey, nestedValue) =>
+                MapEntry(nestedKey, nestedValue.toDouble()));
+        return MapEntry(key as String, nestedMap);
+      });
+
+      return resp;
+    } else {
+      return {};
+    }
+  }
+
   static Future<Map<String, String>> readAll() async {
     const storage = FlutterSecureStorage(
         aOptions: AndroidOptions(
