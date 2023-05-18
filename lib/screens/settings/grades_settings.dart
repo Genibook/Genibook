@@ -90,7 +90,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                   "Current Student: ",
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                ButtonTheme(
+                ButtonTheme( 
                   alignedDropdown: true,
                   child: DropdownButton(
                       value: availableStudentKey,
