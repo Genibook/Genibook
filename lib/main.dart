@@ -69,7 +69,7 @@ class GenibookState extends State<Genibook> {
             future: alreadyLoggedIn,
             builder: (context, alreadyLoggedInFuture) {
               if (alreadyLoggedInFuture.hasData) {
-                Future<Student> student = ApiHandler.getNewStudent(true);
+                Future<Student> student = ApiHandler.getNewStudent(true, false);
 
                 return FutureBuilder<Student>(
                   future: student,
