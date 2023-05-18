@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
-import 'package:genibook/cache/backgroundtasks.dart';
+import 'package:genibook/services/backgroundtasks.dart';
 import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
@@ -8,7 +8,7 @@ import 'package:genibook/models/student_class.dart';
 import 'package:genibook/screens/debug/debug.dart';
 import 'package:genibook/screens/grades.dart';
 import 'package:genibook/screens/welcome.dart';
-import 'package:genibook/utils/awesome_notfis.dart';
+import 'package:genibook/services/notification_service.dart';
 import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
@@ -31,7 +31,6 @@ void main() async {
     // phone!
   }
 
-  initNotifications();
   initPlatformState();
 
   //assert(kDebugMode == true);
@@ -41,6 +40,8 @@ void main() async {
 
 class Genibook extends StatefulWidget {
   const Genibook({super.key});
+
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   State<StatefulWidget> createState() => GenibookState();
@@ -52,9 +53,10 @@ class GenibookState extends State<Genibook> {
 
   @override
   void initState() {
-    super.initState();
+    NotificationService.initializeNotification();
     loginOrSplash = readTOS();
     alreadyLoggedIn = StoreObjects.readSecret();
+    super.initState();
   }
 
   @override
@@ -77,6 +79,7 @@ class GenibookState extends State<Genibook> {
                           builder: (lightColorScheme, darkColorScheme) {
                         return MaterialApp(
                             debugShowCheckedModeBanner: false,
+                            navigatorKey: Genibook.navigatorKey,
                             title: 'Grades',
                             theme: ThemeData(
                               colorScheme: lightColorScheme ??

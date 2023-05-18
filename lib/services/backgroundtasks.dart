@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:background_fetch/background_fetch.dart';
 import 'package:genibook/api/utils.dart';
+import 'package:genibook/services/notification_service.dart';
 
 // [Android-only] This "Headless Task" is run when the Android app is terminated with `enableHeadless: true`
 // Be sure to annotate your callback function to avoid issues in release mode on Flutter >= 3.3.0
@@ -69,8 +70,8 @@ Future<void> initPlatformState() async {
 
       print("-------[BackgroundFetch] WE STARTING UPDATING CACHES-------");
     }
-
-    await refreshAllData();
+    await NotificationService.initializeNotification();
+    await refreshAllData(true);
 
     // setState(() {
     //   _events.insert(0, DateTime.now());

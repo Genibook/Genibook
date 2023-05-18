@@ -50,7 +50,7 @@ class ApiNavigator extends Navigator {
     // TODO: add something for ungraded assignments
     // TODO: CHANGE THE WEBSITE THAT ASSIGNMENTS AND GRADED API GOES TO CUZ THERES NO Notgraded THING IN GRADE CELL
     //TODO: do like a routine so thtat every ten minutes update
-    ApiHandler.getNewStudent(true).then((student) {
+    ApiHandler.getNewStudent(true, false).then((student) {
       if (direction) {
         Navigator.of(context).push(SlideToLeftPageRoute(
             child: GradesPage(student: Constants.debugMode ? eddie : student)));
@@ -64,7 +64,7 @@ class ApiNavigator extends Navigator {
 
   void pushToProfilePage<T extends Object>(
       BuildContext context, bool direction) {
-    ApiHandler.getNewStudent(true).then((student) {
+    ApiHandler.getNewStudent(true, false).then((student) {
       if (direction) {
         Navigator.of(context).push(SlideToLeftPageRoute(
             child:

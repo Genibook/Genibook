@@ -60,7 +60,7 @@ class _GradesPageState extends State<GradesPage> {
                 setState(() {
                   _loading = true;
                 });
-                Student stud = await refreshAllData();
+                Student stud = await refreshAllData(false);
                 // ignore: use_build_context_synchronously
                 await Navigator.of(context).push(SlideToRightPageRoute(
                     child: GradesPage(

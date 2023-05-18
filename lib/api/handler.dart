@@ -42,7 +42,8 @@ class ApiHandler {
     }
   }
 
-  static Future<Student> getNewStudent(bool getCached) async {
+  static Future<Student> getNewStudent(
+      bool getCached, bool isBackgroundTask) async {
     if (kDebugMode) {
       if (Constants.debugModePrintEVERYTHING) {
         print("[DEBUG: getNewStudent()]: calling getNewStudent()");
@@ -74,6 +75,7 @@ class ApiHandler {
       if (apiStudent == currentStudent) {
         return currentStudent;
       } else {
+        //TODO: create a function to handle sending notifs
         StoreObjects.storeStudent(apiStudent);
         return apiStudent;
       }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/api/utils.dart';
-import 'package:genibook/cache/backgroundtasks.dart';
+import 'package:genibook/services/backgroundtasks.dart';
 import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
@@ -90,7 +90,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                   "Current Student: ",
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
-                ButtonTheme( 
+                ButtonTheme(
                   alignedDropdown: true,
                   child: DropdownButton(
                       value: availableStudentKey,

@@ -25,8 +25,8 @@ Uri getCorrectUri(String ending, Map<String, String> map) {
   return url;
 }
 
-Future<Student> refreshAllData() async {
-  Student stud = await ApiHandler.getNewStudent(false);
+Future<Student> refreshAllData(bool backgroundTask) async {
+  Student stud = await ApiHandler.getNewStudent(false, backgroundTask);
   await ApiHandler.getNewSchedule(false);
   await ApiHandler.getMPs(false);
   await ApiHandler.getGPAhistory(false);
@@ -34,7 +34,7 @@ Future<Student> refreshAllData() async {
 }
 
 Future<Student> refreshMPStudentSchedule() async {
-  Student stud = await ApiHandler.getNewStudent(false);
+  Student stud = await ApiHandler.getNewStudent(false, false);
   await ApiHandler.getNewSchedule(false);
   await ApiHandler.getMPs(false);
   return stud;

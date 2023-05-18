@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
         await StoreObjects.readSecret();
         //print(json.encode(aSecret.toJson()));
 
-        refreshAllData().then((value) => nav.pushToGrades(context, false));
+        refreshAllData(false).then((value) => nav.pushToGrades(context, false));
         // ignore: use_build_context_synchronously
       } else {
         _shakeKey.currentState?.shake();
