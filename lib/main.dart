@@ -8,6 +8,7 @@ import 'package:genibook/models/student_class.dart';
 import 'package:genibook/screens/debug/debug.dart';
 import 'package:genibook/screens/grades.dart';
 import 'package:genibook/screens/welcome.dart';
+import 'package:genibook/utils/awesome_notfis.dart';
 import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
@@ -30,6 +31,9 @@ void main() async {
     // phone!
   }
 
+  initNotifications();
+  initPlatformState();
+
   //assert(kDebugMode == true);
 
   runApp(const Genibook());
@@ -51,7 +55,6 @@ class GenibookState extends State<Genibook> {
     super.initState();
     loginOrSplash = readTOS();
     alreadyLoggedIn = StoreObjects.readSecret();
-    initPlatformState();
   }
 
   @override
