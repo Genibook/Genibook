@@ -6,15 +6,15 @@ import 'package:genibook/services/notification_service.dart';
 /// Sending a notification with a given student object that tells that user what grade changed
 Future<void> sendBGTaskNotification(
     Student newStudent, Student oldStudent) async {
-  // Grades newGrades = newStudent.grades;
-  // Grades oldGrades = oldStudent.grades;
+  Grades newGrades = newStudent.grades;
+  Grades oldGrades = oldStudent.grades;
 
-  // if (newGrades == oldGrades) {
-  //   return;
-  // }
+  if (newGrades == oldGrades) {
+    return;
+  }
 
   await NotificationService.showNotification(
-    title: "${Emojis.animals_cat} Your grades changed!",
+    title: "${Emojis.animals_cat} Your grades changed, take a look!",
     body: "Body of the notification",
   );
 }
