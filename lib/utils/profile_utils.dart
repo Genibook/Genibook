@@ -9,21 +9,39 @@ List<Widget> generateUnDetailedProfileInfo(
     Student student, BuildContext context) {
   List<Widget> ret = [
     ListTile(
-      title: const Text("Counselor Name"),
+      title: Text(
+        "Counselor Name",
+        style: TextStyle(
+            fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize),
+      ),
       trailing: Text(
         student.counselorName,
+        style: TextStyle(
+            fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize),
       ),
     ),
     ListTile(
-      title: const Text("Locker"),
+      title: Text(
+        "Locker",
+        style: TextStyle(
+            fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize),
+      ),
       trailing: Text(
         student.locker,
+        style: TextStyle(
+            fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize),
       ),
     ),
     ListTile(
-      title: const Text("Grade"),
+      title: Text(
+        "Grade",
+        style: TextStyle(
+            fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize),
+      ),
       trailing: Text(
         "${student.grade}",
+        style: TextStyle(
+            fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize),
       ),
     ),
   ];
