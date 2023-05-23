@@ -92,15 +92,14 @@ class _SchedulePageState extends State<SchedulePage> {
                   ),
                   Expanded(
                       child: widget.scheduleAssignments
-                              //TODO: if day generated is with assignments it does not show, maybe change to _focusDay and it will work.
-                              .doesDayHaveAssignment(_selectedDay)
+                              .doesDayHaveAssignment(_focusedDay)
                           ? ListView.builder(
                               itemCount: widget.scheduleAssignments.list.length,
                               itemBuilder: (context, index) {
                                 final assignment =
                                     widget.scheduleAssignments.list[index];
                                 if (isSameDay(
-                                    _selectedDay, assignment.dateAsDateTime)) {
+                                    _focusedDay, assignment.dateAsDateTime)) {
                                   return ListTile(
                                     title: Text(assignment.assignment),
                                     subtitle: Text(
