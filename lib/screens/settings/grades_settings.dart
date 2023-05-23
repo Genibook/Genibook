@@ -62,12 +62,14 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
   }
 
   void _onClickEnable(bool enabled) async {
-    HapticFeedback.lightImpact();
+    HapticFeedback.mediumImpact();
+
     await ConfigCache.storeBgFetchVal(enabled);
     setBackgroundFetch(enabled);
     setState(() {
       _enabled = enabled;
     });
+
     if (!mounted) return;
   }
 

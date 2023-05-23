@@ -89,7 +89,8 @@ class GenibookState extends State<Genibook> {
                               cardTheme: CardTheme(
                                   color: lightColorScheme?.background ??
                                       Constants
-                                          .defaultLightColorScheme.onPrimary),
+                                          .defaultLightColorScheme.background
+                                          .withOpacity(0.9)),
                               appBarTheme: AppBarTheme(
                                   backgroundColor:
                                       lightColorScheme?.background ??
