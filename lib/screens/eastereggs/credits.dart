@@ -24,16 +24,16 @@ class CreditsPageState extends State<CreditsPage> {
             textAlign: TextAlign.center,
           ),
         ),
-        body: Padding(
-            padding: const EdgeInsets.all(10),
+        body: const Padding(
+            padding: EdgeInsets.all(10),
             child: SingleChildScrollView(
-                physics: const ScrollPhysics(),
+                physics: ScrollPhysics(),
                 child: Center(
                     child: SizedBox(
                         height: 500,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             Text(
                               "Users - You! \n (This is the first easter egg created for this app, yay!)",
                               textAlign: TextAlign.center,

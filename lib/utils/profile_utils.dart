@@ -33,8 +33,10 @@ List<Widget> generateUnDetailedProfileInfo(
 
 List<Widget> generateGPAHistories(
     Map<String, dynamic> data, BuildContext context) {
-  if (kDebugMode && Constants.debugModePrintEVERYTHING) {
-    print("[DEBUG generateGPAHistories]: data given in param $data");
+  if (kDebugMode) {
+    if (Constants.debugModePrintEVERYTHING) {
+      print("[DEBUG generateGPAHistories]: data given in param $data");
+    }
   }
 
   List<Widget> ret = [];

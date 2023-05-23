@@ -6,6 +6,7 @@ import 'package:genibook/api/utils.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/models/schedule_class.dart';
 import 'package:genibook/models/secret.dart';
+import 'package:genibook/utils/notifications.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:core';
@@ -72,10 +73,11 @@ class ApiHandler {
         print("[DEBUG]: getNewStudent() json is NOT empty");
       }
       Student apiStudent = Student.fromJson(json);
+      //TODO edit where it is
+      sendBGTaskNotification(apiStudent, currentStudent);
       if (apiStudent == currentStudent) {
         return currentStudent;
       } else {
-        //TODO: create a function to handle sending notifs
         StoreObjects.storeStudent(apiStudent);
         return apiStudent;
       }

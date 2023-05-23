@@ -4,6 +4,7 @@ import 'package:genibook/api/utils.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/settings/grades_settings.dart';
+import 'package:genibook/services/notification_service.dart';
 import 'package:genibook/utils/grades_utils.dart';
 import 'package:genibook/widgets/navbar.dart';
 import '../routes/swipe.dart';
@@ -23,6 +24,12 @@ class GradesPage extends StatefulWidget {
 
 class _GradesPageState extends State<GradesPage> {
   bool _loading = false;
+
+  @override
+  void initState() {
+    NotificationService.checkAllowedNotif();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

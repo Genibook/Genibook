@@ -54,6 +54,7 @@ class GenibookState extends State<Genibook> {
   @override
   void initState() {
     NotificationService.initializeNotification();
+
     loginOrSplash = readTOS();
     alreadyLoggedIn = StoreObjects.readSecret();
     super.initState();

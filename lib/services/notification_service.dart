@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:genibook/main.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ class NotificationService {
   ///  *********************************************
   ///     REQUESTING NOTIFICATION PERMISSIONS
   ///  *********************************************
+  ///
   ///
   static Future<bool> displayNotificationRationale() async {
     bool userAuthorized = false;
@@ -19,6 +21,7 @@ class NotificationService {
             content: const Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                //TODO redo this dialog
                 Text(
                     'Allow Awesome Notifications to send you beautiful notifications!'),
               ],
@@ -33,7 +36,7 @@ class NotificationService {
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
-                        ?.copyWith(color: Colors.red),
+                        ?.copyWith(color: Colors.grey),
                   )),
               TextButton(
                   onPressed: () async {
@@ -45,7 +48,7 @@ class NotificationService {
                     style: Theme.of(context)
                         .textTheme
                         .titleLarge
-                        ?.copyWith(color: Colors.deepPurple),
+                        ?.copyWith(color: Colors.blue),
                   )),
             ],
           );
@@ -54,23 +57,31 @@ class NotificationService {
         await AwesomeNotifications().requestPermissionToSendNotifications();
   }
 
+  static Future<void> checkAllowedNotif() async {
+    await AwesomeNotifications().isNotificationAllowed().then(
+      (isAllowed) async {
+        if (!isAllowed) {
+          await displayNotificationRationale();
+        }
+      },
+    );
+  }
+
   static Future<void> initializeNotification() async {
     await AwesomeNotifications().initialize(
-      null, //'asset://assets/images/balloons-in-sky.jpg',
+      'resource://drawable/res_notification_app_icon', //'asset://assets/images/balloons-in-sky.jpg',
       [
         NotificationChannel(
-          channelGroupKey: 'genibook_grade_change',
-          channelKey: 'genibook_grade_change',
-          channelName: 'Grade Change',
-          channelDescription: 'Notification channel for genibook grade changes',
-          defaultColor: Colors.blue,
-          ledColor: Colors.white,
-          importance: NotificationImportance.Max,
-          channelShowBadge: true,
-          onlyAlertOnce: true,
-          playSound: true,
-          criticalAlerts: true,
-        )
+            channelGroupKey: 'genibook_grade_change',
+            channelKey: 'genibook_grade_change',
+            channelName: 'Grade Change',
+            channelDescription:
+                'Notification channel for genibook grade changes',
+            defaultColor: Colors.blue,
+            ledColor: Colors.white,
+            importance: NotificationImportance.Max,
+            channelShowBadge: true,
+            soundSource: "resource://raw/res_custom_notification")
       ],
       channelGroups: [
         NotificationChannelGroup(
@@ -81,13 +92,13 @@ class NotificationService {
       debug: true,
     );
 
-    await AwesomeNotifications().isNotificationAllowed().then(
-      (isAllowed) async {
-        if (!isAllowed) {
-          await displayNotificationRationale();
-        }
-      },
-    );
+    // await AwesomeNotifications().isNotificationAllowed().then(
+    //   (isAllowed) async {
+    //     if (!isAllowed) {
+    //       await displayNotificationRationale();
+    //     }
+    //   },
+    // );
 
     await AwesomeNotifications().setListeners(
       onActionReceivedMethod: onActionReceivedMethod,
@@ -113,26 +124,18 @@ class NotificationService {
   static Future<void> onDismissActionReceivedMethod(
       ReceivedAction receivedAction) async {
     debugPrint('onDismissActionReceivedMethod');
-  }
 
-  static Future<void> onSilentActionHandle(ReceivedAction received) async {
-    print('On new background action received: ${received.toMap()}');
+    //TODO - check if ios badge notification decreements if i dismiss/open something
 
-    print('Background action running on main isolate');
-    await _handleBackgroundAction(received);
-  }
-
-  static Future<void> _handleBackgroundAction(ReceivedAction received) async {
-    // Your background action handle
+    // if (receivedAction.channelKey == "genibook_grade_change" &&
+    //     Platform.isIOS) {
+    //   AwesomeNotifications().decrementGlobalBadgeCounter();
+    // }
   }
 
   /// Use this method to detect when the user taps on a notification or action button
   static Future<void> onActionReceivedMethod(
-      ReceivedAction receivedAction) async {
-    if (receivedAction.actionType == ActionType.SilentBackgroundAction) {
-      await onSilentActionHandle(receivedAction);
-    }
-  }
+      ReceivedAction receivedAction) async {}
 
   static Future<void> showNotification({
     required final String title,
@@ -175,4 +178,6 @@ class NotificationService {
           : null,
     );
   }
+
+  // static
 }
