@@ -1,11 +1,10 @@
-
-import UIKit
 import Flutter
 import awesome_notifications
-import shared_preferences_ios
-//import all_other_plugins_that_i_need
+import shared_preferences_foundation
 
-override func application(
+@UIApplicationMain
+@objc class AppDelegate: FlutterAppDelegate {
+  override func application(
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
@@ -15,10 +14,11 @@ override func application(
       SwiftAwesomeNotificationsPlugin.setPluginRegistrantCallback { registry in          
           SwiftAwesomeNotificationsPlugin.register(
             with: registry.registrar(forPlugin: "io.flutter.plugins.awesomenotifications.AwesomeNotificationsPlugin")!)          
-          FLTSharedPreferencesPlugin.register(
+          SharedPreferencesPlugin.register(
             with: registry.registrar(forPlugin: "io.flutter.plugins.sharedpreferences.SharedPreferencesPlugin")!)
       }
 
       return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 
+}

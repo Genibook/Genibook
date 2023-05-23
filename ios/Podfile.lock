@@ -1,13 +1,16 @@
 PODS:
-  - awesome_notifications (0.7.5-pre.2):
+  - awesome_notifications (0.7.5-dev.2):
     - Flutter
-    - IosAwnCore
+    - IosAwnCore (= 0.7.5-dev.2)
   - background_fetch (1.1.6):
     - Flutter
   - Flutter (1.0.0)
   - flutter_secure_storage (6.0.0):
     - Flutter
-  - IosAwnCore (0.7.3)
+  - IosAwnCore (0.7.5-dev.2)
+  - shared_preferences_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
   - url_launcher_ios (0.0.1):
     - Flutter
 
@@ -16,6 +19,7 @@ DEPENDENCIES:
   - background_fetch (from `.symlinks/plugins/background_fetch/ios`)
   - Flutter (from `Flutter`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
+  - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
 SPEC REPOS:
@@ -31,17 +35,20 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_secure_storage:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
+  shared_preferences_foundation:
+    :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   url_launcher_ios:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  awesome_notifications: c1b30eb76b2f334c6158bfe6de63d9e31591be47
+  awesome_notifications: b1298b690fcfc25bb885af65056e92cec04ad9c9
   background_fetch: bc9b44b0bf8b434e282a2ac9be8662800a0296ed
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
-  IosAwnCore: 6494e0e174d49f04f513e8a002187be226889a37
+  IosAwnCore: f91ab77c879277e40e57924c3c9699fafcfc3c02
+  shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
-PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
+PODFILE CHECKSUM: 775997f741c536251164e3eacf6e34abf2eb7a17
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1
