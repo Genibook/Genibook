@@ -34,10 +34,7 @@ class ApiNavigator extends Navigator {
 
   Future<void> pushToGrades<T extends Object>(
       BuildContext context, bool direction) async {
-    // TODO: Check the assginemnts api thing cuz its returning goofy stuff cuz like its supposed to not be MP2 ....
-    // TODO: integrate gpas stuff
-    // TODO: make ui look nicer
-    // TODO: MAKE SURE TO ADD SOMEWHERE THAT ONLY SUPPORTS HIGH SCHOOLERS
+    // TODO: MAKE SURE TO ADD SOMEWHERE THAT ONLY SUPPORTS HIGH SCHOOLERS (rn middle school thing not fixed)
 
     //  splash screen (nvm looks ugly)
 
@@ -48,8 +45,6 @@ class ApiNavigator extends Navigator {
     // TODO: google calendar
     // TODO: NOTIFS
     // TODO: add something for ungraded assignments
-    // TODO: CHANGE THE WEBSITE THAT ASSIGNMENTS AND GRADED API GOES TO CUZ THERES NO Notgraded THING IN GRADE CELL
-    //TODO: do like a routine so thtat every ten minutes update
     ApiHandler.getNewStudent(true, false).then((student) {
       if (direction) {
         Navigator.of(context).push(SlideToLeftPageRoute(
