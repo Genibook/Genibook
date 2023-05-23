@@ -148,6 +148,9 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                   "Background Refresh: ",
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
+                //fuck this is hate my life sometimes
+                // idk it loks shit when not enabled
+                //hopefully users enable it
                 Switch(
                   value: _enabled,
                   onChanged: _onClickEnable,
