@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:genibook/main.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class NotificationService {
           return AlertDialog(
             title: Text('Get Notified!',
                 style: Theme.of(context).textTheme.titleLarge),
-            content: Column(
+            content: const Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 //TODO redo this dialog
