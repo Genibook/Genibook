@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:genibook/widgets/tos.dart';
-import 'package:genibook/constants.dart';
-import 'package:genibook/extensions/darkmode.dart';
+import 'package:genipaws/widgets/tos.dart';
+import 'package:genipaws/constants.dart';
+import 'package:genipaws/extensions/darkmode.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

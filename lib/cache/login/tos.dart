@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:genibook/constants.dart';
+import 'package:genipaws/constants.dart';
 
 /// Returns the value written to the TOS key as a bool
 Future<bool> writeTOS() async {

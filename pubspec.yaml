@@ -1,4 +1,4 @@
-name: genibook
+name: genipaws
 description: An app made for Genesis.
 
 # The following line prevents the package from being accidentally published to
@@ -29,6 +29,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  rename: ^2.1.1
   #flutter_native_splash: ^2.2.19
   awesome_notifications: 0.7.5-dev.2+1
   http: 1.0.0
@@ -55,6 +56,7 @@ dependencies:
   
 
 dev_dependencies:
+  
   flutter_test:
     sdk: flutter
 

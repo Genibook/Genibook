@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:genibook/secrets.dart';
+import 'package:genipaws/secrets.dart';
 
 class Constants {
   Constants._();

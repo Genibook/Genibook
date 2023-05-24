@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:genibook/constants.dart';
-import 'package:genibook/models/assignments_class.dart';
+import 'package:genipaws/constants.dart';
+import 'package:genipaws/models/assignments_class.dart';
 
 double roundDouble(double value, int places) {
   num mod = pow(10.0, places);
