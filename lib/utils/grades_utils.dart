@@ -90,11 +90,13 @@ Widget gradeNumThenPercentForAssignments(Assignment assignment) {
 }
 
 List<DropdownMenuItem<String>> generateAvailableStudentsDropDown(
-    Map<String, List<dynamic>> input) {
+    Map<String, List<dynamic>> input, BuildContext context) {
   List<DropdownMenuItem<String>> ret = [];
   input.forEach((key, value) {
-    ret.add(
-        DropdownMenuItem(value: key, child: Text("${value[0]}-${value[1]}")));
+    ret.add(DropdownMenuItem(
+        value: key,
+        child: Text("${value[0]}-${value[1]}",
+            style: const TextStyle(fontSize: 15))));
   });
 
   return ret;

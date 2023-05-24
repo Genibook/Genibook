@@ -77,13 +77,14 @@ List<Widget> generateGPAHistories(
               "$weighted",
               style: TextStyle(
                   color: getColorFromGrade(weighted),
-                  fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize),
+                  fontSize: Theme.of(context).textTheme.bodyMedium!.fontSize),
             ),
             const Text("|"),
             Text("$unweighted",
                 style: TextStyle(
                     color: getColorFromGrade(weighted),
-                    fontSize: Theme.of(context).textTheme.bodyLarge!.fontSize)),
+                    fontSize:
+                        Theme.of(context).textTheme.bodyMedium!.fontSize)),
           ])),
     );
 

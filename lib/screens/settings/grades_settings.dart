@@ -96,8 +96,8 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                   alignedDropdown: true,
                   child: DropdownButton(
                       value: availableStudentKey,
-                      items:
-                          generateAvailableStudentsDropDown(availableStudents),
+                      items: generateAvailableStudentsDropDown(
+                          availableStudents, context),
                       onChanged: (aStringNumber) {
                         String selector = aStringNumber as String;
                         secret.userSelector = selector;
@@ -121,8 +121,12 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                   child: DropdownButton(
                       value: _selectedMP,
                       items: mps
-                          .map((mp) =>
-                              DropdownMenuItem(value: mp, child: Text(mp)))
+                          .map((mp) => DropdownMenuItem(
+                              value: mp,
+                              child: Text(
+                                mp,
+                                style: const TextStyle(fontSize: 15),
+                              )))
                           .toList(),
                       onChanged: (mp) {
                         _selectedMP = mp as String;
