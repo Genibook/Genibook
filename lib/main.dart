@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/services/backgroundtasks.dart';
 import 'package:genibook/cache/login/tos.dart';
@@ -11,6 +14,7 @@ import 'package:genibook/screens/welcome.dart';
 import 'package:genibook/services/notification_service.dart';
 import 'dart:io';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:json_theme/json_theme.dart';
 
 import 'constants.dart';
 import 'screens/login.dart';
@@ -22,13 +26,16 @@ void main() async {
 
   initPlatformState();
 
-  //assert(kDebugMode == true);
+  final themeStr = await rootBundle.loadString('assets/appainter_theme.json');
+  final themeJson = jsonDecode(themeStr);
+  final theme = ThemeDecoder.decodeThemeData(themeJson)!;
 
-  runApp(const Genibook());
+  runApp(Genibook(theme: theme));
 }
 
 class Genibook extends StatefulWidget {
-  const Genibook({super.key});
+  final ThemeData theme;
+  const Genibook({super.key, required this.theme});
 
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -71,26 +78,27 @@ class GenibookState extends State<Genibook> {
                             debugShowCheckedModeBanner: false,
                             navigatorKey: Genibook.navigatorKey,
                             title: 'Grades',
-                            theme: ThemeData(
-                              colorScheme: lightColorScheme ??
-                                  Constants.defaultLightColorScheme,
-                              useMaterial3: true,
-                              cardTheme: CardTheme(
-                                  color: lightColorScheme?.background ??
-                                      Constants
-                                          .defaultLightColorScheme.background
-                                          .withOpacity(0.9)),
-                              appBarTheme: AppBarTheme(
-                                  backgroundColor:
-                                      lightColorScheme?.background ??
-                                          Constants.defaultLightColorScheme
-                                              .background),
-                            ),
-                            darkTheme: ThemeData(
-                              colorScheme: darkColorScheme ??
-                                  Constants.defaultDarkColorScheme,
-                              useMaterial3: true,
-                            ),
+                            theme: widget.theme,
+                            // theme: ThemeData(
+                            //   colorScheme: lightColorScheme ??
+                            //       Constants.defaultLightColorScheme,
+                            //   useMaterial3: true,
+                            //   cardTheme: CardTheme(
+                            //       color: lightColorScheme?.background ??
+                            //           Constants
+                            //               .defaultLightColorScheme.background
+                            //               .withOpacity(0.9)),
+                            //   appBarTheme: AppBarTheme(
+                            //       backgroundColor:
+                            //           lightColorScheme?.background ??
+                            //               Constants.defaultLightColorScheme
+                            //                   .background),
+                            // ),
+                            // darkTheme: ThemeData(
+                            //   colorScheme: darkColorScheme ??
+                            //       Constants.defaultDarkColorScheme,
+                            //   useMaterial3: true,
+                            // ),
                             themeMode: ThemeMode.system,
                             home: Constants.debugMode
                                 ? const DebugScreen()
