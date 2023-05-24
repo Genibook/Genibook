@@ -24,7 +24,7 @@ class CreditsPageState extends State<CreditsPage> {
             textAlign: TextAlign.center,
           ),
         ),
-        body: Padding(
+        body: const Padding(
             padding: EdgeInsets.all(10),
             child: SingleChildScrollView(
                 physics: ScrollPhysics(),

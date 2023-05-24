@@ -1,3 +1,4 @@
+import 'package:genibook/constants.dart';
 import 'package:genibook/main.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
@@ -71,11 +72,11 @@ class NotificationService {
       'resource://drawable/res_notification_app_icon', //'asset://assets/images/balloons-in-sky.jpg',
       [
         NotificationChannel(
-            channelGroupKey: 'genibook_grade_change',
-            channelKey: 'genibook_grade_change',
+            channelGroupKey: '${Constants.lowerCaseAppName}_grade_change',
+            channelKey: '${Constants.lowerCaseAppName}_grade_change',
             channelName: 'Grade Change',
             channelDescription:
-                'Notification channel for genibook grade changes',
+                'Notification channel for ${Constants.lowerCaseAppName} grade changes',
             defaultColor: Colors.blue,
             ledColor: Colors.white,
             importance: NotificationImportance.Max,
@@ -84,7 +85,7 @@ class NotificationService {
       ],
       channelGroups: [
         NotificationChannelGroup(
-          channelGroupKey: 'genibook_grade_change_group',
+          channelGroupKey: '${Constants.lowerCaseAppName}_grade_change_group',
           channelGroupName: 'Group 1',
         )
       ],
@@ -126,7 +127,8 @@ class NotificationService {
 
     //TODO - check if ios badge notification decreements if i dismiss/open something
 
-    // if (receivedAction.channelKey == "genibook_grade_change" &&
+    // if (receivedAction.channelKey ==
+    //         "${Constants.lowerCaseAppName}_grade_change" &&
     //     Platform.isIOS) {
     //   AwesomeNotifications().decrementGlobalBadgeCounter();
     // }
@@ -155,7 +157,7 @@ class NotificationService {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: -1,
-        channelKey: 'genibook_grade_change',
+        channelKey: '${Constants.lowerCaseAppName}_grade_change',
         title: title,
         body: body,
         largeIcon: largeIcon,

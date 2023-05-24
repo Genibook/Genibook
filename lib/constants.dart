@@ -24,6 +24,7 @@ class Constants {
 
   static const String tagline = "It's Genesis remade.";
   static const String appName = "Genibook";
+  static const String lowerCaseAppName = "genibook";
 
   static const Color appBlue = Color(0xFF21A8F5);
 
