@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:genibook/constants.dart';
 import 'package:genibook/main.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
@@ -127,16 +129,22 @@ class NotificationService {
 
     //TODO - check if ios badge notification decreements if i dismiss/open something
 
-    // if (receivedAction.channelKey ==
-    //         "${Constants.lowerCaseAppName}_grade_change" &&
-    //     Platform.isIOS) {
-    //   AwesomeNotifications().decrementGlobalBadgeCounter();
-    // }
+    if (receivedAction.channelKey ==
+            "${Constants.lowerCaseAppName}_grade_change" &&
+        Platform.isIOS) {
+      AwesomeNotifications().decrementGlobalBadgeCounter();
+    }
   }
 
   /// Use this method to detect when the user taps on a notification or action button
   static Future<void> onActionReceivedMethod(
-      ReceivedAction receivedAction) async {}
+      ReceivedAction receivedAction) async {
+    if (receivedAction.channelKey ==
+            "${Constants.lowerCaseAppName}_grade_change" &&
+        Platform.isIOS) {
+      AwesomeNotifications().decrementGlobalBadgeCounter();
+    }
+  }
 
   static Future<void> showNotification({
     required final String title,

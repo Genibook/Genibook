@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           const Text(
-            "genibook",
+            Constants.appName,
             style: TextStyle(
               fontSize: 40,
               letterSpacing: 2,
