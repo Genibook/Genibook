@@ -26,16 +26,25 @@ void main() async {
 
   initPlatformState();
 
-  final themeStr = await rootBundle.loadString('assets/appainter_theme.json');
-  final themeJson = jsonDecode(themeStr);
-  final theme = ThemeDecoder.decodeThemeData(themeJson)!;
+  final lightThemeStr = await rootBundle.loadString('assets/light_theme.json');
+  final themeJson = jsonDecode(lightThemeStr);
+  final lightTheme = ThemeDecoder.decodeThemeData(themeJson)!;
 
-  runApp(Genibook(theme: theme));
+  final darkThemeStr = await rootBundle.loadString('assets/dark_theme.json');
+  final darkThemeJson = jsonDecode(darkThemeStr);
+  final darkTheme = ThemeDecoder.decodeThemeData(darkThemeJson)!;
+
+  runApp(Genibook(
+    lightTheme: lightTheme,
+    darkTheme: darkTheme,
+  ));
 }
 
 class Genibook extends StatefulWidget {
-  final ThemeData theme;
-  const Genibook({super.key, required this.theme});
+  final ThemeData lightTheme;
+  final ThemeData darkTheme;
+  const Genibook(
+      {super.key, required this.lightTheme, required this.darkTheme});
 
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
@@ -78,7 +87,9 @@ class GenibookState extends State<Genibook> {
                             debugShowCheckedModeBanner: false,
                             navigatorKey: Genibook.navigatorKey,
                             title: 'Grades',
-                            theme: widget.theme,
+                            theme: widget.lightTheme,
+                            darkTheme: widget.darkTheme,
+                            //darkTheme: ,
                             // theme: ThemeData(
                             //   colorScheme: lightColorScheme ??
                             //       Constants.defaultLightColorScheme,
