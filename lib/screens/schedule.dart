@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:genipaws/constants.dart';
-import 'package:genipaws/widgets/navbar.dart';
+import 'package:genibook/constants.dart';
+import 'package:genibook/widgets/navbar.dart';
 import 'package:table_calendar/table_calendar.dart';
-import 'package:genipaws/models/schedule_class.dart';
-import 'package:genipaws/routes/swipe.dart';
+import 'package:genibook/models/schedule_class.dart';
+import 'package:genibook/routes/swipe.dart';
 
 class SchedulePage extends StatefulWidget {
   final ScheduleAssignmentsList scheduleAssignments;

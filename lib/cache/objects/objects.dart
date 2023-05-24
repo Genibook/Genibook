@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
-import 'package:genipaws/api/rawdata.dart';
-import 'package:genipaws/constants.dart';
-import 'package:genipaws/models/schedule_class.dart';
-import 'package:genipaws/models/secret.dart';
-import 'package:genipaws/models/student_class.dart';
+import 'package:genibook/api/rawdata.dart';
+import 'package:genibook/constants.dart';
+import 'package:genibook/models/schedule_class.dart';
+import 'package:genibook/models/secret.dart';
+import 'package:genibook/models/student_class.dart';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 

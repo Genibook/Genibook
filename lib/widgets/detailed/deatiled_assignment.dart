@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:genipaws/models/assignments_class.dart';
+import 'package:genibook/models/assignments_class.dart';
 
 void showDetailedAssignmentView(BuildContext context, Assignment assignment) {
   showDialog(

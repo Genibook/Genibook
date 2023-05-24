@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:genipaws/api/handler.dart';
-import 'package:genipaws/services/backgroundtasks.dart';
-import 'package:genipaws/cache/login/tos.dart';
-import 'package:genipaws/cache/objects/objects.dart';
-import 'package:genipaws/models/secret.dart';
-import 'package:genipaws/models/student_class.dart';
-import 'package:genipaws/screens/debug/debug.dart';
-import 'package:genipaws/screens/grades.dart';
-import 'package:genipaws/screens/welcome.dart';
-import 'package:genipaws/services/notification_service.dart';
+import 'package:genibook/api/handler.dart';
+import 'package:genibook/services/backgroundtasks.dart';
+import 'package:genibook/cache/login/tos.dart';
+import 'package:genibook/cache/objects/objects.dart';
+import 'package:genibook/models/secret.dart';
+import 'package:genibook/models/student_class.dart';
+import 'package:genibook/screens/debug/debug.dart';
+import 'package:genibook/screens/grades.dart';
+import 'package:genibook/screens/welcome.dart';
+import 'package:genibook/services/notification_service.dart';
 import 'dart:io';
 import 'package:universal_platform/universal_platform.dart';
 import 'package:window_size/window_size.dart';
@@ -35,19 +35,19 @@ void main() async {
 
   //assert(kDebugMode == true);
 
-  runApp(const Genipaws());
+  runApp(const Genibook());
 }
 
-class Genipaws extends StatefulWidget {
-  const Genipaws({super.key});
+class Genibook extends StatefulWidget {
+  const Genibook({super.key});
 
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
-  State<StatefulWidget> createState() => GenipawsState();
+  State<StatefulWidget> createState() => GenibookState();
 }
 
-class GenipawsState extends State<Genipaws> {
+class GenibookState extends State<Genibook> {
   Future<bool>? loginOrSplash;
   Future<Secret>? alreadyLoggedIn;
 
@@ -80,7 +80,7 @@ class GenipawsState extends State<Genipaws> {
                           builder: (lightColorScheme, darkColorScheme) {
                         return MaterialApp(
                             debugShowCheckedModeBanner: false,
-                            navigatorKey: Genipaws.navigatorKey,
+                            navigatorKey: Genibook.navigatorKey,
                             title: 'Grades',
                             theme: ThemeData(
                               colorScheme: lightColorScheme ??

@@ -11,7 +11,7 @@ class NotificationService {
   ///
   static Future<bool> displayNotificationRationale() async {
     bool userAuthorized = false;
-    BuildContext context = Genipaws.navigatorKey.currentContext!;
+    BuildContext context = Genibook.navigatorKey.currentContext!;
     await showDialog(
         context: context,
         builder: (BuildContext ctx) {

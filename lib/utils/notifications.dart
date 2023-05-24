@@ -1,7 +1,7 @@
-import 'package:genipaws/models/grades_class.dart';
+import 'package:genibook/models/grades_class.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:genipaws/models/student_class.dart';
-import 'package:genipaws/services/notification_service.dart';
+import 'package:genibook/models/student_class.dart';
+import 'package:genibook/services/notification_service.dart';
 
 /// Sending a notification with a given student object that tells that user what grade changed
 Future<void> sendBGTaskNotification(

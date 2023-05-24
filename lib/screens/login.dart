@@ -2,15 +2,15 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:genipaws/api/handler.dart';
-import 'package:genipaws/api/utils.dart';
-import 'package:genipaws/cache/objects/objects.dart';
-import 'package:genipaws/constants.dart';
-import 'package:genipaws/icons/custom_icons_icons.dart';
-import 'package:genipaws/api/navigator.dart';
-import 'package:genipaws/extensions/virtualkeyboard.dart';
-import 'package:genipaws/models/secret.dart';
-import 'package:genipaws/widgets/shakey.dart';
+import 'package:genibook/api/handler.dart';
+import 'package:genibook/api/utils.dart';
+import 'package:genibook/cache/objects/objects.dart';
+import 'package:genibook/constants.dart';
+import 'package:genibook/icons/custom_icons_icons.dart';
+import 'package:genibook/api/navigator.dart';
+import 'package:genibook/extensions/virtualkeyboard.dart';
+import 'package:genibook/models/secret.dart';
+import 'package:genibook/widgets/shakey.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
         child:
             Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
           const Text(
-            "genipaws",
+            "genibook",
             style: TextStyle(
               fontSize: 40,
               letterSpacing: 2,

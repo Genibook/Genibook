@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:genipaws/api/handler.dart';
-import 'package:genipaws/api/rawdata.dart';
+import 'package:genibook/api/handler.dart';
+import 'package:genibook/api/rawdata.dart';
 
-import 'package:genipaws/constants.dart';
+import 'package:genibook/constants.dart';
 
 import '../routes/swipes.dart';
 
-import 'package:genipaws/screens/login.dart';
-import 'package:genipaws/screens/profile.dart';
-import 'package:genipaws/screens/grades.dart';
-import 'package:genipaws/screens/schedule.dart';
+import 'package:genibook/screens/login.dart';
+import 'package:genibook/screens/profile.dart';
+import 'package:genibook/screens/grades.dart';
+import 'package:genibook/screens/schedule.dart';
 
 class ApiNavigator extends Navigator {
   const ApiNavigator({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:genipaws/constants.dart';
-import 'package:genipaws/models/student_class.dart';
-import 'package:genipaws/utils/grades_utils.dart';
+import 'package:genibook/constants.dart';
+import 'package:genibook/models/student_class.dart';
+import 'package:genibook/utils/grades_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 List<Widget> generateUnDetailedProfileInfo(

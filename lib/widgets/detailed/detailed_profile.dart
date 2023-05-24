@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:genipaws/models/student_class.dart';
-import 'package:genipaws/utils/profile_utils.dart';
+import 'package:genibook/models/student_class.dart';
+import 'package:genibook/utils/profile_utils.dart';
 
 AlertDialog gimmeDetailedProfileView(Student student) {
   return AlertDialog(

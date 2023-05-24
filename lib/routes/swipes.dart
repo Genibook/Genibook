@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:genipaws/constants.dart';
+import 'package:genibook/constants.dart';
 
 class SlideToLeftPageRoute<T> extends PageRouteBuilder<T> {
   final Widget child;

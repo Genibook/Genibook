@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:genipaws/api/rawdata.dart';
-import 'package:genipaws/api/utils.dart';
-import 'package:genipaws/services/backgroundtasks.dart';
-import 'package:genipaws/cache/objects/config.dart';
-import 'package:genipaws/cache/objects/objects.dart';
-import 'package:genipaws/models/secret.dart';
-// import 'package:genipaws/models/student_class.dart';
-// import 'package:genipaws/models/grades_class.dart';
-import 'package:genipaws/api/handler.dart';
-import 'package:genipaws/routes/swipes.dart';
-import 'package:genipaws/screens/grades.dart';
-import 'package:genipaws/utils/grades_utils.dart';
+import 'package:genibook/api/rawdata.dart';
+import 'package:genibook/api/utils.dart';
+import 'package:genibook/services/backgroundtasks.dart';
+import 'package:genibook/cache/objects/config.dart';
+import 'package:genibook/cache/objects/objects.dart';
+import 'package:genibook/models/secret.dart';
+// import 'package:genibook/models/student_class.dart';
+// import 'package:genibook/models/grades_class.dart';
+import 'package:genibook/api/handler.dart';
+import 'package:genibook/routes/swipes.dart';
+import 'package:genibook/screens/grades.dart';
+import 'package:genibook/utils/grades_utils.dart';
 
 class GradesSettingsView extends StatefulWidget {
   const GradesSettingsView({super.key});

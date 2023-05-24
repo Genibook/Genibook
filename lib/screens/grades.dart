@@ -1,16 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:genipaws/api/utils.dart';
-import 'package:genipaws/constants.dart';
-import 'package:genipaws/routes/swipes.dart';
-import 'package:genipaws/screens/settings/grades_settings.dart';
-import 'package:genipaws/services/notification_service.dart';
-import 'package:genipaws/utils/grades_utils.dart';
-import 'package:genipaws/widgets/navbar.dart';
+import 'package:genibook/api/utils.dart';
+import 'package:genibook/constants.dart';
+import 'package:genibook/routes/swipes.dart';
+import 'package:genibook/screens/settings/grades_settings.dart';
+import 'package:genibook/services/notification_service.dart';
+import 'package:genibook/utils/grades_utils.dart';
+import 'package:genibook/widgets/navbar.dart';
 import '../routes/swipe.dart';
 import 'assignments.dart';
 import '../models/student_class.dart';
-import 'package:genipaws/extensions/darkmode.dart';
+import 'package:genibook/extensions/darkmode.dart';
 
 class GradesPage extends StatefulWidget {
   final Student student;

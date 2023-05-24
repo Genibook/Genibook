@@ -3,17 +3,17 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:genipaws/api/handler.dart';
-import 'package:genipaws/api/rawdata.dart';
-import 'package:genipaws/cache/login/tos.dart';
-import 'package:genipaws/cache/objects/objects.dart';
-import 'package:genipaws/models/assignments_class.dart';
-import 'package:genipaws/models/grades_class.dart';
-import 'package:genipaws/routes/swipes.dart';
-import 'package:genipaws/models/secret.dart';
-import 'package:genipaws/models/student_class.dart';
-import 'package:genipaws/screens/login.dart';
-import 'package:genipaws/secrets.dart';
+import 'package:genibook/api/handler.dart';
+import 'package:genibook/api/rawdata.dart';
+import 'package:genibook/cache/login/tos.dart';
+import 'package:genibook/cache/objects/objects.dart';
+import 'package:genibook/models/assignments_class.dart';
+import 'package:genibook/models/grades_class.dart';
+import 'package:genibook/routes/swipes.dart';
+import 'package:genibook/models/secret.dart';
+import 'package:genibook/models/student_class.dart';
+import 'package:genibook/screens/login.dart';
+import 'package:genibook/secrets.dart';
 
 const simpleTaskKey = "be.tramckrijte.workmanagerExample.simpleTask";
 const rescheduledTaskKey = "be.tramckrijte.workmanagerExample.rescheduledTask";
