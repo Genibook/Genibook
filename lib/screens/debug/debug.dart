@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
@@ -140,21 +141,16 @@ class _DebugScreenState extends State<DebugScreen> {
                 },
                 child: const Text("schedule assignments ==")),
             Text(
-              "Caching",
-              style: Theme.of(context).textTheme.displaySmall,
-            ),
-            ElevatedButton(
-                onPressed: () async {
-                  bool val = await writeTOS();
-                  if (kDebugMode) {
-                    print("Assigned value to: $val");
-                  }
-                },
-                child: const Text("TOS")),
-            Text(
               "Plugin initialization",
               style: Theme.of(context).textTheme.headlineSmall,
             ),
+            ElevatedButton(
+                onPressed: () async {
+                  if (kDebugMode) {
+                    AwesomeNotifications().setGlobalBadgeCounter(0);
+                  }
+                },
+                child: const Text("notificatino set 0 ios")),
           ],
         ),
       )),
