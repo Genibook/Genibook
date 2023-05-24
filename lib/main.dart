@@ -35,19 +35,19 @@ void main() async {
 
   //assert(kDebugMode == true);
 
-  runApp(const genipaws());
+  runApp(const Genipaws());
 }
 
-class genipaws extends StatefulWidget {
-  const genipaws({super.key});
+class Genipaws extends StatefulWidget {
+  const Genipaws({super.key});
 
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
-  State<StatefulWidget> createState() => genipawsState();
+  State<StatefulWidget> createState() => GenipawsState();
 }
 
-class genipawsState extends State<genipaws> {
+class GenipawsState extends State<Genipaws> {
   Future<bool>? loginOrSplash;
   Future<Secret>? alreadyLoggedIn;
 
@@ -80,7 +80,7 @@ class genipawsState extends State<genipaws> {
                           builder: (lightColorScheme, darkColorScheme) {
                         return MaterialApp(
                             debugShowCheckedModeBanner: false,
-                            navigatorKey: genipaws.navigatorKey,
+                            navigatorKey: Genipaws.navigatorKey,
                             title: 'Grades',
                             theme: ThemeData(
                               colorScheme: lightColorScheme ??
