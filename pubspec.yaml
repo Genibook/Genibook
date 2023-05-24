@@ -30,6 +30,7 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   json_theme: ^4.0.0
+  custom_refresh_indicator: ^2.0.1
   rename: ^2.1.1
   #flutter_native_splash: ^2.2.19
   awesome_notifications: 0.7.5-dev.2+1

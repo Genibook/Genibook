@@ -26,6 +26,7 @@ class _GradesPageState extends State<GradesPage> {
   bool _loading = false;
 
   //TODO: add the current mp to make sure nobody is confused, and like maybe add the mp's gpa from the backend..
+  // maybe custom refresh indicator
   @override
   void initState() {
     NotificationService.checkAllowedNotif();
