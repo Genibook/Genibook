@@ -10,8 +10,6 @@ import 'package:genibook/screens/grades.dart';
 import 'package:genibook/screens/welcome.dart';
 import 'package:genibook/services/notification_service.dart';
 import 'dart:io';
-import 'package:universal_platform/universal_platform.dart';
-import 'package:window_size/window_size.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
 import 'constants.dart';
@@ -21,15 +19,6 @@ import 'utils/http_overrides.dart';
 void main() async {
   HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
-
-  if (UniversalPlatform.isWindows ||
-      UniversalPlatform.isLinux ||
-      UniversalPlatform.isMacOS) {
-    setWindowMinSize(const Size(350, 700));
-    setWindowMaxSize(Size.infinite);
-  } else {
-    // phone!
-  }
 
   initPlatformState();
 
