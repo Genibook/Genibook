@@ -1,7 +1,7 @@
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:genibook/constants.dart';
+import 'package:genipaws/constants.dart';
 
 class Grades {
   Map<String, Grade> gradesMap;

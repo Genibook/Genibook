@@ -1,4 +1,4 @@
-import 'package:genibook/main.dart';
+import 'package:genipaws/main.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +10,7 @@ class NotificationService {
   ///
   static Future<bool> displayNotificationRationale() async {
     bool userAuthorized = false;
-    BuildContext context = Genibook.navigatorKey.currentContext!;
+    BuildContext context = genipaws.navigatorKey.currentContext!;
     await showDialog(
         context: context,
         builder: (BuildContext ctx) {
@@ -71,11 +71,11 @@ class NotificationService {
       'resource://drawable/res_notification_app_icon', //'asset://assets/images/balloons-in-sky.jpg',
       [
         NotificationChannel(
-            channelGroupKey: 'genibook_grade_change',
-            channelKey: 'genibook_grade_change',
+            channelGroupKey: 'genipaws_grade_change',
+            channelKey: 'genipaws_grade_change',
             channelName: 'Grade Change',
             channelDescription:
-                'Notification channel for genibook grade changes',
+                'Notification channel for genipaws grade changes',
             defaultColor: Colors.blue,
             ledColor: Colors.white,
             importance: NotificationImportance.Max,
@@ -84,7 +84,7 @@ class NotificationService {
       ],
       channelGroups: [
         NotificationChannelGroup(
-          channelGroupKey: 'genibook_grade_change_group',
+          channelGroupKey: 'genipaws_grade_change_group',
           channelGroupName: 'Group 1',
         )
       ],
@@ -126,7 +126,7 @@ class NotificationService {
 
     //TODO - check if ios badge notification decreements if i dismiss/open something
 
-    // if (receivedAction.channelKey == "genibook_grade_change" &&
+    // if (receivedAction.channelKey == "genipaws_grade_change" &&
     //     Platform.isIOS) {
     //   AwesomeNotifications().decrementGlobalBadgeCounter();
     // }
@@ -155,7 +155,7 @@ class NotificationService {
     await AwesomeNotifications().createNotification(
       content: NotificationContent(
         id: -1,
-        channelKey: 'genibook_grade_change',
+        channelKey: 'genipaws_grade_change',
         title: title,
         body: body,
         largeIcon: largeIcon,

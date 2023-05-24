@@ -1,5 +1,5 @@
-import 'package:genibook/models/assignments_class.dart';
-import 'package:genibook/models/grades_class.dart';
+import 'package:genipaws/models/assignments_class.dart';
+import 'package:genipaws/models/grades_class.dart';
 // ignore: depend_on_referenced_packages
 import 'package:collection/collection.dart';
 

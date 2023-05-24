@@ -1,6 +1,6 @@
-import 'package:genibook/api/handler.dart';
-import 'package:genibook/constants.dart';
-import 'package:genibook/models/student_class.dart';
+import 'package:genipaws/api/handler.dart';
+import 'package:genipaws/constants.dart';
+import 'package:genipaws/models/student_class.dart';
 
 Uri getCorrectUri(String ending, Map<String, String> map) {
   Uri url;

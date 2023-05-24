@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:genibook/api/handler.dart';
-import 'package:genibook/cache/objects/objects.dart';
-import 'package:genibook/routes/swipes.dart';
-import 'package:genibook/constants.dart';
-import 'package:genibook/screens/eastereggs/credits.dart';
-import 'package:genibook/screens/login.dart';
-import 'package:genibook/utils/base64_to_image.dart';
-import 'package:genibook/routes/swipe.dart';
-import 'package:genibook/utils/profile_utils.dart';
-import 'package:genibook/widgets/detailed/detailed_profile.dart';
-import 'package:genibook/widgets/navbar.dart';
+import 'package:genipaws/api/handler.dart';
+import 'package:genipaws/cache/objects/objects.dart';
+import 'package:genipaws/routes/swipes.dart';
+import 'package:genipaws/constants.dart';
+import 'package:genipaws/screens/eastereggs/credits.dart';
+import 'package:genipaws/screens/login.dart';
+import 'package:genipaws/utils/base64_to_image.dart';
+import 'package:genipaws/routes/swipe.dart';
+import 'package:genipaws/utils/profile_utils.dart';
+import 'package:genipaws/widgets/detailed/detailed_profile.dart';
+import 'package:genipaws/widgets/navbar.dart';
 import 'package:flutter/services.dart';
 
 import '../models/student_class.dart';

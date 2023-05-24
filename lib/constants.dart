@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:genibook/secrets.dart';
+import 'package:genipaws/secrets.dart';
 
 class Constants {
   Constants._();
@@ -23,7 +23,7 @@ class Constants {
   static const int transitionDurationOfSwipeForLeft = 155;
 
   static const String tagline = "It's Genesis remade.";
-  static const String appName = "Genibook";
+  static const String appName = "GeniPaws";
 
   static const Color appBlue = Color(0xFF21A8F5);
 

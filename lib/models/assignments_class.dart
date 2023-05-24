@@ -2,7 +2,7 @@
 // String assignmentsJsonString = jsonEncode(assignments.toJson());
 
 import 'package:flutter/foundation.dart';
-import 'package:genibook/constants.dart';
+import 'package:genipaws/constants.dart';
 
 class Assignments {
   Map<String, List<Assignment>> assignments;

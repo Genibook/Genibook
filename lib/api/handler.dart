@@ -1,17 +1,17 @@
 import 'package:flutter/foundation.dart';
-import 'package:genibook/api/rawdata.dart';
-import 'package:genibook/cache/objects/config.dart';
-import 'package:genibook/cache/objects/objects.dart';
-import 'package:genibook/api/utils.dart';
-import 'package:genibook/constants.dart';
-import 'package:genibook/models/schedule_class.dart';
-import 'package:genibook/models/secret.dart';
-import 'package:genibook/utils/notifications.dart';
+import 'package:genipaws/api/rawdata.dart';
+import 'package:genipaws/cache/objects/config.dart';
+import 'package:genipaws/cache/objects/objects.dart';
+import 'package:genipaws/api/utils.dart';
+import 'package:genipaws/constants.dart';
+import 'package:genipaws/models/schedule_class.dart';
+import 'package:genipaws/models/secret.dart';
+import 'package:genipaws/utils/notifications.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:core';
 
-import 'package:genibook/models/student_class.dart';
+import 'package:genipaws/models/student_class.dart';
 
 class ApiHandler {
   ApiHandler._();
