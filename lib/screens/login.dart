@@ -219,8 +219,14 @@ class _LoginPageState extends State<LoginPage> {
                                     size: 20.0,
                                   ),
                             label: _logiN
-                                ? const Text("Loading")
-                                : const Text('View your Genesis'),
+                                ? const Text(
+                                    "Loading",
+                                    textAlign: TextAlign.center,
+                                  )
+                                : const Text(
+                                    'View your Genesis',
+                                    textAlign: TextAlign.center,
+                                  ),
                             onPressed: _login,
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
