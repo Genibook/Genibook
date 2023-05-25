@@ -13,8 +13,19 @@ Future<void> sendBGTaskNotification(
     return;
   }
 
+  String body = "";
+  List<Map<String, Grade>> diffs = Grades.getDifferences(newGrades, oldGrades);
+  for (Map<String, Grade> diff in diffs) {
+    String className = diff.keys.elementAt(1);
+    Grade newGrade = diff.values.elementAt(1);
+    Grade oldGrade = diff.values.elementAt(0);
+
+    body +=
+        "${Emojis.clothing_graduation_cap} $className: ${oldGrade.grade} -> ${newGrade.grade}\n";
+  }
+
   await NotificationService.showNotification(
-    title: "${Emojis.animals_cat} Your grades changed, take a look!",
-    body: "Body of the notification",
+    title: "${Emojis.animals_cat} Your grades changed!",
+    body: body,
   );
 }

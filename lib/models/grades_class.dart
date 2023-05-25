@@ -25,8 +25,13 @@ class Grades {
   }
 
   int get length => gradesMap.length;
+
   Iterable<String> get keys {
     return gradesMap.keys;
+  }
+
+  Iterable<Grade> get gradesObjectList {
+    return gradesMap.values;
   }
 
   double getSubjectGrade(String subject) {
@@ -63,6 +68,31 @@ class Grades {
           },
         );
     return grade.teacherEmail;
+  }
+
+  ///Parameters -
+  ///[Grades] cachedGrades - the [Grades] object that has the cahed grades
+  ///[Grades] apiGrades - the [Grades] object from the api
+  static List<Map<String, Grade>> getDifferences(
+      Grades cachedGrades, Grades apiGrades) {
+    List<Map<String, Grade>> diffs = [];
+
+    Iterable<String> vals1Keys = cachedGrades.keys;
+    Iterable<String> vals2Keys = apiGrades.keys;
+
+    for (String key1 in vals1Keys) {
+      Grade grade1 = cachedGrades.gradesMap[key1] ??
+          Grade(grade: 0, teacherEmail: "", teacherName: "");
+      for (String key2 in vals2Keys) {
+        Grade grade2 = apiGrades.gradesMap[key2] ??
+            Grade(grade: 0, teacherEmail: "", teacherName: "");
+        if (grade1 != grade2) {
+          diffs.add({key1: grade1, key2: grade2});
+        }
+      }
+    }
+
+    return diffs;
   }
 
   @override
@@ -132,7 +162,6 @@ class Grade {
   int get hashCode =>
       grade.hashCode ^ teacherName.hashCode ^ teacherEmail.hashCode;
 }
-
 
 // final grades = Grades.fromJson({
 //   'Math': {

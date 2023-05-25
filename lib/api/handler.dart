@@ -74,11 +74,11 @@ class ApiHandler {
         print("[DEBUG]: getNewStudent() json is NOT empty");
       }
       Student apiStudent = Student.fromJson(json);
-      //TODO edit where it is
-      sendBGTaskNotification(apiStudent, currentStudent);
+
       if (apiStudent == currentStudent) {
         return currentStudent;
       } else {
+        sendBGTaskNotification(apiStudent, currentStudent);
         StoreObjects.storeStudent(apiStudent);
         return apiStudent;
       }
