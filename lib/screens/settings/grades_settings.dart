@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/api/rawdata.dart';
@@ -193,9 +194,32 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
         ),
       ),
       actions: <Widget>[
-        SizedBox(
-            width: 100,
-            child: TextButton(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(
+                child: TextButton(
+                    onPressed: () async {
+                      HapticFeedback.heavyImpact();
+                      if (await AwesomeNotifications().getGlobalBadgeCounter() >
+                          0) {
+                        // ignore: use_build_context_synchronously
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content: Text("Notifications Cleared!"),
+                        ));
+                        AwesomeNotifications().setGlobalBadgeCounter(0);
+                      }
+                    },
+                    child: Text("Clear notifications",
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(fontSize: 10)))),
+            SizedBox(
+                child: TextButton(
               onPressed: () async {
                 HapticFeedback.lightImpact();
                 await StoreObjects.storeSecret(secret);
@@ -219,6 +243,8 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                         style: Theme.of(context).textTheme.bodyLarge),
               ]),
             )),
+          ],
+        ),
       ],
     );
   }
