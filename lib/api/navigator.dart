@@ -48,11 +48,12 @@ class ApiNavigator extends Navigator {
     ApiHandler.getNewStudent(true, false).then((student) {
       if (direction) {
         Navigator.of(context).push(SlideToLeftPageRoute(
-            child: GradesPage(student: Constants.debugMode ? eddie : student)));
+            child:
+                GradesPage(student: Constants.fakeGrades ? eddie : student)));
         return;
       }
       Navigator.of(context).push(SlideToRightPageRoute(
-          child: GradesPage(student: Constants.debugMode ? eddie : student)));
+          child: GradesPage(student: Constants.fakeGrades ? eddie : student)));
       return;
     });
   }
@@ -63,11 +64,11 @@ class ApiNavigator extends Navigator {
       if (direction) {
         Navigator.of(context).push(SlideToLeftPageRoute(
             child:
-                ProfilePage(student: Constants.debugMode ? eddie : student)));
+                ProfilePage(student: Constants.fakeGrades ? eddie : student)));
         return;
       }
       Navigator.of(context).push(SlideToRightPageRoute(
-          child: ProfilePage(student: Constants.debugMode ? eddie : student)));
+          child: ProfilePage(student: Constants.fakeGrades ? eddie : student)));
       return;
     });
   }
@@ -79,7 +80,7 @@ class ApiNavigator extends Navigator {
         Navigator.of(context).push(SlideToLeftPageRoute(
           child: SchedulePage(
             scheduleAssignments:
-                Constants.debugMode ? scheduleAssignments : schedule,
+                Constants.fakeGrades ? scheduleAssignments : schedule,
           ),
         ));
         return;
@@ -87,7 +88,7 @@ class ApiNavigator extends Navigator {
       Navigator.of(context).push(SlideToRightPageRoute(
         child: SchedulePage(
           scheduleAssignments:
-              Constants.debugMode ? scheduleAssignments : schedule,
+              Constants.fakeGrades ? scheduleAssignments : schedule,
         ),
       ));
       return;
