@@ -100,26 +100,6 @@ class GenibookState extends State<Genibook> {
                                 : ThemeData(
                                     colorScheme: darkColorScheme,
                                     useMaterial3: true),
-                            //darkTheme: ,
-                            // theme: ThemeData(
-                            //   colorScheme: lightColorScheme ??
-                            //       Constants.defaultLightColorScheme,
-                            //   useMaterial3: true,
-                            //   cardTheme: CardTheme(
-                            //       color: lightColorScheme?.background ??
-                            //           Constants
-                            //               .defaultLightColorScheme.background
-                            //               .withOpacity(0.9)),
-                            //   appBarTheme: AppBarTheme(
-                            //       backgroundColor:
-                            //           lightColorScheme?.background ??
-                            //               Constants.defaultLightColorScheme
-                            //                   .background),
-                            // ),
-                            // darkTheme: ThemeData(
-                            //   colorScheme: darkColorScheme ??
-                            //       Constants.defaultDarkColorScheme,
-                            //   useMaterial3: true,
                             // ),
                             themeMode: ThemeMode.system,
                             home: Constants.debugMode
