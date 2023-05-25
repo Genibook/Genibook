@@ -254,4 +254,17 @@ class ApiHandler {
       }
     }
   }
+
+  static Future<int> getLatencyThroughLogin() async {
+    Secret secret = await StoreObjects.readSecret();
+
+    final startTime = DateTime.now();
+
+    await http.post(getCorrectUri("/apiv1/login/", secret.toJson()));
+
+    final endTime = DateTime.now();
+    final latency = endTime.difference(startTime).inMilliseconds;
+
+    return latency;
+  }
 }

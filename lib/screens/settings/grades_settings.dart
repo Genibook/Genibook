@@ -28,6 +28,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
   bool _enabled = true;
   Map<String, List<dynamic>> availableStudents = {};
   String? availableStudentKey;
+  int latency = -1;
 
   @override
   void initState() {
@@ -85,29 +86,30 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Current Student: ",
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-                ButtonTheme(
-                  alignedDropdown: true,
-                  child: DropdownButton(
-                      value: availableStudentKey,
-                      items: generateAvailableStudentsDropDown(
-                          availableStudents, context),
-                      onChanged: (aStringNumber) {
-                        String selector = aStringNumber as String;
-                        secret.userSelector = selector;
-                        setState(() {
-                          availableStudentKey = selector;
-                        });
-                      }),
-                )
-              ],
-            ),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Test latency: ",
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "$latency ms",
+                      ),
+                      IconButton(
+                          onPressed: () async {
+                            HapticFeedback.lightImpact();
+                            int lat = await ApiHandler.getLatencyThroughLogin();
+                            setState(() {
+                              latency = lat;
+                            });
+                          },
+                          icon: const Icon(Icons.refresh)),
+                    ],
+                  ),
+                ]),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -129,6 +131,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                               )))
                           .toList(),
                       onChanged: (mp) {
+                        HapticFeedback.lightImpact();
                         _selectedMP = mp as String;
                         secret.mp = mp;
 
@@ -140,6 +143,31 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                             });
                           },
                         );
+                      }),
+                )
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Current Student: ",
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
+                ButtonTheme(
+                  alignedDropdown: true,
+                  child: DropdownButton(
+                      value: availableStudentKey,
+                      items: generateAvailableStudentsDropDown(
+                          availableStudents, context),
+                      onChanged: (aStringNumber) {
+                        HapticFeedback.lightImpact();
+                        String selector = aStringNumber as String;
+                        secret.userSelector = selector;
+                        setState(() {
+                          availableStudentKey = selector;
+                        });
                       }),
                 )
               ],

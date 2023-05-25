@@ -14,7 +14,6 @@ import 'package:genibook/widgets/navbar.dart';
 import '../routes/swipe.dart';
 import 'assignments.dart';
 import '../models/student_class.dart';
-import 'package:genibook/extensions/darkmode.dart';
 
 class GradesPage extends StatefulWidget {
   final Student student;
@@ -89,6 +88,7 @@ class _GradesPageState extends State<GradesPage> {
             ),
             body: SafeArea(
                 child: RefreshIndicator(
+              strokeWidth: 3,
               onRefresh: () async {
                 setState(() {
                   _loading = true;
@@ -101,22 +101,7 @@ class _GradesPageState extends State<GradesPage> {
                 )));
               },
               child: _loading
-                  ? Center(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                          Text(
-                            "Loading",
-                            style: Theme.of(context).textTheme.bodyLarge,
-                          ),
-                          context.isDarkMode
-                              ? const Image(
-                                  image: AssetImage(
-                                      "assets/icon-blue-transparent-meow.png"))
-                              : const Image(
-                                  image: AssetImage(
-                                      "assets/icon-black-transparent-meow.png"))
-                        ]))
+                  ? Center(child: Image.asset("assets/loadcat.gif"))
                   : ListView.builder(
                       itemCount: widget.student.grades.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -129,7 +114,6 @@ class _GradesPageState extends State<GradesPage> {
                                 "[DEBUG: Grades page build, Item builder]: $index , ${widget.student.grades.keys.elementAt(index)}");
                           }
                         }
-
                         String courseName =
                             widget.student.grades.keys.elementAt(index);
                         return GestureDetector(

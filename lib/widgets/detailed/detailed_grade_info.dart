@@ -15,18 +15,42 @@ void showDetailedGradePageView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                "Selected MP: $selectedMp",
-                style: Theme.of(context).textTheme.bodyLarge,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Selected MP:",
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  Text("$selectedMp")
+                ],
               ),
               const Divider(),
-              Text(
-                "Weighted Percent GPA: ${studentGpa?.weighted} ",
-                style: Theme.of(context).textTheme.bodyLarge,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Weighted Percent GPA:",
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  Text("${studentGpa?.weighted}")
+                ],
               ),
-              Text(
-                "Unweighted Percent GPA: ${studentGpa?.unweighted} ",
-                style: Theme.of(context).textTheme.bodyLarge,
+              const SizedBox(
+                height: 5,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Unweighted Percent GPA:",
+                    style: Theme.of(context).textTheme.labelLarge,
+                  ),
+                  Text("${studentGpa?.unweighted}")
+                ],
               ),
             ],
           ),
