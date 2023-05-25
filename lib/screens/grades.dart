@@ -9,6 +9,7 @@ import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/settings/grades_settings.dart';
 import 'package:genibook/services/notification_service.dart';
 import 'package:genibook/utils/grades_utils.dart';
+import 'package:genibook/widgets/detailed/detailed_grade_info.dart';
 import 'package:genibook/widgets/navbar.dart';
 import '../routes/swipe.dart';
 import 'assignments.dart';
@@ -64,6 +65,12 @@ class _GradesPageState extends State<GradesPage> {
               elevation: 2,
               shadowColor: Theme.of(context).shadowColor,
               automaticallyImplyLeading: false,
+              leading: IconButton(
+                icon: const Icon(Icons.info_outline),
+                onPressed: () {
+                  showDetailedGradePageView(context, studentGpa, selectedMp);
+                },
+              ),
               actions: [
                 SizedBox(
                     height: 50,
@@ -122,38 +129,6 @@ class _GradesPageState extends State<GradesPage> {
                                 "[DEBUG: Grades page build, Item builder]: $index , ${widget.student.grades.keys.elementAt(index)}");
                           }
                         }
-                        //todo probably do a like info button on the top left corner of the app bar
-                        // if (index == 0) {
-                        //   return GestureDetector(
-                        //       onTap: () {},
-                        //       child: Padding(
-                        //         padding: const EdgeInsets.only(top: 10),
-                        //         child: Row(
-                        //             mainAxisAlignment: MainAxisAlignment.center,
-                        //             crossAxisAlignment:
-                        //                 CrossAxisAlignment.center,
-                        //             children: [
-                        //               Text(
-                        //                 "Weighted: ${studentGpa?.weighted} ",
-                        //                 style: Theme.of(context)
-                        //                     .textTheme
-                        //                     .bodyLarge,
-                        //               ),
-                        //               Text(
-                        //                 "Unweighted: ${studentGpa?.unweighted} ",
-                        //                 style: Theme.of(context)
-                        //                     .textTheme
-                        //                     .bodyLarge,
-                        //               ),
-                        //               Text(
-                        //                 "Selected MP: $selectedMp",
-                        //                 style: Theme.of(context)
-                        //                     .textTheme
-                        //                     .bodyLarge,
-                        //               )
-                        //             ]),
-                        //       ));
-                        // }
 
                         String courseName =
                             widget.student.grades.keys.elementAt(index);
