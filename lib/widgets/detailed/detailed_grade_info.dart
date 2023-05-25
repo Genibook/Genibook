@@ -32,7 +32,7 @@ void showDetailedGradePageView(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Weighted Percent GPA:",
+                    "Weighted GPA:",
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   Text("${studentGpa?.weighted}")
@@ -46,7 +46,7 @@ void showDetailedGradePageView(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Unweighted Percent GPA:",
+                    "Unweighted GPA:",
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
                   Text("${studentGpa?.unweighted}")

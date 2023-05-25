@@ -103,6 +103,7 @@ class _GradesPageState extends State<GradesPage> {
               child: _loading
                   ? Center(child: Image.asset("assets/loadcat.gif"))
                   : ListView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: widget.student.grades.length,
                       itemBuilder: (BuildContext context, int index) {
                         if (kDebugMode) {
