@@ -83,12 +83,23 @@ class GenibookState extends State<Genibook> {
                     if (snapshot.hasData) {
                       return DynamicColorBuilder(
                           builder: (lightColorScheme, darkColorScheme) {
+                        bool islightColorSchemeNull = lightColorScheme == null;
+                        bool isdarkColorSchemeNull = darkColorScheme == null;
+
                         return MaterialApp(
                             debugShowCheckedModeBanner: false,
                             navigatorKey: Genibook.navigatorKey,
                             title: 'Grades',
-                            theme: widget.lightTheme,
-                            darkTheme: widget.darkTheme,
+                            theme: islightColorSchemeNull
+                                ? widget.lightTheme
+                                : ThemeData(
+                                    colorScheme: lightColorScheme,
+                                    useMaterial3: true),
+                            darkTheme: isdarkColorSchemeNull
+                                ? widget.darkTheme
+                                : ThemeData(
+                                    colorScheme: darkColorScheme,
+                                    useMaterial3: true),
                             //darkTheme: ,
                             // theme: ThemeData(
                             //   colorScheme: lightColorScheme ??
