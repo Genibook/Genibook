@@ -55,15 +55,6 @@ void showDetailedGradePageView(
             ],
           ),
         ),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            //TODO: add learn more button to talk about how we calculate the gpa and stuff
-            child: const Text('Close'),
-          ),
-        ],
       );
     },
   );
