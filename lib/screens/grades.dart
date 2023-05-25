@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:genibook/api/handler.dart';
 import 'package:genibook/api/utils.dart';
+import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/constants.dart';
+import 'package:genibook/models/gpas.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/settings/grades_settings.dart';
 import 'package:genibook/services/notification_service.dart';
@@ -24,11 +27,25 @@ class GradesPage extends StatefulWidget {
 
 class _GradesPageState extends State<GradesPage> {
   bool _loading = false;
+  Gpa? studentGpa;
+  String? selectedMp;
 
   //TODO: add the current mp to make sure nobody is confused, and like maybe add the mp's gpa from the backend..
   // maybe custom refresh indicator
   @override
   void initState() {
+    ApiHandler.getGpa(true).then((value) {
+      setState(() {
+        studentGpa = value;
+      });
+    });
+
+    StoreObjects.readSecret().then((value) {
+      setState(() {
+        selectedMp = value.mp;
+      });
+    });
+
     NotificationService.checkAllowedNotif();
     super.initState();
   }
@@ -105,6 +122,39 @@ class _GradesPageState extends State<GradesPage> {
                                 "[DEBUG: Grades page build, Item builder]: $index , ${widget.student.grades.keys.elementAt(index)}");
                           }
                         }
+                        //todo probably do a like info button on the top left corner of the app bar
+                        // if (index == 0) {
+                        //   return GestureDetector(
+                        //       onTap: () {},
+                        //       child: Padding(
+                        //         padding: const EdgeInsets.only(top: 10),
+                        //         child: Row(
+                        //             mainAxisAlignment: MainAxisAlignment.center,
+                        //             crossAxisAlignment:
+                        //                 CrossAxisAlignment.center,
+                        //             children: [
+                        //               Text(
+                        //                 "Weighted: ${studentGpa?.weighted} ",
+                        //                 style: Theme.of(context)
+                        //                     .textTheme
+                        //                     .bodyLarge,
+                        //               ),
+                        //               Text(
+                        //                 "Unweighted: ${studentGpa?.unweighted} ",
+                        //                 style: Theme.of(context)
+                        //                     .textTheme
+                        //                     .bodyLarge,
+                        //               ),
+                        //               Text(
+                        //                 "Selected MP: $selectedMp",
+                        //                 style: Theme.of(context)
+                        //                     .textTheme
+                        //                     .bodyLarge,
+                        //               )
+                        //             ]),
+                        //       ));
+                        // }
+
                         String courseName =
                             widget.student.grades.keys.elementAt(index);
                         return GestureDetector(

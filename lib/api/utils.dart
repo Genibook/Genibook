@@ -30,6 +30,7 @@ Future<Student> refreshAllData(bool backgroundTask) async {
   await ApiHandler.getNewSchedule(false);
   await ApiHandler.getMPs(false);
   await ApiHandler.getGPAhistory(false);
+  await ApiHandler.getGpa(false);
   return stud;
 }
 

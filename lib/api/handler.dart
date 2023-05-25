@@ -4,6 +4,7 @@ import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/api/utils.dart';
 import 'package:genibook/constants.dart';
+import 'package:genibook/models/gpas.dart';
 import 'package:genibook/models/schedule_class.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/utils/notifications.dart';
@@ -224,5 +225,33 @@ class ApiHandler {
     }
 
     return ret;
+  }
+
+  static Future<Gpa> getGpa(bool getCached) async {
+    Gpa cachedGpa = await StoreObjects.readGpa();
+
+    Secret secret = await StoreObjects.readSecret();
+
+    if (getCached) {
+      return cachedGpa;
+    }
+
+    Map<String, dynamic> jsonString =
+        await loadData("/apiv1/gpas/", secret.toJson());
+
+    if (jsonString.isEmpty) {
+      if (kDebugMode) {
+        print("[DEBUG getGpas] GPAs are empty");
+      }
+      return cachedGpa;
+    } else {
+      Gpa apiGpa = Gpa.fromJson(jsonString);
+      if (apiGpa == cachedGpa) {
+        return cachedGpa;
+      } else {
+        StoreObjects.storeGpa(apiGpa);
+        return apiGpa;
+      }
+    }
   }
 }

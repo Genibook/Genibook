@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/constants.dart';
+import 'package:genibook/models/gpas.dart';
 import 'package:genibook/models/schedule_class.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/models/student_class.dart';
@@ -134,6 +135,37 @@ class StoreObjects {
     }
   }
 
+  static Future<void> storeGpa(Gpa gpa) async {
+    const storage = FlutterSecureStorage(
+      aOptions: AndroidOptions(
+        encryptedSharedPreferences: true,
+      ),
+    );
+    String stringJson = jsonEncode(gpa.toJson());
+    await storage.write(key: "gpa_curr", value: stringJson);
+  }
+
+  static Future<Gpa> readGpa() async {
+    const storage = FlutterSecureStorage(
+      aOptions: AndroidOptions(
+        encryptedSharedPreferences: true,
+      ),
+    );
+    String jsonString = await storage.read(key: "gpa_curr") ?? "";
+
+    if (kDebugMode) {
+      if (Constants.debugModePrintEVERYTHING) {
+        print("[DEBUG] READ GPA: $jsonString)");
+      }
+    }
+    if (jsonString.isNotEmpty) {
+      Map<String, dynamic> jsonn = json.decode(jsonString);
+      return Gpa.fromJson(jsonn);
+    } else {
+      return Gpa(unweighted: 0.0, weighted: 0.0);
+    }
+  }
+
   static Future<Map<String, String>> readAll() async {
     const storage = FlutterSecureStorage(
         aOptions: AndroidOptions(
@@ -154,6 +186,7 @@ class StoreObjects {
     await storage.delete(key: "mps");
     await storage.delete(key: "gpa_his");
     await storage.delete(key: "bg-fetch");
+    await storage.delete(key: "gpa_curr");
   }
 
   //static Future<void> storeSecrets() async{
