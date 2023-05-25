@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:genibook/models/gpas.dart';
 
 void showDetailedGradePageView(
-    BuildContext context, Gpa? studentGpa, String? selectedMp) {
+    BuildContext context, Gpa? studentGpa, String? selectedM) {
   showDialog(
     context: context,
     builder: (context) {
@@ -23,7 +23,7 @@ void showDetailedGradePageView(
                     "Selected MP:",
                     style: Theme.of(context).textTheme.labelLarge,
                   ),
-                  Text("$selectedMp")
+                  Text("$selectedM")
                 ],
               ),
               const Divider(),
