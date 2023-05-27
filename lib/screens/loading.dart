@@ -91,6 +91,8 @@ class _LoadingState extends State<Loading> {
         ),
       ),
       body: Center(
+          child: Padding(
+        padding: const EdgeInsets.only(left: 10, right: 10),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -121,7 +123,7 @@ class _LoadingState extends State<Loading> {
             )
           ],
         ),
-      ),
+      )),
     );
   }
 }
