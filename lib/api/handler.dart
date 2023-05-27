@@ -155,6 +155,14 @@ class ApiHandler {
     Map<String, Map<String, double>> cachedHis =
         await StoreObjects.readGPAhistory();
 
+    if (Constants.fakeGrades) {
+      return {
+        "2020 - 21": {"unweighted": 90, "weighted": 93},
+        "2021 - 22": {"unweighted": 96, "weighted": 98},
+        "Current": {"unweighted": 98.90, "weighted": 101.2}
+      };
+    }
+
     if (getCached) {
       return cachedHis;
     }
@@ -190,6 +198,7 @@ class ApiHandler {
       return cachedHis;
     } else {
       StoreObjects.storeGPAHistory(ret);
+
       return ret;
     }
   }

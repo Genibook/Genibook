@@ -72,16 +72,14 @@ class ApiNavigator extends Navigator {
         //means to the left
         Navigator.of(context).push(SlideToLeftPageRoute(
           child: SchedulePage(
-            scheduleAssignments:
-                Constants.fakeGrades ? scheduleAssignments : schedule,
+            scheduleAssignments: schedule,
           ),
         ));
         return;
       }
       Navigator.of(context).push(SlideToRightPageRoute(
         child: SchedulePage(
-          scheduleAssignments:
-              Constants.fakeGrades ? scheduleAssignments : schedule,
+          scheduleAssignments: schedule,
         ),
       ));
       return;
