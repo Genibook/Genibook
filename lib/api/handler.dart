@@ -78,7 +78,10 @@ class ApiHandler {
       if (apiStudent == currentStudent) {
         return currentStudent;
       } else {
-        sendBGTaskNotification(apiStudent, currentStudent);
+        if (isBackgroundTask) {
+          sendBGTaskNotification(apiStudent, currentStudent);
+        }
+
         StoreObjects.storeStudent(apiStudent);
         return apiStudent;
       }
