@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/cache/objects/objects.dart';
+import 'package:genibook/main.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/screens/eastereggs/credits.dart';
-import 'package:genibook/screens/login.dart';
 import 'package:genibook/utils/base64_to_image.dart';
 import 'package:genibook/routes/swipe.dart';
 import 'package:genibook/utils/profile_utils.dart';
@@ -65,9 +65,17 @@ class _ProfilePageState extends State<ProfilePage> {
                 IconButton(
                     onPressed: () async {
                       await StoreObjects.logout();
+
+                      List<ThemeData> themeList = await giveMeLightAndDark();
+                      ThemeData light = themeList[0];
+                      ThemeData dark = themeList[0];
+
                       // ignore: use_build_context_synchronously
-                      Navigator.of(context).push(
-                          SlideToRightPageRoute(child: const LoginPage()));
+                      Navigator.of(context).push(SlideToRightPageRoute(
+                          child: Genibook(
+                        lightTheme: light,
+                        darkTheme: dark,
+                      )));
                     },
                     icon: const Icon(Icons.logout))
               ],
