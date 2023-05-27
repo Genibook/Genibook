@@ -18,40 +18,51 @@ class NotificationService {
         context: context,
         builder: (BuildContext ctx) {
           return AlertDialog(
-            title: Text('Get Notified!',
-                style: Theme.of(context).textTheme.titleLarge),
+            title: Text(
+              'Get Notified!',
+              style: Theme.of(context).textTheme.titleLarge,
+              textAlign: TextAlign.center,
+            ),
             content: const Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 //TODO redo this dialog
                 Text(
-                    'Allow Awesome Notifications to send you beautiful notifications!'),
+                  "Allow ${Constants.appName} to send you ✨beautiful✨ notifications",
+                  textAlign: TextAlign.center,
+                ),
               ],
             ),
             actions: [
-              TextButton(
-                  onPressed: () {
-                    Navigator.of(ctx).pop();
-                  },
-                  child: Text(
-                    'Deny',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(color: Colors.grey),
-                  )),
-              TextButton(
-                  onPressed: () async {
-                    userAuthorized = true;
-                    Navigator.of(ctx).pop();
-                  },
-                  child: Text(
-                    'Allow',
-                    style: Theme.of(context)
-                        .textTheme
-                        .titleLarge
-                        ?.copyWith(color: Colors.blue),
-                  )),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Text(
+                        'Deny',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(color: Colors.grey),
+                      )),
+                  TextButton(
+                      onPressed: () async {
+                        userAuthorized = true;
+                        Navigator.of(ctx).pop();
+                      },
+                      child: Text(
+                        'Allow',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyLarge
+                            ?.copyWith(color: Colors.blue),
+                      )),
+                ],
+              ),
             ],
           );
         });
