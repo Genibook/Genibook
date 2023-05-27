@@ -28,10 +28,16 @@ class Constants {
 
   static const Color appBlue = Color(0xFF21A8F5);
 
-  static const bool debugMode = false;
+  static const bool debugMode = true;
   static const bool fakeGrades = false;
   static const bool debugModePrintEVERYTHING = false;
 
   static const String tosReadKey = "tos_read";
-  //static const String
+
+  static const Map<int, String> loadingPageFromMap = {
+    0: "login",
+    1: "grade_settings",
+    2: "grade_refresh",
+    3: "debug"
+  };
 }

@@ -3,11 +3,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
-import 'package:genibook/api/utils.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/icons/custom_icons_icons.dart';
-import 'package:genibook/api/navigator.dart';
+import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/extensions/virtualkeyboard.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/widgets/shakey.dart';
@@ -21,12 +20,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  ApiNavigator nav = const ApiNavigator();
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _passwordVisible = false;
-  bool _logiN = false;
 
   final _shakeKey = GlobalKey<ShakeWidgetState>();
 
@@ -62,15 +59,11 @@ class _LoginPageState extends State<LoginPage> {
 
       bool valid = await ApiHandler.login(aSecret);
       if (valid) {
-        setState(() {
-          _logiN = true;
-        });
         await StoreObjects.storeSecret(aSecret);
         await StoreObjects.readSecret();
         //print(json.encode(aSecret.toJson()));
-
-        refreshAllData(false).then((value) => nav.pushToGrades(context, false));
         // ignore: use_build_context_synchronously
+        ApiNavigator.pushToLoadingPage(context, 0);
       } else {
         _shakeKey.currentState?.shake();
       }
@@ -212,21 +205,14 @@ class _LoginPageState extends State<LoginPage> {
                           height: 50,
                           width: 200,
                           child: ElevatedButton.icon(
-                            icon: _logiN
-                                ? const Icon(CustomIcons.cat)
-                                : const Icon(
-                                    CustomIcons.binoculars,
-                                    size: 20.0,
-                                  ),
-                            label: _logiN
-                                ? const Text(
-                                    "Loading",
-                                    textAlign: TextAlign.center,
-                                  )
-                                : const Text(
-                                    'View your Genesis',
-                                    textAlign: TextAlign.center,
-                                  ),
+                            icon: const Icon(
+                              CustomIcons.binoculars,
+                              size: 20.0,
+                            ),
+                            label: const Text(
+                              'View your Genesis',
+                              textAlign: TextAlign.center,
+                            ),
                             onPressed: _login,
                             style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(

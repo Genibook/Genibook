@@ -10,6 +10,7 @@ import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
+import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/models/student_class.dart';
@@ -52,6 +53,15 @@ class _DebugScreenState extends State<DebugScreen> {
           child: SingleChildScrollView(
         child: Column(
           children: [
+            Text(
+              "Screens",
+              style: Theme.of(context).textTheme.displaySmall,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  ApiNavigator.pushToLoadingPage(context, 3);
+                },
+                child: const Text("Page to loading")),
             Text(
               "API calls",
               style: Theme.of(context).textTheme.displaySmall,

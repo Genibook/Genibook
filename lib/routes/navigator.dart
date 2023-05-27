@@ -3,8 +3,9 @@ import 'package:genibook/api/handler.dart';
 import 'package:genibook/api/rawdata.dart';
 
 import 'package:genibook/constants.dart';
+import 'package:genibook/screens/loading.dart';
 
-import '../routes/swipes.dart';
+import 'swipes.dart';
 
 import 'package:genibook/screens/login.dart';
 import 'package:genibook/screens/profile.dart';
@@ -86,5 +87,15 @@ class ApiNavigator extends Navigator {
       ));
       return;
     });
+  }
+
+  static void pushToLoadingPage(BuildContext context, int from) {
+    Navigator.of(context).push(
+      SlideToRightPageRoute(
+          child: Loading(
+        fromScreen: from,
+      )),
+    );
+    return;
   }
 }

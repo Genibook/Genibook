@@ -2,16 +2,12 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/api/rawdata.dart';
-import 'package:genibook/api/utils.dart';
+import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/services/backgroundtasks.dart';
 import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
-// import 'package:genibook/models/student_class.dart';
-// import 'package:genibook/models/grades_class.dart';
 import 'package:genibook/api/handler.dart';
-import 'package:genibook/routes/swipes.dart';
-import 'package:genibook/screens/grades.dart';
 import 'package:genibook/utils/grades_utils.dart';
 
 class GradesSettingsView extends StatefulWidget {
@@ -25,7 +21,6 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
   Secret secret = Secret.fromJson(emptySecretDict);
   List<dynamic> mps = [];
   String? _selectedMP;
-  bool _isLoading = false;
   bool _enabled = true;
   Map<String, List<dynamic>> availableStudents = {};
   String? availableStudentKey;
@@ -223,24 +218,14 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
               onPressed: () async {
                 HapticFeedback.lightImpact();
                 await StoreObjects.storeSecret(secret);
-                setState(() {
-                  _isLoading = true;
-                });
-                refreshMPStudentSchedule().then((value) {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).push(SlideToRightPageRoute(
-                      child: GradesPage(
-                    student: value,
-                  )));
-                });
+                // ignore: use_build_context_synchronously
+                ApiNavigator.pushToLoadingPage(context, 1);
               },
               child:
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                _isLoading
-                    ? const CircularProgressIndicator()
-                    : Text('Save',
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.bodyLarge),
+                Text('Save',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge),
               ]),
             )),
           ],
