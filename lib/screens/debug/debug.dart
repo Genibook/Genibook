@@ -15,7 +15,6 @@ import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/models/student_class.dart';
 import 'package:genibook/screens/login.dart';
-import 'package:genibook/secrets.dart';
 
 const simpleTaskKey = "be.tramckrijte.workmanagerExample.simpleTask";
 const rescheduledTaskKey = "be.tramckrijte.workmanagerExample.rescheduledTask";
