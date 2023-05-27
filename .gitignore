@@ -45,3 +45,4 @@ app.*.map.json
 
 secrets.dart
 /test_data
+genibook-keystore.jks
