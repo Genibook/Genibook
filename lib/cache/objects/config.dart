@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:genibook/constants.dart';
 
 class ConfigCache {
   ConfigCache._();
@@ -45,8 +46,10 @@ class ConfigCache {
     String jsonString = await storage.read(key: "mps") ?? "";
 
     if (kDebugMode) {
-      print("[DEBUG] READ MPS:");
-      print(jsonString);
+      if (Constants.debugModePrintEVERYTHING) {
+        print("[DEBUG] READ MPS:");
+        print(jsonString);
+      }
     }
     if (jsonString.isNotEmpty) {
       List<dynamic> thing = json.decode(jsonString);

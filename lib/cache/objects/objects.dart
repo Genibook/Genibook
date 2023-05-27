@@ -55,7 +55,9 @@ class StoreObjects {
     ));
     String jsonString = await storage.read(key: "secret") ?? "";
     if (kDebugMode) {
-      print("[DEBUG] READ SECRET: $jsonString");
+      if (Constants.debugModePrintEVERYTHING) {
+        print("[DEBUG] READ SECRET: $jsonString");
+      }
     }
     if (jsonString.isNotEmpty) {
       Map<String, dynamic> jsonn = json.decode(jsonString);
