@@ -84,8 +84,8 @@ class _DebugScreenState extends State<DebugScreen> {
             ElevatedButton(
                 onPressed: (() async {
                   Secret secret = Secret(
-                      username: email,
-                      password: password,
+                      username: "email",
+                      password: "pass",
                       userSelector: "1",
                       mp: "MP1",
                       highSchool: "Montgomery High School");
