@@ -34,16 +34,9 @@ class ApiNavigator extends Navigator {
 
   Future<void> pushToGrades<T extends Object>(
       BuildContext context, bool direction) async {
-    // TODO: MAKE SURE TO ADD SOMEWHERE THAT ONLY SUPPORTS HIGH SCHOOLERS (rn middle school thing not fixed)
-
-    //  splash screen (nvm looks ugly)
-
-    // TODO: credits
-    // TODO: finsih grade settings page
     // TODO: bday detection :D
     // TODO: make a chart or smth
     // TODO: google calendar
-    // TODO: NOTIFS
     // TODO: add something for ungraded assignments
     ApiHandler.getNewStudent(true, false).then((student) {
       if (direction) {

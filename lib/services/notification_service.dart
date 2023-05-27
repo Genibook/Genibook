@@ -127,8 +127,6 @@ class NotificationService {
       ReceivedAction receivedAction) async {
     debugPrint('onDismissActionReceivedMethod');
 
-    //TODO - check if ios badge notification decreements if i dismiss/open something
-
     if (receivedAction.channelKey ==
             "${Constants.lowerCaseAppName}_grade_change" &&
         Platform.isIOS) {

@@ -30,8 +30,6 @@ class _GradesPageState extends State<GradesPage> {
   Gpa? studentGpa;
   String? selectedMp;
 
-  //TODO: add the current mp to make sure nobody is confused, and like maybe add the mp's gpa from the backend..
-  // maybe custom refresh indicator
   @override
   void initState() {
     ApiHandler.getGpa(true).then((value) {

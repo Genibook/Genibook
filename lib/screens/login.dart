@@ -41,9 +41,6 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _login() async {
-    setState(() {
-      _logiN = true;
-    });
     if (_formKey.currentState!.validate()) {
       String email = _emailController.text;
       String pass = _passwordController.text;
@@ -65,6 +62,9 @@ class _LoginPageState extends State<LoginPage> {
 
       bool valid = await ApiHandler.login(aSecret);
       if (valid) {
+        setState(() {
+          _logiN = true;
+        });
         await StoreObjects.storeSecret(aSecret);
         await StoreObjects.readSecret();
         //print(json.encode(aSecret.toJson()));
