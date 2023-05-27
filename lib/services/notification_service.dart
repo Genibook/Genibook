@@ -26,7 +26,6 @@ class NotificationService {
             content: const Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                //TODO redo this dialog
                 Text(
                   "Allow ${Constants.appName} to send you ✨beautiful✨ notifications",
                   textAlign: TextAlign.center,
