@@ -26,8 +26,7 @@ class _LoadingState extends State<Loading> {
     "Genibook actually had a version 1 - called Zenesus!",
     "You can contact eddietang2314@gmail.com if you have any questions!",
     "Genibook/Zenesus's first supported opperating system was Windows.",
-    "",
-    // Add more texts to the list
+    "Genibook is free and open source! Link: https://github.com/Zenesus",
   ];
 
   void startLooping() {
@@ -97,12 +96,15 @@ class _LoadingState extends State<Loading> {
                   .headlineMedium
                   ?.copyWith(fontSize: 20),
             ),
+            const SizedBox(
+              height: 10,
+            ),
             Text(
               textList[currentIndex],
               style: Theme.of(context)
                   .textTheme
                   .headlineMedium
-                  ?.copyWith(fontSize: 20),
+                  ?.copyWith(fontSize: 23),
               textAlign: TextAlign.center,
             )
           ],
