@@ -70,6 +70,18 @@ class _LoadingState extends State<Loading> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: 30,
+        elevation: 2,
+        shadowColor: Theme.of(context).shadowColor,
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          "Loading...",
+          style: Theme.of(context).textTheme.bodySmall,
+          textAlign: TextAlign.center,
+        ),
+      ),
       bottomNavigationBar: BottomAppBar(
         height: 40,
         child: Text(
