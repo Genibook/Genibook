@@ -38,6 +38,7 @@ Future<Student> refreshMPStudentSchedule() async {
   Student stud = await ApiHandler.getNewStudent(false, false);
   await ApiHandler.getNewSchedule(false);
   await ApiHandler.getMPs(false);
+  await ApiHandler.getGpa(false);
   return stud;
 }
 
