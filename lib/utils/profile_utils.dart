@@ -1,12 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+
 import 'package:genibook/constants.dart';
 import 'package:genibook/models/student_class.dart';
 import 'package:genibook/utils/grades_utils.dart';
-import 'package:json_theme/json_theme.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 List<Widget> generateUnDetailedProfileInfo(
@@ -129,15 +127,4 @@ Future<void> LaunchUrl(String urll) async {
   if (!await launchUrl(url)) {
     throw Exception('Could not launch $url');
   }
-}
-
-Future<List<ThemeData>> giveMeLightAndDark() async {
-  final lightThemeStr = await rootBundle.loadString('assets/light_theme.json');
-  final themeJson = jsonDecode(lightThemeStr);
-  final lightTheme = ThemeDecoder.decodeThemeData(themeJson)!;
-
-  final darkThemeStr = await rootBundle.loadString('assets/dark_theme.json');
-  final darkThemeJson = jsonDecode(darkThemeStr);
-  final darkTheme = ThemeDecoder.decodeThemeData(darkThemeJson)!;
-  return [lightTheme, darkTheme];
 }
