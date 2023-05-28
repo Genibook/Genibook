@@ -64,7 +64,8 @@ class GenibookState extends State<Genibook> with WidgetsBindingObserver {
         if (kDebugMode) {
           print("app in paused");
         }
-        // ConfigCache.storeSessionBioAuth(false);
+        //TODO: REBUILD FOR IOS AND ANDROID LATER sussy idk why
+        ConfigCache.storeSessionBioAuth(false);
         break;
       case AppLifecycleState.detached:
         if (kDebugMode) {
