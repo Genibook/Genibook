@@ -1,10 +1,7 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/api/rawdata.dart';
 import 'package:genibook/routes/navigator.dart';
-import 'package:genibook/services/backgroundtasks.dart';
-import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/api/handler.dart';
@@ -21,10 +18,9 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
   Secret secret = Secret.fromJson(emptySecretDict);
   List<dynamic> mps = [];
   String? _selectedMP;
-  bool _enabled = true;
+
   Map<String, List<dynamic>> availableStudents = {};
   String? availableStudentKey;
-  int latency = -1;
 
   @override
   void initState() {
@@ -42,12 +38,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
         availableStudentKey = secret.userSelector;
       });
     });
-    ConfigCache.readBgFetchVal().then((value) {
-      if (!mounted) return;
-      setState(() {
-        _enabled = value;
-      });
-    });
+
     ApiHandler.getAvailableStudents().then((value) {
       if (!mounted) return;
       setState(() {
@@ -56,18 +47,6 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
     });
 
     super.initState();
-  }
-
-  void _onClickEnable(bool enabled) async {
-    HapticFeedback.mediumImpact();
-
-    await ConfigCache.storeBgFetchVal(enabled);
-    setBackgroundFetch(enabled);
-    setState(() {
-      _enabled = enabled;
-    });
-
-    if (!mounted) return;
   }
 
   @override
@@ -81,31 +60,6 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Test latency: ",
-                    style: Theme.of(context).textTheme.labelLarge,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        "$latency ms",
-                      ),
-                      IconButton(
-                          onPressed: () async {
-                            HapticFeedback.lightImpact();
-                            int lat = await ApiHandler.getLatencyThroughLogin();
-                            setState(() {
-                              latency = lat;
-                            });
-                          },
-                          icon: const Icon(Icons.refresh)),
-                    ],
-                  ),
-                ]),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -168,66 +122,40 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                 )
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  "Background Refresh: ",
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-                //fuck this is hate my life sometimes
-                // idk it loks shit when not enabled
-                //hopefully users enable it
-                Switch(
-                  value: _enabled,
-                  onChanged: _onClickEnable,
-                ),
-              ],
-            ),
           ],
         ),
       ),
       actions: <Widget>[
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            SizedBox(
-                child: TextButton(
-                    onPressed: () async {
-                      HapticFeedback.heavyImpact();
-                      if (await AwesomeNotifications().getGlobalBadgeCounter() >
-                          0) {
-                        // ignore: use_build_context_synchronously
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text("Notifications Cleared!"),
-                        ));
-                        AwesomeNotifications().setGlobalBadgeCounter(0);
-                      }
-                    },
-                    child: Text("Clear notifications",
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyLarge
-                            ?.copyWith(fontSize: 10)))),
-            SizedBox(
-                child: TextButton(
+            TextButton(
+              onPressed: () async {
+                HapticFeedback.lightImpact();
+                Navigator.of(context).pop();
+              },
+              child: Text('Exit',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: Colors.grey)),
+            ),
+            TextButton(
               onPressed: () async {
                 HapticFeedback.lightImpact();
                 await StoreObjects.storeSecret(secret);
                 // ignore: use_build_context_synchronously
                 ApiNavigator.pushToLoadingPage(context, 1);
               },
-              child:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text('Save',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyLarge),
-              ]),
-            )),
+              child: Text('Save',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyLarge
+                      ?.copyWith(color: Colors.blue)),
+            ),
           ],
         ),
       ],
