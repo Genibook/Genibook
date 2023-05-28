@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/models/gpas.dart';
 
-void showDetailedGradePageView(
-    BuildContext context, Gpa? studentGpa, String? selectedM) {
+void showDetailedGradePageView(BuildContext context, Gpa? studentGpa) {
   showDialog(
     context: context,
     builder: (context) {
@@ -15,18 +14,6 @@ void showDetailedGradePageView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "Selected MP:",
-                    style: Theme.of(context).textTheme.labelLarge,
-                  ),
-                  Text("$selectedM")
-                ],
-              ),
-              const Divider(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,

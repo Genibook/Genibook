@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
-import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/gpas.dart';
 import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/api/utils.dart';
@@ -27,7 +26,6 @@ class _LoadingState extends State<Loading> {
   Random random = Random();
   int currentIndex = -1;
   Gpa? studentGpa;
-  String? selectedMp;
 
   List<String> textList = [
     "Our app uses cats as comforting assistants?",
@@ -56,12 +54,6 @@ class _LoadingState extends State<Loading> {
     ApiHandler.getGpa(true).then((value) {
       setState(() {
         studentGpa = value;
-      });
-    });
-
-    StoreObjects.readSecret().then((value) {
-      setState(() {
-        selectedMp = value.mp;
       });
     });
 
@@ -98,7 +90,7 @@ class _LoadingState extends State<Loading> {
         leading: IconButton(
           icon: const Icon(Icons.info_outline),
           onPressed: () {
-            showDetailedGradePageView(context, studentGpa, selectedMp);
+            showDetailedGradePageView(context, studentGpa);
           },
         ),
         actions: [

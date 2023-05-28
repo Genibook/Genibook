@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/cache/objects/config.dart';
-import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/models/gpas.dart';
 import 'package:genibook/routes/navigator.dart';
@@ -29,25 +28,17 @@ class GradesPage extends StatefulWidget {
 
 class _GradesPageState extends State<GradesPage> {
   Gpa? studentGpa;
-  String? selectedMp;
 
   late final LocalAuthentication auth;
   bool _supportState = false;
   bool doesUserUseBioAuth = false;
   bool isauth = false;
   bool sessionBioAuth = true;
-//TODO: so the info pop up delete the goofy mp cuz the settings has it already
   @override
   void initState() {
     ApiHandler.getGpa(true).then((value) {
       setState(() {
         studentGpa = value;
-      });
-    });
-
-    StoreObjects.readSecret().then((value) {
-      setState(() {
-        selectedMp = value.mp;
       });
     });
 
@@ -138,7 +129,7 @@ class _GradesPageState extends State<GradesPage> {
               leading: IconButton(
                 icon: const Icon(Icons.info_outline),
                 onPressed: () {
-                  showDetailedGradePageView(context, studentGpa, selectedMp);
+                  showDetailedGradePageView(context, studentGpa);
                 },
               ),
               actions: [
