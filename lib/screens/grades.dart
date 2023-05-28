@@ -36,7 +36,7 @@ class _GradesPageState extends State<GradesPage> {
   bool doesUserUseBioAuth = false;
   bool isauth = false;
   bool sessionBioAuth = true;
-
+//TODO: so the info pop up delete the goofy mp cuz the settings has it already
   @override
   void initState() {
     ApiHandler.getGpa(true).then((value) {
