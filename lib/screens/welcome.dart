@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:genibook/widgets/tos.dart';
 import 'package:genibook/constants.dart';
-import 'package:genibook/extensions/darkmode.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -49,58 +48,50 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     //LoginPage()
     return Scaffold(
-        body: Container(
-      decoration: context.isDarkMode
-          ? null
-          : const BoxDecoration(color: Constants.appBlue),
-      child: SafeArea(
-          child: Padding(
+        body: SafeArea(
+      child: Padding(
         padding: const EdgeInsets.all(5),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            RotationTransition(
-                turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
-                child: Center(
-                  child: Image(
-                      image: context.isDarkMode
-                          ? const AssetImage(
-                              "assets/icon-blue-transparent-meow.png")
-                          : const AssetImage(
-                              "assets/icon-black-transparent.png")),
-                )),
+            // RotationTransition(
+            //     turns: Tween(begin: 0.0, end: 1.0).animate(_controller),
+            //     child: Center(
+            //       child: Image(
+            //           image: context.isDarkMode
+            //               ? const AssetImage(
+            //                   "assets/icon-blue-transparent-meow.png")
+            //               : const AssetImage(
+            //                   "assets/icon-black-transparent.png")),
+            //     )),
             Text(
-              "Welcome to ${Constants.appName}.",
-              style: Theme.of(context).textTheme.displaySmall,
+              Constants.appName,
+              style: Theme.of(context)
+                  .textTheme
+                  .displayLarge
+                  ?.copyWith(fontSize: 30),
               textAlign: TextAlign.center,
             ),
-            const Spacer(),
+
             Text(
               Constants.tagline,
               style: Theme.of(context).textTheme.displayMedium,
               textAlign: TextAlign.center,
             ),
-            const Spacer(),
+
             Opacity(
               opacity: _showButton ? _controller.value : 0.0,
-              child: ElevatedButton(
+              child: IconButton(
                 onPressed: () async {
                   showPrivacyPolicyDialog(context);
                 },
-                child: const SizedBox(
-                    height: 50,
-                    width: 120,
-                    child: Center(
-                      child: Text(
-                        "Let's hop in 🐈🎓",
-                        textAlign: TextAlign.center,
-                      ),
-                    )),
+                icon: const Icon(Icons.arrow_forward_ios),
               ),
             ),
-            const Spacer(),
           ],
         ),
-      )),
+      ),
     ));
   }
 }

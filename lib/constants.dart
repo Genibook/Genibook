@@ -22,13 +22,13 @@ class Constants {
 
   static const int transitionDurationOfSwipeForLeft = 155;
 
-  static const String tagline = "It's Genesis remade.";
+  static const String tagline = "It's Genesis but better";
   static const String appName = "Genibook";
   static const String lowerCaseAppName = "genibook";
 
   static const Color appBlue = Color(0xFF21A8F5);
 
-  static const bool debugMode = true;
+  static const bool debugMode = false;
   static const bool fakeGrades = false;
   static const bool debugModePrintEVERYTHING = false;
 
