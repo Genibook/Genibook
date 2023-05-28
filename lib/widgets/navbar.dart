@@ -3,9 +3,11 @@ import 'package:genibook/constants.dart';
 import 'package:genibook/routes/navigator.dart';
 
 class Navbar extends StatefulWidget {
-  // ignore: use_key_in_widget_constructors
-  const Navbar({Key? key, required this.selectedIndex});
+  final bool disabled;
   final int selectedIndex;
+  // ignore: use_key_in_widget_constructors
+  const Navbar({Key? key, required this.selectedIndex, required this.disabled});
+
   @override
   State<StatefulWidget> createState() => NavBarState();
 }
@@ -27,6 +29,9 @@ class NavBarState extends State<Navbar> {
   }
 
   void _onItemTapped(int index) async {
+    if (widget.disabled) {
+      return;
+    }
     int selectedIndex = _selectedIndex;
     setState(() {
       _selectedIndex = index;

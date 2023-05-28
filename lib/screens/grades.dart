@@ -53,8 +53,10 @@ class _GradesPageState extends State<GradesPage> {
           swipeHandler(details, Constants.gradePageNavNumber, context);
         },
         child: Scaffold(
-            bottomNavigationBar:
-                const Navbar(selectedIndex: Constants.gradePageNavNumber),
+            bottomNavigationBar: const Navbar(
+              selectedIndex: Constants.gradePageNavNumber,
+              disabled: false,
+            ),
             appBar: AppBar(
               title: const Text('Grades'),
               elevation: 2,

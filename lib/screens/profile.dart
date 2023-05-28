@@ -72,8 +72,10 @@ class _ProfilePageState extends State<ProfilePage> {
                     icon: const Icon(Icons.logout))
               ],
             ),
-            bottomNavigationBar:
-                const Navbar(selectedIndex: Constants.profilePageNavNumber),
+            bottomNavigationBar: const Navbar(
+              selectedIndex: Constants.profilePageNavNumber,
+              disabled: false,
+            ),
             body: SafeArea(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),

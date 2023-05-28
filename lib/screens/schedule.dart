@@ -34,8 +34,10 @@ class _SchedulePageState extends State<SchedulePage> {
           swipeHandler(details, Constants.schedulePageNavNumber, context);
         },
         child: Scaffold(
-            bottomNavigationBar:
-                const Navbar(selectedIndex: Constants.schedulePageNavNumber),
+            bottomNavigationBar: const Navbar(
+              selectedIndex: Constants.schedulePageNavNumber,
+              disabled: false,
+            ),
             appBar: AppBar(
               title: const Text('Schedule'),
               automaticallyImplyLeading: false,

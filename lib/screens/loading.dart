@@ -1,11 +1,17 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:genibook/api/handler.dart';
+import 'package:genibook/cache/objects/objects.dart';
+import 'package:genibook/models/gpas.dart';
 import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/api/utils.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/grades.dart';
+import 'package:genibook/screens/settings/grades_settings.dart';
+import 'package:genibook/widgets/detailed/detailed_grade_info.dart';
+import 'package:genibook/widgets/navbar.dart';
 
 class Loading extends StatefulWidget {
   final int fromScreen;
@@ -20,6 +26,8 @@ class _LoadingState extends State<Loading> {
   ApiNavigator nav = const ApiNavigator();
   Random random = Random();
   int currentIndex = -1;
+  Gpa? studentGpa;
+  String? selectedMp;
 
   List<String> textList = [
     "Our app uses cats as comforting assistants?",
@@ -45,6 +53,18 @@ class _LoadingState extends State<Loading> {
 
   @override
   void initState() {
+    ApiHandler.getGpa(true).then((value) {
+      setState(() {
+        studentGpa = value;
+      });
+    });
+
+    StoreObjects.readSecret().then((value) {
+      setState(() {
+        selectedMp = value.mp;
+      });
+    });
+
     super.initState();
     startLooping();
     String fromScreen =
@@ -71,24 +91,35 @@ class _LoadingState extends State<Loading> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 30,
+        title: const Text('Grades'),
         elevation: 2,
         shadowColor: Theme.of(context).shadowColor,
         automaticallyImplyLeading: false,
-        centerTitle: true,
-        title: Text(
-          "Loading...",
-          style: Theme.of(context).textTheme.bodySmall,
-          textAlign: TextAlign.center,
+        leading: IconButton(
+          icon: const Icon(Icons.info_outline),
+          onPressed: () {
+            showDetailedGradePageView(context, studentGpa, selectedMp);
+          },
         ),
+        actions: [
+          SizedBox(
+              height: 50,
+              width: 50,
+              child: IconButton(
+                  onPressed: (() {
+                    // ApiHandler.getNewStudent(false);
+                    showDialog(
+                        context: context,
+                        builder: ((context) {
+                          return const GradesSettingsView();
+                        }));
+                  }),
+                  icon: const Icon(Icons.settings))),
+        ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        height: 40,
-        child: Text(
-          "Loading...",
-          style: Theme.of(context).textTheme.bodySmall,
-          textAlign: TextAlign.center,
-        ),
+      bottomNavigationBar: const Navbar(
+        selectedIndex: Constants.gradePageNavNumber,
+        disabled: true,
       ),
       body: Center(
           child: Padding(
@@ -96,8 +127,15 @@ class _LoadingState extends State<Loading> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              "Loading...",
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium
+                  ?.copyWith(fontSize: 13),
+            ),
             const SizedBox(
-              height: 10,
+              height: 15,
             ),
             Center(
                 child: Image.asset(
@@ -108,7 +146,7 @@ class _LoadingState extends State<Loading> {
               style: Theme.of(context)
                   .textTheme
                   .headlineMedium
-                  ?.copyWith(fontSize: 20),
+                  ?.copyWith(fontSize: 13),
             ),
             const SizedBox(
               height: 10,
@@ -118,7 +156,7 @@ class _LoadingState extends State<Loading> {
               style: Theme.of(context)
                   .textTheme
                   .headlineMedium
-                  ?.copyWith(fontSize: 23),
+                  ?.copyWith(fontSize: 15),
               textAlign: TextAlign.center,
             )
           ],
