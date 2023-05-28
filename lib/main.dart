@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
+import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/services/backgroundtasks.dart';
 import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
@@ -45,9 +47,34 @@ class Genibook extends StatefulWidget {
   State<StatefulWidget> createState() => GenibookState();
 }
 
-class GenibookState extends State<Genibook> {
+class GenibookState extends State<Genibook> with WidgetsBindingObserver {
   Future<bool>? loginOrSplash;
   Future<Secret>? alreadyLoggedIn;
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        // print("app in resumed");
+        break;
+      case AppLifecycleState.inactive:
+        //  print("app in inactive");
+        break;
+      case AppLifecycleState.paused:
+        if (kDebugMode) {
+          print("app in paused");
+        }
+        // ConfigCache.storeSessionBioAuth(false);
+        break;
+      case AppLifecycleState.detached:
+        if (kDebugMode) {
+          print("app in detached");
+        }
+        ConfigCache.storeSessionBioAuth(false);
+
+        break;
+    }
+  }
 
   @override
   void initState() {
@@ -56,6 +83,13 @@ class GenibookState extends State<Genibook> {
     loginOrSplash = readTOS();
     alreadyLoggedIn = StoreObjects.readSecret();
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
   }
 
   @override

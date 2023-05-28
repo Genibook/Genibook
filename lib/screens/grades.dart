@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
@@ -32,7 +33,9 @@ class _GradesPageState extends State<GradesPage> {
 
   late final LocalAuthentication auth;
   bool _supportState = false;
-  bool? doesUserUseBioAuth;
+  bool doesUserUseBioAuth = false;
+  bool isauth = false;
+  bool sessionBioAuth = true;
 
   @override
   void initState() {
@@ -54,6 +57,12 @@ class _GradesPageState extends State<GradesPage> {
       });
     });
 
+    ConfigCache.readSessionBioAuth().then((bool value) {
+      setState(() {
+        sessionBioAuth = value;
+      });
+    });
+
     NotificationService.checkAllowedNotif();
     super.initState();
 
@@ -65,8 +74,53 @@ class _GradesPageState extends State<GradesPage> {
     });
   }
 
+  Future<void> _auth() async {
+    if (_supportState) {
+      if (doesUserUseBioAuth) {
+        try {
+          bool authenticated = await auth.authenticate(
+              localizedReason: "Authenticate to view grades",
+              options: const AuthenticationOptions(
+                  stickyAuth: true, biometricOnly: true));
+
+          setState(() {
+            isauth = authenticated;
+          });
+          await ConfigCache.storeSessionBioAuth(isauth);
+        } on PlatformException catch (e) {
+          if (kDebugMode) {
+            print(e);
+          }
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (_supportState) {
+      if (doesUserUseBioAuth) {
+        if (!sessionBioAuth) {
+          if (!isauth) {
+            return SafeArea(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                  Text(
+                    "Authenticate to view grades",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  IconButton(
+                      iconSize: 50,
+                      onPressed: () {
+                        _auth();
+                      },
+                      icon: const Icon(Icons.login))
+                ]));
+          }
+        }
+      }
+    }
     return GestureDetector(
         onPanUpdate: (details) {
           swipeHandler(details, Constants.gradePageNavNumber, context);
@@ -93,7 +147,6 @@ class _GradesPageState extends State<GradesPage> {
                     width: 50,
                     child: IconButton(
                         onPressed: (() {
-                          // ApiHandler.getNewStudent(false);
                           showDialog(
                               context: context,
                               builder: ((context) {

@@ -88,6 +88,9 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   icon: const Icon(Icons.logout))
             ],
           ),
+          const SizedBox(
+            height: 10,
+          ),
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,12 +120,15 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   ],
                 ),
               ]),
+          const SizedBox(
+            height: 10,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Clear Notifications: ",
+                "Clear notifications: ",
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               IconButton(
@@ -140,12 +146,13 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                   icon: const Icon(Icons.delete))
             ],
           ),
+          const Divider(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Background Refresh: ",
+                "Background refresh: ",
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               Switch(
@@ -154,12 +161,15 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               ),
             ],
           ),
+          const SizedBox(
+            height: 10,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Use Face-ID to login: ",
+                "Bio-metrics to login: ",
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               Switch(

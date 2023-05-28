@@ -76,7 +76,28 @@ class ConfigCache {
         aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
     ));
-    String value = await storage.read(key: "bio_auth") ?? "true";
+    String value = await storage.read(key: "bio_auth") ?? "false";
+    return value.toLowerCase() == 'true';
+  }
+
+  static Future<void> storeSessionBioAuth(bool auth) async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
+    if (auth) {
+      await storage.write(key: "session_bio_auth", value: "true");
+    } else {
+      await storage.write(key: "session_bio_auth", value: "false");
+    }
+  }
+
+  static Future<bool> readSessionBioAuth() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
+    String value = await storage.read(key: "session_bio_auth") ?? "false";
     return value.toLowerCase() == 'true';
   }
 }
