@@ -58,4 +58,25 @@ class ConfigCache {
       return <dynamic>["MP1", "MP2"];
     }
   }
+
+  static Future<void> storeBioAuth(bool doesUserWantIt) async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
+    if (doesUserWantIt) {
+      await storage.write(key: "bio_auth", value: "true");
+    } else {
+      await storage.write(key: "bio_auth", value: "false");
+    }
+  }
+
+  static Future<bool> readBioAuth() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
+    String value = await storage.read(key: "bio_auth") ?? "true";
+    return value.toLowerCase() == 'true';
+  }
 }

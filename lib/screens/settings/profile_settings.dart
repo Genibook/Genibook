@@ -16,15 +16,22 @@ class ProfileSettings extends StatefulWidget {
 }
 
 class _ProfileSettingsState extends State<ProfileSettings> {
-  bool _enabled = true;
+  bool _enabled = false;
+  bool _bioAuthEnabled = false;
   int latency = -1;
 
   @override
   void initState() {
-    ConfigCache.readBgFetchVal().then((value) {
+    ConfigCache.readBgFetchVal().then((bool value) {
       if (!mounted) return;
       setState(() {
         _enabled = value;
+      });
+    });
+    ConfigCache.readBioAuth().then((bool value) {
+      if (!mounted) return;
+      setState(() {
+        _bioAuthEnabled = value;
       });
     });
     super.initState();
@@ -37,6 +44,16 @@ class _ProfileSettingsState extends State<ProfileSettings> {
     setBackgroundFetch(enabled);
     setState(() {
       _enabled = enabled;
+    });
+
+    if (!mounted) return;
+  }
+
+  void _onBioToggle(bool enabled) async {
+    HapticFeedback.mediumImpact();
+    await ConfigCache.storeBioAuth(enabled);
+    setState(() {
+      _bioAuthEnabled = enabled;
     });
 
     if (!mounted) return;
@@ -134,6 +151,20 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               Switch(
                 value: _enabled,
                 onChanged: _onClickEnable,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                "Use Face-ID to login: ",
+                style: Theme.of(context).textTheme.labelLarge,
+              ),
+              Switch(
+                value: _bioAuthEnabled,
+                onChanged: _onBioToggle,
               ),
             ],
           ),

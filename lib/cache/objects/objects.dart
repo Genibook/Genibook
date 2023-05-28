@@ -189,6 +189,7 @@ class StoreObjects {
     await storage.delete(key: "gpa_his");
     await storage.delete(key: "bg-fetch");
     await storage.delete(key: "gpa_curr");
+    await storage.delete(key: "bio_auth");
     await storage.delete(key: Constants.tosReadKey);
   }
 

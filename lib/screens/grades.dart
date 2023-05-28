@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
+import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/models/gpas.dart';
@@ -10,6 +11,7 @@ import 'package:genibook/services/notification_service.dart';
 import 'package:genibook/utils/grades_utils.dart';
 import 'package:genibook/widgets/detailed/detailed_grade_info.dart';
 import 'package:genibook/widgets/navbar.dart';
+import 'package:local_auth/local_auth.dart';
 import '../routes/swipe.dart';
 import 'assignments.dart';
 import '../models/student_class.dart';
@@ -28,6 +30,10 @@ class _GradesPageState extends State<GradesPage> {
   Gpa? studentGpa;
   String? selectedMp;
 
+  late final LocalAuthentication auth;
+  bool _supportState = false;
+  bool? doesUserUseBioAuth;
+
   @override
   void initState() {
     ApiHandler.getGpa(true).then((value) {
@@ -42,8 +48,21 @@ class _GradesPageState extends State<GradesPage> {
       });
     });
 
+    ConfigCache.readBioAuth().then((bool value) {
+      setState(() {
+        doesUserUseBioAuth = value;
+      });
+    });
+
     NotificationService.checkAllowedNotif();
     super.initState();
+
+    auth = LocalAuthentication();
+    auth.isDeviceSupported().then((bool isSupported) {
+      setState(() {
+        _supportState = isSupported;
+      });
+    });
   }
 
   @override
