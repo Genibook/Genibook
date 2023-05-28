@@ -169,7 +169,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Bio-metrics to login: ",
+                "Face/Touch ID support: ",
                 style: Theme.of(context).textTheme.labelLarge,
               ),
               Switch(
