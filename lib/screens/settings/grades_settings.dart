@@ -135,7 +135,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                 HapticFeedback.lightImpact();
                 Navigator.of(context).pop();
               },
-              child: Text('Exit',
+              child: Text('Cancel',
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
@@ -143,6 +143,7 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                       ?.copyWith(color: Colors.grey)),
             ),
             TextButton(
+              //TODO: textbutton material you color kinda weird, as quoted by eetash
               onPressed: () async {
                 HapticFeedback.lightImpact();
                 await StoreObjects.storeSecret(secret);
