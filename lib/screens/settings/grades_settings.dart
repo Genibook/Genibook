@@ -144,6 +144,8 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
             ),
             TextButton(
               //TODO: textbutton material you color kinda weird, as quoted by eetash
+              //maybe make it like not in a row widget (idk tried it its weird)
+
               onPressed: () async {
                 HapticFeedback.lightImpact();
                 await StoreObjects.storeSecret(secret);
