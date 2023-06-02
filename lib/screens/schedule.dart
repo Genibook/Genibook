@@ -58,7 +58,8 @@ class _SchedulePageState extends State<SchedulePage> {
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
 
-                              //TODO: why the goofy purple color???????????
+                              //idfk where and how to change the goofy purple color sorry eetash
+                              //cope ;)
                               color: date == _selectedDay
                                   ? Colors.transparent
                                   : Theme.of(context)

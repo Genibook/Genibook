@@ -69,32 +69,33 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 ButtonTheme(
-                  alignedDropdown: true,
-                  child: DropdownButton(
-                      value: _selectedMP,
-                      items: mps
-                          .map((mp) => DropdownMenuItem(
-                              value: mp,
-                              child: Text(
-                                mp,
-                                style: const TextStyle(fontSize: 15),
-                              )))
-                          .toList(),
-                      onChanged: (mp) {
-                        HapticFeedback.lightImpact();
-                        _selectedMP = mp as String;
-                        secret.mp = mp;
+                    alignedDropdown: true,
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                          value: _selectedMP,
+                          items: mps
+                              .map((mp) => DropdownMenuItem(
+                                  value: mp,
+                                  child: Text(
+                                    mp,
+                                    style: const TextStyle(fontSize: 15),
+                                  )))
+                              .toList(),
+                          onChanged: (mp) {
+                            HapticFeedback.lightImpact();
+                            _selectedMP = mp as String;
+                            secret.mp = mp;
 
-                        ApiHandler.getMPs(true).then(
-                          (value) {
-                            if (!mounted) return;
-                            setState(() {
-                              mps = value;
-                            });
-                          },
-                        );
-                      }),
-                )
+                            ApiHandler.getMPs(true).then(
+                              (value) {
+                                if (!mounted) return;
+                                setState(() {
+                                  mps = value;
+                                });
+                              },
+                            );
+                          }),
+                    ))
               ],
             ),
             Row(
@@ -106,46 +107,45 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
                   style: Theme.of(context).textTheme.labelLarge,
                 ),
                 ButtonTheme(
-                  alignedDropdown: true,
-                  child: DropdownButton(
-                      value: availableStudentKey,
-                      items: generateAvailableStudentsDropDown(
-                          availableStudents, context),
-                      onChanged: (aStringNumber) {
-                        HapticFeedback.lightImpact();
-                        String selector = aStringNumber as String;
-                        secret.userSelector = selector;
-                        setState(() {
-                          availableStudentKey = selector;
-                        });
-                      }),
-                )
+                    alignedDropdown: true,
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                          value: availableStudentKey,
+                          items: generateAvailableStudentsDropDown(
+                              availableStudents, context),
+                          onChanged: (aStringNumber) {
+                            HapticFeedback.lightImpact();
+                            String selector = aStringNumber as String;
+                            secret.userSelector = selector;
+                            setState(() {
+                              availableStudentKey = selector;
+                            });
+                          }),
+                    ))
               ],
             ),
           ],
         ),
       ),
       actions: <Widget>[
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            TextButton(
-              onPressed: () async {
-                HapticFeedback.lightImpact();
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: Colors.grey)),
-            ),
-            TextButton(
-              //TODO: textbutton material you color kinda weird, as quoted by eetash
-              //maybe make it like not in a row widget (idk tried it its weird)
-
+        SizedBox(
+          height: 45,
+          child: ElevatedButton(
+            onPressed: () async {
+              HapticFeedback.lightImpact();
+              Navigator.of(context).pop();
+            },
+            child: Text('Cancel',
+                textAlign: TextAlign.center,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(color: Colors.grey)),
+          ),
+        ),
+        SizedBox(
+            height: 45,
+            child: ElevatedButton(
               onPressed: () async {
                 HapticFeedback.lightImpact();
                 await StoreObjects.storeSecret(secret);
@@ -154,13 +154,8 @@ class _GradesSettingsViewState extends State<GradesSettingsView> {
               },
               child: Text('Save',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyLarge
-                      ?.copyWith(color: Colors.blue)),
-            ),
-          ],
-        ),
+                  style: Theme.of(context).textTheme.bodyLarge),
+            )),
       ],
     );
   }
