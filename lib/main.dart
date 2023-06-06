@@ -107,21 +107,34 @@ class GenibookState extends State<Genibook> {
     if (_supportState) {
       if (doesUserUseBioAuth) {
         if (!isauth) {
-          return SafeArea(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                Text(
-                  "Authenticate",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                IconButton(
-                    iconSize: 50,
-                    onPressed: () {
-                      _auth();
-                    },
-                    icon: const Icon(Icons.login))
-              ]));
+          return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: Scaffold(
+                  body: SafeArea(
+                      child: Center(
+                          child: Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Authenticate with biometrics",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .displaySmall
+                                          ?.copyWith(color: Colors.blue),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    IconButton(
+                                        iconSize: 50,
+                                        onPressed: () {
+                                          _auth();
+                                        },
+                                        icon: const Icon(Icons.login))
+                                  ]))))),
+              theme: widget.lightTheme,
+              darkTheme: widget.darkTheme);
         }
       }
     }
