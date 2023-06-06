@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:genibook/api/handler.dart';
-import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/models/gpas.dart';
 import 'package:genibook/routes/navigator.dart';
@@ -11,7 +9,6 @@ import 'package:genibook/services/notification_service.dart';
 import 'package:genibook/utils/grades_utils.dart';
 import 'package:genibook/widgets/detailed/detailed_grade_info.dart';
 import 'package:genibook/widgets/navbar.dart';
-import 'package:local_auth/local_auth.dart';
 import '../routes/swipe.dart';
 import 'assignments.dart';
 import '../models/student_class.dart';
@@ -29,11 +26,6 @@ class GradesPage extends StatefulWidget {
 class _GradesPageState extends State<GradesPage> {
   Gpa? studentGpa;
 
-  late final LocalAuthentication auth;
-  bool _supportState = false;
-  bool doesUserUseBioAuth = false;
-  bool isauth = false;
-  bool sessionBioAuth = true;
   @override
   void initState() {
     ApiHandler.getGpa(true).then((value) {
@@ -41,77 +33,12 @@ class _GradesPageState extends State<GradesPage> {
         studentGpa = value;
       });
     });
-
-    ConfigCache.readBioAuth().then((bool value) {
-      setState(() {
-        doesUserUseBioAuth = value;
-      });
-    });
-
-    ConfigCache.readSessionBioAuth().then((bool value) {
-      setState(() {
-        sessionBioAuth = value;
-      });
-    });
-
     NotificationService.checkAllowedNotif();
     super.initState();
-
-    auth = LocalAuthentication();
-    auth.isDeviceSupported().then((bool isSupported) {
-      setState(() {
-        _supportState = isSupported;
-      });
-    });
-  }
-
-  Future<void> _auth() async {
-    if (_supportState) {
-      if (doesUserUseBioAuth) {
-        try {
-          bool authenticated = await auth.authenticate(
-              localizedReason: "Authenticate to view grades",
-              options: const AuthenticationOptions(
-                  stickyAuth: true, biometricOnly: true));
-
-          setState(() {
-            isauth = authenticated;
-          });
-          await ConfigCache.storeSessionBioAuth(isauth);
-        } on PlatformException catch (e) {
-          if (kDebugMode) {
-            print(e);
-          }
-        }
-      }
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_supportState) {
-      if (doesUserUseBioAuth) {
-        if (!sessionBioAuth) {
-          if (!isauth) {
-            return SafeArea(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  Text(
-                    "Authenticate to view grades",
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  IconButton(
-                      iconSize: 50,
-                      onPressed: () {
-                        _auth();
-                      },
-                      icon: const Icon(Icons.login))
-                ]));
-          }
-        }
-      }
-    }
     return GestureDetector(
         onPanUpdate: (details) {
           swipeHandler(details, Constants.gradePageNavNumber, context);

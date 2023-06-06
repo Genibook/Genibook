@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/services/backgroundtasks.dart';
@@ -14,6 +15,7 @@ import 'package:genibook/services/notification_service.dart';
 import 'dart:io';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:genibook/utils/theme_utils.dart';
+import 'package:local_auth/local_auth.dart';
 
 import 'constants.dart';
 import 'screens/login.dart';
@@ -47,36 +49,14 @@ class Genibook extends StatefulWidget {
   State<StatefulWidget> createState() => GenibookState();
 }
 
-class GenibookState extends State<Genibook> with WidgetsBindingObserver {
+class GenibookState extends State<Genibook> {
   Future<bool>? loginOrSplash;
   Future<Secret>? alreadyLoggedIn;
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.resumed:
-        // print("app in resumed");
-        break;
-      case AppLifecycleState.inactive:
-        //  print("app in inactive");
-        break;
-      case AppLifecycleState.paused:
-        if (kDebugMode) {
-          print("app in paused");
-        }
-        //TODO fix lol this thing is so bad
-        //TODO: 4.0 gpa scale goober
-        ConfigCache.storeSessionBioAuth(false);
-        break;
-      case AppLifecycleState.detached:
-        if (kDebugMode) {
-          print("app in detached");
-        }
-        ConfigCache.storeSessionBioAuth(false);
-
-        break;
-    }
-  }
+  late final LocalAuthentication auth;
+  bool _supportState = false;
+  bool doesUserUseBioAuth = false;
+  bool isauth = false;
 
   @override
   void initState() {
@@ -84,18 +64,68 @@ class GenibookState extends State<Genibook> with WidgetsBindingObserver {
 
     loginOrSplash = readTOS();
     alreadyLoggedIn = StoreObjects.readSecret();
+
+    ConfigCache.readBioAuth().then((bool value) {
+      setState(() {
+        doesUserUseBioAuth = value;
+      });
+    });
+
     super.initState();
-    WidgetsBinding.instance.addObserver(this);
+
+    auth = LocalAuthentication();
+    auth.isDeviceSupported().then((bool isSupported) {
+      setState(() {
+        _supportState = isSupported;
+      });
+    });
   }
 
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
+  Future<void> _auth() async {
+    if (_supportState) {
+      if (doesUserUseBioAuth) {
+        try {
+          bool authenticated = await auth.authenticate(
+              localizedReason: "Authenticate to view grades",
+              options: const AuthenticationOptions(
+                  stickyAuth: true, biometricOnly: true));
+
+          setState(() {
+            isauth = authenticated;
+          });
+        } on PlatformException catch (e) {
+          if (kDebugMode) {
+            print(e);
+          }
+        }
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    if (_supportState) {
+      if (doesUserUseBioAuth) {
+        if (!isauth) {
+          return SafeArea(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                Text(
+                  "Authenticate",
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+                IconButton(
+                    iconSize: 50,
+                    onPressed: () {
+                      _auth();
+                    },
+                    icon: const Icon(Icons.login))
+              ]));
+        }
+      }
+    }
+
     return FutureBuilder<bool>(
       future: loginOrSplash,
       builder: (context, loginOrSplashFuture) {
