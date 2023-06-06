@@ -210,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                               size: 20.0,
                             ),
                             label: const Text(
-                              'View your Genesis',
+                              'View your Grades',
                               textAlign: TextAlign.center,
                             ),
                             onPressed: _login,
