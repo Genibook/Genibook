@@ -98,10 +98,6 @@ class GenibookState extends State<Genibook> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
       future: loginOrSplash,
-      //TODO: change order because after log out the readTOS changes cuz the user logs in, so we have to first check the user is valid, if it is,
-      // theres no need to check it, or else
-      // we just push to readTOS.
-
       builder: (context, loginOrSplashFuture) {
         if (loginOrSplashFuture.hasData) {
           return FutureBuilder<Secret>(
@@ -138,11 +134,17 @@ class GenibookState extends State<Genibook> with WidgetsBindingObserver {
                             home: Constants.debugMode
                                 ? const DebugScreen()
                                 //? const MyApp()
-                                : loginOrSplashFuture.data!
-                                    ? alreadyLoggedInFuture.data!.valid
-                                        ? GradesPage(student: snapshot.data!)
-                                        : const LoginPage()
-                                    : const SplashScreen());
+                                : alreadyLoggedInFuture.data!.valid
+                                    ? GradesPage(student: snapshot.data!)
+                                    : loginOrSplashFuture.data!
+                                        ? const LoginPage()
+                                        : const SplashScreen());
+
+                        // : loginOrSplashFuture.data!
+                        //     ? alreadyLoggedInFuture.data!.valid
+                        //         ? GradesPage(student: snapshot.data!)
+                        //         : const LoginPage()
+                        //     : const SplashScreen());
                       });
                     } else {
                       return const Center(child: CircularProgressIndicator());
