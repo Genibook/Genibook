@@ -9,6 +9,8 @@ import 'package:genibook/icons/custom_icons_icons.dart';
 import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/extensions/virtualkeyboard.dart';
 import 'package:genibook/models/secret.dart';
+import 'package:genibook/routes/swipes.dart';
+import 'package:genibook/screens/gpa_calculator.dart';
 import 'package:genibook/widgets/shakey.dart';
 
 class LoginPage extends StatefulWidget {
@@ -221,6 +223,22 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ))),
                 ),
+                const SizedBox(height: 10.0),
+                Center(
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).push(SlideToRightPageRoute(
+                              child: const GPACalculatorScreen()));
+                        },
+                        child: Text("Don't have an account?",
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelSmall
+                                ?.copyWith(
+                                    decoration: TextDecoration.underline,
+                                    color:
+                                        const Color.fromARGB(255, 31, 93, 200),
+                                    fontSize: 8.9)))),
               ],
             ),
           ),
