@@ -10,7 +10,7 @@ import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/extensions/virtualkeyboard.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/routes/swipes.dart';
-import 'package:genibook/screens/gpa_calculator.dart';
+import 'package:genibook/screens/no_acc/gpa_calc.dart';
 import 'package:genibook/widgets/shakey.dart';
 
 class LoginPage extends StatefulWidget {
