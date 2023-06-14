@@ -122,8 +122,9 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         validator: (v) {
           if (v!.isEmpty) {
             return "Enter The Lesson Name.";
-          } else
+          } else {
             return null;
+          }
         },
         decoration: InputDecoration(
           hintText: "Mathematics",
