@@ -38,14 +38,17 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          const SizedBox(
+            height: 15,
+          ),
           Row(
             children: <Widget>[
               Expanded(
-                flex: 2,
+                flex: 5,
                 child: _buildForm(),
               ),
               Expanded(
-                flex: 1,
+                flex: 2,
                 child: ShowAverage(
                     average: DataHelper.calculateAvg(),
                     numberOfClass: DataHelper.allAddedLessons.length),
@@ -95,9 +98,13 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
                   ),
                 ),
               ),
+              Checkbox(value: true, onChanged: (bool? honors) {}),
               IconButton(
                 onPressed: _addLessonAndCalAvg,
-                icon: const Icon(Icons.arrow_forward_ios_sharp),
+                icon: const Icon(
+                  Icons.arrow_forward_ios_sharp,
+                  size: 20,
+                ),
                 iconSize: 30,
               ),
             ],
