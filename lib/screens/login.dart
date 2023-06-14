@@ -10,7 +10,7 @@ import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/extensions/virtualkeyboard.dart';
 import 'package:genibook/models/secret.dart';
 import 'package:genibook/routes/swipes.dart';
-import 'package:genibook/screens/no_acc/gpa_calc.dart';
+import 'package:genibook/screens/no_acc/widgets/grade_average_page.dart';
 import 'package:genibook/widgets/shakey.dart';
 
 class LoginPage extends StatefulWidget {
@@ -228,7 +228,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(SlideToRightPageRoute(
-                              child: const GPACalculatorScreen()));
+                              child: const GradeAveragePage()));
                         },
                         child: Text("Don't have an account?",
                             style: Theme.of(context)
