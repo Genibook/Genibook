@@ -22,11 +22,11 @@ class _LetterDropdownWidgetState extends State<LetterDropdownWidget> {
       padding: Constants.dropDownPadding,
       decoration: BoxDecoration(
           borderRadius: Constants.borderRadius,
-          color: Constants.mainColor.shade100.withOpacity(0.3)),
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
       child: DropdownButton<double>(
         value: selectedLetterValue,
         elevation: 16,
-        iconEnabledColor: Constants.mainColor,
+        iconEnabledColor: Theme.of(context).colorScheme.primary,
         onChanged: (selectedValue) {
           setState(() {
             selectedLetterValue = selectedValue!;

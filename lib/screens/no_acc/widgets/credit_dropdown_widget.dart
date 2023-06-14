@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/screens/no_acc/app_constants.dart';
 import 'package:genibook/screens/no_acc/helper/data_helper.py.dart';
 
 class CreditDropdownWidget extends StatefulWidget {
@@ -19,8 +20,8 @@ class _CreditDropdownWidgetState extends State<CreditDropdownWidget> {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
-      ),
+          borderRadius: Constants.borderRadius,
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.3)),
       child: DropdownButton<double>(
         value: selectedCreditValue,
         elevation: 16,

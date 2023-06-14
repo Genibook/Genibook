@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Constants {
-  static const mainColor = Colors.indigo;
+  //static const mainColor = Colors.indigo;
   static const String title = "Grade Average Calculator";
 
   static BorderRadius borderRadius = BorderRadius.circular(24);

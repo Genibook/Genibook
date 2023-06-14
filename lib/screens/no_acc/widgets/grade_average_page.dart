@@ -29,13 +29,13 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        title: Text(
+        title: const Text(
           "GPA calculator",
-          style: Theme.of(context).textTheme.displaySmall,
         ),
         centerTitle: true,
       ),
-      body: Column(
+      body: SafeArea(
+          child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Row(
@@ -61,7 +61,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
             ),
           ),
         ],
-      ),
+      )),
     );
   }
 
@@ -132,7 +132,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
               borderRadius: Constants.borderRadius,
               borderSide: BorderSide.none),
           filled: true,
-          fillColor: Constants.mainColor.shade100.withOpacity(0.3),
+          fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
         ),
       ),
     );

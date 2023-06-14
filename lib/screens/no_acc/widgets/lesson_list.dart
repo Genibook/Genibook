@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:genibook/screens/no_acc/app_constants.dart';
 import 'package:genibook/screens/no_acc/helper/data_helper.py.dart';
 
 class LessonList extends StatelessWidget {
@@ -24,7 +23,8 @@ class LessonList extends StatelessWidget {
                     child: ListTile(
                       title: Text(DataHelper.allAddedLessons[index].name),
                       leading: CircleAvatar(
-                          backgroundColor: Constants.mainColor,
+                          backgroundColor:
+                              Theme.of(context).colorScheme.primary,
                           child: Text((DataHelper
                                       .allAddedLessons[index].letterGrade *
                                   DataHelper.allAddedLessons[index].creditGrade)
@@ -38,9 +38,12 @@ class LessonList extends StatelessWidget {
             })
         : Container(
             alignment: Alignment.center,
-            child: Text("Please Add Lesson.",
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.displaySmall),
-          );
+            child: Padding(
+              padding: const EdgeInsets.only(right: 30, left: 30),
+              child: Text(
+                  "Add a lesson!\n\nSwipe the lesson to the right to remove it 🗑️",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleLarge),
+            ));
   }
 }
