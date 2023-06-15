@@ -19,14 +19,17 @@ class ShowAverage extends StatelessWidget {
               ? "$numberOfClass classes entered"
               : "Enter The Class",
           style: Theme.of(context).textTheme.bodyMedium,
+          textAlign: TextAlign.center,
         ),
         Text(
           average >= 0 ? average.toStringAsFixed(2) : "0.0",
           style: Theme.of(context).textTheme.bodyMedium,
+          textAlign: TextAlign.center,
         ),
         Text(
           "points",
           style: Theme.of(context).textTheme.bodyMedium,
+          textAlign: TextAlign.center,
         )
       ],
     );

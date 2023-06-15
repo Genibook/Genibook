@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/screens/no_acc/helper/data_helper.py.dart';
 import 'package:genibook/screens/no_acc/app_constants.dart';
+import 'package:genibook/screens/no_acc/utils.dart';
 import 'package:genibook/screens/no_acc/model/lesson.dart';
 import 'package:genibook/screens/no_acc/widgets/credit_dropdown_widget.dart';
 import 'package:genibook/screens/no_acc/widgets/lesson_list.dart';
@@ -21,6 +22,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
   double selectedLetterValue = 4;
   double selectedCreditValue = 1;
   var enteringValue = "";
+  String gradeString = "";
 
   @override
   Widget build(BuildContext context) {
@@ -78,26 +80,28 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Expanded(
-                child: Padding(
-                  padding: Constants.iconPadding,
-                  child: LetterDropdownWidget(
-                    onLetterSelected: (letter) {
-                      selectedLetterValue = letter;
-                    },
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: Constants.iconPadding,
-                  child: CreditDropdownWidget(
-                    onCreditSelected: (credit) {
-                      selectedCreditValue = credit;
-                    },
-                  ),
-                ),
-              ),
+              _buildGradePercent(),
+              // Expanded(
+              //   child: Padding(
+              //     padding: Constants.iconPadding,
+              //     child: LetterDropdownWidget(
+              //       onLetterSelected: (letter) {
+              //         selectedLetterValue = letter;
+              //       },
+              //     ),
+              //   ),
+              // ),
+              // Expanded(
+              //   child: Padding(
+              //     padding: Constants.iconPadding,
+              //     child: CreditDropdownWidget(
+              //       onCreditSelected: (credit) {
+              //         selectedCreditValue = credit;
+              //       },
+              //     ),
+              //   ),
+              // ),
+              _buildCredits(),
               Checkbox(value: true, onChanged: (bool? honors) {}),
               IconButton(
                 onPressed: _addLessonAndCalAvg,
@@ -143,6 +147,70 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         ),
       ),
     );
+  }
+
+  _buildGradePercent() {
+    return Padding(
+        padding: const EdgeInsets.only(left: 8),
+        child: SizedBox(
+          width: 70,
+          child: TextFormField(
+            onSaved: (value) {
+              setState(() {
+                gradeString = value!;
+              });
+            },
+            validator: (v) {
+              if (v!.isEmpty) {
+                return "Enter a grade";
+              } else if (!isNumeric(v)) {
+                return "Enter a valid grade";
+              } else {
+                return null;
+              }
+            },
+            decoration: InputDecoration(
+              hintText: "Grade",
+              border: OutlineInputBorder(
+                  borderRadius: Constants.borderRadius,
+                  borderSide: BorderSide.none),
+              filled: true,
+              fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+            ),
+          ),
+        ));
+  }
+
+  _buildCredits() {
+    return Padding(
+        padding: const EdgeInsets.only(left: 8),
+        child: SizedBox(
+          width: 70,
+          child: TextFormField(
+            onSaved: (value) {
+              setState(() {
+                gradeString = value!;
+              });
+            },
+            validator: (v) {
+              if (v!.isEmpty) {
+                return "Enter a credit";
+              } else if (!isNumeric(v)) {
+                return "Enter a valid credit";
+              } else {
+                return null;
+              }
+            },
+            decoration: InputDecoration(
+              hintText: "Credits",
+              border: OutlineInputBorder(
+                  borderRadius: Constants.borderRadius,
+                  borderSide: BorderSide.none),
+              filled: true,
+              fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+            ),
+          ),
+        ));
   }
 
   void _addLessonAndCalAvg() {

@@ -52,8 +52,8 @@ class DataHelper {
   static List<DropdownMenuItem<double>> allGradeLetters() {
     return _gradeLetters()
         .map((e) => DropdownMenuItem(
-              child: Text(e),
               value: _convertLetterToValue(e),
+              child: Text(e),
             ))
         .toList();
   }
