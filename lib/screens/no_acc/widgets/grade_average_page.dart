@@ -1,11 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:genibook/api/utils.dart';
 import 'package:genibook/screens/no_acc/helper/data_helper.py.dart';
 import 'package:genibook/screens/no_acc/app_constants.dart';
 import 'package:genibook/screens/no_acc/utils.dart';
 import 'package:genibook/screens/no_acc/model/lesson.dart';
 import 'package:genibook/screens/no_acc/widgets/lesson_list.dart';
 import 'package:genibook/screens/no_acc/widgets/show_average.dart';
+import 'package:genibook/utils/profile_utils.dart';
 
 class GradeAveragePage extends StatefulWidget {
   const GradeAveragePage({Key? key}) : super(key: key);
@@ -34,6 +36,35 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
           "GPA calculator",
         ),
         centerTitle: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: const Text("Info"),
+                        content: GestureDetector(
+                            onTap: () {
+                              LaunchUrl(
+                                  getCorrectUri("/howGPA/", {}).toString());
+                            },
+                            child: Text("Learn Genibook Calculates GPA",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                        decoration: TextDecoration.underline,
+                                        color: const Color.fromARGB(
+                                            255, 12, 89, 176)))),
+                      );
+                    });
+              },
+              icon: const Icon(
+                Icons.info_outline,
+                size: 27,
+              ))
+        ],
       ),
       body: SafeArea(
           child: Column(
@@ -133,7 +164,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       },
       validator: (v) {
         if (v!.isEmpty) {
-          return "Enter The Course Name.";
+          return "Enter A Course Name.";
         } else {
           return null;
         }
@@ -141,7 +172,8 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       decoration: InputDecoration(
         hintText: "Course Name (e.g. Mathematics)",
         border: OutlineInputBorder(
-            borderRadius: Constants.borderRadius, borderSide: BorderSide.none),
+            borderRadius: GPAConstants.borderRadius,
+            borderSide: BorderSide.none),
         filled: true,
         fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
       ),
@@ -169,7 +201,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         decoration: InputDecoration(
           hintText: "Grade",
           border: OutlineInputBorder(
-              borderRadius: Constants.borderRadius,
+              borderRadius: GPAConstants.borderRadius,
               borderSide: BorderSide.none),
           filled: true,
           fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
@@ -197,7 +229,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         decoration: InputDecoration(
           hintText: "Credits",
           border: OutlineInputBorder(
-              borderRadius: Constants.borderRadius,
+              borderRadius: GPAConstants.borderRadius,
               borderSide: BorderSide.none),
           filled: true,
           fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
