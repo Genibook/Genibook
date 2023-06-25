@@ -10,27 +10,36 @@ class ShowAverage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          numberOfClass > 0
-              ? "$numberOfClass classes entered"
-              : "Enter The Class",
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
+        Row(
+          children: [
+            const Text(
+              "Unweighted GPA: ",
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              average >= 0 ? average.toStringAsFixed(2) : "0.0",
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
-        Text(
-          average >= 0 ? average.toStringAsFixed(2) : "0.0",
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
+        Row(
+          children: [
+            const Text(
+              "Weighted GPA: ",
+              textAlign: TextAlign.center,
+            ),
+            Text(
+              average >= 0 ? average.toStringAsFixed(2) : "0.0",
+              style: Theme.of(context).textTheme.bodyMedium,
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
-        Text(
-          "points",
-          style: Theme.of(context).textTheme.bodyMedium,
-          textAlign: TextAlign.center,
-        )
       ],
     );
   }

@@ -21,6 +21,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
   var formKey = GlobalKey<FormState>();
   double selectedLetterValue = 4;
   double selectedCreditValue = 1;
+  bool selectedAPorHonors = false;
   var enteringValue = "";
   String gradeString = "";
 
@@ -41,21 +42,25 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           const SizedBox(
-            height: 15,
+            height: 5,
           ),
-          Row(
-            children: <Widget>[
-              Expanded(
-                flex: 5,
-                child: _buildForm(),
-              ),
-              Expanded(
-                flex: 2,
-                child: ShowAverage(
-                    average: DataHelper.calculateAvg(),
-                    numberOfClass: DataHelper.allAddedLessons.length),
-              ),
-            ],
+          ShowAverage(
+              average: DataHelper.calculateAvg(),
+              numberOfClass: DataHelper.allAddedLessons.length),
+          const Divider(),
+          const SizedBox(
+            height: 5,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 5,
+                  child: _buildForm(),
+                ),
+              ],
+            ),
           ),
           Expanded(
             child: LessonList(
@@ -78,7 +83,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
           _buildTextFormField(),
           const SizedBox(height: 5),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildGradePercent(),
               // Expanded(
@@ -102,7 +107,9 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
               //   ),
               // ),
               _buildCredits(),
-              Checkbox(value: true, onChanged: (bool? honors) {}),
+
+              _buildHonorsCheckBox(),
+
               IconButton(
                 onPressed: _addLessonAndCalAvg,
                 icon: const Icon(
@@ -121,24 +128,68 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
     );
   }
 
-  _buildTextFormField() {
+  _buildHonorsCheckBox() {
     return Padding(
-      padding: const EdgeInsets.only(left: 8),
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text("AP/Honors"),
+            Checkbox(
+                value: selectedAPorHonors,
+                onChanged: (bool? honors) {
+                  setState(() {
+                    selectedAPorHonors = honors ?? false;
+                  });
+                }),
+          ],
+        ));
+  }
+
+  _buildTextFormField() {
+    return TextFormField(
+      onSaved: (value) {
+        setState(() {
+          enteringValue = value!;
+        });
+      },
+      validator: (v) {
+        if (v!.isEmpty) {
+          return "Enter The Course Name.";
+        } else {
+          return null;
+        }
+      },
+      decoration: InputDecoration(
+        hintText: "Course Name (e.g. Mathematics)",
+        border: OutlineInputBorder(
+            borderRadius: Constants.borderRadius, borderSide: BorderSide.none),
+        filled: true,
+        fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+      ),
+    );
+  }
+
+  _buildGradePercent() {
+    return Expanded(
       child: TextFormField(
         onSaved: (value) {
           setState(() {
-            enteringValue = value!;
+            gradeString = value!;
           });
         },
         validator: (v) {
           if (v!.isEmpty) {
-            return "Enter The Lesson Name.";
+            return "Enter a grade";
+          } else if (!isNumeric(v)) {
+            return "Enter a valid grade";
           } else {
             return null;
           }
         },
         decoration: InputDecoration(
-          hintText: "Mathematics",
+          hintText: "Grade",
           border: OutlineInputBorder(
               borderRadius: Constants.borderRadius,
               borderSide: BorderSide.none),
@@ -149,68 +200,33 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
     );
   }
 
-  _buildGradePercent() {
-    return Padding(
-        padding: const EdgeInsets.only(left: 8),
-        child: SizedBox(
-          width: 70,
-          child: TextFormField(
-            onSaved: (value) {
-              setState(() {
-                gradeString = value!;
-              });
-            },
-            validator: (v) {
-              if (v!.isEmpty) {
-                return "Enter a grade";
-              } else if (!isNumeric(v)) {
-                return "Enter a valid grade";
-              } else {
-                return null;
-              }
-            },
-            decoration: InputDecoration(
-              hintText: "Grade",
-              border: OutlineInputBorder(
-                  borderRadius: Constants.borderRadius,
-                  borderSide: BorderSide.none),
-              filled: true,
-              fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-            ),
-          ),
-        ));
-  }
-
   _buildCredits() {
-    return Padding(
-        padding: const EdgeInsets.only(left: 8),
-        child: SizedBox(
-          width: 70,
-          child: TextFormField(
-            onSaved: (value) {
-              setState(() {
-                gradeString = value!;
-              });
-            },
-            validator: (v) {
-              if (v!.isEmpty) {
-                return "Enter a credit";
-              } else if (!isNumeric(v)) {
-                return "Enter a valid credit";
-              } else {
-                return null;
-              }
-            },
-            decoration: InputDecoration(
-              hintText: "Credits",
-              border: OutlineInputBorder(
-                  borderRadius: Constants.borderRadius,
-                  borderSide: BorderSide.none),
-              filled: true,
-              fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
-            ),
-          ),
-        ));
+    return Expanded(
+      child: TextFormField(
+        onSaved: (value) {
+          setState(() {
+            gradeString = value!;
+          });
+        },
+        validator: (v) {
+          if (v!.isEmpty) {
+            return "Enter a credit";
+          } else if (!isNumeric(v)) {
+            return "Enter a valid credit";
+          } else {
+            return null;
+          }
+        },
+        decoration: InputDecoration(
+          hintText: "Credits",
+          border: OutlineInputBorder(
+              borderRadius: Constants.borderRadius,
+              borderSide: BorderSide.none),
+          filled: true,
+          fillColor: Theme.of(context).colorScheme.primary.withOpacity(0.3),
+        ),
+      ),
+    );
   }
 
   void _addLessonAndCalAvg() {
@@ -219,7 +235,8 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       var addingLesson = Lesson(
           name: enteringValue,
           letterGrade: selectedLetterValue,
-          creditGrade: selectedCreditValue);
+          creditGrade: selectedCreditValue,
+          add_credit: selectedAPorHonors);
       DataHelper.addLesson(addingLesson);
       if (kDebugMode) {
         print(DataHelper.calculateAvg());
