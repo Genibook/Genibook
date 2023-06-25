@@ -1,17 +1,17 @@
 class Lesson {
   late final String name;
-  late final double letterGrade;
+  late final double grade;
   late final double creditGrade;
-  late final bool add_credit;
+  late final bool addCredit;
 
   Lesson(
       {required this.name,
-      required this.letterGrade,
+      required this.grade,
       required this.creditGrade,
-      required this.add_credit});
+      required this.addCredit});
 
   @override
   String toString() {
-    return "$name $letterGrade $creditGrade";
+    return "$name $grade $creditGrade";
   }
 }

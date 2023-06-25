@@ -4,9 +4,7 @@ import 'package:genibook/screens/no_acc/helper/data_helper.py.dart';
 import 'package:genibook/screens/no_acc/app_constants.dart';
 import 'package:genibook/screens/no_acc/utils.dart';
 import 'package:genibook/screens/no_acc/model/lesson.dart';
-import 'package:genibook/screens/no_acc/widgets/credit_dropdown_widget.dart';
 import 'package:genibook/screens/no_acc/widgets/lesson_list.dart';
-import 'package:genibook/screens/no_acc/widgets/letter_dropdown_widget.dart';
 import 'package:genibook/screens/no_acc/widgets/show_average.dart';
 
 class GradeAveragePage extends StatefulWidget {
@@ -19,11 +17,11 @@ class GradeAveragePage extends StatefulWidget {
 
 class _GradeAveragePageState extends State<GradeAveragePage> {
   var formKey = GlobalKey<FormState>();
-  double selectedLetterValue = 4;
+  double selectedGradeValue = 1;
   double selectedCreditValue = 1;
   bool selectedAPorHonors = false;
-  var enteringValue = "";
-  String gradeString = "";
+
+  var courseName = "";
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +43,8 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
             height: 5,
           ),
           ShowAverage(
-              average: DataHelper.calculateAvg(),
+              average: DataHelper.calculateAvg()[0],
+              weightedAverage: DataHelper.calculateAvg()[1],
               numberOfClass: DataHelper.allAddedLessons.length),
           const Divider(),
           const SizedBox(
@@ -86,34 +85,12 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildGradePercent(),
-              // Expanded(
-              //   child: Padding(
-              //     padding: Constants.iconPadding,
-              //     child: LetterDropdownWidget(
-              //       onLetterSelected: (letter) {
-              //         selectedLetterValue = letter;
-              //       },
-              //     ),
-              //   ),
-              // ),
-              // Expanded(
-              //   child: Padding(
-              //     padding: Constants.iconPadding,
-              //     child: CreditDropdownWidget(
-              //       onCreditSelected: (credit) {
-              //         selectedCreditValue = credit;
-              //       },
-              //     ),
-              //   ),
-              // ),
               _buildCredits(),
-
               _buildHonorsCheckBox(),
-
               IconButton(
                 onPressed: _addLessonAndCalAvg,
                 icon: const Icon(
-                  Icons.arrow_forward_ios_sharp,
+                  Icons.arrow_forward_ios,
                   size: 20,
                 ),
                 iconSize: 30,
@@ -151,7 +128,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
     return TextFormField(
       onSaved: (value) {
         setState(() {
-          enteringValue = value!;
+          courseName = value!;
         });
       },
       validator: (v) {
@@ -174,17 +151,18 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
   _buildGradePercent() {
     return Expanded(
       child: TextFormField(
-        onSaved: (value) {
-          setState(() {
-            gradeString = value!;
-          });
-        },
+        onSaved: (value) {},
         validator: (v) {
           if (v!.isEmpty) {
             return "Enter a grade";
           } else if (!isNumeric(v)) {
             return "Enter a valid grade";
+          } else if (double.parse(v) < 0) {
+            return "Enter a valid grade";
           } else {
+            setState(() {
+              selectedGradeValue = double.parse(v);
+            });
             return null;
           }
         },
@@ -203,17 +181,16 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
   _buildCredits() {
     return Expanded(
       child: TextFormField(
-        onSaved: (value) {
-          setState(() {
-            gradeString = value!;
-          });
-        },
+        onSaved: (value) {},
         validator: (v) {
           if (v!.isEmpty) {
             return "Enter a credit";
           } else if (!isNumeric(v)) {
             return "Enter a valid credit";
           } else {
+            setState(() {
+              selectedCreditValue = double.parse(v);
+            });
             return null;
           }
         },
@@ -233,15 +210,17 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
     formKey.currentState!.save();
     if (formKey.currentState!.validate()) {
       var addingLesson = Lesson(
-          name: enteringValue,
-          letterGrade: selectedLetterValue,
+          name: courseName,
+          grade: selectedGradeValue,
           creditGrade: selectedCreditValue,
-          add_credit: selectedAPorHonors);
+          addCredit: selectedAPorHonors);
       DataHelper.addLesson(addingLesson);
       if (kDebugMode) {
         print(DataHelper.calculateAvg());
       }
-      setState(() {});
+      setState(() {
+        formKey.currentState?.reset();
+      });
     }
   }
 }

@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 class ShowAverage extends StatelessWidget {
   final double average;
+  final double weightedAverage;
   final int numberOfClass;
 
   const ShowAverage(
-      {Key? key, required this.average, required this.numberOfClass})
+      {Key? key,
+      required this.average,
+      required this.weightedAverage,
+      required this.numberOfClass})
       : super(key: key);
 
   @override
@@ -34,7 +38,7 @@ class ShowAverage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             Text(
-              average >= 0 ? average.toStringAsFixed(2) : "0.0",
+              weightedAverage >= 0 ? weightedAverage.toStringAsFixed(2) : "0.0",
               style: Theme.of(context).textTheme.bodyMedium,
               textAlign: TextAlign.center,
             ),

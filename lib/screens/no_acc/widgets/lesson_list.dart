@@ -23,14 +23,11 @@ class LessonList extends StatelessWidget {
                     child: ListTile(
                       title: Text(DataHelper.allAddedLessons[index].name),
                       leading: CircleAvatar(
-                          backgroundColor:
-                              Theme.of(context).colorScheme.primary,
-                          child: Text((DataHelper
-                                      .allAddedLessons[index].letterGrade *
-                                  DataHelper.allAddedLessons[index].creditGrade)
-                              .toStringAsFixed(0))),
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        child: Text(DataHelper.allAddedLessons[index].name[0]),
+                      ),
                       subtitle: Text(
-                          "Credit: ${DataHelper.allAddedLessons[index].creditGrade}, Letter Grade: ${DataHelper.allAddedLessons[index].letterGrade}"),
+                          "Credit: ${DataHelper.allAddedLessons[index].creditGrade}, Grade: ${DataHelper.allAddedLessons[index].grade}"),
                     ),
                   ),
                 ),
