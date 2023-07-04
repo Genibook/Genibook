@@ -26,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _passwordVisible = false;
+  bool _notASchoolRn = false;
 
   final _shakeKey = GlobalKey<ShakeWidgetState>();
 
@@ -122,6 +123,15 @@ class _LoginPageState extends State<LoginPage> {
                                 ))
                             .toList(),
                         onChanged: (value) {
+                          if ((value ?? "").contains("None")) {
+                            setState(() {
+                              _notASchoolRn = true;
+                            });
+                          } else {
+                            setState(() {
+                              _notASchoolRn = false;
+                            });
+                          }
                           setState(() {
                             _selectedSchool = value ?? "";
                           });
@@ -144,101 +154,130 @@ class _LoginPageState extends State<LoginPage> {
                 context.virtualKeyboardIsOpen
                     ? const SizedBox(height: 10.0)
                     : const SizedBox(height: 16.0),
-                SizedBox(
-                  child: TextFormField(
-                    controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      hintText: 'Enter your email',
-                      border: OutlineInputBorder(),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                context.virtualKeyboardIsOpen
-                    ? const SizedBox(height: 10.0)
-                    : const SizedBox(height: 16.0),
-                SizedBox(
-                  child: TextFormField(
-                    controller: _passwordController,
-                    obscureText: !_passwordVisible,
-                    decoration: InputDecoration(
-                        labelText: 'Password',
-                        hintText: 'Enter your password',
-                        border: const OutlineInputBorder(),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _passwordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
-                            color: Theme.of(context).primaryColorDark,
+                _notASchoolRn
+                    ? const SizedBox.shrink()
+                    : SizedBox(
+                        child: TextFormField(
+                          controller: _emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: const InputDecoration(
+                            labelText: 'Email',
+                            hintText: 'Enter your email',
+                            border: OutlineInputBorder(),
                           ),
-                          onPressed: () {
-                            setState(() {
-                              _passwordVisible = !_passwordVisible;
-                            });
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email';
+                            }
+                            return null;
                           },
-                        )),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
+                        ),
+                      ),
                 context.virtualKeyboardIsOpen
                     ? const SizedBox(height: 10.0)
                     : const SizedBox(height: 16.0),
-                Center(
-                  child: ShakeWidget(
-                      key: _shakeKey,
-                      // 5. configure the animation parameters
-                      shakeCount: 3,
-                      shakeOffset: 10,
-                      shakeDuration: const Duration(milliseconds: 400),
-                      child: SizedBox(
-                          height: 50,
-                          width: 200,
-                          child: ElevatedButton.icon(
-                            icon: const Icon(
-                              CustomIcons.binoculars,
-                              size: 20.0,
-                            ),
-                            label: const Text(
-                              'View your Grades',
-                              textAlign: TextAlign.center,
-                            ),
-                            onPressed: _login,
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20.0),
+                _notASchoolRn
+                    ? const SizedBox.shrink()
+                    : SizedBox(
+                        child: TextFormField(
+                          controller: _passwordController,
+                          obscureText: !_passwordVisible,
+                          decoration: InputDecoration(
+                              labelText: 'Password',
+                              hintText: 'Enter your password',
+                              border: const OutlineInputBorder(),
+                              suffixIcon: IconButton(
+                                icon: Icon(
+                                  _passwordVisible
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
+                                  color: Theme.of(context).primaryColorDark,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    _passwordVisible = !_passwordVisible;
+                                  });
+                                },
+                              )),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your password';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                context.virtualKeyboardIsOpen
+                    ? const SizedBox(height: 10.0)
+                    : const SizedBox(height: 16.0),
+                _notASchoolRn
+                    ? Center(
+                        child: SizedBox(
+                            height: 50,
+                            width: 250,
+                            child: ElevatedButton.icon(
+                              icon: const Icon(
+                                Icons.person,
+                                size: 20.0,
                               ),
-                            ),
-                          ))),
-                ),
-                const SizedBox(height: 10.0),
-                Center(
-                    child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).push(SlideToRightPageRoute(
-                              child: const GradeAveragePage()));
-                        },
-                        child: Text("Don't have an account?",
-                            style: Theme.of(context)
-                                .textTheme
-                                .labelSmall
-                                ?.copyWith(
-                                    decoration: TextDecoration.underline,
-                                    color:
-                                        const Color.fromARGB(255, 31, 93, 200),
-                                    fontSize: 8.9)))),
+                              label: const Text(
+                                'Continue as a guest',
+                                textAlign: TextAlign.center,
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                    SlideToRightPageRoute(
+                                        child: const GradeAveragePage()));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                              ),
+                            )))
+                    : Center(
+                        child: ShakeWidget(
+                            key: _shakeKey,
+                            // 5. configure the animation parameters
+                            shakeCount: 3,
+                            shakeOffset: 10,
+                            shakeDuration: const Duration(milliseconds: 400),
+                            child: SizedBox(
+                                height: 50,
+                                width: 200,
+                                child: ElevatedButton.icon(
+                                  icon: const Icon(
+                                    CustomIcons.binoculars,
+                                    size: 20.0,
+                                  ),
+                                  label: const Text(
+                                    'View your Grades',
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  onPressed: _login,
+                                  style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
+                                ))),
+                      ),
+                // const SizedBox(height: 10.0),
+                // Center(
+                //     child: GestureDetector(
+                //         onTap: () {
+                //           Navigator.of(context).push(SlideToRightPageRoute(
+                //               child: const GradeAveragePage()));
+                //         },
+                //         child: Text("Don't have an account?",
+                //             style: Theme.of(context)
+                //                 .textTheme
+                //                 .labelSmall
+                //                 ?.copyWith(
+                //                     decoration: TextDecoration.underline,
+                //                     color:
+                //                         const Color.fromARGB(255, 31, 93, 200),
+                //                     fontSize: 8.9)))),
               ],
             ),
           ),

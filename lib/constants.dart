@@ -6,7 +6,10 @@ class Constants {
 
   static String url = URL;
 
-  static final List<String> schools = ['Montgomery High School'];
+  static final List<String> schools = [
+    'Montgomery High School',
+    'None of the above'
+  ];
 
   static final defaultLightColorScheme =
       ColorScheme.fromSwatch(primarySwatch: Colors.blue);
