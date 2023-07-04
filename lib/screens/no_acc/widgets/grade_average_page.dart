@@ -161,12 +161,8 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         setState(() {
           courseName = value!;
         });
-      },
-      validator: (v) {
-        if (v!.isEmpty) {
-          return "Enter A Course Name.";
-        } else {
-          return null;
+        if (value!.isEmpty) {
+          courseName = "Course ${DataHelper.allAddedLessons.length + 1}";
         }
       },
       decoration: InputDecoration(
