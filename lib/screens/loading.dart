@@ -1,15 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:genibook/api/handler.dart';
-import 'package:genibook/models/gpas.dart';
 import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/api/utils.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/grades.dart';
-// import 'package:genibook/screens/summer.dart';
-// import 'package:genibook/utils/dates.dart';
+import 'package:genibook/screens/summer.dart';
+import 'package:genibook/utils/dates.dart';
 import 'package:genibook/widgets/navbar.dart';
 
 class Loading extends StatefulWidget {
@@ -25,7 +23,6 @@ class _LoadingState extends State<Loading> {
   ApiNavigator nav = const ApiNavigator();
   Random random = Random();
   int currentIndex = -1;
-  Gpa? studentGpa;
 
   List<String> textList = [
     "Our app uses cats as comforting assistants?",
@@ -51,23 +48,18 @@ class _LoadingState extends State<Loading> {
 
   @override
   void initState() {
-    ApiHandler.getGpa(true).then((value) {
-      setState(() {
-        studentGpa = value;
-      });
-    });
-
     super.initState();
+
     startLooping();
     String fromScreen =
         Constants.loadingPageFromMap[widget.fromScreen] ?? "login";
 
-    // if (isTodaySummer()) {
-    //   Navigator.of(context).pushReplacement(
-    //       MaterialPageRoute(builder: ((context) => const SummerScreen())));
-    // }
-
-    if (fromScreen == "login") {
+    if (isTodaySummer()) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.of(context)
+            .push(SlideToRightPageRoute(child: const SummerScreen()));
+      });
+    } else if (fromScreen == "login") {
       refreshAllData(false).then((value) => nav.pushToGrades(context, false));
     } else if (fromScreen == "grade_settings") {
       refreshMPStudentSchedule().then((value) {

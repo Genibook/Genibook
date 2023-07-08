@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/cache/objects/config.dart';
+import 'package:genibook/screens/summer.dart';
 import 'package:genibook/services/backgroundtasks.dart';
 import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
@@ -14,6 +15,7 @@ import 'package:genibook/screens/welcome.dart';
 import 'package:genibook/services/notification_service.dart';
 import 'dart:io';
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:genibook/utils/dates.dart';
 import 'package:genibook/utils/theme_utils.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -104,6 +106,8 @@ class GenibookState extends State<Genibook> {
 
   @override
   Widget build(BuildContext context) {
+    bool summertwoDay = isTodaySummer();
+
     if (_supportState) {
       if (doesUserUseBioAuth) {
         if (!isauth) {
@@ -161,7 +165,7 @@ class GenibookState extends State<Genibook> {
                         return MaterialApp(
                             debugShowCheckedModeBanner: false,
                             navigatorKey: Genibook.navigatorKey,
-                            title: 'Grades',
+                            title: 'Genibook',
                             theme: islightColorSchemeNull
                                 ? widget.lightTheme
                                 : ThemeData(
@@ -174,14 +178,16 @@ class GenibookState extends State<Genibook> {
                                     useMaterial3: true),
                             // ),
                             themeMode: ThemeMode.system,
-                            home: Constants.debugMode
-                                ? const DebugScreen()
-                                //? const MyApp()
-                                : alreadyLoggedInFuture.data!.valid
-                                    ? GradesPage(student: snapshot.data!)
-                                    : loginOrSplashFuture.data!
-                                        ? const LoginPage()
-                                        : const SplashScreen());
+                            home: summertwoDay
+                                ? const SummerScreen()
+                                : Constants.debugMode
+                                    ? const DebugScreen()
+                                    //? const MyApp()
+                                    : alreadyLoggedInFuture.data!.valid
+                                        ? GradesPage(student: snapshot.data!)
+                                        : loginOrSplashFuture.data!
+                                            ? const LoginPage()
+                                            : const SplashScreen());
 
                         // : loginOrSplashFuture.data!
                         //     ? alreadyLoggedInFuture.data!.valid

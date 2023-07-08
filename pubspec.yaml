@@ -74,6 +74,7 @@ flutter:
   assets:
     - assets/
     - assets/noData.png
+    - assets/gifs/
     
   fonts:
     - family:  CustomIcons
