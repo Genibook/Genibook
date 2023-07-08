@@ -54,24 +54,38 @@ class _GradesPageState extends State<GradesPage> {
               shadowColor: Theme.of(context).shadowColor,
               automaticallyImplyLeading: false,
               leading: IconButton(
-                icon: const Icon(Icons.info_outline),
-                onPressed: () {
-                  showDetailedGradePageView(context, studentGpa);
-                },
-              ),
+                  onPressed: (() {
+                    showDialog(
+                        context: context,
+                        builder: ((context) {
+                          return const GradesSettingsView();
+                        }));
+                  }),
+                  icon: const Icon(Icons.settings)),
               actions: [
-                SizedBox(
-                    height: 50,
-                    width: 50,
-                    child: IconButton(
-                        onPressed: (() {
-                          showDialog(
-                              context: context,
-                              builder: ((context) {
-                                return const GradesSettingsView();
-                              }));
-                        }),
-                        icon: const Icon(Icons.settings))),
+                PopupMenuButton(
+                  itemBuilder: (context) {
+                    return [
+                      PopupMenuItem(
+                        value: "1",
+                        child: GestureDetector(
+                          child: const Text("My GPA"),
+                        ),
+                      ),
+                      const PopupMenuItem(
+                        value: "2",
+                        child: Text("Refresh"),
+                      ),
+                    ];
+                  },
+                  onSelected: (value) {
+                    if (value == "1") {
+                      showDetailedGradePageView(context, studentGpa);
+                    } else if (value == "2") {
+                      ApiNavigator.pushToLoadingPage(context, 2);
+                    }
+                  },
+                ),
               ],
             ),
             body: SafeArea(

@@ -8,8 +8,8 @@ import 'package:genibook/api/utils.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/grades.dart';
-import 'package:genibook/screens/settings/grades_settings.dart';
-import 'package:genibook/widgets/detailed/detailed_grade_info.dart';
+// import 'package:genibook/screens/summer.dart';
+// import 'package:genibook/utils/dates.dart';
 import 'package:genibook/widgets/navbar.dart';
 
 class Loading extends StatefulWidget {
@@ -62,6 +62,11 @@ class _LoadingState extends State<Loading> {
     String fromScreen =
         Constants.loadingPageFromMap[widget.fromScreen] ?? "login";
 
+    // if (isTodaySummer()) {
+    //   Navigator.of(context).pushReplacement(
+    //       MaterialPageRoute(builder: ((context) => const SummerScreen())));
+    // }
+
     if (fromScreen == "login") {
       refreshAllData(false).then((value) => nav.pushToGrades(context, false));
     } else if (fromScreen == "grade_settings") {
@@ -87,27 +92,6 @@ class _LoadingState extends State<Loading> {
         elevation: 2,
         shadowColor: Theme.of(context).shadowColor,
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: const Icon(Icons.info_outline),
-          onPressed: () {
-            showDetailedGradePageView(context, studentGpa);
-          },
-        ),
-        actions: [
-          SizedBox(
-              height: 50,
-              width: 50,
-              child: IconButton(
-                  onPressed: (() {
-                    // ApiHandler.getNewStudent(false);
-                    showDialog(
-                        context: context,
-                        builder: ((context) {
-                          return const GradesSettingsView();
-                        }));
-                  }),
-                  icon: const Icon(Icons.settings))),
-        ],
       ),
       bottomNavigationBar: const Navbar(
         selectedIndex: Constants.gradePageNavNumber,
