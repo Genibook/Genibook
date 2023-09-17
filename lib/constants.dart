@@ -43,4 +43,6 @@ class Constants {
     2: "grade_refresh",
     3: "debug"
   };
+
+  static const apiName = "api";
 }
