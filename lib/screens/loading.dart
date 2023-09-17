@@ -54,7 +54,7 @@ class _LoadingState extends State<Loading> {
     String fromScreen =
         Constants.loadingPageFromMap[widget.fromScreen] ?? "login";
 
-    if (isTodaySummer()) {
+    if (AppDateManager.isTodaySummer()) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Navigator.of(context)
             .push(SlideToRightPageRoute(child: const SummerScreen()));

@@ -6,6 +6,7 @@ import 'package:genibook/models/gpas.dart';
 import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/screens/settings/grades_settings.dart';
 import 'package:genibook/services/notification_service.dart';
+import 'package:genibook/utils/dates.dart';
 import 'package:genibook/utils/grades_utils.dart';
 import 'package:genibook/widgets/detailed/detailed_grade_info.dart';
 import 'package:genibook/widgets/navbar.dart';
@@ -34,6 +35,7 @@ class _GradesPageState extends State<GradesPage> {
       });
     });
     NotificationService.checkAllowedNotif();
+    AppDateManager.seeIfTodayBirthday(widget.student.birthday);
     super.initState();
   }
 

@@ -106,7 +106,7 @@ class GenibookState extends State<Genibook> {
 
   @override
   Widget build(BuildContext context) {
-    bool summertwoDay = isTodaySummer();
+    bool summertwoDay = AppDateManager.isTodaySummer();
 
     if (_supportState) {
       if (doesUserUseBioAuth) {

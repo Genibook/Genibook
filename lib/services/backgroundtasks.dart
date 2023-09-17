@@ -73,7 +73,7 @@ Future<void> initPlatformState() async {
     }
     await NotificationService.initializeNotification();
 
-    if (!isTodaySummer()) {
+    if (!AppDateManager.isTodaySummer()) {
       await refreshAllData(true);
     }
 
