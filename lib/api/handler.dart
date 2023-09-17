@@ -32,7 +32,7 @@ class ApiHandler {
 
   static Future<bool> login(Secret secret) async {
     final response =
-        await http.post(getCorrectUri("/apiv1/login/", secret.toJson()));
+        await http.post(getCorrectUri("/apiv2/login/", secret.toJson()));
     if (response.statusCode == 200) {
       return true;
     } else {
@@ -63,7 +63,7 @@ class ApiHandler {
     // secrets are stored before calling this function.
     Secret secret = await StoreObjects.readSecret();
     Map<String, dynamic> json =
-        await loadData("/apiv1/student/", secret.toJson());
+        await loadData("/apiv2/student/", secret.toJson());
     if (json.isEmpty) {
       if (kDebugMode) {
         print("[DEBUG: getNewStudent()] json is empty");
@@ -96,7 +96,7 @@ class ApiHandler {
     }
     Secret secret = await StoreObjects.readSecret();
     Map<String, dynamic> json =
-        await loadData("/apiv1/schedule/", secret.toJson());
+        await loadData("/apiv2/schedule/", secret.toJson());
 
     if (json.isEmpty) {
       if (kDebugMode) {
@@ -125,7 +125,7 @@ class ApiHandler {
     }
 
     final response =
-        await http.post(getCorrectUri("/apiv1/mps/", secret.toJson()));
+        await http.post(getCorrectUri("/apiv2/mps/", secret.toJson()));
     if (response.statusCode == 200) {
       List<dynamic> mps = json.decode(response.body);
       apiMps = mps;
@@ -173,7 +173,7 @@ class ApiHandler {
     Map<String, String> map = secret.toJson();
     map["mp"] = "FG";
 
-    final response = await http.post(getCorrectUri("/apiv1/gpas_his/", map));
+    final response = await http.post(getCorrectUri("/apiv2/gpas_his/", map));
     if (response.statusCode == 200) {
       final decodedJson = json.decode(response.body);
 
@@ -211,22 +211,22 @@ class ApiHandler {
     Secret secret = await StoreObjects.readSecret();
     Map<String, String> map = secret.toJson();
     var response =
-        await http.post(getCorrectUri("/apiv1/grade_of_students/", map));
+        await http.post(getCorrectUri("/apiv2/grade_of_students/", map));
     if (response.statusCode == 200) {
       grades = json.decode(response.body);
     } else {
       if (kDebugMode) {
         print(
-            "[DEBUG getAvailableStudents]: failed to get (/apiv1/grade_of_students/) data");
+            "[DEBUG getAvailableStudents]: failed to get (/apiv2/grade_of_students/) data");
       }
     }
 
-    response = await http.post(getCorrectUri("/apiv1/ids/", map));
+    response = await http.post(getCorrectUri("/apiv2/ids/", map));
     if (response.statusCode == 200) {
       ids = json.decode(response.body);
     } else {
       if (kDebugMode) {
-        print("[DEBUG getAvailableStudents]: failed to get (/apiv1/ids/) data");
+        print("[DEBUG getAvailableStudents]: failed to get (/apiv2/ids/) data");
       }
     }
 
@@ -249,7 +249,7 @@ class ApiHandler {
     }
 
     Map<String, dynamic> jsonString =
-        await loadData("/apiv1/gpas/", secret.toJson());
+        await loadData("/apiv2/gpas/", secret.toJson());
 
     if (jsonString.isEmpty) {
       if (kDebugMode) {
@@ -272,7 +272,7 @@ class ApiHandler {
 
     final startTime = DateTime.now();
 
-    await http.post(getCorrectUri("/apiv1/login/", secret.toJson()));
+    await http.post(getCorrectUri("/apiv2/login/", secret.toJson()));
 
     final endTime = DateTime.now();
     final latency = endTime.difference(startTime).inMilliseconds;
