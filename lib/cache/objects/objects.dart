@@ -25,7 +25,9 @@ class StoreObjects {
         aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
     ));
+    // print("PRINT");
     String jsonString = await storage.read(key: "student") ?? "";
+    // print("PRINT");
     if (jsonString.isNotEmpty) {
       if (kDebugMode) {
         if (Constants.debugModePrintEVERYTHING) {
@@ -35,6 +37,7 @@ class StoreObjects {
       Map<String, dynamic> jsonn = json.decode(jsonString);
       return Student.fromJson(jsonn);
     } else {
+      print("PRINT");
       return eddie;
     }
   }
