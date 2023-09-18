@@ -171,7 +171,11 @@ class ApiHandler {
     Secret secret = await StoreObjects.readSecret();
 
     Map<String, String> map = secret.toJson();
-    map["mp"] = "FG";
+    if ((map["mp"] ?? "") == "MP1") {
+      map["mp"] = "MP1";
+    } else if ((map["mp"] ?? "") == "MP2") {
+      map["mp"] = "FG";
+    }
 
     final response =
         await http.post(getCorrectUri("/${Constants.apiName}/gpas_his/", map));

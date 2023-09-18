@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/models/student_class.dart';
@@ -5,12 +6,19 @@ import 'package:genibook/models/student_class.dart';
 Uri getCorrectUri(String ending, Map<String, String> map) {
   Uri url;
   if (Constants.url.startsWith("127") || Constants.url.startsWith("196")) {
-    url = Uri(
-      host: Constants.url,
-      path: ending,
-      scheme: "http",
-      queryParameters: map,
+    if (kDebugMode) {
+      if (Constants.debugModePrintEVERYTHING) {
+        print(Constants.url);
+        print(ending);
+      }
+    }
+
+    url = Uri.http(
+      Constants.url,
+      ending,
+      map,
     );
+    //url example: const String URL = "127.0.0.1:6969";
     // url = Uri.http(Constants.url, ending, );
   } else {
     //url is https

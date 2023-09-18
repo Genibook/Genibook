@@ -37,7 +37,7 @@ class StoreObjects {
       Map<String, dynamic> jsonn = json.decode(jsonString);
       return Student.fromJson(jsonn);
     } else {
-      print("PRINT");
+      // print("PRINT");
       return eddie;
     }
   }

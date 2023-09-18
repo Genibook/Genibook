@@ -197,25 +197,27 @@ class GenibookState extends State<Genibook> {
                       });
                     } else {
                       if (kDebugMode) {
-                        print("[DEBUG] student snapshot has no data");
-                        print("[DEBUG] student snpashot: ${snapshot.error}");
+                        if (Constants.debugModePrintEVERYTHING) {
+                          print("[DEBUG] student snapshot has no data");
+                          print("[DEBUG] student snpashot: ${snapshot.error}");
+                        }
                       }
                       return const Center(child: CircularProgressIndicator());
                     }
                   },
                 );
               } else {
-                if (kDebugMode) {
-                  print("[DEBUG] alreadyLoggedInFuture has no data");
-                }
+                // if (kDebugMode) {
+                //   print("[DEBUG] alreadyLoggedInFuture has no data");
+                // }
                 return const Center(child: CircularProgressIndicator());
               }
             },
           );
         } else {
-          if (kDebugMode) {
-            print("[DEBUG] loginOrSplashFuture snapshot has no data");
-          }
+          // if (kDebugMode) {
+          //   print("[DEBUG] loginOrSplashFuture snapshot has no data");
+          // }
           return const Center(child: CircularProgressIndicator());
         }
       },

@@ -13,8 +13,8 @@ class Gpa {
 
   factory Gpa.fromJson(Map<String, dynamic> json) {
     return Gpa(
-      unweighted: json['unweighted'],
-      weighted: json['weighted'],
+      unweighted: json['unweighted'].toDouble(),
+      weighted: json['weighted'].toDouble(),
     );
   }
 
