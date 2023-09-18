@@ -4,7 +4,7 @@ import 'package:genibook/models/student_class.dart';
 
 Uri getCorrectUri(String ending, Map<String, String> map) {
   Uri url;
-  if (Constants.url.startsWith("127")) {
+  if (Constants.url.startsWith("127") || Constants.url.startsWith("196")) {
     url = Uri(
       host: Constants.url,
       path: ending,

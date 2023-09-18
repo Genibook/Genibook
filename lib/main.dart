@@ -197,8 +197,8 @@ class GenibookState extends State<Genibook> {
                       });
                     } else {
                       if (kDebugMode) {
-                        print("student snapshot has no data");
-                        print("student snpashot: ${snapshot.error}");
+                        print("[DEBUG] student snapshot has no data");
+                        print("[DEBUG] student snpashot: ${snapshot.error}");
                       }
                       return const Center(child: CircularProgressIndicator());
                     }
@@ -206,7 +206,7 @@ class GenibookState extends State<Genibook> {
                 );
               } else {
                 if (kDebugMode) {
-                  print("alreadyLoggedInFuture has no data");
+                  print("[DEBUG] alreadyLoggedInFuture has no data");
                 }
                 return const Center(child: CircularProgressIndicator());
               }
@@ -214,7 +214,7 @@ class GenibookState extends State<Genibook> {
           );
         } else {
           if (kDebugMode) {
-            print("loginOrSplashFuture snapshot has no data");
+            print("[DEBUG] loginOrSplashFuture snapshot has no data");
           }
           return const Center(child: CircularProgressIndicator());
         }
