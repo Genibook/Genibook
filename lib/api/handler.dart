@@ -97,10 +97,14 @@ class ApiHandler {
     Secret secret = await StoreObjects.readSecret();
     Map<String, dynamic> json =
         await loadData("/${Constants.apiName}/schedule/", secret.toJson());
+    //print(json);
+    //print(secret.toJson());
 
     if (json.isEmpty) {
       if (kDebugMode) {
-        print("[DEBUG getNewSchedule] json is empty");
+        if (Constants.debugModePrintEVERYTHING) {
+          print("[DEBUG getNewSchedule] json is empty");
+        }
       }
       return cachedSchedule;
     } else {

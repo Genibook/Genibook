@@ -77,10 +77,12 @@ class ScheduleAssignmentsList {
 
   factory ScheduleAssignmentsList.fromJson(Map<String, dynamic> json) {
     final List<dynamic> jsonList = json[json.keys.first];
+
     final List<ScheduleAssignment> scheduleAssignments = jsonList
         .map((dynamic item) =>
             ScheduleAssignment.fromJson(item as Map<String, dynamic>))
         .toList();
+
     return ScheduleAssignmentsList(scheduleAssignments: scheduleAssignments);
   }
 
