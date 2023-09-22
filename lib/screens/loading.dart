@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:genibook/api/handler.dart';
+import 'package:genibook/extensions/size.dart';
+import 'package:genibook/models/student_class.dart';
 import 'package:genibook/routes/navigator.dart';
-import 'package:genibook/api/utils.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/grades.dart';
@@ -23,6 +25,9 @@ class _LoadingState extends State<Loading> {
   ApiNavigator nav = const ApiNavigator();
   Random random = Random();
   int currentIndex = -1;
+  int tasks = 5;
+  int completedTasks = 0;
+  double completionPercentage = 0;
 
   List<String> textList = [
     "Our app uses cats as comforting assistants?",
@@ -109,6 +114,14 @@ class _LoadingState extends State<Loading> {
                 child: Image.asset(
                     "assets/loadcat.gif")), // Replace 'your_gif.gif' with your actual GIF file path
             const SizedBox(height: 20.0),
+            SizedBox(
+              width: context.getWidth * 0.75,
+              child: LinearProgressIndicator(
+                value: completionPercentage,
+              ),
+            ),
+
+            const SizedBox(height: 20),
             Text(
               "Did you know that:",
               style: Theme.of(context)
@@ -131,5 +144,41 @@ class _LoadingState extends State<Loading> {
         ),
       )),
     );
+  }
+
+  void incrementFinishedTasks() {
+    setState(() {
+      completedTasks++;
+      completionPercentage = (completedTasks / tasks);
+    });
+    //print(completionPercentage);
+  }
+
+  Future<void> refreshAllData(bool backgroundTask) async {
+    //Student stud =
+
+    await ApiHandler.getNewStudent(false, backgroundTask);
+    incrementFinishedTasks();
+    await ApiHandler.getNewSchedule(false);
+    incrementFinishedTasks();
+    await ApiHandler.getMPs(false);
+    incrementFinishedTasks();
+    await ApiHandler.getGPAhistory(false);
+    incrementFinishedTasks();
+    await ApiHandler.getGpa(false);
+    incrementFinishedTasks();
+    // return stud;
+  }
+
+  Future<Student> refreshMPStudentSchedule() async {
+    Student stud = await ApiHandler.getNewStudent(false, false);
+    incrementFinishedTasks();
+    await ApiHandler.getNewSchedule(false);
+    incrementFinishedTasks();
+    await ApiHandler.getMPs(false);
+    incrementFinishedTasks();
+    await ApiHandler.getGpa(false);
+    incrementFinishedTasks();
+    return stud;
   }
 }

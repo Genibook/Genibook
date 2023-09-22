@@ -33,23 +33,16 @@ Uri getCorrectUri(String ending, Map<String, String> map) {
   return url;
 }
 
-Future<Student> refreshAllData(bool backgroundTask) async {
-  Student stud = await ApiHandler.getNewStudent(false, backgroundTask);
+Future<void> refreshAllData(bool backgroundTask) async {
+  //Student stud =
+  await ApiHandler.getNewStudent(false, backgroundTask);
   await ApiHandler.getNewSchedule(false);
   await ApiHandler.getMPs(false);
   await ApiHandler.getGPAhistory(false);
   await ApiHandler.getGpa(false);
-  return stud;
+  // return stud;
 }
 
-Future<Student> refreshMPStudentSchedule() async {
-  Student stud = await ApiHandler.getNewStudent(false, false);
-  await ApiHandler.getNewSchedule(false);
-  await ApiHandler.getMPs(false);
-  await ApiHandler.getGpa(false);
-  return stud;
-}
-
-Future<void> refreshGPAHistory() async {
-  await ApiHandler.getGPAhistory(false);
-}
+// Future<void> refreshGPAHistory() async {
+//   await ApiHandler.getGPAhistory(false);
+// }
