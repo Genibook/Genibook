@@ -97,12 +97,12 @@ class _DebugScreenState extends State<DebugScreen> {
                 child: const Text("LOGIN")),
             ElevatedButton(
                 onPressed: (() async {
-                  Secret sec = await StoreObjects.readSecret();
-                  ScheduleAssignmentsList e =
-                      await ApiHandler.getNewSchedule(false);
-                  if (kDebugMode) {
-                    //print(e);
-                  }
+                  // Secret sec = await StoreObjects.readSecret();
+                  // ScheduleAssignmentsList e =
+                  //     await ApiHandler.getNewSchedule(false);
+                  // if (kDebugMode) {
+                  //   //print(e);
+                  // }
                 }),
                 child: const Text("schedule")),
             Text(
