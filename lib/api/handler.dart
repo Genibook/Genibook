@@ -97,7 +97,7 @@ class ApiHandler {
     Secret secret = await StoreObjects.readSecret();
     Map<String, dynamic> json =
         await loadData("/${Constants.apiName}/schedule/", secret.toJson());
-    //print(json);
+    // print(json);
     //print(secret.toJson());
 
     if (json.isEmpty) {
@@ -111,9 +111,11 @@ class ApiHandler {
       ScheduleAssignmentsList apiSchedule =
           ScheduleAssignmentsList.fromJson(json);
       if (apiSchedule == cachedSchedule) {
+        //   print(cachedSchedule.toJson());
         return cachedSchedule;
       } else {
         StoreObjects.storeSchedule(apiSchedule);
+
         return apiSchedule;
       }
     }

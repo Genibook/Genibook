@@ -76,7 +76,13 @@ class ScheduleAssignmentsList {
   const ScheduleAssignmentsList({required this.scheduleAssignments});
 
   factory ScheduleAssignmentsList.fromJson(Map<String, dynamic> json) {
-    final List<dynamic> jsonList = json[json.keys.first];
+    // print(json);
+    final List<dynamic> jsonList = [];
+    json.forEach((key, value) {
+      jsonList.addAll(value);
+    });
+
+    //final List<dynamic> jsonList = json[json.keys.first];
 
     final List<ScheduleAssignment> scheduleAssignments = jsonList
         .map((dynamic item) =>
@@ -110,6 +116,7 @@ class ScheduleAssignmentsList {
       identical(this, other) ||
       other is ScheduleAssignmentsList &&
           runtimeType == other.runtimeType &&
+          other.scheduleAssignments.length == scheduleAssignments.length &&
           listEquals(other.scheduleAssignments, scheduleAssignments);
 
   @override

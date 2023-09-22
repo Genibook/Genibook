@@ -10,6 +10,7 @@ import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
+import 'package:genibook/models/schedule_class.dart';
 import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/models/secret.dart';
@@ -94,6 +95,16 @@ class _DebugScreenState extends State<DebugScreen> {
                   }
                 }),
                 child: const Text("LOGIN")),
+            ElevatedButton(
+                onPressed: (() async {
+                  Secret sec = await StoreObjects.readSecret();
+                  ScheduleAssignmentsList e =
+                      await ApiHandler.getNewSchedule(false);
+                  if (kDebugMode) {
+                    //print(e);
+                  }
+                }),
+                child: const Text("schedule")),
             Text(
               "Caching",
               style: Theme.of(context).textTheme.displaySmall,
