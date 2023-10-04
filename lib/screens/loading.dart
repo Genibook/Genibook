@@ -65,7 +65,7 @@ class _LoadingState extends State<Loading> {
             .push(SlideToRightPageRoute(child: const SummerScreen()));
       });
     } else if (fromScreen == "login") {
-      refreshAllData(false).then((value) => nav.pushToGrades(context, false));
+      refreshAllData().then((value) => nav.pushToGrades(context, false));
     } else if (fromScreen == "grade_settings") {
       refreshMPStudentSchedule().then((value) {
         Navigator.of(context).push(SlideToRightPageRoute(
@@ -74,10 +74,10 @@ class _LoadingState extends State<Loading> {
         )));
       });
     } else if (fromScreen == "grade_refresh") {
-      refreshAllData(false).then((value) => nav.pushToGrades(context, false));
+      refreshAllData().then((value) => nav.pushToGrades(context, false));
     } else if (fromScreen == "debug") {
     } else {
-      refreshAllData(false).then((value) => nav.pushToGrades(context, false));
+      refreshAllData().then((value) => nav.pushToGrades(context, false));
     }
   }
 
@@ -154,10 +154,10 @@ class _LoadingState extends State<Loading> {
     //print(completionPercentage);
   }
 
-  Future<void> refreshAllData(bool backgroundTask) async {
+  Future<void> refreshAllData() async {
     //Student stud =
 
-    await ApiHandler.getNewStudent(false, backgroundTask);
+    await ApiHandler.getNewStudent(false, false);
     incrementFinishedTasks();
     await ApiHandler.getNewSchedule(false);
     incrementFinishedTasks();

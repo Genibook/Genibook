@@ -43,7 +43,7 @@ class AppDateManager {
               title: Text("Happy Birthday"),
               content: Text(
                   //TODO: model complete now we just gotta set up.
-                  "The Genibook Team (eddie) wishes you a happy birthday and "),
+                  "The Genibook Team wishes you a happy birthday 🎂"),
             );
           });
     }
