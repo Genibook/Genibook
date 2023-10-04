@@ -48,4 +48,12 @@ class AppDateManager {
           });
     }
   }
+
+  static bool checkIfValidBday(String bday) {
+    if (bday.contains("/")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
