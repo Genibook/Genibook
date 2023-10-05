@@ -37,6 +37,7 @@ class ApiNavigator extends Navigator {
       BuildContext context, bool direction) async {
     // TODO: make a chart or smth
     // TODO: google calendar
+    //TODO: keystore thinbg keytool -keystore path-to-debug-or-production-keystore -list -v
     // TODO: add something for ungraded assignments
     ApiHandler.getNewStudent(true, false).then((student) {
       if (direction) {
