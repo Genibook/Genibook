@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:genibook/cache/objects/config.dart';
 import 'package:genibook/main.dart';
 
 class AppDateManager {
@@ -29,23 +30,27 @@ class AppDateManager {
       day = double.parse(bdays[0][1]);
     }
 
-    final bdayDay = DateTime.utc(2020, month.toInt(), day.toInt());
-    final currentlyNow = DateTime.utc(2020, now.month, now.day);
-    //final currentlyNow = DateTime.utc(2020, 7, 6);
+    final bdayDay = DateTime.utc(now.year, month.toInt(), day.toInt());
+    final currentlyNow = DateTime.utc(now.year, now.month, now.day);
+    // final currentlyNow = DateTime.utc(now.year, 7, 6);
     bool isBday = bdayDay.isAtSameMomentAs(currentlyNow);
+
     // return isBday;
-    if (isBday) {
+    if (isBday && !await ConfigCache.readBdaySeen()) {
       BuildContext context = Genibook.navigatorKey.currentContext!;
+      // ignore: use_build_context_synchronously
       await showDialog(
           context: context,
           builder: (context) {
             return const AlertDialog(
-              title: Text("Happy Birthday"),
-              content: Text(
-                  //TODO: model complete now we just gotta set up.
-                  "The Genibook Team wishes you a happy birthday 🎂"),
+              title: Text("Happy Birthday - Easter Egg 2"),
+              content: Text("The Genibook team wishes you a happy birthday 🎂"),
             );
           });
+      await ConfigCache.storeBdaySeen(true);
+    } else if (isBday) {
+    } else {
+      await ConfigCache.storeBdaySeen(false);
     }
   }
 

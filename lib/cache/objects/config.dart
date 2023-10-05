@@ -80,6 +80,27 @@ class ConfigCache {
     return value.toLowerCase() == 'true';
   }
 
+  static Future<void> storeBdaySeen(bool seenState) async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
+    if (seenState) {
+      await storage.write(key: "bdaySeen", value: "true");
+    } else {
+      await storage.write(key: "bdaySeen", value: "false");
+    }
+  }
+
+  static Future<bool> readBdaySeen() async {
+    const storage = FlutterSecureStorage(
+        aOptions: AndroidOptions(
+      encryptedSharedPreferences: true,
+    ));
+    String value = await storage.read(key: "bdaySeen") ?? "false";
+    return value.toLowerCase() == 'true';
+  }
+
   // static Future<void> storeSessionBioAuth(bool auth) async {
   //   const storage = FlutterSecureStorage(
   //       aOptions: AndroidOptions(

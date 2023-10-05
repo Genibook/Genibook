@@ -195,6 +195,7 @@ class StoreObjects {
     await storage.delete(key: "bio_auth");
     await storage.delete(key: "session_bio_auth");
     await storage.delete(key: Constants.tosReadKey);
+    await storage.delete(key: "bdaySeen");
   }
 
   //static Future<void> storeSecrets() async{

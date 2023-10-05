@@ -10,7 +10,6 @@ import 'package:genibook/cache/login/tos.dart';
 import 'package:genibook/cache/objects/objects.dart';
 import 'package:genibook/models/assignments_class.dart';
 import 'package:genibook/models/grades_class.dart';
-import 'package:genibook/models/schedule_class.dart';
 import 'package:genibook/routes/navigator.dart';
 import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/models/secret.dart';

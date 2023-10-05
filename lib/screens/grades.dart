@@ -36,7 +36,9 @@ class _GradesPageState extends State<GradesPage> {
     });
     NotificationService.checkAllowedNotif();
     if (AppDateManager.checkIfValidBday(widget.student.birthday)) {
-      AppDateManager.seeIfTodayBirthday(widget.student.birthday);
+      Future.delayed(Duration.zero, () async {
+        AppDateManager.seeIfTodayBirthday(widget.student.birthday);
+      });
     }
     super.initState();
   }

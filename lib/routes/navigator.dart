@@ -35,8 +35,6 @@ class ApiNavigator extends Navigator {
 
   Future<void> pushToGrades<T extends Object>(
       BuildContext context, bool direction) async {
-    //TODO: build and release api v2 app
-    // TODO: bday detection :D
     // TODO: make a chart or smth
     // TODO: google calendar
     // TODO: add something for ungraded assignments

@@ -40,12 +40,12 @@ class CreditsPageState extends State<CreditsPage> {
                             ),
                             Divider(),
                             Text(
-                              "Zenesus Beta Testers: Etaash, Justin, Niketh, Justin, Devestate",
+                              "Zenesus Beta Testers: Etaash, Niketh, Justin, Devestate",
                               textAlign: TextAlign.center,
                             ),
                             Divider(),
                             Text(
-                              "Genibook Beta Testers: ___ nothing yet ___",
+                              "Genibook Beta Testers: Etaash, Niketh, Justin, Devestate, Jason",
                               textAlign: TextAlign.center,
                             ),
                             Divider(),

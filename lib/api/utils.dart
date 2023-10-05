@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/constants.dart';
-import 'package:genibook/models/student_class.dart';
 
 Uri getCorrectUri(String ending, Map<String, String> map) {
   Uri url;
