@@ -4,7 +4,7 @@ import 'package:genibook/constants.dart';
 
 Uri getCorrectUri(String ending, Map<String, String> map) {
   Uri url;
-  if (Constants.url.startsWith("127") || Constants.url.startsWith("196")) {
+  if (Constants.url.startsWith("127") || Constants.url.startsWith("19")) {
     if (kDebugMode) {
       if (Constants.debugModePrintEVERYTHING) {
         print(Constants.url);
