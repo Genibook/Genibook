@@ -141,24 +141,25 @@ class _DebugScreenState extends State<DebugScreen> {
             ElevatedButton(
                 onPressed: () async {
                   if (kDebugMode) {
-                    print(Grades.fromJson(grades) == Grades.fromJson(grades2));
+                    print(Grades.fromJson(grades) ==
+                        Grades.fromJson(errorGrades));
                   }
                 },
                 child: const Text("Grades ==")),
-            ElevatedButton(
-                onPressed: () async {
-                  if (kDebugMode) {
-                    print(eddie == baddie);
-                  }
-                },
-                child: const Text("Student ==")),
-            ElevatedButton(
-                onPressed: () async {
-                  if (kDebugMode) {
-                    print(scheduleAssignments == scheduleAssignments2);
-                  }
-                },
-                child: const Text("schedule assignments ==")),
+            //  ElevatedButton(
+            // // onPressed: () async {
+            // //   if (kDebugMode) {
+            // //     print(eddie == baddie);
+            // //   }
+            // // },
+            // child: const Text("Student ==")),
+            // ElevatedButton(
+            //     onPressed: () async {
+            //       if (kDebugMode) {
+            //         print(scheduleAssignments == scheduleAssignments2);
+            //       }
+            //     },
+            //     child: const Text("schedule assignments ==")),
             Text(
               "Plugin initialization",
               style: Theme.of(context).textTheme.headlineSmall,

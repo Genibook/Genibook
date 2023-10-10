@@ -3,6 +3,9 @@ import 'dart:typed_data';
 import 'package:flutter/widgets.dart';
 
 Image imageFromBase64String(String base64String) {
+  if (base64String.isEmpty) {
+    return Image.asset("user.png");
+  }
   return Image.memory(base64Decode(base64String));
 }
 

@@ -35,8 +35,7 @@ class Secret {
         mp.isNotEmpty &&
         username.isNotEmpty &&
         highSchool.isNotEmpty &&
-        username.isNotEmpty &&
-        userSelector.isNotEmpty) {
+        username.isNotEmpty) {
       return true;
     } else {
       return false;

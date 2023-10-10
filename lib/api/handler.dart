@@ -62,6 +62,11 @@ class ApiHandler {
     }
     // secrets are stored before calling this function.
     Secret secret = await StoreObjects.readSecret();
+
+    if (!secret.valid) {
+      return errorStudent;
+    }
+
     Map<String, dynamic> json =
         await loadData("/${Constants.apiName}/student/", secret.toJson());
     if (json.isEmpty) {
@@ -95,6 +100,11 @@ class ApiHandler {
       return cachedSchedule;
     }
     Secret secret = await StoreObjects.readSecret();
+
+    if (!secret.valid) {
+      return errorScheduleAssignments;
+    }
+
     Map<String, dynamic> json =
         await loadData("/${Constants.apiName}/schedule/", secret.toJson());
     // print(json);
@@ -128,6 +138,10 @@ class ApiHandler {
 
     if (getCached) {
       return cachedMps;
+    }
+
+    if (!secret.valid) {
+      return [];
     }
 
     final response = await http
@@ -176,6 +190,10 @@ class ApiHandler {
     Map<String, Map<String, double>> ret = {};
     Secret secret = await StoreObjects.readSecret();
 
+    if (!secret.valid) {
+      return {};
+    }
+
     Map<String, String> map = secret.toJson();
     if ((map["mp"] ?? "") == "MP1") {
       map["mp"] = "MP1";
@@ -220,6 +238,11 @@ class ApiHandler {
     List<dynamic> ids = [];
 
     Secret secret = await StoreObjects.readSecret();
+
+    if (!secret.valid) {
+      return {};
+    }
+
     Map<String, String> map = secret.toJson();
     var response = await http
         .post(getCorrectUri("/${Constants.apiName}/grade_of_students/", map));
@@ -261,6 +284,10 @@ class ApiHandler {
       return cachedGpa;
     }
 
+    if (!secret.valid) {
+      return Gpa(unweighted: 0, weighted: 0);
+    }
+
     Map<String, dynamic> jsonString =
         await loadData("/${Constants.apiName}/gpas/", secret.toJson());
 
@@ -282,6 +309,10 @@ class ApiHandler {
 
   static Future<int> getLatencyThroughLogin() async {
     Secret secret = await StoreObjects.readSecret();
+
+    if (!secret.valid) {
+      return -1000;
+    }
 
     final startTime = DateTime.now();
 
