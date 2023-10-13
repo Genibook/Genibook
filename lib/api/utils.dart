@@ -41,6 +41,10 @@ Future<void> refreshAllData(bool backgroundTask) async {
   await ApiHandler.getMPs(false);
   await ApiHandler.getGPAhistory(false);
   await ApiHandler.getGpa(false);
+
+  if (backgroundTask) {
+    await ApiHandler.postThisIsABGcall();
+  }
   // return stud;
 }
 

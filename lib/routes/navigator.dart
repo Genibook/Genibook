@@ -4,6 +4,7 @@ import 'package:genibook/api/rawdata.dart';
 
 import 'package:genibook/constants.dart';
 import 'package:genibook/screens/loading.dart';
+import 'package:genibook/widgets/transcript.dart';
 
 import 'swipes.dart';
 
@@ -95,6 +96,13 @@ class ApiNavigator extends Navigator {
           child: Loading(
         fromScreen: from,
       )),
+    );
+    return;
+  }
+
+  static void pushToTranscriptPage(BuildContext context) {
+    Navigator.of(context).push(
+      SlideToRightPageRoute(child: const PdfViewerScreen()),
     );
     return;
   }

@@ -72,23 +72,25 @@ class _GradesPageState extends State<GradesPage> {
                 PopupMenuButton(
                   itemBuilder: (context) {
                     return [
-                      PopupMenuItem(
-                        value: "1",
-                        child: GestureDetector(
-                          child: const Text("My GPA"),
-                        ),
+                      const PopupMenuItem(
+                        value: "gpa",
+                        child: Text("My GPA"),
                       ),
                       const PopupMenuItem(
-                        value: "2",
+                          value: "transcript", child: Text("My Transcript")),
+                      const PopupMenuItem(
+                        value: "refresh",
                         child: Text("Refresh"),
                       ),
                     ];
                   },
                   onSelected: (value) {
-                    if (value == "1") {
+                    if (value == "gpa") {
                       showDetailedGradePageView(context, studentGpa);
-                    } else if (value == "2") {
+                    } else if (value == "refresh") {
                       ApiNavigator.pushToLoadingPage(context, 2);
+                    } else if (value == "transcript") {
+                      ApiNavigator.pushToTranscriptPage(context);
                     }
                   },
                 ),

@@ -307,6 +307,29 @@ class ApiHandler {
     }
   }
 
+  static Future<Uint8List> fetchPdfContent() async {
+    try {
+      Secret secret = await StoreObjects.readSecret();
+
+      var response = await http.get(
+          getCorrectUri("/${Constants.apiName}/transcript/", secret.toJson()));
+
+      if (response.statusCode == 200) {
+        // Check if the response content type is 'application/pdf'
+        if (response.headers['content-type'] == 'application/pdf') {
+          return response.bodyBytes;
+        } else {
+          throw Exception('Error: The response is not a PDF.');
+        }
+      } else {
+        throw Exception(
+            'Error: ${response.statusCode} - ${response.reasonPhrase}');
+      }
+    } catch (e) {
+      throw Exception('Error: $e');
+    }
+  }
+
   static Future<int> getLatencyThroughLogin() async {
     Secret secret = await StoreObjects.readSecret();
 
@@ -323,5 +346,10 @@ class ApiHandler {
     final latency = endTime.difference(startTime).inMilliseconds;
 
     return latency;
+  }
+
+  static Future<void> postThisIsABGcall() async {
+    await http
+        .post(getCorrectUri("/${Constants.apiName}/background-process/", {}));
   }
 }
