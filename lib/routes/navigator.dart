@@ -4,7 +4,7 @@ import 'package:genibook/api/rawdata.dart';
 
 import 'package:genibook/constants.dart';
 import 'package:genibook/screens/loading.dart';
-import 'package:genibook/widgets/transcript.dart';
+import 'package:genibook/screens/transcript.dart';
 
 import 'swipes.dart';
 
