@@ -24,15 +24,6 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
           mimeTypeList: ["appliation/pdf"]);
 
       if (!mounted) return;
-
-      showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              title: Text("Success!"),
-              content: Text("Please check where you stored it."),
-            );
-          });
     }
   }
 
