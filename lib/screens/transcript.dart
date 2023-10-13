@@ -34,6 +34,8 @@ class _PdfViewerScreenState extends State<PdfViewerScreen> {
           builder: (context) {
             return AlertDialog(
                 title: const Text("Download your transcript?"),
+                content: const Text(
+                    "Note: If you don't see a pop up/option to download it may mean your device is not supported."),
                 actions: [
                   TextButton(
                       onPressed: () {
