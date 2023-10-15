@@ -42,7 +42,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     setState(() {
-      gpaHistoryList = generateGPAHistories(gpaHis, context);
+      gpaHistoryList =
+          generateGPAHistories(gpaHis, widget.student.grade, context);
     });
     return GestureDetector(
         onPanUpdate: (details) {

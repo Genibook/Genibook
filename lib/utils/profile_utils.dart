@@ -52,20 +52,36 @@ List<Widget> generateUnDetailedProfileInfo(
 }
 
 List<Widget> generateGPAHistories(
-    Map<String, dynamic> data, BuildContext context) {
+    Map<String, dynamic> data, int grade, BuildContext context) {
   if (kDebugMode) {
     if (Constants.debugModePrintEVERYTHING) {
       print("[DEBUG generateGPAHistories]: data given in param $data");
     }
   }
 
+  //TODO: add grade check support
+  // lets do like grade+1 - 9
+  // if that value is greater > 0, get that value then sum (loop) it only that amount of times
+  // if it is not, just calculate the cummulative normally.
+  //
+
   List<Widget> ret = [];
+
+  int lengthOfCourses = 0;
+  double sumOfWeighted = 0;
+  double sumOfUnWeighted = 0;
 
   for (var key in data.keys.toList().reversed) {
     dynamic value = data[key];
 
     double unweighted = value["unweighted"] ?? 0.0;
     double weighted = value["weighted"] ?? 0.0;
+
+    if (key != "Current") {
+      sumOfWeighted += weighted;
+      sumOfUnWeighted += unweighted;
+      lengthOfCourses++;
+    }
 
     Widget tile = ListTile(
       title: Text(
@@ -91,6 +107,38 @@ List<Widget> generateGPAHistories(
     );
 
     ret.add(tile);
+  }
+
+  if (lengthOfCourses != 0) {
+    double averagedWeightedGpa =
+        roundDouble(sumOfWeighted / lengthOfCourses, 2);
+    double averagedUnWeightedGpa =
+        roundDouble(sumOfUnWeighted / lengthOfCourses, 2);
+    ret.insert(
+        0,
+        ListTile(
+          title: Text(
+            "Cummulative",
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+          trailing: SizedBox(
+              width: 100,
+              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                Text(
+                  "$averagedWeightedGpa",
+                  style: TextStyle(
+                      color: getColorFromGrade(averagedWeightedGpa),
+                      fontSize:
+                          Theme.of(context).textTheme.bodyMedium!.fontSize),
+                ),
+                const Text("|"),
+                Text("$averagedUnWeightedGpa",
+                    style: TextStyle(
+                        color: getColorFromGrade(averagedUnWeightedGpa),
+                        fontSize:
+                            Theme.of(context).textTheme.bodyMedium!.fontSize)),
+              ])),
+        ));
   }
 
   ret.insert(
