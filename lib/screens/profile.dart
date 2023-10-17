@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
 import 'package:genibook/routes/swipes.dart';
@@ -47,7 +49,9 @@ class _ProfilePageState extends State<ProfilePage> {
     });
     return GestureDetector(
         onPanUpdate: (details) {
-          swipeHandler(details, Constants.profilePageNavNumber, context);
+          if (Platform.isIOS) {
+            swipeHandler(details, Constants.profilePageNavNumber, context);
+          }
         },
         child: Scaffold(
             appBar: AppBar(

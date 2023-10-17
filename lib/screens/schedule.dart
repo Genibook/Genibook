@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:genibook/constants.dart';
@@ -31,7 +33,9 @@ class _SchedulePageState extends State<SchedulePage> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onPanUpdate: (details) {
-          swipeHandler(details, Constants.schedulePageNavNumber, context);
+          if (Platform.isIOS) {
+            swipeHandler(details, Constants.schedulePageNavNumber, context);
+          }
         },
         child: Scaffold(
             bottomNavigationBar: const Navbar(

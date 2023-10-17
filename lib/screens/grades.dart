@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
@@ -47,7 +49,9 @@ class _GradesPageState extends State<GradesPage> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onPanUpdate: (details) {
-          swipeHandler(details, Constants.gradePageNavNumber, context);
+          if (Platform.isIOS) {
+            swipeHandler(details, Constants.gradePageNavNumber, context);
+          }
         },
         child: Scaffold(
             bottomNavigationBar: const Navbar(
