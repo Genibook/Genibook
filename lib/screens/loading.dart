@@ -34,7 +34,7 @@ class _LoadingState extends State<Loading> {
     "Genibook actually had a version 1 - called Zenesus!",
     "You can contact eddietang2314@gmail.com if you have any questions!",
     "Genibook/Zenesus's first supported opperating system was Windows.",
-    "Genibook is free and open source! Link: https://github.com/Zenesus",
+    "Genibook is free and open source! Link: https://github.com/Genibook",
     "IF you think that the app is NOT working, please LOG OUT, then REINSTALL it!",
     "This app is still under beta testing - meaning there WILL (unlikely though) be bugs 🐛",
     "IF you are having problems with GPAs, make sure you selected a valid Marking Period!"
