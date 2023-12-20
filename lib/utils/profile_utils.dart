@@ -67,9 +67,9 @@ List<Widget> generateGPAHistories(
 
   List<Widget> ret = [];
 
-  int lengthOfCourses = 0;
-  double sumOfWeighted = 0;
-  double sumOfUnWeighted = 0;
+  // int lengthOfCourses = 0;
+  // double sumOfWeighted = 0;
+  // double sumOfUnWeighted = 0;
 
   for (var key in data.keys.toList().reversed) {
     dynamic value = data[key];
@@ -77,11 +77,12 @@ List<Widget> generateGPAHistories(
     double unweighted = value["unweighted"] ?? 0.0;
     double weighted = value["weighted"] ?? 0.0;
 
-    if (key != "Current") {
-      sumOfWeighted += weighted;
-      sumOfUnWeighted += unweighted;
-      lengthOfCourses++;
-    }
+    // if (key != "Current") {
+    //   if (grade >= 9) {}
+    //   sumOfWeighted += weighted;
+    //   sumOfUnWeighted += unweighted;
+    //   lengthOfCourses++;
+    // }
 
     Widget tile = ListTile(
       title: Text(
@@ -109,37 +110,37 @@ List<Widget> generateGPAHistories(
     ret.add(tile);
   }
 
-  if (lengthOfCourses != 0) {
-    double averagedWeightedGpa =
-        roundDouble(sumOfWeighted / lengthOfCourses, 2);
-    double averagedUnWeightedGpa =
-        roundDouble(sumOfUnWeighted / lengthOfCourses, 2);
-    ret.insert(
-        0,
-        ListTile(
-          title: Text(
-            "Cummulative",
-            style: Theme.of(context).textTheme.bodyLarge,
-          ),
-          trailing: SizedBox(
-              width: 100,
-              child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                Text(
-                  "$averagedWeightedGpa",
-                  style: TextStyle(
-                      color: getColorFromGrade(averagedWeightedGpa),
-                      fontSize:
-                          Theme.of(context).textTheme.bodyMedium!.fontSize),
-                ),
-                const Text("|"),
-                Text("$averagedUnWeightedGpa",
-                    style: TextStyle(
-                        color: getColorFromGrade(averagedUnWeightedGpa),
-                        fontSize:
-                            Theme.of(context).textTheme.bodyMedium!.fontSize)),
-              ])),
-        ));
-  }
+  // if (lengthOfCourses != 0) {
+  //   double averagedWeightedGpa =
+  //       roundDouble(sumOfWeighted / lengthOfCourses, 2);
+  //   double averagedUnWeightedGpa =
+  //       roundDouble(sumOfUnWeighted / lengthOfCourses, 2);
+  //   ret.insert(
+  //       0,
+  //       ListTile(
+  //         title: Text(
+  //           "Cummulative",
+  //           style: Theme.of(context).textTheme.bodyLarge,
+  //         ),
+  //         trailing: SizedBox(
+  //             width: 100,
+  //             child: Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+  //               Text(
+  //                 "$averagedWeightedGpa",
+  //                 style: TextStyle(
+  //                     color: getColorFromGrade(averagedWeightedGpa),
+  //                     fontSize:
+  //                         Theme.of(context).textTheme.bodyMedium!.fontSize),
+  //               ),
+  //               const Text("|"),
+  //               Text("$averagedUnWeightedGpa",
+  //                   style: TextStyle(
+  //                       color: getColorFromGrade(averagedUnWeightedGpa),
+  //                       fontSize:
+  //                           Theme.of(context).textTheme.bodyMedium!.fontSize)),
+  //             ])),
+  //       ));
+  // }
 
   ret.insert(
       0,

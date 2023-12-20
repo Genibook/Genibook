@@ -209,9 +209,9 @@ Student eddie = Student.fromJson({
   'birthday': '06/07/2007',
   'schedule_link': 'https://example.com',
   'name': 'Eddie Tang',
-  'grade': 10,
-  'locker': 'N/A',
-  'counselor_name': 'Justin Charles',
+  'grade': 11,
+  'locker': 'Example Locker',
+  'counselor_name': 'Example Name',
   'id': 107600,
   "lunchbalance": "29",
   'image64':

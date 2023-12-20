@@ -177,9 +177,10 @@ class ApiHandler {
 
     if (Constants.fakeGrades) {
       return {
-        "2020 - 21": {"unweighted": 90, "weighted": 93},
-        "2021 - 22": {"unweighted": 96, "weighted": 98},
-        "Current": {"unweighted": 98.90, "weighted": 101.2}
+        "2020 - 21": {"unweighted": 91, "weighted": 91},
+        "2021 - 22": {"unweighted": 98.4, "weighted": 100.2},
+        "2022 - 23": {"unweighted": 97.7, "weighted": 99.7},
+        "Current": {"unweighted": 98.9, "weighted": 101.2}
       };
     }
 
