@@ -259,7 +259,12 @@ class ApiHandler {
     response =
         await http.post(getCorrectUri("/${Constants.apiName}/ids/", map));
     if (response.statusCode == 200) {
-      ids = json.decode(response.body);
+      try {
+        ids = json.decode(response.body);
+      } on FormatException {
+        debugPrint("JSON FORMAT EXCEPTION IDS RESPONSE BODY INVALID");
+        ids = [];
+      }
     } else {
       if (kDebugMode) {
         print(
