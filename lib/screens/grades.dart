@@ -44,24 +44,27 @@ class _GradesPageState extends State<GradesPage> {
         AppDateManager.seeIfTodayBirthday(widget.student.birthday);
       });
     }
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text("Genibook will be offline for a while"),
-            content: Column(children: [
-              const Text("Click here to read more: "),
-              GestureDetector(
-                  onTap: () {
-                    LaunchUrl(getCorrectUri("/bye/", {}).toString());
-                  },
-                  child: Text("click me",
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          decoration: TextDecoration.underline,
-                          color: const Color.fromARGB(255, 12, 89, 176)))),
-            ]),
-          );
-        });
+    Future.delayed(Duration.zero, () async {
+      await showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Genibook will be offline for a while 😢"),
+              content: Column(mainAxisSize: MainAxisSize.min, children: [
+                const Text("Click here to read more: "),
+                GestureDetector(
+                    onTap: () {
+                      LaunchUrl(getCorrectUri("/bye/", {}).toString());
+                    },
+                    child: Text("click me",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            decoration: TextDecoration.underline,
+                            color: const Color.fromARGB(255, 12, 89, 176)))),
+              ]),
+            );
+          });
+    });
+
     super.initState();
   }
 
