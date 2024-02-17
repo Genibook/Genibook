@@ -18,6 +18,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:genibook/utils/dates.dart';
 import 'package:genibook/utils/theme_utils.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:upgrader/upgrader.dart';
 
 import 'constants.dart';
 import 'screens/login.dart';
@@ -113,30 +114,33 @@ class GenibookState extends State<Genibook> {
         if (!isauth) {
           return MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: Scaffold(
-                  body: SafeArea(
-                      child: Center(
-                          child: Padding(
-                              padding: const EdgeInsets.all(20),
-                              child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      "Authenticate with biometrics",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .displaySmall
-                                          ?.copyWith(color: Colors.blue),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                    IconButton(
-                                        iconSize: 50,
-                                        onPressed: () {
-                                          _auth();
-                                        },
-                                        icon: const Icon(Icons.login))
-                                  ]))))),
+              home: UpgradeAlert(
+                  child: Scaffold(
+                      body: SafeArea(
+                          child: Center(
+                              child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Authenticate with biometrics",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displaySmall
+                                              ?.copyWith(color: Colors.blue),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        IconButton(
+                                            iconSize: 50,
+                                            onPressed: () {
+                                              _auth();
+                                            },
+                                            icon: const Icon(Icons.login))
+                                      ])))))),
               theme: widget.lightTheme,
               darkTheme: widget.darkTheme);
         }
