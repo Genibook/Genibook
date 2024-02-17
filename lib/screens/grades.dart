@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:genibook/api/handler.dart';
+import 'package:genibook/api/utils.dart';
 import 'package:genibook/constants.dart';
 import 'package:genibook/models/gpas.dart';
 import 'package:genibook/routes/navigator.dart';
@@ -10,6 +11,7 @@ import 'package:genibook/screens/settings/grades_settings.dart';
 import 'package:genibook/services/notification_service.dart';
 import 'package:genibook/utils/dates.dart';
 import 'package:genibook/utils/grades_utils.dart';
+import 'package:genibook/utils/profile_utils.dart';
 import 'package:genibook/widgets/detailed/detailed_grade_info.dart';
 import 'package:genibook/widgets/navbar.dart';
 import '../routes/swipe.dart';
@@ -42,6 +44,24 @@ class _GradesPageState extends State<GradesPage> {
         AppDateManager.seeIfTodayBirthday(widget.student.birthday);
       });
     }
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Genibook will be offline for a while"),
+            content: Column(children: [
+              const Text("Click here to read more: "),
+              GestureDetector(
+                  onTap: () {
+                    LaunchUrl(getCorrectUri("/bye/", {}).toString());
+                  },
+                  child: Text("click me",
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          decoration: TextDecoration.underline,
+                          color: const Color.fromARGB(255, 12, 89, 176)))),
+            ]),
+          );
+        });
     super.initState();
   }
 
