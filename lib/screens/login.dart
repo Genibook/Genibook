@@ -13,6 +13,9 @@ import 'package:genibook/routes/swipes.dart';
 import 'package:genibook/screens/no_acc/widgets/grade_average_page.dart';
 import 'package:genibook/widgets/shakey.dart';
 
+import '../api/utils.dart';
+import '../utils/profile_utils.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -31,6 +34,29 @@ class _LoginPageState extends State<LoginPage> {
   final _shakeKey = GlobalKey<ShakeWidgetState>();
 
   String? _selectedSchool;
+
+  @override
+  void initState() {
+    super.initState();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text("Genibook will be offline for a while"),
+            content: Column(children: [
+              const Text("Click here to read more: "),
+              GestureDetector(
+                  onTap: () {
+                    LaunchUrl(getCorrectUri("/bye/", {}).toString());
+                  },
+                  child: Text("click me",
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          decoration: TextDecoration.underline,
+                          color: const Color.fromARGB(255, 12, 89, 176)))),
+            ]),
+          );
+        });
+  }
 
   @override
   void dispose() {
