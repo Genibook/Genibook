@@ -6,6 +6,8 @@ PODS:
     - IosAwnCore (= 0.7.5-dev.2)
   - background_fetch (1.1.6):
     - Flutter
+  - device_info_plus (0.0.1):
+    - Flutter
   - document_file_save_plus (0.0.1):
     - Flutter
   - Flutter (1.0.0)
@@ -13,6 +15,8 @@ PODS:
     - Flutter
   - IosAwnCore (0.7.5-dev.2)
   - local_auth_ios (0.0.1):
+    - Flutter
+  - package_info_plus (0.4.5):
     - Flutter
   - shared_preferences_foundation (0.0.1):
     - Flutter
@@ -24,10 +28,12 @@ DEPENDENCIES:
   - alh_pdf_view (from `.symlinks/plugins/alh_pdf_view/ios`)
   - awesome_notifications (from `.symlinks/plugins/awesome_notifications/ios`)
   - background_fetch (from `.symlinks/plugins/background_fetch/ios`)
+  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
   - document_file_save_plus (from `.symlinks/plugins/document_file_save_plus/ios`)
   - Flutter (from `Flutter`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - local_auth_ios (from `.symlinks/plugins/local_auth_ios/ios`)
+  - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
 
@@ -42,6 +48,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/awesome_notifications/ios"
   background_fetch:
     :path: ".symlinks/plugins/background_fetch/ios"
+  device_info_plus:
+    :path: ".symlinks/plugins/device_info_plus/ios"
   document_file_save_plus:
     :path: ".symlinks/plugins/document_file_save_plus/ios"
   Flutter:
@@ -50,6 +58,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_secure_storage/ios"
   local_auth_ios:
     :path: ".symlinks/plugins/local_auth_ios/ios"
+  package_info_plus:
+    :path: ".symlinks/plugins/package_info_plus/ios"
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   url_launcher_ios:
@@ -59,11 +69,13 @@ SPEC CHECKSUMS:
   alh_pdf_view: 1e05ba5c688073784d0e19d8856113c3ccd46ea7
   awesome_notifications: b1298b690fcfc25bb885af65056e92cec04ad9c9
   background_fetch: bc9b44b0bf8b434e282a2ac9be8662800a0296ed
+  device_info_plus: c6fb39579d0f423935b0c9ce7ee2f44b71b9fce6
   document_file_save_plus: 913d440d8b611ae19add4522ed578e3ed1483a2f
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
   IosAwnCore: f91ab77c879277e40e57924c3c9699fafcfc3c02
   local_auth_ios: c6cf091ded637a88f24f86a8875d8b0f526e2605
+  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
   shared_preferences_foundation: e2dae3258e06f44cc55f49d42024fd8dd03c590c
   url_launcher_ios: 08a3dfac5fb39e8759aeb0abbd5d9480f30fc8b4
 
